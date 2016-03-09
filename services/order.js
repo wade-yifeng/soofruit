@@ -13,16 +13,15 @@ module.exports.detail = function (req, res, next) {
 };
 
 module.exports.create = function (req, res, next) {
-    res.send('create')
-    //var order = new Order(
-    //    {
-    //        customer: req.body.customer,
-    //        amount: req.body.amount,
-    //        delivery_date: Date.now(),
-    //        items: req.body.items
-    //    });
-    //var res = order.save();
-    //res.json(res);
+    var order = new Order(
+        {
+            customer: req.body.customer,
+            amount: req.body.amount,
+            delivery_date: req.body.amount.delivery_date,
+            items: req.body.items
+        });
+    var res = order.save();
+    res.json(res);
 };
 
 module.exports.edit = function (req, res, next) {
