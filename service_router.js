@@ -5,7 +5,7 @@ var router = require('express').Router();
 
 var order = require('./services/order');
 
-// order controller
+// order service
 router.get('/orders', order.index);
 router.get('/orders/:_id', order.detail);
 router.post('/orders', order.create);

@@ -7,13 +7,31 @@
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Fruit list</label>
-        <div class="col-sm-10">
-            <select multiple class="form-control">
-                <option>Apple</option>
-                <option>Banana</option>
-                <option>Pitaya</option>
-                <option>Mango</option>
-            </select>
+        <div class="col-sm-10" ng-click="calcTotalAmount()">
+            <br/>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Fruit</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th></th>
+                </tr>
+                <tr class="form-inline" ng-repeat="fruit in fruits">
+                    <td><input type="checkbox" ng-model="fruit.selectd">&nbsp;&nbsp;</td>
+                    <td>{{fruit.fruit_name}}&nbsp;&nbsp;</td>
+                    <td><input class="form-control input-sm" type="number" ng-model="fruit.fruit_quantity"></td>
+                    <td>&nbsp;&nbsp;
+                        X
+                        &nbsp;
+                        {{fruit.unit_price}}
+                        &nbsp;
+                        =
+                        &nbsp;
+                        {{fruit.unit_price*fruit.fruit_quantity|currency:"￥"}}
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="form-group">

@@ -8,8 +8,9 @@ var OrderSchema = new mongoose.Schema({
     amount: Number,
     order_date: {type: Date, default: Date.now},
     delivery_date: Date,
-    items: [{
+    fruits: [{
         fruit_name: String,
+        unit_price: Number,
         fruit_quantity: Number
     }]
 });
