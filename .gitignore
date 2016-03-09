@@ -34,3 +34,6 @@ node_modules
 
 # Gulp asset folder
 asset
+
+# IDE config directory
+.idea
