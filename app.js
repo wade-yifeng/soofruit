@@ -18,5 +18,5 @@ app.get('/', function (req, res) {
 });
 
 app.listen(config.port, function () {
-    console.log('Site is up on http://localhost:3000/')
+    console.log('Site is up on http://localhost:' + config.port);
 });
