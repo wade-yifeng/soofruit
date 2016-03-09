@@ -2,6 +2,7 @@
   "name": "demo",
   "version": "0.0.1",
   "description": "mean demo",
+  "repository": "https://github.com/wade-yifeng/soostep",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +13,13 @@
     "body-parser": "^1.15.0",
     "ejs-mate": "^2.3.0",
     "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylus": "^2.3.1",
+    "gulp-uglify": "^1.5.3",
     "mongoose": "^4.4.6"
   }
 }
