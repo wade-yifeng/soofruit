@@ -14,3 +14,5 @@ web,mobile,platform
 [Mongoosejs](http://mongoosejs.com/docs/guide.html)
 
 [Bootstrap Global CSS Style](http://v3.bootcss.com/css/)
+
+[Gulp](https://github.com/nimojs/gulp-book)
