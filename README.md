@@ -5,5 +5,6 @@ web,mobile,platform
         [Nodejs](http://www.runoob.com/nodejs/nodejs-tutorial.html)
         [Express](http://www.expressjs.com.cn/)
         [AngularJS](https://docs.angularjs.org/tutorial)
+        [AngularJS](https://docs.angularjs.org)
         [Mongoosejs](http://mongoosejs.com/docs/guide.html)
         [Bootstrap Global CSS Style](http://v3.bootcss.com/css/)
