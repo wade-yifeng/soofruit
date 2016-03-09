@@ -7,11 +7,14 @@ var app = angular.module('app', [
 
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/order/create',
-            {
-                controller: 'OrderCtrl',
-                templateUrl: '/order/create.html'
-            })
+        .when('/order/create', {
+            controller: 'OrderCreate',
+            templateUrl: '/order/create.html'
+        })
+        .when('/order/detail/:_id', {
+            controller: 'OrderDetail',
+            templateUrl: '/order/detail.html'
+        })
         .otherwise({
             redirectTo: '/order/create'
         });
