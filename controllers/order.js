@@ -41,7 +41,7 @@ app.controller('OrderCreate', function ($scope, $http, $location) {
 
     $scope.calcTotalAmount = function () {
         var total = 0;
-        for (var i = 0; i < $scope.fruits.length; i++) {
+        for (var i in $scope.fruits) {
             var fruit = $scope.fruits[i];
             if (fruit.selectd) {
                 total += fruit.unit_price * fruit.fruit_quantity;
@@ -51,7 +51,7 @@ app.controller('OrderCreate', function ($scope, $http, $location) {
     };
 
     $scope.createOrder = function (order) {
-        for (var i = 0; i < $scope.fruits.length; i++) {
+        for (var i in $scope.fruits) {
             var fruit = $scope.fruits[i];
             if (fruit.selectd) {
                 order.fruits.push({
