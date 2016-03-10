@@ -15,4 +15,6 @@ web,mobile,platform
 
 [Bootstrap Global CSS Style](http://v3.bootcss.com/css/)
 
+[Bootstrap Components](http://v3.bootcss.com/components/)
+
 [Gulp](https://github.com/nimojs/gulp-book)

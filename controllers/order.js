@@ -3,6 +3,18 @@
  */
 var app = angular.module('app');
 
+app.controller('OrderIndex', function ($scope, $http, $route) {
+    $http.get('/orders').success(function (result) {
+        $scope.orders = result;
+    });
+
+    $scope.deleteOrder = function (_id) {
+        $http.delete('/orders/' + _id).success(function (result) {
+            $route.reload();
+        });
+    };
+});
+
 var fruits = [
     {
         fruit_name: 'Apple',
