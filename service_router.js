@@ -6,10 +6,10 @@ var router = require('express').Router();
 var order = require('./services/order');
 
 // order service
-router.get('/orders', order.index);
-router.get('/orders/:_id', order.detail);
-router.post('/orders', order.create);
-router.post('/orders/edit', order.edit);
-router.post('/orders/delete', order.delete);
+router.get('/orders', order.index)
+    .post('/orders', order.create);
+router.get('/orders/:_id', order.detail)
+    .put('/orders/:_id', order.edit)
+    .delete('/orders/:_id', order.delete);
 
 module.exports = router;
