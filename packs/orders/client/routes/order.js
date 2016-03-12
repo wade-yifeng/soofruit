@@ -9,15 +9,15 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/order/index', {
             controller: 'OrderIndex',
-            templateUrl: '/order/index.html'
+            templateUrl: 'orderindex.html'
         })
         .when('/order/create', {
             controller: 'OrderCreate',
-            templateUrl: '/order/create.html'
+            templateUrl: 'ordercreate.html'
         })
         .when('/order/detail/:_id', {
             controller: 'OrderDetail',
-            templateUrl: '/order/detail.html'
+            templateUrl: 'orderdetail.html'
         })
         .otherwise({
             redirectTo: '/order/index'

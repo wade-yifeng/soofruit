@@ -1,7 +1,7 @@
 /**
  * Created by xz_liu on 2016/3/8.
  */
-var Order = require('../models').Order;
+var Order = require('./model').Order;
 
 
 module.exports.index = function (req, res) {

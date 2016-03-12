@@ -10,7 +10,7 @@
             <th class="text-center"></th>
         </tr>
         <tr ng-repeat="order in orders">
-            <td>{{order._id}}</td>
+            <td><a href="#/order/detail/{{order._id}}">{{order._id}}</a></td>
             <td>&nbsp;&nbsp;{{order.customer}}&nbsp;&nbsp;</td>
             <td>
                 <ul>
