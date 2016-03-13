@@ -7,8 +7,8 @@ var sourcemaps = require('gulp-sourcemaps');
 gulp.task('js', function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
-            'assets/scripts/angular.js',
-            'assets/scripts/angular-route.js',
+            'static/scripts/angular.js',
+            'static/scripts/angular-route.js',
             'packs/**/client/routes/*.js',
             'packs/**/client/controllers/*.js'
         ])
@@ -22,8 +22,8 @@ gulp.task('js', function () {
 
 gulp.task('watch:js', ['js'], function () {
     gulp.watch([
-        'assets/scripts/angular.js',
-        'assets/scripts/angular-route.js',
+        'static/scripts/angular.js',
+        'static/scripts/angular-route.js',
         'packs/**/client/routes/*.js',
         'packs/**/client/controllers/*.js'
     ], ['js']);

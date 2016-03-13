@@ -4,6 +4,8 @@
 var app = angular.module('app');
 
 app.controller('OrderIndex', function ($scope, $http, $route) {
+    document.title = 'Order List';
+
     $http.get('/orders').success(function (result) {
         $scope.orders = result;
     });
@@ -42,6 +44,8 @@ var fruits = [
     }];
 
 app.controller('OrderCreate', function ($scope, $http, $location) {
+    document.title = 'Order Create';
+
     $scope.fruits = fruits;
 
     $scope.order = {
@@ -82,6 +86,8 @@ app.controller('OrderCreate', function ($scope, $http, $location) {
 });
 
 app.controller('OrderDetail', function ($scope, $http, $routeParams) {
+    document.title = 'Order Detail';
+
     var _id = $routeParams._id;
     $http.get('/orders/' + _id).success(function (result) {
         if (!result.code) {
