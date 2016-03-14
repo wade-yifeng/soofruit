@@ -21,3 +21,7 @@ gulp.task('copytemplates', ['copyimgs'], function () {
         .pipe(minifyhtml())
         .pipe(gulp.dest('assets/'));
 });
+
+gulp.task('watch:html', ['copytemplates'], function () {
+    gulp.watch('packs/**/client/templates/*.html', ['copytemplates']);
+});

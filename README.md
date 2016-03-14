@@ -19,3 +19,12 @@ web,mobile,platform
 [Bootstrap Components](http://v3.bootcss.com/components/)
 
 [Gulp](https://github.com/nimojs/gulp-book)
+
+## 安装及运行步骤
+
+1. 全局安装打包工具gulp:
+    $ npm install gulp -g
+2. 安装依赖模块:
+    $ npm install
+3. 用gulp打包->运行->监听文件变化:
+    $ gulp
