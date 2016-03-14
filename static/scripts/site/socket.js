@@ -7,7 +7,7 @@ var socket = io.connect('http://localhost:3000');
 
 socket.on('notify', function (data) {
     $("#socketinfo")
-        .html('<div style="position:fixed;">' + data.msg + '</div>').fadeIn(3000,function(){
-        $("#socketinfo").fadeOut(1000)
+        .html('<div class="btn btn-success" style="position:fixed;">' + data.msg + '</div>').fadeIn(3000, function () {
+        $("#socketinfo").fadeOut(1000);
     });
 });

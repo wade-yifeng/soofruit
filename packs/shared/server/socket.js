@@ -13,7 +13,11 @@ module.exports.initSocket = function (server) {
 };
 
 module.exports.notify = function (user) {
+    // emit + broadcast.emit可以广播到所有打开网站的客户端
     _socket.emit('notify', {
-        msg: util.format('User <b>%s</b> create an order.', user)
+        msg: util.format('User %s creates an order.', user)
+    });
+    _socket.broadcast.emit('notify', {
+        msg: util.format('User %s creates an order.', user)
     });
 };
