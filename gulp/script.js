@@ -41,5 +41,5 @@ gulp.task('watch:js', ['js', 'js:ng'], function () {
         'static/scripts/site/**/*.js',
         'packs/**/client/routes/*.js',
         'packs/**/client/controllers/*.js'
-    ], ['js']);
+    ], ['js', 'js:ng']);
 });
