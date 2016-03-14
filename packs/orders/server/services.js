@@ -2,6 +2,7 @@
  * Created by xz_liu on 2016/3/8.
  */
 var Order = require('./model').Order;
+var socket = require('../../shared/server/socket');
 
 
 module.exports.index = function (req, res) {
@@ -36,6 +37,9 @@ module.exports.create = function (req, res) {
             res.json({code: 500, message: err});
         }
         else {
+            //发送socket通知
+            socket.notify(order.customer);
+
             res.json(order._id.toString());
         }
     });
