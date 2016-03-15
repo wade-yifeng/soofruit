@@ -22,6 +22,8 @@ app.use('/', require('./packs/orders/server/routes'));
 
 
 app.get('/', function (req, res) {
+    res.render('h5index.html');
+}).get('/pc', function (req, res) {
     res.render('index.html');
 }).get('/admin', function (req, res) {
     res.render('adminindex.html');
