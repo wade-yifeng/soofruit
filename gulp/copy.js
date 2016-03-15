@@ -11,7 +11,7 @@ gulp.task('copyfonts', function () {
 });
 
 gulp.task('copyimgs', ['copyfonts'], function () {
-    return gulp.src('static/imgs/*.*', {base: 'static'})
+    return gulp.src('static/imgs/**/*.*', {base: 'static'})
         .pipe(gulp.dest('assets/'));
 });
 
