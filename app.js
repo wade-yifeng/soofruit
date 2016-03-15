@@ -6,9 +6,8 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var socket = require('./packs/shared/server/socket');
 var config = require('./config');
-var http = require("http");
-var url = require("url");
 var crypto = require("crypto");
+var url = require("url");
 
 var app = new express();
 var server = http.Server(app);
