@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "crypto": "0.0.3",
     "ejs-mate": "^2.3.0",
     "express": "^4.13.4",
     "gulp": "^3.9.1",
@@ -24,6 +25,7 @@
     "gulp-stylus": "^2.3.1",
     "gulp-uglify": "^1.5.3",
     "mongoose": "^4.4.6",
-    "socket.io": "^1.4.5"
+    "socket.io": "^1.4.5",
+    "url": "^0.11.0"
   }
 }
