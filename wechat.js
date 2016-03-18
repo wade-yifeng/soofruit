@@ -6,11 +6,12 @@
  * 3. 
  */
 
-var config = require('config');
+var configLoader = require('./config');
+var config = new configLoader();
 
 var Wechat = function (appID, appSecret) {
-	this.appID = appID || config.get('WechatAPI.appID');
-	this.appSecret = appSecret || config.get('WechatAPI.appSecret');
+	this.appID = appID || config.WechatAPI.appID;
+	this.appSecret = appSecret || config.WechatAPI.appSecret;
 	console.log(this.appID);
 }
 
@@ -19,6 +20,6 @@ module.exports = Wechat;
 /*
 // 微信API
 var api = new API(config.appID, config.appSecret, function(callback) {
-
+	
 })
 */

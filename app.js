@@ -1,6 +1,5 @@
 
 GLOBAL._ = require('underscore');
-
 var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
@@ -9,9 +8,9 @@ var crypto = require("crypto");
 var url = require("url");
 var wechatAPI = require('wechat-api');
 var wechat = require('./wechat');
-var Config = require('./conf'),
-    conf = new Config();
+var configLoader = require('./config');
 
+var config = new configLoader();
 var app = new express();
 var server = http.Server(app);
 
