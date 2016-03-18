@@ -6,8 +6,7 @@
  * 3. 
  */
 
-var configLoader = require('./config');
-var config = new configLoader();
+var config = require('config');
 
 var Wechat = function (appID, appSecret) {
 	this.appID = appID || config.WechatAPI.appID;

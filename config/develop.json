@@ -1,9 +1,0 @@
-{
-	"port": "3000",
-    "db" : "mongodb://localhost/test",
-	"WechatAPI": 
-	{
-	    "appID": "wx94911ed9aa3ef58c",
-	    "appSecret": "c2f8def6c499b979bc46f7beee43091d"
-	}
-}
