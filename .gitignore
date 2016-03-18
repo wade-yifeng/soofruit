@@ -37,3 +37,6 @@ asset
 
 # IDE config directory
 .idea
+
+# Mac file that stores custom attributes
+.DS_Store
