@@ -21,7 +21,7 @@ gulp.task('js', function () {
 gulp.task('js:ng', function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
-            'packs/**/client/routes/*.js',
+            'packs/**/client/routes.js',
             'packs/**/client/controllers/*.js'
         ])
         .pipe(sourcemaps.init())
@@ -39,7 +39,7 @@ gulp.task('watch:js', ['js', 'js:ng'], function () {
         'static/scripts/jquery.js',
         'static/scripts/socket.io.js',
         'static/scripts/site/**/*.js',
-        'packs/**/client/routes/*.js',
+        'packs/**/client/routes.js',
         'packs/**/client/controllers/*.js'
     ], ['js', 'js:ng']);
 });

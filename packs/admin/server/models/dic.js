@@ -22,4 +22,4 @@ var DicSchema = new mongoose.Schema({
     Desc: String
 });
 
-module.exports.Order = mongoose.model('Dic', DicSchema);
+module.exports.Dic = mongoose.model('Dic', DicSchema);
