@@ -1,13 +1,25 @@
-/**
- * Created by xz_liu on 2016/3/8.
+/*!
+ * 根据指定环境加载Config
  */
-var config = {
+var default_config = require('./default.json');
 
-    //站点端口
-    port: 3000,
+module.exports = function() {
+	var version = (process.env.NODE_ENV || 'develop').toLowerCase(), ver_config, config;
+    try {
+        ver_config = require('./config/' + version);
+    } catch (err) {
+        console.log("Cannot find version " + version + " config file!!!");
+        process.exit(-1);
+    }
 
-    //数据库连接字符串
-    db: 'mongodb://localhost/test'
-};
+    config = _.extend({ 'version' : version }, default_config, ver_config);
 
-module.exports = config;
+    return config;
+}
+
+
+ * 1. 站点配置（端口，Host地址）
+ * 2. 数据库配置（mongodb，redis）
+{
+	
+}
