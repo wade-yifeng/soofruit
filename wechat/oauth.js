@@ -8,6 +8,7 @@
  */
 var urllib = require('urllib');
 var config = require('config');
+var wrapper = require('./util').wrapper;
 
 // 以data保存当前AccessToken
 var AccessToken = function (data) {
