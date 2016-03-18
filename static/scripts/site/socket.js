@@ -3,7 +3,7 @@
  */
 
 // 需要替换为服务器地址
-var socket = io.connect('http://www.soofruit.com:3000/');
+var socket = io.connect('http://localhost:3000/');
 
 socket.on('notify', function (data) {
     $("#socketinfo")

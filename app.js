@@ -16,8 +16,10 @@ app.engine('html', require('ejs-mate'))
     .use(bodyParser.json())
     .use(express.static('assets'));
 
+
 // 添加服务器端路由到这里.
-app.use('/', require('./packs/orders/server/routes'));
+app.use('/', require('./packs/admin/server/routes'))
+    .use('/', require('./packs/orders/server/routes'));
 
 
 app.get('/', function (req, res) {
@@ -27,6 +29,7 @@ app.get('/', function (req, res) {
 }).get('/admin', function (req, res) {
     res.render('adminindex.html');
 });
+
 
 // 启动socket
 socket.initSocket(server);
