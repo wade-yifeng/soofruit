@@ -1,7 +1,7 @@
 /**
  * Created by xz_liu on 2016/3/18.
  */
-var Dic = require('../models/dic').Dic;
+var Dic = require('../../../shared/models').Dic;
 
 
 module.exports.list = function (req, res) {

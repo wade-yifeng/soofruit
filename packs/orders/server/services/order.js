@@ -1,8 +1,8 @@
 /**
  * Created by xz_liu on 2016/3/8.
  */
-var Order = require('./model').Order;
-var socket = require('../../shared/server/socket');
+var Order = require('../../../shared/models').OldOrder;
+var socket = require('../../../shared/socket');
 
 
 module.exports.index = function (req, res) {

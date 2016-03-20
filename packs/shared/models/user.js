@@ -2,7 +2,6 @@
  * Created by xz_liu on 2016/3/17.
  */
 var mongoose = require('mongoose');
-require('../../../shared/server/mongoconn');
 
 /**
  * 用户
@@ -16,4 +15,4 @@ var UserSchema = new mongoose.Schema({
     createDate:　Date
 });
 
-module.exports.Order = mongoose.model('User', UserSchema);
+mongoose.model('User', UserSchema);

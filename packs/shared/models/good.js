@@ -2,7 +2,6 @@
  * Created by xz_liu on 2016/3/17.
  */
 var mongoose = require('mongoose');
-require('../../../shared/server/mongoconn');
 
 /**
  * 商品
@@ -37,4 +36,4 @@ var GoodSchema = new mongoose.Schema({
     storage: String
 });
 
-module.exports.Order = mongoose.model('Good', GoodSchema);
+mongoose.model('Good', GoodSchema);

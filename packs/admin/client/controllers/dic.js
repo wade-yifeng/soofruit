@@ -24,8 +24,8 @@ app.controller('Dic', function ($scope, $http, $route) {
         });
     };
 
-    $scope.createDic = function (order) {
-        $http.post('/dics', order).success(function (result) {
+    $scope.createDic = function (dic) {
+        $http.post('/dics', dic).success(function (result) {
             if (!result.code) {
                 $route.reload();
             }
