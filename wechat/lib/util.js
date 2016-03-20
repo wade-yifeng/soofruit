@@ -20,3 +20,24 @@ exports.wrapper = function (callback) {
         callback(null, data, res);
     };
 };
+
+/*!
+ * 对提交参数一层封装，当POST JSON，并且结果也为JSON时使用
+ */
+exports.postJSON = function (data) {
+  return {
+    dataType: 'json',
+    type: 'POST',
+    data: data,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+};
+
+exports.make = function (host, name, fn) {
+  host[name] = function () {
+    this.preRequest(this['_' + name], arguments);
+  };
+  host['_' + name] = fn;
+};

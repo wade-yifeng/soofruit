@@ -2,7 +2,6 @@
  * 微信验证基础类：
  * 1. 提供微信签名Token的认证
  * 2. 提供微信AccessToken的发布(定期刷新)和订阅
- *    多进程间共享Redis数据，订阅AccessToken刷新事件
  * 3. 提供OAuth第三方网站认证和公众号认证
  * 4. 提供获取用户WeChat数据的方法
  */
@@ -18,9 +17,10 @@ var AccessToken = function (data) {
     this.data = data;
 };
 
-// 判断是否过期，expires_in为缓冲时间
+// 判断是否过期，加入缓冲时间
 AccessToken.prototype.isValid = function () {
-    return !!this.data.access_token && (new Date().getTime()) < (this.data.create_at + this.data.expires_in * 1000);
+    // 过期时间，因网络延迟等，将实际过期时间提前10秒，以防止临界点
+    return !!this.data.access_token && (new Date().getTime()) < (this.data.create_at + (this.data.expires_in  - 10) * 1000);
 };
 
 // 处理AccessToken的私有方法
@@ -41,15 +41,15 @@ var processToken = function (that, callback) {
 var OAuth = function (appID, appSecret) {
     this.appID = appID || config.OAuth.appID;
     this.appSecret = appSecret || config.OAuth.appSecret;
+    this.store = {};
 
     this.getToken = function(openid, callback) {
-        // TODO: 从Redis中获取缓存的AccessToken
-        // callback(null, );
+        callback(null, this.store[openid]);
     }
 
     this.saveToken = function (openid, token, callback) {
-        // TODO: 触发Redis的Push和Pub
-        // callback(null);
+        this.store[openid] = token;
+        callback(null);
     };
 
     this.defaults = {};

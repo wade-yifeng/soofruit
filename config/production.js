@@ -14,7 +14,9 @@ module.exports = {
         // 公众号ID
         appID: "wx36418b8bcd9f8c8a",
         // 公众号密钥
-        appSecret: "f5e38fb6f3f29d7ae73004b106f8de45"
+        appSecret: "f5e38fb6f3f29d7ae73004b106f8de45",
+        // 公众号预设Token
+        token: "Soostep123"
     },
     OpenAPI: {
         

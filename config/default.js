@@ -15,6 +15,8 @@ module.exports = {
         appID: "wx94911ed9aa3ef58c",
         // 公众号密钥
         appSecret: "c2f8def6c499b979bc46f7beee43091d",
+        // 公众号预设Token    
+        token: "Soostep123",
         // 菜单配置
         menu: [
             {
