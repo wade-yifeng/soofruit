@@ -5,23 +5,23 @@ var gulp = require('gulp');
 var rename = require('gulp-rename');
 var minifyhtml = require('gulp-minify-html');
 
-gulp.task('copyfonts', function () {
+gulp.task('copy:fonts', function () {
     return gulp.src('static/fonts/*.*', {base: 'static'})
         .pipe(gulp.dest('assets/'));
 });
 
-gulp.task('copyimgs', ['copyfonts'], function () {
+gulp.task('copy:imgs', function () {
     return gulp.src('static/imgs/**/*.*', {base: 'static'})
         .pipe(gulp.dest('assets/'));
 });
 
-gulp.task('copytemplates', ['copyimgs'], function () {
+gulp.task('copy:templates', ['copy:fonts', 'copy:imgs'], function () {
     return gulp.src('packs/**/client/templates/*.html')
         .pipe(rename({dirname: 'pages'}))
         .pipe(minifyhtml())
         .pipe(gulp.dest('assets/'));
 });
 
-gulp.task('watch:html', ['copytemplates'], function () {
-    gulp.watch('packs/**/client/templates/*.html', ['copytemplates']);
+gulp.task('watch:html', ['copy:templates'], function () {
+    gulp.watch('packs/**/client/templates/*.html', ['copy:templates']);
 });

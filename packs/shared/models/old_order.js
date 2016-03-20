@@ -2,7 +2,6 @@
  * Created by xz_liu on 2016/3/8.
  */
 var mongoose = require('mongoose');
-require('../../shared/server/mongoconn');
 
 var OrderSchema = new mongoose.Schema({
     customer: String,
@@ -17,4 +16,4 @@ var OrderSchema = new mongoose.Schema({
 });
 OrderSchema.index({order_date: -1});
 
-module.exports.Order = mongoose.model('Order', OrderSchema);
+mongoose.model('OldOrder', OrderSchema);

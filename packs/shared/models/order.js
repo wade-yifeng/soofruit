@@ -2,7 +2,6 @@
  * Created by xz_liu on 2016/3/17.
  */
 var mongoose = require('mongoose');
-require('../../../shared/server/mongoconn');
 
 /**
  * 订单
@@ -29,4 +28,4 @@ var OrderSchema = new mongoose.Schema({
 });
 OrderSchema.index({orderDate: -1});
 
-module.exports.Order = mongoose.model('Order', OrderSchema);
+mongoose.model('Order', OrderSchema);

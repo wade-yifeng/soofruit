@@ -3,8 +3,7 @@ var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
 var config = require('config');
-var wechatAPI = require('wechat-api');
-var socket = require('./packs/shared/server/socket');
+var socket = require('./packs/shared/socket');
 var wechat = require('./wechat/oauth');
 
 var app = new express();
@@ -33,6 +32,7 @@ app.get('/', function (req, res) {
 
 // 启动socket
 socket.initSocket(server);
+
 
 server.listen(config.port, function () {
     console.log('Site is up on http://localhost:' + config.port);
