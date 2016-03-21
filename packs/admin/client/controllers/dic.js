@@ -13,7 +13,6 @@ app.controller('Dic', function ($scope, $http, $route) {
 
     $http.get('/dicTypes').success(function (result) {
         $scope.dicTypes = result;
-        //$scope.dicTypes.append(result);
     });
 
     $scope.getDic = function (_id) {

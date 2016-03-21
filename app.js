@@ -22,13 +22,13 @@ app.use('/', require('./packs/admin/server/routes'))
 // 子站点主页映射
 app.get('/', function (req, res) {
     console.log(req);
-    res.render('h5index.html');
+    res.render('index.html');
 }).get('/pc', function (req, res) {
     console.log(req);
-    res.render('index.html');
+    res.render('orders_index.html');
 }).get('/admin', function (req, res) {
     console.log(req);
-    res.render('adminindex.html');
+    res.render('admin_index.html');
 });
 
 // 启动socket
