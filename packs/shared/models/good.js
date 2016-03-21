@@ -15,16 +15,10 @@ var GoodSchema = new mongoose.Schema({
     desc: String,
 
     //分类
-    category: String,
+    category: Number,
 
     //图片相对路径
     pics: [String],
-
-    //卖价
-    sellPrice: Number,
-
-    //原价
-    originPrice: Number,
 
     //原产地
     provenance: String,
@@ -33,7 +27,16 @@ var GoodSchema = new mongoose.Schema({
     shelfLife: Number,
 
     //存储方式
-    storage: String
+    storage: String,
+
+    //卖价
+    sellPrice: Number,
+
+    //原价
+    originPrice: Number,
+
+    //销量
+    sales: {Type: Number, Default: 0}
 });
 
 mongoose.model('Good', GoodSchema);
