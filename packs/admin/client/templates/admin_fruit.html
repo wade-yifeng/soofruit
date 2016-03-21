@@ -1,0 +1,104 @@
+<form class="form-horizontal" ng-control="Fruit">
+
+    <!-- Dic List -->
+    <table class="table table-bordered table-striped table-hover table-condensed">
+        <tr>
+            <th class="text-center">名称/标题</th>
+            <th class="text-center">描述</th>
+            <th class="text-center">分类</th>
+            <th class="text-center">图片</th>
+            <th class="text-center">原产地</th>
+            <th class="text-center">保质期</th>
+            <th class="text-center">存储方式</th>
+            <th class="text-center">卖价</th>
+            <th class="text-center">原价</th>
+            <th class="text-center">销量</th>
+            <th class="text-center"></th>
+        </tr>
+        <tr ng-repeat="f in fruits">
+            <td>{{f.name}}</td>
+            <td>&nbsp;&nbsp;{{f.desc}}</td>
+            <td>&nbsp;&nbsp;{{f.category}}</td>
+            <td>&nbsp;&nbsp;{{f.pics}}</td>
+            <td>&nbsp;&nbsp;{{f.provenance}}</td>
+            <td>&nbsp;&nbsp;{{f.shelfLife}}</td>
+            <td>&nbsp;&nbsp;{{f.storage}}</td>
+            <td>&nbsp;&nbsp;{{f.sellPrice}}</td>
+            <td>&nbsp;&nbsp;{{f.originPrice}}</td>
+            <td>&nbsp;&nbsp;{{f.sales}}</td>
+            <td class="text-center">
+                <input class="btn btn-sm" type="button" ng-click="deleteFruit(f._id)" value="Delete">
+            </td>
+        </tr>
+        <tr ng-show="dics.length==0">
+            <td class="text-center" colspan="11">
+                <br>No fruits created yet. Please create one.</a>.
+                &nbsp;&nbsp;<br><br>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Create/Edit Dic -->
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">名称/标题</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" ng-model="fruitEdit.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">描述</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="fruitEdit.desc">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">分类</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="fruitEdit.category">
+                    <option ng-repeat="c in fruitCategories">{{c}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">图片</label>
+            <div class="col-sm-11">
+                <input type="file" file-model="currentImg"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">原产地</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="fruitEdit.provenance">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">保质期</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="number" ng-model="fruitEdit.shelfLife">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">存储方式</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="fruitEdit.storage">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">卖价</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="number" ng-model="fruitEdit.sellPrice">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">原价</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="number" ng-model="fruitEdit.originPrice">
+            </div>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-success" type="button" ng-click="createFruit(fruitEdit)" value="创建水果">
+        </div>
+    </div>
+
+</form>

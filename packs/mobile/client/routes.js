@@ -9,7 +9,7 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/home', {
             controller: 'Home',
-            templateUrl: 'pages/h5home.html'
+            templateUrl: 'pages/home.html'
         })
         .otherwise({
             redirectTo: '/home'

@@ -4,19 +4,19 @@
 var OrderStatusEnum = {
 
     //待付款
-    AwaitPay: 0,
+    AwaitPay: 'AwaitPay',
 
     //已付款
-    Payed: 1,
+    Payed: 'Payed',
 
     //已收货
-    Picked: 2,
+    Picked: 'Picked',
 
     //已成交
-    Finish: 3,
+    Finish: 'Finish',
 
     //已撤销
-    Cancelled: 4
+    Cancelled: 'Cancelled'
 };
 
 module.exports = OrderStatusEnum;

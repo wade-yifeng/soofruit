@@ -7,11 +7,15 @@ var app = angular.module('admin', [
 
 app.config(function ($routeProvider) {
     $routeProvider
+        .when('/fruit', {
+            controller: 'Fruit',
+            templateUrl: 'pages/admin_fruit.html'
+        })
         .when('/dic', {
             controller: 'Dic',
-            templateUrl: 'pages/dic.html'
+            templateUrl: 'pages/admin_dic.html'
         })
         .otherwise({
-            redirectTo: '/dic'
+            redirectTo: '/fruit'
         });
 });
