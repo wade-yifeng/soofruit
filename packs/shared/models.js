@@ -13,14 +13,14 @@ mongoose.connect(config.db, {
 });
 
 require('./models/dic');
-require('./models/fruit');
+require('./models/good');
 require('./models/old_order');
 require('./models/order');
 require('./models/order_user_good');
 require('./models/user');
 
 module.exports.Dic = mongoose.model('Dic');
-module.exports.Fruit = mongoose.model('Fruit');
+module.exports.Good = mongoose.model('Good');
 module.exports.OldOrder = mongoose.model('OldOrder');
 module.exports.Order = mongoose.model('Order');
 module.exports.OrderUserGood = mongoose.model('OrderUserGood');
