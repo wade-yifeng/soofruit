@@ -9,6 +9,8 @@ gulp.task('js:common', function () {
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/angular.js',
             'static/scripts/angular-route.js',
+            'static/scripts/ng-file-upload-shim.js',
+            'static/scripts/ng-file-upload.js',
             'static/scripts/jquery.js',
             'static/scripts/socket.io.js'
         ])
@@ -27,7 +29,7 @@ gulp.task('js:custom', function () {
         .pipe(sourcemaps.init())
         .pipe(ngAnnotate())
         .pipe(concat('site.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('assets'));
 });
@@ -36,6 +38,8 @@ gulp.task('watch:js', ['js:common', 'js:custom'], function () {
     gulp.watch([
         'static/scripts/angular.js',
         'static/scripts/angular-route.js',
+        'static/scripts/ng-file-upload-shim.js',
+        'static/scripts/ng-file-upload.js',
         'static/scripts/jquery.js',
         'static/scripts/socket.io.js',
         'packs/**/client/routes.js',

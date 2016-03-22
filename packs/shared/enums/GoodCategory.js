@@ -1,7 +1,7 @@
 /**
  * Created by xz_liu on 2016/3/21.
  */
-var FruitCategory = {
+var GoodCategory = {
 
     //浆果
     Berry: 'Berry',
@@ -19,4 +19,4 @@ var FruitCategory = {
     Pome: 'Pome'
 };
 
-module.exports = FruitCategory;
+module.exports = GoodCategory;

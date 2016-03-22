@@ -3,7 +3,7 @@
  */
 var router = require('express').Router();
 var dic = require('./services/dic');
-var fruit = require('./services/fruit');
+var good = require('./services/good');
 
 // dictionary service
 router.get('/dics', dic.list)
@@ -13,12 +13,13 @@ router.get('/dics/:_id', dic.detail)
     .delete('/dics/:_id', dic.delete);
 router.get('/dicTypes', dic.getDicTypes);
 
-// fruit service
-router.get('/fruits', fruit.list)
-    .post('/fruits', fruit.save);
-router.get('/fruits/:_id', fruit.detail)
-    .put('/fruits/:_id', fruit.save)
-    .delete('/fruits/:_id', fruit.delete);
-router.get('/fruitCategories', fruit.getfruitCategories);
+// good service
+router.get('/goods', good.list)
+    .post('/goods', good.save);
+router.get('/goods/:_id', good.detail)
+    .put('/goods/:_id', good.save)
+    .delete('/goods/:_id', good.delete);
+router.get('/goodCategories', good.getgoodCategories);
+router.post('/pics', good.uploadPics);
 
 module.exports = router;

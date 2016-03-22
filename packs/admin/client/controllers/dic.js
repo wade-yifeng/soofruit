@@ -2,10 +2,9 @@
  * Created by xz_liu on 2016/3/9.
  */
 var app = angular.module('admin');
-var title = 'Dictionary Management';
 
 app.controller('Dic', function ($scope, $http, $route) {
-    document.title = title;
+    document.title = 'Dictionary Management';
 
     $http.get('/dics').success(function (result) {
         $scope.dics = result;

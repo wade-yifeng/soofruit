@@ -1,7 +1,8 @@
 var express = require('express');
 var http = require('http');
-var bodyParser = require('body-parser');
 var config = require('config');
+var bodyParser = require('body-parser');
+var multipart = require('connect-multiparty');
 var socket = require('./packs/shared/socket');
 
 var app = new express();
@@ -11,6 +12,7 @@ app.engine('html', require('ejs-mate'))
     .set('views', './assets/pages')
     .use(bodyParser.urlencoded({extended: true}))
     .use(bodyParser.json())
+    .use(multipart({uploadDir: config.UploadDir}))
     .use(express.static('assets'))
     .use(express.query());
 
@@ -27,7 +29,7 @@ app.get('/', function (req, res) {
     console.log(req);
     res.render('orders_index.html');
 }).get('/admin', function (req, res) {
-    console.log(req);
+    //console.log(req);
     res.render('admin_index.html');
 });
 
