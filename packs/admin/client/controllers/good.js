@@ -5,9 +5,21 @@ var app = angular.module('admin');
 
 app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     document.title = 'Goods Management';
+    $scope.isUpdate = false;
+    $scope.buttonName = '新建商品';
+
+    //测试用数据
     $scope.good = {
-        name: '芒果哦',
-        pics: []
+        name: '芒果',
+        desc: '描述',
+        category: 'Nut',
+        pics: [],
+        provenance: '上海',
+        shelfLife: 1,
+        storage: '阴凉',
+        price: 10,
+        sales: 0,
+        balance: 120
     };
 
     $http.get('/goods').success(function (result) {
@@ -18,20 +30,31 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
         $scope.goodCategories = result;
     });
 
-    $scope.getGood = function (_id) {
+    $scope.editGood = function (_id) {
         $http.get('/goods/' + _id).success(function (result) {
             if (!result.code) {
                 $scope.good = result;
+                $scope.isUpdate = true;
+                $scope.buttonName = '编辑商品';
             }
         });
     };
 
-    $scope.createGood = function (good) {
-        $http.post('/goods', good).success(function (result) {
-            if (!result.code) {
-                $route.reload();
-            }
-        });
+    $scope.saveGood = function (good) {
+        if (!$scope.isUpdate) {
+            $http.post('/goods', good).success(function (result) {
+                if (!result.code) {
+                    $route.reload();
+                }
+            });
+        }
+        else {
+            $http.put('/goods/' + good._id, good).success(function (result) {
+                if (result.code == 0) {
+                    $route.reload();
+                }
+            });
+        }
     };
 
     $scope.deleteGood = function (_id) {

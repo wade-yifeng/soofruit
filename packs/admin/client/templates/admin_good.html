@@ -1,6 +1,6 @@
 <form class="form-horizontal" ng-control="Good">
 
-    <!-- Dic List -->
+    <!-- Good List -->
     <table class="table table-bordered table-striped table-hover table-condensed">
         <tr>
             <th class="text-center">名称/标题</th>
@@ -10,9 +10,9 @@
             <th class="text-center">原产地</th>
             <th class="text-center">保质期</th>
             <th class="text-center">存储方式</th>
-            <th class="text-center">卖价</th>
-            <th class="text-center">原价</th>
+            <th class="text-center">价格</th>
             <th class="text-center">销量</th>
+            <th class="text-center">库存</th>
             <th class="text-center"></th>
         </tr>
         <tr ng-repeat="g in goods">
@@ -27,10 +27,11 @@
             <td>&nbsp;&nbsp;{{g.provenance}}</td>
             <td>&nbsp;&nbsp;{{g.shelfLife}}</td>
             <td>&nbsp;&nbsp;{{g.storage}}</td>
-            <td>&nbsp;&nbsp;{{g.sellPrice}}</td>
-            <td>&nbsp;&nbsp;{{g.originPrice}}</td>
+            <td>&nbsp;&nbsp;{{g.price}}</td>
             <td>&nbsp;&nbsp;{{g.sales}}</td>
+            <td>&nbsp;&nbsp;{{g.balance}}</td>
             <td class="text-center">
+                <input class="btn btn-sm" type="button" ng-click="editGood(g._id)" value="Edit">
                 <input class="btn btn-sm" type="button" ng-click="deleteGood(g._id)" value="Delete">
             </td>
         </tr>
@@ -42,7 +43,7 @@
         </tr>
     </table>
 
-    <!-- Create/Edit Dic -->
+    <!-- Create/Edit Good -->
     <div class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-1 control-label">名称/标题</label>
@@ -60,6 +61,7 @@
             <label class="col-sm-1 control-label">分类</label>
             <div class="col-sm-11">
                 <select class="form-control input-sm" ng-model="good.category">
+                    <option selected>--请选择--</option>
                     <option ng-repeat="c in goodCategories">{{c}}</option>
                 </select>
             </div>
@@ -71,8 +73,8 @@
                         accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" multiple>选择图片(可多选)
                 </button>
                 <div>
-                    <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="f in files">
-                        <img ngf-src="f" ngf-resize="{width: 300, height: 300}">
+                    <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="path in good.pics">
+                        <img src="{{path}}" style="width:300px;">
                     </div>
                 </div>
                 {{errorMsg}}
@@ -97,19 +99,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-1 control-label">卖价</label>
+            <label class="col-sm-1 control-label">价格</label>
             <div class="col-sm-11">
-                <input class="form-control input-sm" type="number" ng-model="good.sellPrice">
+                <input class="form-control input-sm" type="number" ng-model="good.price">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-1 control-label">原价</label>
+            <label class="col-sm-1 control-label">库存</label>
             <div class="col-sm-11">
-                <input class="form-control input-sm" type="number" ng-model="good.originPrice">
+                <input class="form-control input-sm" type="number" ng-model="good.balance">
             </div>
         </div>
         <div class="text-center">
-            <input class="btn btn-success" type="button" ng-click="createGood(good)" value="创建水果">
+            <input class="btn btn-success" type="button" ng-click="saveGood(good)" value="{{buttonName}}">
         </div>
     </div>
 

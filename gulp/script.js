@@ -26,11 +26,11 @@ gulp.task('js:custom', function () {
             'packs/**/client/controllers/*.js',
             'static/scripts/orders/**/*.js'
         ])
-        .pipe(sourcemaps.init())
-        .pipe(ngAnnotate())
+        .pipe(sourcemaps.init())    //Debug需要
+        .pipe(ngAnnotate())         //uglify需要
         .pipe(concat('site.js'))
-        //.pipe(uglify())
-        .pipe(sourcemaps.write())
+        //.pipe(uglify())             //生产环境需要
+        .pipe(sourcemaps.write())   //Debug需要
         .pipe(gulp.dest('assets'));
 });
 

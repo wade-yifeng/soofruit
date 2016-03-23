@@ -29,7 +29,7 @@ module.exports.detail = function (req, res) {
 };
 
 
-module.exports.save = function (req, res) {
+module.exports.create = function (req, res) {
     var dic = new Dic(req.body);
 
     dic.save(function (err) {
@@ -38,6 +38,18 @@ module.exports.save = function (req, res) {
         }
         else {
             res.json(dic._id.toString());
+        }
+    });
+};
+
+
+module.exports.update = function (req, res) {
+    Dic.update({_id: req.body._id}, req.body, function (err) {
+        if (err) {
+            res.json({code: 500, message: err});
+        }
+        else {
+            res.json({code: 0});
         }
     });
 };
