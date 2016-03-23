@@ -6,7 +6,12 @@ var GoodCategory = require('../../../shared/enums').GoodCategory;
 
 
 module.exports.list = function (req, res) {
-    Good.find()
+    var conditions = {};
+    if (req.query.category) {
+        conditions.category = req.query.category;
+    }
+
+    Good.find(conditions)
         .lean()
         .exec(function (err, doc) {
             if (err) {

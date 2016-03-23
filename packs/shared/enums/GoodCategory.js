@@ -16,5 +16,10 @@ module.exports = {
     Nut: 'Nut',
 
     //仁果
-    Pome: 'Pome'
+    Pome: 'Pome',
+
+    Test1: 'Test1',
+    Test2: 'Test2',
+    Test3: 'Test3',
+    Test4: 'Test4'
 };
