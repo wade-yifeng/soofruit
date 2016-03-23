@@ -71,7 +71,7 @@ body{background:#fff;}
   -webkit-box-shadow: 1px 2px 6px rgba(55,55,55,0.5);
   -moz-box-shadow: 1px 2px 6px rgba(55,55,55,0.5);
   box-shadow: 1px 2px 6px rgba(55,55,55,0.5); color:#ff6e40; }
-#header .back{position:absolute; top:0px; left:10px; font-size:0;}
+#header .back{position:absolute; top:0px; left:30px; font-size:0;}
 #header .back img,#header .back1 img ,#header .recipe_add_cart_icon img{height:90px; vertical-align:middle;}
 #header .back1{position:absolute; top:0px; right:10px;}
 #header .btn_cancel{ font-size:80%; color:#fff;}

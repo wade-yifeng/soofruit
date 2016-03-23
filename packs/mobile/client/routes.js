@@ -9,6 +9,14 @@ app.config(function ($routeProvider) {
             controller: 'Home',
             templateUrl: 'pages/home.html'
         })
+        .when('/category', {
+            controller: 'Category',
+            templateUrl: 'pages/category.html'
+        })
+        .when('/goods/:category', {
+            controller: 'Goods',
+            templateUrl: 'pages/goods.html'
+        })
         .otherwise({
             redirectTo: '/home'
         });
