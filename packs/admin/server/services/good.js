@@ -6,19 +6,8 @@ var GoodCategory = require('../../../shared/enums').GoodCategory;
 
 
 module.exports.list = function (req, res) {
-    Good.find().lean().exec(function (err, doc) {
-        if (err) {
-            res.json({code: 500, message: err});
-        }
-        else {
-            res.json(doc);
-        }
-    });
-};
-
-
-module.exports.detail = function (req, res) {
-    Good.findById(req.params._id).lean()
+    Good.find()
+        .lean()
         .exec(function (err, doc) {
             if (err) {
                 res.json({code: 500, message: err});
@@ -30,15 +19,41 @@ module.exports.detail = function (req, res) {
 };
 
 
-module.exports.save = function (req, res) {
+module.exports.detail = function (req, res) {
+    Good.findById(req.params._id)
+        .lean()
+        .exec(function (err, doc) {
+            if (err) {
+                res.json({code: 500, message: err});
+            }
+            else {
+                res.json(doc);
+            }
+        });
+};
+
+
+module.exports.create = function (req, res) {
     var good = new Good(req.body);
-    
+
     good.save(function (err) {
         if (err) {
             res.json({code: 500, message: err});
         }
         else {
             res.json(good._id.toString());
+        }
+    });
+};
+
+
+module.exports.update = function (req, res) {
+    Good.update({_id: req.body._id}, req.body, function (err) {
+        if (err) {
+            res.json({code: 500, message: err});
+        }
+        else {
+            res.json({code: 0});
         }
     });
 };

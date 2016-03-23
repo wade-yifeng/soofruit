@@ -29,14 +29,14 @@ var GoodSchema = new mongoose.Schema({
     //存储方式
     storage: String,
 
-    //卖价
-    sellPrice: Number,
-
-    //原价
-    originPrice: Number,
+    //价格
+    price: Number,
 
     //销量
-    sales: Number
+    sales: Number,
+
+    //库存
+    balance: Number
 });
 
 mongoose.model('Good', GoodSchema);
