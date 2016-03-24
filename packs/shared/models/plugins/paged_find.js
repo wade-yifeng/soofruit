@@ -30,10 +30,11 @@ module.exports = function pagedFindPlugin(schema) {
                 hasPrev: false,
                 next: 0,
                 hasNext: false,
-                total: 0
+                total: 0,
+                limit: options.limit
             },
             items: {
-                begin: ((options.page * options.limit) - options.limit) + 1,
+                begin: ((options.page - 1) * options.limit) + 1,
                 end: options.page * options.limit,
                 total: 0
             }
@@ -77,10 +78,10 @@ module.exports = function pagedFindPlugin(schema) {
 
                 //final paging math
                 output.pages.total = Math.ceil(output.items.total / options.limit);
-                output.pages.next = ((output.pages.current + 1) > output.pages.total ? output.pages.total : output.pages.current + 1);
-                output.pages.hasNext = (output.pages.next !== output.pages.total);
-                output.pages.prev = output.pages.current - 1;
-                output.pages.hasPrev = (output.pages.prev !== 0);
+                output.pages.hasNext = (output.pages.current !== output.pages.total);
+                output.pages.next = (output.pages.current + 1 > output.pages.total ? output.pages.total : output.pages.current + 1);
+                output.pages.hasPrev = (output.pages.current !== 1);
+                output.pages.prev = (output.pages.current - 1 < 1 ? 1 : output.pages.current - 1);
                 if (output.items.end > output.items.total) {
                     output.items.end = output.items.total;
                 }
