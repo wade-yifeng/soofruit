@@ -15,6 +15,10 @@ app.config(function ($routeProvider) {
             controller: 'Dic',
             templateUrl: 'pages/admin_dic.html'
         })
+        .when('/strategy', {
+            controller: 'strategyCtrl',
+            templateUrl: 'pages/admin_strategy_index.html'
+        })
         .otherwise({
             redirectTo: '/fruit'
         });

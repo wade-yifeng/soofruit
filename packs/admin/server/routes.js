@@ -4,6 +4,7 @@
 var router = require('express').Router();
 var dic = require('./services/dic');
 var fruit = require('./services/fruit');
+var strategy = require('./services/strategy');
 
 // dictionary service
 router.get('/dics', dic.list)
@@ -20,5 +21,12 @@ router.get('/fruits/:_id', fruit.detail)
     .put('/fruits/:_id', fruit.save)
     .delete('/fruits/:_id', fruit.delete);
 router.get('/fruitCategories', fruit.getfruitCategories);
+
+// strategy services
+router.get('/strategies', strategy.list)
+      .get('/strategies/:id', strategy.detail)
+      .post('/strategies', strategy.save)
+      .put('/strategies/:id', strategy.update)
+      .delete('/strategies/:id', strategy.delete)
 
 module.exports = router;
