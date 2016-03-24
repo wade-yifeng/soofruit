@@ -4,12 +4,19 @@
  * 2. 数据库配置（mongodb，redis）
  * 3. 微信公众号配置       
  * 4. 微信开放平台配置      
-*/
+ */
 module.exports = {
+
     // 站点端口
     port: 8000,
+
     // 数据库连接字符串
-    db : "mongodb://localhost/test",
+    db: "mongodb://localhost/test",
+
+    // 图片上传路径
+    UploadDir: "./assets/imgs/upload",
+
+    // 微信
     WeChat: {
         // 公众号ID
         appID: "wx36418b8bcd9f8c8a",
@@ -18,7 +25,6 @@ module.exports = {
         // 公众号预设Token
         token: "Soostep123"
     },
-    OpenAPI: {
-        
-    }
-}
+    
+    OpenAPI: {}
+};

@@ -1,7 +1,7 @@
 /**
  * Created by xz_liu on 2016/3/21.
  */
-var FruitCategory = {
+module.exports = {
 
     //浆果
     Berry: 'Berry',
@@ -16,7 +16,10 @@ var FruitCategory = {
     Nut: 'Nut',
 
     //仁果
-    Pome: 'Pome'
-};
+    Pome: 'Pome',
 
-module.exports = FruitCategory;
+    Test1: 'Test1',
+    Test2: 'Test2',
+    Test3: 'Test3',
+    Test4: 'Test4'
+};

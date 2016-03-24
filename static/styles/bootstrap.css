@@ -4614,11 +4614,12 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination {
   display: inline-block;
   padding-left: 0;
-  margin: 20px 0;
+  margin-bottom: 20px;
   border-radius: 4px;
 }
 .pagination > li {
   display: inline;
+  cursor: pointer;
 }
 .pagination > li > a,
 .pagination > li > span {
