@@ -41,5 +41,6 @@ var GoodSchema = new mongoose.Schema({
     //库存
     balance: Number
 });
+GoodSchema.plugin(require('./plugins/paged_find'));
 
 mongoose.model('Good', GoodSchema);
