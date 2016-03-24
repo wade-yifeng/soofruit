@@ -42,6 +42,17 @@
             </td>
         </tr>
     </table>
+    <nav>
+        <ul class="pagination">
+            <li ng-class="pages.hasPrev?'':'disabled'">
+                <span ng-click="getPagedGoods(pages.prev)">&laquo;</span>
+            </li>
+            <li ng-repeat="i in pageArray" ng-class="pages.current==i?'active':''"><span ng-click="getPagedGoods(i)">{{i}}</span></li>
+            <li ng-class="pages.hasNext?'':'disabled'">
+                <span ng-click="getPagedGoods(pages.next)">&raquo;</span>
+            </li>
+        </ul>
+    </nav>
 
     <!-- Create/Edit Good -->
     <div class="form-horizontal">

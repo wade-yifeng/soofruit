@@ -15,6 +15,7 @@ router.get('/dicTypes', dic.getDicTypes);
 
 // good service
 router.get('/goods', good.list)
+    .get('/goodsPaged', good.listPaged)
     .post('/goods', good.create);
 router.get('/goods/:_id', good.detail)
     .put('/goods/:_id', good.update)

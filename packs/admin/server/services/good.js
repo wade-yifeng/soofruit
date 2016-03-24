@@ -24,6 +24,24 @@ module.exports.list = function (req, res) {
 };
 
 
+module.exports.listPaged = function (req, res) {
+    var options = {
+        limit: req.query.limit ? parseInt(req.query.limit, null) : 10,
+        page: req.query.page ? parseInt(req.query.page, null) : 1,
+        sort: req.query.sort ? req.query.sort : '_id'
+    };
+
+    Good.pagedFind(options, function (err, output) {
+        if (err) {
+            res.json({code: 500, message: err});
+        }
+        else {
+            res.json(output);
+        }
+    });
+};
+
+
 module.exports.detail = function (req, res) {
     Good.findById(req.params._id)
         .lean()
