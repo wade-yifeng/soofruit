@@ -27,7 +27,7 @@
             <td>&nbsp;&nbsp;{{g.provenance}}</td>
             <td>&nbsp;&nbsp;{{g.shelfLife}}</td>
             <td>&nbsp;&nbsp;{{g.storage}}</td>
-            <td>&nbsp;&nbsp;{{g.price}}</td>
+            <td>&nbsp;&nbsp;{{g.price|currency:'￥'}}</td>
             <td>&nbsp;&nbsp;{{g.sales}}</td>
             <td>&nbsp;&nbsp;{{g.balance}}</td>
             <td class="text-center">
@@ -42,12 +42,14 @@
             </td>
         </tr>
     </table>
-    <nav>
+    <nav ng-show="goods.length>0">
         <ul class="pagination">
             <li ng-class="pages.hasPrev?'':'disabled'">
                 <span ng-click="getPagedGoods(pages.prev)">&laquo;</span>
             </li>
-            <li ng-repeat="i in pageArray" ng-class="pages.current==i?'active':''"><span ng-click="getPagedGoods(i)">{{i}}</span></li>
+            <li ng-repeat="i in pageArray" ng-class="pages.current==i?'active':''">
+                <span ng-click="getPagedGoods(i)">{{i}}</span>
+            </li>
             <li ng-class="pages.hasNext?'':'disabled'">
                 <span ng-click="getPagedGoods(pages.next)">&raquo;</span>
             </li>
@@ -55,7 +57,7 @@
     </nav>
 
     <!-- Create/Edit Good -->
-    <div class="form-horizontal">
+    <div id="editForm" class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-1 control-label">名称/标题</label>
             <div class="col-sm-11">
@@ -80,8 +82,8 @@
         <div class="form-group">
             <label class="col-sm-1 control-label">图片</label>
             <div class="col-sm-11">
-                <button class="form-control btn-info" ngf-select="uploadFiles($files)"
-                        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" multiple>选择图片(可多选)
+                <button class="form-control btn-info" ngf-select="uploadFiles($files)" accept="image/*"
+                        ngf-max-height="1000" ngf-max-size="1MB" multiple>选择图片 (可多选, 为了显示效果请尽量选接近500*500的正方形图片)
                 </button>
                 <div>
                     <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="path in good.pics">
@@ -128,7 +130,25 @@
             </div>
         </div>
         <div class="text-center">
-            <input class="btn btn-success" type="button" ng-click="saveGood(good)" value="{{buttonName}}">
+            <input class="btn btn-success" type="button" ng-click="saveGood(good)" ng-value="buttonName">
+        </div>
+    </div>
+
+    <div class="modal fade in" id="dialogDelete" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>删除确认</h3>
+                </div>
+                <div class="modal-body">
+                    <p>确定要删除商品吗?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
+                    <a href="#" class="btn btn-primary" data-dismiss="modal" ng-click="confirmDelete(goodToDelete)">删除</a>
+                </div>
+            </div>
         </div>
     </div>
 
