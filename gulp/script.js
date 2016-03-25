@@ -13,7 +13,8 @@ gulp.task('js:common', function () {
             'static/scripts/ng-file-upload.js',
             'static/scripts/jquery.js',
             'static/scripts/socket.io.js',
-            'static/scripts/underscore.js'
+            'static/scripts/underscore.js',
+            'static/scripts/bootstrap.js'
         ])
         .pipe(concat('common.js'))
         .pipe(uglify())
@@ -45,8 +46,10 @@ gulp.task('watch:js', ['js:common', 'js:custom'], function () {
         'static/scripts/jquery.js',
         'static/scripts/socket.io.js',
         'static/scripts/underscore.js',
+        'static/scripts/bootstrap.js',
+        'static/scripts/admin/**/*.js',
+        'static/scripts/orders/**/*.js',
         'packs/**/client/routes.js',
-        'packs/**/client/controllers/*.js',
-        'static/scripts/orders/**/*.js'
+        'packs/**/client/controllers/*.js'
     ], ['js:common', 'js:custom']);
 });

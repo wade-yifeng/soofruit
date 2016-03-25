@@ -37,6 +37,9 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
             if (!result.code) {
                 $scope.good = result;
                 toggleCreateUpdate(true);
+                $('#editForm').addClass('animated bounceInUp').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    $('#editForm').removeClass('animated bounceInUp')
+                });
             }
         });
     };
@@ -49,6 +52,8 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
                     $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
                     commonGetPagedGoods($scope.pages.current);
                     $scope.good = {pics: []};
+
+                    showDialog('商品创建成功');
                 }
             });
         }
@@ -58,12 +63,19 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
                     commonGetPagedGoods($scope.pages.current);
                     toggleCreateUpdate(false);
                     $scope.good = {pics: []};
+
+                    showDialog('商品更新成功');
                 }
             });
         }
     };
 
     $scope.deleteGood = function (_id) {
+        $scope.goodToDelete = _id;
+        $('#dialogDelete').modal('show');
+    };
+
+    $scope.confirmDelete = function (_id) {
         $http.delete('/goods/' + _id).success(function (result) {
             if (result.code == 0) {
                 //删除当页最后一条后跳到前一页
