@@ -37,6 +37,9 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
             if (!result.code) {
                 $scope.good = result;
                 toggleCreateUpdate(true);
+                $('#editForm').addClass('animated bounceInUp').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    $('#editForm').removeClass('animated bounceInUp')
+                });
             }
         });
     };
