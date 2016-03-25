@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.ObjectId;
 
 var StrategySchema = new mongoose.Schema({
-    strategyNmae: { type: String },
-    goodId: { type: mongoose.Schema.Types.ObjectId, ref: good },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: user },
-    strategyType: { type: String },
-    discountType: { type: String },
+    strategyName: { type: String },
+    goodId: { type: ObjectId },
+    userId: { type: ObjectId }, // distributor user id.
+    strategyType: { type: String }, // StrategyType enum.
+    discountType: { type: String }, // DiscountType enum.
     discountFactor: { type: Number },
     targetBills: { type: Number },
     achievedBills: { type: Number },

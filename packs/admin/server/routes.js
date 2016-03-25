@@ -5,6 +5,7 @@ var router = require('express').Router();
 var dic = require('./services/dic');
 var strategy = require('./services/strategy');
 var good = require('./services/good');
+var user = require('./services/user');
 
 // dictionary service
 router.get('/dics', dic.list)
@@ -29,6 +30,11 @@ router.get('/strategies', strategy.list)
       .get('/strategies/:id', strategy.detail)
       .post('/strategies', strategy.save)
       .put('/strategies/:id', strategy.update)
-      .delete('/strategies/:id', strategy.delete)
+      .delete('/strategies/:id', strategy.delete);
+// enums
+router.get('/enums', strategy.getEnums);
+
+// user services
+router.get('/users', user.list);
 
 module.exports = router;

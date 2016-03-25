@@ -15,7 +15,7 @@ app.config(function ($routeProvider) {
         })
         .when('/strategy', {
             controller: 'strategyCtrl',
-            templateUrl: 'pages/admin_strategy_index.html'
+            templateUrl: 'pages/admin_strategy.html'
         })
         .otherwise({
             redirectTo: '/good'

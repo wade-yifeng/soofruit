@@ -1,4 +1,5 @@
 var Strategy = require('../../../shared/models').Strategy;
+var Enums = require('../../../shared/enums');
 
 module.exports.list = function (req, res) {
     Strategy.find(function (err, strategies) {
@@ -62,4 +63,10 @@ module.exports.delete = function (req, res) {
         
         res.json({id: req.params.id, message: 'strategy deleted'});
     });
+};
+
+module.exports.getEnums = function (req, res) {
+    // TODO: consider to add enums into redis.
+    // redisClient.set('Enums', Enums);
+    res.send(Enums);
 };
