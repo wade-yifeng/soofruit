@@ -1,0 +1,109 @@
+<div class="form-horizontal" ng-control="strategyCtrl">
+    
+    <!-- Dic List -->
+    <table class="table table-bordered table-striped table-hover table-condensed">
+        <tr>
+            <th class="text-center">策略名称</th>
+            <th class="text-center">商品名称</th>
+            <th class="text-center">用户名</th>
+            <th class="text-center">策略类型</th>
+            <th class="text-center">折扣类型</th>
+            <th class="text-center">折扣系数</th>
+            <th class="text-center">目标订单数</th>
+            <th class="text-center">已成交单数</th>
+            <th class="text-center">创建时间</th>
+            <th class="text-center">是否可用</th>
+            <th class="text-center">操作</th>
+        </tr>
+        <tr ng-repeat="stgy in strategies">
+            <td>{{stgy.strategyName}}</td>
+            <td>{{stgy.goodId}}</td>
+            <td>{{stgy.userId}}</td>
+            <td>{{stgy.strategyType}}</td>
+            <td>{{stgy.discountType}}</td>
+            <td>{{stgy.discountFactor}}</td>
+            <td>{{stgy.targetBills}}</td>
+            <td>{{stgy.achievedBills}}</td>
+            <td>{{stgy.created}}</td>
+            <td>{{stgy.isActive}}</td>
+            <td class="text-center">
+                <input class="btn btn-sm" type="button" ng-click="getStrategy(stgy._id)" value="Edit" />
+                <input class="btn btn-sm" type="button" ng-click="deleteStrategy(stgy._id)" value="Delete" />
+            </td>
+        </tr>
+        <tr ng-show="strategies.length==0">
+            <td class="text-center" colspan="11">
+                <br>No strategy created yet. Please create one.</a>.
+                <br><br>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Create/Edit Dic -->
+    <div class="form-horizontal">
+        <div>
+            <input type="hidden" ng-model="strategy._id" />
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">策略名称</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" ng-model="strategy.strategyname" />                
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">商品名称</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="strategy.goodid">
+                    <option ng-repeat="opts in goods" value={{opts._id}}>{{opts.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">用户</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="strategy.userid">
+                    <option ng-repeat="opts in users" value={{opts._id}}>{{opts}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">策略类型</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="strategy.strategyType">
+                    <option ng-repeat="opts in strategyType" >{{opts}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">折扣类型</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="strategy.discountType">
+                    <option ng-repeat="opts in discountType" >{{opts}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">折扣系数</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="number" ng-model="strategy.discountFactor">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">目标订单数</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="number" ng-model="strategy.targetBills">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">已成交单数</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="number" ng-model="strategy.achievedBills">
+            </div>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-success" type="button" ng-click="clearContent()" value="清除">
+            <input class="btn btn-success" type="button" ng-click="saveStrategy(strategy)" value="保存">
+        </div>
+    </div>
+    
+</div>

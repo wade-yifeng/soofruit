@@ -3,3 +3,5 @@
  */
 module.exports.GoodCategory = require('./enums/GoodCategory');
 module.exports.OrderStatus = require('./enums/OrderStatus');
+module.exports.StrategyType = require('./enums/StrategyType');
+module.exports.DiscountType = require('./enums/DiscountType');

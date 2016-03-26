@@ -18,6 +18,7 @@ require('./models/old_order');
 require('./models/order');
 require('./models/order_user_good');
 require('./models/user');
+require('./models/strategy');
 
 module.exports.Dic = mongoose.model('Dic');
 module.exports.Good = mongoose.model('Good');
@@ -25,3 +26,4 @@ module.exports.OldOrder = mongoose.model('OldOrder');
 module.exports.Order = mongoose.model('Order');
 module.exports.OrderUserGood = mongoose.model('OrderUserGood');
 module.exports.User = mongoose.model('User');
+module.exports.Strategy = mongoose.model('Strategy');
