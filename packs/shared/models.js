@@ -27,3 +27,5 @@ module.exports.Order = mongoose.model('Order');
 module.exports.OrderUserGood = mongoose.model('OrderUserGood');
 module.exports.User = mongoose.model('User');
 module.exports.Strategy = mongoose.model('Strategy');
+
+module.exports.ValidateGood = require('./validators/good').ValidateGood;
