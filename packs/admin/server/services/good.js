@@ -1,7 +1,9 @@
 /**
  * Created by xz_liu on 2016/3/18.
  */
-var Good = require('../../../shared/models').Good;
+var models = require('../../../shared/models');
+var Good = models.Good;
+var ValidateGood = models.ValidateGood;
 var GoodCategory = require('../../../shared/enums').GoodCategory;
 
 
@@ -57,16 +59,22 @@ module.exports.detail = function (req, res) {
 
 
 module.exports.create = function (req, res) {
-    var good = new Good(req.body);
+    var v = ValidateGood(req.body);
+    if (!v.isValid()) {
+        res.json({code: 400, msgs: v.msg});
+    }
+    else {
+        var good = new Good(req.body);
 
-    good.save(function (err) {
-        if (err) {
-            res.json({code: 500, message: err});
-        }
-        else {
-            res.json(good._id.toString());
-        }
-    });
+        good.save(function (err) {
+            if (err) {
+                res.json({code: 500, message: err});
+            }
+            else {
+                res.json(good._id.toString());
+            }
+        });
+    }
 };
 
 

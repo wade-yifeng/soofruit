@@ -45,28 +45,34 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     };
 
     $scope.saveGood = function (good) {
-        if (!$scope.isUpdate) {
-            $http.post('/goods', good).success(function (result) {
-                if (!result.code) {
-                    //新建成功跳到新商品所在页
-                    $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
-                    commonGetPagedGoods($scope.pages.current);
-                    $scope.good = {pics: []};
+        var res = checkGood(good);
+        if (res.isValid) {
+            if (!$scope.isUpdate) {
+                $http.post('/goods', good).success(function (result) {
+                    if (!result.code) {
+                        //新建成功跳到新商品所在页
+                        $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
+                        commonGetPagedGoods($scope.pages.current);
+                        $scope.good = {pics: []};
 
-                    showDialog('商品创建成功');
-                }
-            });
+                        showDialog('商品创建成功');
+                    }
+                });
+            }
+            else {
+                $http.put('/goods/' + good._id, good).success(function (result) {
+                    if (result.code == 0) {
+                        commonGetPagedGoods($scope.pages.current);
+                        toggleCreateUpdate(false);
+                        $scope.good = {pics: []};
+
+                        showDialog('商品更新成功');
+                    }
+                });
+            }
         }
-        else {
-            $http.put('/goods/' + good._id, good).success(function (result) {
-                if (result.code == 0) {
-                    commonGetPagedGoods($scope.pages.current);
-                    toggleCreateUpdate(false);
-                    $scope.good = {pics: []};
-
-                    showDialog('商品更新成功');
-                }
-            });
+        else{
+            // 验证错误展示
         }
     };
 
@@ -129,5 +135,10 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     var toggleCreateUpdate = function (isUpdate) {
         $scope.isUpdate = isUpdate;
         $scope.buttonName = isUpdate ? '编辑商品' : '新建商品';
+    };
+
+    var checkGood = function (good) {
+        var res = window.ValidateGood(good);
+        console.log(res);
     };
 });
