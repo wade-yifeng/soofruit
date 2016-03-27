@@ -40,3 +40,18 @@ assets
 
 # Mac file that stores custom attributes
 .DS_Store
+
+# Ignore Mac OS desktop services store
+.DS_Store
+
+# Ignore Windows desktop setting file
+desktop.ini
+
+*.log
+
+.idea
+public/upload/*
+
+*.sublime-project
+*.sublime-workspace
+*.swp
