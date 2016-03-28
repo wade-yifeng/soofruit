@@ -58,6 +58,7 @@
 
     <!-- Create/Edit Good -->
     <div id="editForm" class="form-horizontal">
+        <div class="alert alert-warning"></div>
         <div class="form-group">
             <label class="col-sm-1 control-label">名称/标题</label>
             <div class="col-sm-11">
@@ -131,25 +132,10 @@
         </div>
         <div class="text-center">
             <input class="btn btn-success" type="button" ng-click="saveGood(good)" ng-value="buttonName">
+            <input class="btn btn-success" type="button" ng-click="cancelEdit()" value="撤销编辑" ng-show="isUpdate">
         </div>
     </div>
 
-    <div class="modal fade in" id="dialogDelete" tabindex="-1" role="dialog" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>删除确认</h3>
-                </div>
-                <div class="modal-body">
-                    <p>确定要删除商品吗?</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" data-dismiss="modal">取消</a>
-                    <a href="#" class="btn btn-primary" data-dismiss="modal" ng-click="confirmDelete(goodToDelete)">删除</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div ng-include="'/pages/popup_confirm.html'"></div>
 
 </form>
