@@ -17,6 +17,10 @@ app.config(function ($routeProvider) {
             controller: 'strategyCtrl',
             templateUrl: 'pages/admin_strategy.html'
         })
+        .when('/user', {
+            controller: 'userCtrl',
+            templateUrl: 'pages/admin_user.html'
+        })
         .otherwise({
             redirectTo: '/good'
         });

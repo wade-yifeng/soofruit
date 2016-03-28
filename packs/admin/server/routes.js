@@ -36,5 +36,10 @@ router.get('/enums', strategy.getEnums);
 
 // user services
 router.get('/users', user.list);
+router.post('/user/signin', user.signin);
+router.get('/user/signout', user.signout);
+router.post('/user/register', user.register);
+
+
 
 module.exports = router;

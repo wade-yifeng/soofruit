@@ -32,5 +32,15 @@ module.exports = {
         oauth2URL: "https://api.weixin.qq.com/sns/oauth2/access_token",
         oauth2RefreshURL: "https://api.weixin.qq.com/sns/oauth2/refresh_token",
         authURL: "https://api.weixin.qq.com/sns/auth"
-    }
+    },
+    
+    SECRET_TOKEN: 'aMdoeb5ed87zorRdkD6greDML81DcnrzeSD648ferFejmplx',
+    
+    TOKEN_EXPIRATION_SEC: 60000 * 60,
+    
+    SECRET_SESSION: 'soostep',
+    
+    SESSION_TRY_TIMES: 3,
+    
+    SALT_WORK_FACTOR : 10
 };
