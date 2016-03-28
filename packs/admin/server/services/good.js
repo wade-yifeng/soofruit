@@ -1,9 +1,12 @@
 /**
  * Created by xz_liu on 2016/3/18.
  */
+var fs = require('fs');
+var path = require('path');
 var models = require('../../../shared/models');
 var Good = models.Good;
 var ValidateGood = models.ValidateGood;
+var uploadPath = require('config').UploadDir.substr(2);
 var GoodCategory = require('../../../shared/enums').GoodCategory;
 
 
@@ -33,12 +36,12 @@ module.exports.listPaged = function (req, res) {
         sort: req.query.sort ? req.query.sort : '_id'
     };
 
-    Good.pagedFind(options, function (err, output) {
+    Good.pagedFind(options, function (err, doc) {
         if (err) {
             res.json({code: 500, message: err});
         }
         else {
-            res.json(output);
+            res.json(doc);
         }
     });
 };
@@ -97,6 +100,25 @@ module.exports.delete = function (req, res) {
         }
         else {
             res.json({code: 0});
+
+            //同时异步删掉所有无用图片文件
+            Good.find({}, 'pics')
+                .lean()
+                .exec(function (err, doc) {
+                    if (!err) {
+                        var dbPics = [];
+                        doc.forEach(function (item) {
+                            dbPics.push.apply(dbPics, item.pics);
+                        });
+
+                        var allPics = fs.readdirSync(path.resolve(uploadPath));
+                        allPics.forEach(function (pic) {
+                            if (dbPics.indexOf(pic) == -1) {
+                                fs.unlink(path.resolve(uploadPath, pic));
+                            }
+                        });
+                    }
+                });
         }
     });
 };
@@ -108,7 +130,19 @@ module.exports.getgoodCategories = function (req, res) {
 
 
 module.exports.uploadPics = function (req, res) {
-    //截去开头的assets.原始路径举例:assets/imgs/upload/tm4HP8x0RDH2PGpCb7htcQyD.jpg
-    var srcPath = req.files.file.path.substr(6);
+    //截去路径assets/imgs/upload/,仅保留文件名
+    var srcPath = req.files.file.path.substr(19);
     res.send(srcPath);
+};
+
+
+module.exports.deletePic = function (req, res) {
+    fs.unlink(path.resolve(uploadPath, req.params._path), function (err) {
+        if (err) {
+            res.json({code: 500, message: err});
+        }
+        else {
+            res.json({code: 0});
+        }
+    });
 };

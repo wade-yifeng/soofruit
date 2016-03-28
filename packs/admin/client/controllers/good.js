@@ -6,21 +6,6 @@ var app = angular.module('admin');
 app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     document.title = 'Goods Management';
 
-    // //测试用数据
-    // $scope.good = {
-    //     name: '草莓',
-    //     desc: '描述',
-    //     category: 'Berry',
-    //     pics: [],
-    //     spec: '1kg',
-    //     provenance: '上海',
-    //     shelfLife: 1,
-    //     storage: '阴凉',
-    //     price: 10,
-    //     sales: 0,
-    //     balance: 120
-    // };
-
     $http.get('/goodCategories').success(function (result) {
         commonGetPagedGoods(1);
         toggleCreateUpdate(false);
@@ -53,36 +38,34 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
             if (!$scope.isUpdate) {
                 $http.post('/goods', good).success(function (result) {
                     if (!result.code) {
+                        showInfo('商品创建成功');
+                        $('div.alert').hide();
+
                         //新建成功跳到新商品所在页
                         $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
                         commonGetPagedGoods($scope.pages.current);
                         $scope.good = {pics: []};
-
-                        $('div.alert').hide();
-                        showInfo('商品创建成功');
                     }
                 });
             }
             else {
                 $http.put('/goods/' + good._id, good).success(function (result) {
                     if (result.code == 0) {
+                        showInfo('商品更新成功');
                         commonGetPagedGoods($scope.pages.current);
                         toggleCreateUpdate(false);
-
-                        showInfo('商品更新成功');
                     }
                 });
             }
         }
         else {
-            // 展示验证错误
             showValidationResult(res.msgs);
         }
     };
 
     $scope.deleteGood = function (_id) {
-        $scope.entityToOperate = _id;
         showConfirm('确定要删除商品吗?');
+        $scope.entityToOperate = _id;
     };
 
     $scope.confirmOperation = function (_id) {
@@ -118,6 +101,18 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
         });
     };
 
+    $scope.deleteFile = function (file) {
+        $http.delete('/pics/' + file).success(function (result) {
+            if (result.code == 0) {
+                var originPics = $scope.good.pics;
+                $scope.good.pics = [];
+                originPics.forEach(function (pic) {
+                    if (pic != file) $scope.good.pics.push(pic);
+                });
+            }
+        })
+    };
+
     var commonGetPagedGoods = function (page) {
         $http.get('/goodsPaged?page=' + page).success(function (result) {
             if (!result.code) {
@@ -142,6 +137,21 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
         $scope.buttonName = isUpdate ? '提交编辑' : '新建商品';
         if (!isUpdate) {
             $scope.good = {pics: []};
+
+            // //测试用数据
+            // $scope.good = {
+            //     name: '草莓',
+            //     desc: '描述',
+            //     category: 'Berry',
+            //     pics: [],
+            //     spec: '1kg',
+            //     provenance: '上海',
+            //     shelfLife: 1,
+            //     storage: '阴凉',
+            //     price: 10,
+            //     sales: 0,
+            //     balance: 120
+            // };
         }
     };
 });

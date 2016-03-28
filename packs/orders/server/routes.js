@@ -4,7 +4,7 @@
 var router = require('express').Router();
 var order = require('./services/order');
 
-// order service
+// order services
 router.get('/orders', order.index)
     .post('/orders', order.create);
 router.get('/orders/:_id', order.detail)
