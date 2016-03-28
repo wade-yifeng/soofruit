@@ -53,23 +53,22 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
             if (!$scope.isUpdate) {
                 $http.post('/goods', good).success(function (result) {
                     if (!result.code) {
+                        showInfo('商品创建成功');
+                        $('div.alert').hide();
+
                         //新建成功跳到新商品所在页
                         $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
                         commonGetPagedGoods($scope.pages.current);
                         $scope.good = {pics: []};
-
-                        $('div.alert').hide();
-                        showInfo('商品创建成功');
                     }
                 });
             }
             else {
                 $http.put('/goods/' + good._id, good).success(function (result) {
                     if (result.code == 0) {
+                        showInfo('商品更新成功');
                         commonGetPagedGoods($scope.pages.current);
                         toggleCreateUpdate(false);
-
-                        showInfo('商品更新成功');
                     }
                 });
             }
@@ -116,6 +115,14 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
                     evt.loaded / evt.total));
             });
         });
+    };
+
+    $scope.deleteFile = function (file) {
+        $http.delete('/pics/' + file).success(function (result) {
+            if (result.code == 0) {
+                $scope.good.pics.pop(file);
+            }
+        })
     };
 
     var commonGetPagedGoods = function (page) {

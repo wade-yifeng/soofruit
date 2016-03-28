@@ -21,7 +21,7 @@
             <td>&nbsp;&nbsp;{{g.category}}</td>
             <td>
                 <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="path in g.pics">
-                    <img src="{{path}}" style="width:100px;">
+                    <img src="/imgs/upload/{{path}}" style="width:100px;">
                 </div>
             </td>
             <td>&nbsp;&nbsp;{{g.provenance}}</td>
@@ -88,7 +88,9 @@
                 </button>
                 <div>
                     <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="path in good.pics">
-                        <img src="{{path}}" style="width:300px;">
+                        <img src="/imgs/upload/{{path}}" style="width:300px;">
+                        <div class="glyphicon glyphicon-remove-sign pull-right"
+                             style="left:-23px; font-size:1.5em; cursor:pointer;" ng-click="deleteFile(path)"></div>
                     </div>
                 </div>
                 {{errorMsg}}
