@@ -6,21 +6,6 @@ var app = angular.module('admin');
 app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     document.title = 'Goods Management';
 
-    // //测试用数据
-    // $scope.good = {
-    //     name: '草莓',
-    //     desc: '描述',
-    //     category: 'Berry',
-    //     pics: [],
-    //     spec: '1kg',
-    //     provenance: '上海',
-    //     shelfLife: 1,
-    //     storage: '阴凉',
-    //     price: 10,
-    //     sales: 0,
-    //     balance: 120
-    // };
-
     $http.get('/goodCategories').success(function (result) {
         commonGetPagedGoods(1);
         toggleCreateUpdate(false);
@@ -74,14 +59,13 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
             }
         }
         else {
-            // 展示验证错误
             showValidationResult(res.msgs);
         }
     };
 
     $scope.deleteGood = function (_id) {
-        $scope.entityToOperate = _id;
         showConfirm('确定要删除商品吗?');
+        $scope.entityToOperate = _id;
     };
 
     $scope.confirmOperation = function (_id) {
@@ -120,7 +104,11 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     $scope.deleteFile = function (file) {
         $http.delete('/pics/' + file).success(function (result) {
             if (result.code == 0) {
-                $scope.good.pics.pop(file);
+                var originPics = $scope.good.pics;
+                $scope.good.pics = [];
+                originPics.forEach(function (pic) {
+                    if (pic != file) $scope.good.pics.push(pic);
+                });
             }
         })
     };
@@ -149,6 +137,21 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
         $scope.buttonName = isUpdate ? '提交编辑' : '新建商品';
         if (!isUpdate) {
             $scope.good = {pics: []};
+
+            // //测试用数据
+            // $scope.good = {
+            //     name: '草莓',
+            //     desc: '描述',
+            //     category: 'Berry',
+            //     pics: [],
+            //     spec: '1kg',
+            //     provenance: '上海',
+            //     shelfLife: 1,
+            //     storage: '阴凉',
+            //     price: 10,
+            //     sales: 0,
+            //     balance: 120
+            // };
         }
     };
 });
