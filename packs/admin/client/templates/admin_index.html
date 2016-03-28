@@ -88,8 +88,8 @@
                         <li class="nav-header">Main</li>
                         <li class="active"><a class="ajax-link" href="#">
                             <span class="glyphicon glyphicon-home"></span><span>用户管理</span></a></li>
-                        <li><a class="ajax-link" href="/admin#/fruit">
-                            <span class="glyphicon glyphicon-eye-open"></span><span>水果管理</span></a></li>
+                        <li><a class="ajax-link" href="/admin#/good">
+                            <span class="glyphicon glyphicon-eye-open"></span><span>商品管理</span></a></li>
                         <li><a class="ajax-link" href="/admin#/dic">
                             <span class="glyphicon glyphicon-edit"></span><span>字典维护</span></a></li>
                         <li><a class="ajax-link" href="/admin#/strategy">
@@ -131,19 +131,7 @@
     </footer>
 </div>
 
-<div class="modal fade in" id="dialogInfo" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3>页面消息</h3>
-            </div>
-            <div class="modal-body">
-                <p>消息内容</p>
-            </div>
-        </div>
-    </div>
-</div>
+<div ng-include="'/pages/popup_info.html'"></div>
 
 <script type="text/javascript" src='/common.js'></script>
 <script type="text/javascript" src='/browserified.js'></script>
