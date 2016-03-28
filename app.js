@@ -2,6 +2,7 @@ GLOBAL._ = require('underscore');
 var express = require('express');
 var http = require('http');
 var config = require('config');
+var compression = require('compression');
 var bodyParser = require('body-parser');
 var multipart = require('connect-multiparty');
 var socket = require('./packs/shared/socket');
@@ -12,6 +13,7 @@ var server = http.Server(app);
 
 app.engine('html', require('ejs-mate'))
     .set('views', './assets/pages')
+    .use(compression())
     .use(bodyParser.urlencoded({extended: true}))
     .use(bodyParser.json())
     .use(multipart({uploadDir: config.UploadDir}))

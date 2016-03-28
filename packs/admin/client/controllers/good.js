@@ -5,7 +5,6 @@ var app = angular.module('admin');
 
 app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     document.title = 'Goods Management';
-    $scope.good = {pics: []};
 
     // //测试用数据
     // $scope.good = {
@@ -44,38 +43,49 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
         });
     };
 
-    $scope.saveGood = function (good) {
-        if (!$scope.isUpdate) {
-            $http.post('/goods', good).success(function (result) {
-                if (!result.code) {
-                    //新建成功跳到新商品所在页
-                    $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
-                    commonGetPagedGoods($scope.pages.current);
-                    $scope.good = {pics: []};
+    $scope.cancelEdit = function () {
+        toggleCreateUpdate(false);
+    };
 
-                    showDialog('商品创建成功');
-                }
-            });
+    $scope.saveGood = function (good) {
+        var res = window.ValidateGood(good);
+        if (res.isValid()) {
+            if (!$scope.isUpdate) {
+                $http.post('/goods', good).success(function (result) {
+                    if (!result.code) {
+                        //新建成功跳到新商品所在页
+                        $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
+                        commonGetPagedGoods($scope.pages.current);
+                        $scope.good = {pics: []};
+
+                        $('div.alert').hide();
+                        showInfo('商品创建成功');
+                    }
+                });
+            }
+            else {
+                $http.put('/goods/' + good._id, good).success(function (result) {
+                    if (result.code == 0) {
+                        commonGetPagedGoods($scope.pages.current);
+                        toggleCreateUpdate(false);
+
+                        showInfo('商品更新成功');
+                    }
+                });
+            }
         }
         else {
-            $http.put('/goods/' + good._id, good).success(function (result) {
-                if (result.code == 0) {
-                    commonGetPagedGoods($scope.pages.current);
-                    toggleCreateUpdate(false);
-                    $scope.good = {pics: []};
-
-                    showDialog('商品更新成功');
-                }
-            });
+            // 展示验证错误
+            showValidationResult(res.msgs);
         }
     };
 
     $scope.deleteGood = function (_id) {
-        $scope.goodToDelete = _id;
-        $('#dialogDelete').modal('show');
+        $scope.entityToOperate = _id;
+        showConfirm('确定要删除商品吗?');
     };
 
-    $scope.confirmDelete = function (_id) {
+    $scope.confirmOperation = function (_id) {
         $http.delete('/goods/' + _id).success(function (result) {
             if (result.code == 0) {
                 //删除当页最后一条后跳到前一页
@@ -127,7 +137,11 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     };
 
     var toggleCreateUpdate = function (isUpdate) {
+        $('div.alert').hide();
         $scope.isUpdate = isUpdate;
-        $scope.buttonName = isUpdate ? '编辑商品' : '新建商品';
+        $scope.buttonName = isUpdate ? '提交编辑' : '新建商品';
+        if (!isUpdate) {
+            $scope.good = {pics: []};
+        }
     };
 });
