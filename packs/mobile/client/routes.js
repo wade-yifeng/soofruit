@@ -1,7 +1,7 @@
 /**
  * Created by xz_liu on 2016/3/9.
  */
-var app = angular.module('mobile', ['ngRoute']);
+var app = angular.module('mobile', ['ngRoute', 'ngCookies']);
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -16,6 +16,10 @@ app.config(function ($routeProvider) {
         .when('/goods/:category', {
             controller: 'Goods',
             templateUrl: 'pages/goods.html'
+        })
+        .when('/cart', {
+            controller: 'Cart',
+            templateUrl: 'pages/cart.html'
         })
         .otherwise({
             redirectTo: '/home'

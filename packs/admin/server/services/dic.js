@@ -44,7 +44,7 @@ module.exports.create = function (req, res) {
 
 
 module.exports.update = function (req, res) {
-    Dic.update({_id: req.body._id}, req.body, function (err) {
+    Dic.update({_id: req.params._id}, req.body, function (err) {
         if (err) {
             res.json({code: 500, message: err});
         }

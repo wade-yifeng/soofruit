@@ -3,6 +3,7 @@
  */
 var app = angular.module('mobile');
 
-app.controller('Home', function ($scope, $http, $route) {
-        document.title = 'Home';
+app.controller('Home', function ($scope, GlobalCartSvc, $http, $cookies) {
+    document.title = 'Home';
+    GlobalCartSvc.initGlobalCart();
 });

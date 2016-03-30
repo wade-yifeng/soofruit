@@ -9,6 +9,7 @@ gulp.task('js:common', function () {
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/angular.js',
             'static/scripts/angular-route.js',
+            'static/scripts/angular-cookies.js',
             'static/scripts/ng-file-upload-shim.js',
             'static/scripts/ng-file-upload.js',
             'static/scripts/jquery.js',
@@ -27,6 +28,7 @@ gulp.task('js:custom', function () {
             'static/scripts/admin/**/*.js',
             'static/scripts/orders/**/*.js',
             'packs/**/client/routes.js',
+            'packs/**/client/services/*.js',
             'packs/**/client/controllers/*.js'
         ])
         .pipe(sourcemaps.init())    //Debug需要
@@ -41,6 +43,7 @@ gulp.task('watch:js', ['js:common', 'js:custom'], function () {
     gulp.watch([
         'static/scripts/angular.js',
         'static/scripts/angular-route.js',
+        'static/scripts/angular-cookies.js',
         'static/scripts/ng-file-upload-shim.js',
         'static/scripts/ng-file-upload.js',
         'static/scripts/jquery.js',
@@ -50,6 +53,7 @@ gulp.task('watch:js', ['js:common', 'js:custom'], function () {
         'static/scripts/admin/**/*.js',
         'static/scripts/orders/**/*.js',
         'packs/**/client/routes.js',
+        'packs/**/client/services/*.js',
         'packs/**/client/controllers/*.js'
     ], ['js:common', 'js:custom']);
 });

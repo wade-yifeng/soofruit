@@ -138,20 +138,20 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
         if (!isUpdate) {
             $scope.good = {pics: []};
 
-            // //测试用数据
-            // $scope.good = {
-            //     name: '草莓',
-            //     desc: '描述',
-            //     category: 'Berry',
-            //     pics: [],
-            //     spec: '1kg',
-            //     provenance: '上海',
-            //     shelfLife: 1,
-            //     storage: '阴凉',
-            //     price: 10,
-            //     sales: 0,
-            //     balance: 120
-            // };
+            ////测试用数据
+            //$scope.good = {
+            //    name: '草莓',
+            //    desc: '描述',
+            //    category: 'Berry',
+            //    pics: [],
+            //    spec: '1kg',
+            //    provenance: '上海',
+            //    shelfLife: 1,
+            //    storage: '阴凉',
+            //    price: 10,
+            //    sales: 0,
+            //    balance: 120
+            //};
         }
     };
 });

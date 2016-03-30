@@ -3,8 +3,9 @@
  */
 var app = angular.module('mobile');
 
-app.controller('Goods', function ($scope, $http, $routeParams) {
+app.controller('Goods', function ($scope, GlobalCartSvc, $http, $routeParams, $cookies) {
     document.title = 'Goods List';
+    GlobalCartSvc.initGlobalCart();
     $scope.category = $routeParams.category;
 
     $http.get('/goods?category=' + $scope.category).success(function (result) {
@@ -12,4 +13,16 @@ app.controller('Goods', function ($scope, $http, $routeParams) {
             $scope.goods = result;
         }
     });
+
+    $scope.addToCart = function (_id, isToAdd) {
+        if (!isToAdd) return;
+
+        if ($cookies.get('cart')) {
+            GlobalCartSvc.addGoodToCart(_id);
+        } else {
+            GlobalCartSvc.initGlobalCart().then(function () {
+                GlobalCartSvc.addGoodToCart(_id);
+            });
+        }
+    };
 });

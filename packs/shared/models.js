@@ -21,6 +21,7 @@ require('./models/user');
 require('./models/strategy');
 require('./models/permission');
 require('./models/user_permission');
+require('./models/cart');
 
 module.exports.Dic = mongoose.model('Dic');
 module.exports.Good = mongoose.model('Good');
@@ -31,5 +32,6 @@ module.exports.User = mongoose.model('User');
 module.exports.Strategy = mongoose.model('Strategy');
 module.exports.Permission = mongoose.model('Permission');
 module.exports.UserPermission = mongoose.model('UserPermission');
+module.exports.Cart = mongoose.model('Cart');
 
 module.exports.ValidateGood = require('./validators/good').ValidateGood;

@@ -392,8 +392,8 @@ body{background:#fff;}
 .f_cart .coupon_entry{ background-image:none; text-align:left; background-color:rgba(238,238,238,0.9); font-weight:normal; color:#666; }
 .f_cart .order_entry{  background-image:none; text-align:left;  border-bottom:1px solid #bbb;  background-color:rgba(238,238,238,0.9); font-weight:normal; color:#666;}
 
-.f_cart .coupon_entry > div{background:url(../images/coupons_arrow.png) no-repeat 98% center; font-size:100% !important;}
-.f_cart .order_entry > div{background:url(../images/coupons_arrow.png) no-repeat 98% center;}
+.f_cart .coupon_entry > div{background:url(/imgs/mobile/forward.png) no-repeat 98% center; font-size:100% !important;}
+.f_cart .order_entry > div{background:url(/imgs/mobile/forward.png) no-repeat 98% center;}
 
 .f_cart .coupon_entry i , .f_cart .order_entry i{ font-style:normal; color:#ff6e3f;}
 .f_cart .f_title span{float:right; color:#ff6e40;}
