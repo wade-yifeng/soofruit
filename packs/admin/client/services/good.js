@@ -3,20 +3,11 @@
  */
 var app = angular.module('mobile');
 
-app.factory('CartSvc', function ($http, $q) {
+app.factory('GoodSvc', function ($http, $q) {
         return {
-            create: function (userID, good) {
+            create: function (good) {
                 var defer = $q.defer();
-                $http.post('/cart', {
-                    userID: userID,
-                    goods: [{
-                        goodID: _id,
-                        name: good.name,
-                        price: good.price,
-                        pic: good.pics[0],
-                        quantity: 1
-                    }]
-                }).success(function (result) {
+                $http.post('/goods', good).success(function (result) {
                     if (result != null) {
                         defer.resolve(result);
                     }
@@ -26,9 +17,9 @@ app.factory('CartSvc', function ($http, $q) {
                 });
                 return defer.promise;
             },
-            get: function (userID) {
+            get: function (goodID) {
                 var defer = $q.defer();
-                $http.get('/cart/' + userID).success(function (result) {
+                $http.get('/goods/' + goodID).success(function (result) {
                     if (result != null) {
                         defer.resolve(result);
                     }
@@ -38,11 +29,23 @@ app.factory('CartSvc', function ($http, $q) {
                 });
                 return defer.promise;
             },
-            update: function (cart) {
+            update: function (good) {
                 var defer = $q.defer();
-                $http.put('/cart/' + cart.userID, cart).success(function (result) {
+                $http.put('/goods/' + good._id, good).success(function (result) {
                     if (result.code == 0) {
-                        defer.resolve();
+                        defer.resolve(result);
+                    }
+                    else {
+                        defer.reject();
+                    }
+                });
+                return defer.promise;
+            },
+            delete: function (goodID) {
+                var defer = $q.defer();
+                $http.delete('/goods/' + goodID).success(function (result) {
+                    if (result.code == 0) {
+                        defer.resolve(result);
                     }
                     else {
                         defer.reject();

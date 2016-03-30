@@ -15,6 +15,9 @@ var CartSchema = new mongoose.Schema({
     //欲购商品
     goods: [{
         goodID: ObjectId,
+        name: String,
+        price: Number,
+        pic: String,
         quantity: Number
     }],
 

@@ -1,72 +1,69 @@
 <div class="checkout-cart" ng-controller="Cart">
     <header id="header">
         <a onclick="window.history.go(-1);" class="back"><img src="/imgs/mobile/back.png"/></a>
-        购物车 <span class="category_h_nav" style="cursor:pointer;" id="js_cart_edit" data="" data-edit="编辑"
-                  data-done="完成">编辑</span>
+        购物车
+        <span class="category_h_nav js_cart_edit" style="cursor:pointer;display:none;"
+              data="" data-edit="编辑" data-done="完成">编辑</span>
     </header>
-    <div id="shopcart">
+
+    <div>
         <section class="mainbg"></section>
 
-        <section class="main pad" style="display:none;">
+        <section class="main pad js_cart_empty">
             <section class="padleft">
                 <section class="cart_em">
-                    <img src="/wap/view/0501/images/cart_em1.png">
+                    <img src="/imgs/mobile/cart_empty.png">
                     您的购物车内没有商品！
                 </section>
-                <section class="gift_btn"><a href="http://m.tablelife.com/zh/index.html">继续购物</a></section>
+                <section class="gift_btn"><a href="#">继续购物</a></section>
             </section>
         </section>
 
-        <section class="main pad fullRub_pad  carad">
-            <!--<section class="main pad carad">-->
-            <input type="hidden" id="sort_type" value="1">
+        <section class="main pad fullRub_pad carad js_cart_nonempty" style="display:none;">
             <section class="cart_list pad">
                 <table width="100%">
                     <tbody>
-                    <tr>
+                    <tr ng-repeat="good in cart.goods">
                         <td>
                             <div class="js-cart-checkbox-select-buy" style="display:none;">
-                                <input style="display:none;" class="checked_input" type="checkbox" name="keys[]"
-                                       value="2853" checked="checked" onclick="shopcart_select('keys[]')">
+                                <input style="display:none;" class="checked_input" type="checkbox" checked="checked">
                                 <label class="change_cart_input  input_checked_yes"></label>
                             </div>
 
                             <div class="js-cart-checkbox-select-delete">
-                                <input class="checked_input" type="checkbox" name="delete_keys[]" value="2853"
-                                       onclick="shopcart_select_delete(this,'delete_keys[]')" check-data="0"
+                                <input class="checked_input" type="checkbox" name="delete_keys[]" check-data="0"
                                        style="display:none;">
                                 <label class="change_cart_input  input_checked_no "></label>
                             </div>
                         </td>
-                        <td class="td1"><a href="http://m.tablelife.com/zh/item-2853.html"><img
-                                src="http://m.tablelife.com/image/cache/catalog/product/0316/300312-1-200x200.jpg"
-                                class="img"></a></td>
-                        <td class="td2"><!--cart_add_reduce-->
+                        <td class="td1">
+                            <a href="http://m.tablelife.com/zh/item-2853.html">
+                                <img src="/imgs/upload/{{good.pic}}" class="img"></a></td>
+                        <td class="td2">
                             <h2 class="pro_title">
-                                <a href="http://m.tablelife.com/zh/item-2853.html">姜蓉鸡【招行支付69元专享】</a>
+                                <a href="http://m.tablelife.com/zh/item-2853.html">{{good.name}}</a>
                                 <span class="l sell_out"></span>
                             </h2>
                             <h3>
-                    <span class="r cart_list_nuber ">
-										     <input class="down" type="button"
-                                                    onclick="update_product_quantity_shopcart('shopcart_','2853','down','1','')"
-                                                    value="-">
-                         <input type="text" id="shopcart_2853_quantity" name="qty[2853]" value="1" class="addcart"
-                                onblur="update_product_quantity_shopcart('shopcart_','2853','blur','1','')" orinum="1">
-                         <input class="up" type="button"
-                                onclick="update_product_quantity_shopcart('shopcart_','2853','up','1','')" value="+">
-										</span>
-                                <span class="show-total">￥99.00</span>
+                                <span class="r cart_list_nuber ">
+                                    <input class="down" type="button" value="-"
+                                           ng-click="changeQuantity(good.goodID,good.quantity,true)">
+                                    <input class="addcart" id="{{good.goodID}}" type="text" ng-value="good.quantity">
+                                    <input class="up" type="button" value="+"
+                                           ng-click="changeQuantity(good.goodID,good.quantity,false)">
+                                </span>
+                                <span class="show-total">{{good.price*good.quantity|currency:'￥'}}</span>
                             </h3>
 
                         </td>
+                    </tr>
                     </tbody>
                 </table>
             </section>
         </section>
 
-        <footer class="f_cart js-cart-bottom-checkout" style="z-index:200">
-            <a href="http://m.tablelife.com/index.php?route=checkout/coupon/select">
+        <footer class="f_cart js-cart-bottom-checkout" style="z-index:200;display:none;">
+            <a href="#">
                 <div class="f_title coupon_entry">
                     <div style="font-size:14px;">点此使用<i>优惠券</i></div>
                 </div>
@@ -76,13 +73,13 @@
                     <tbody>
                     <tr>
                         <td>
-                            <input type="checkbox" style="display:none;" onclick="selectall('check_box','keys[]');"
-                                   name="keys[]" id="check_box" checkstaus="1" checked="checked">
+                            <input type="checkbox" style="display:none;" checkstaus="1" checked="checked">
                             <label class="change_cart_input  input_checked_no"></label>
                             <span class="select-all">全选</span>
                         </td>
                         <td width="65%" class="total-show"><h2 style="display:inline-block;">合计:<span>￥99.00</span></h2>
-                            <h3>商品:￥99</h3></td>
+                            <h3>商品:￥99</h3>
+                        </td>
                         <td width="35%">
                             <script async="" src="//www.google-analytics.com/analytics.js"></script>
                             <script type="text/javascript"> var error_warning = "";</script>

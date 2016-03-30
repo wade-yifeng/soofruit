@@ -33,6 +33,7 @@ $("body").on("touchend click", ".Q-buy-btn", function () {
     return false;
 });
 
+//设置nav上面购物车内商品总数
 var setCartGoodsCount = function (increment, doesInitialize) {
     var startValue = doesInitialize ? 0 : parseInt($('.J-shoping-num').text());
     $('.J-shoping-num').text(startValue + increment);
