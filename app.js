@@ -29,7 +29,8 @@ app.use(session({
 }));
 
 // 服务器端路由
-app.use('/', require('./packs/admin/server/routes'))
+app.use('/', require('./packs/mobile/server/routes'))
+    .use(require('./packs/admin/server/routes'))
     .use(require('./packs/orders/server/routes'))
     .use(require('./wechat/routes'));
 

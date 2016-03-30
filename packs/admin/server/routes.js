@@ -41,6 +41,4 @@ router.post('/user/signin', user.signin);
 router.get('/user/signout', user.signout);
 router.post('/user/register', user.register);
 
-
-
 module.exports = router;

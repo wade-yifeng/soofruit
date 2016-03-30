@@ -82,7 +82,7 @@ module.exports.create = function (req, res) {
 
 
 module.exports.update = function (req, res) {
-    Good.update({_id: req.body._id}, req.body, function (err) {
+    Good.update({_id: req.params._id}, req.body, function (err) {
         if (err) {
             res.json({code: 500, message: err});
         }
