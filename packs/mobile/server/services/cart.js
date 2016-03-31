@@ -11,6 +11,9 @@ module.exports.create = function (req, res) {
         if (err) {
             res.json({code: 500, message: err});
         }
+        else if (!cart) {
+            res.json({code: 500, message: '购物车创建失败'});
+        }
         else {
             res.json(cart);
         }

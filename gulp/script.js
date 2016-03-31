@@ -25,6 +25,7 @@ gulp.task('js:common', function () {
 gulp.task('js:custom', function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
+            'static/scripts/mobile/**/*.js',
             'static/scripts/admin/**/*.js',
             'static/scripts/orders/**/*.js',
             'packs/**/client/routes.js',
@@ -50,6 +51,7 @@ gulp.task('watch:js', ['js:common', 'js:custom'], function () {
         'static/scripts/socket.io.js',
         'static/scripts/underscore.js',
         'static/scripts/bootstrap.js',
+        'static/scripts/mobile/**/*.js',
         'static/scripts/admin/**/*.js',
         'static/scripts/orders/**/*.js',
         'packs/**/client/routes.js',

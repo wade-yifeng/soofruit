@@ -21,6 +21,10 @@ app.config(function ($routeProvider) {
             controller: 'Cart',
             templateUrl: 'pages/cart.html'
         })
+        .when('/account',{
+            controller: 'Account',
+            templateUrl: 'pages/account.html'
+        })
         .otherwise({
             redirectTo: '/home'
         });

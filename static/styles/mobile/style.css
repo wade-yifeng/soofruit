@@ -372,7 +372,6 @@ body{background:#fff;}
 	color:#fff;
 }
 
-.cart_list input[type="checkbox"]{margin-left:20px;}
 .cart_list .img{width:160px; height:100px;}
 .cart_list td{ padding-top:10px; padding-bottom:10px; border-bottom:1px solid #ccc;}
 .cart_list td.td1{width:180px;}
@@ -410,7 +409,7 @@ body{background:#fff;}
 /*购物车 列表  编辑*/
 .checkout-cart .js-cart-bottom-edit{ border-top:1px solid #ccc;}
 .checkout_all_font{ font-size:170%;}
-.checkout_del_btn{ border-radius:40px; margin:6px 6% 6px 0 ; padding:0 !important; line-height:240% !important;}
+.checkout_del_btn{ border-radius:40px; margin:11px 6% 11px 0 ; padding:0 !important; line-height:240% !important;}
 
 .box{position:fixed; top:50%; left:0; height:363px; margin-top:-180px; width:100%; }
 .box .box_con{margin:0 10px; background:url(../images/cartbg.png) repeat; padding:0 10px 40px;}

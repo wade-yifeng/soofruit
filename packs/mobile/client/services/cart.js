@@ -10,14 +10,14 @@ app.factory('CartSvc', function ($http, $q) {
                 $http.post('/cart', {
                     userID: userID,
                     goods: [{
-                        goodID: _id,
+                        goodID: good._id,
                         name: good.name,
                         price: good.price,
                         pic: good.pics[0],
                         quantity: 1
                     }]
                 }).success(function (result) {
-                    if (result != null) {
+                    if (!result.code) {
                         defer.resolve(result);
                     }
                     else {
@@ -29,7 +29,7 @@ app.factory('CartSvc', function ($http, $q) {
             get: function (userID) {
                 var defer = $q.defer();
                 $http.get('/cart/' + userID).success(function (result) {
-                    if (result != null) {
+                    if (result == null || !result.code) {
                         defer.resolve(result);
                     }
                     else {
