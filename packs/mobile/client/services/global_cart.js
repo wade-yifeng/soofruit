@@ -10,70 +10,75 @@ app.factory('GlobalCartSvc', function ($http, $cookies, GoodSvc, CartSvc) {
          */
         initGlobalCart: function () {
             if ($cookies.get('cart')) {
+                setCartGoodsCount(0, true);
                 $cookies.getObject('cart').goods.forEach(function (good) {
-                    setCartGoodsCount(good.quantity, true);
+                    setCartGoodsCount(good.quantity);
                 });
             } else {
-                CartSvc.get('56fbda74ade860ca0d29226d').then(function (cart) {
-                    $cookies.putObject('cart', cart);
-                    result.goods.forEach(function (good) {
-                        setCartGoodsCount(good.quantity, true);
-                    });
+                return CartSvc.get('56fbda74ade860ca0d29226d').then(function (cart) {
+                    if (cart != null) {
+                        $cookies.putObject('cart', cart);
+                        setCartGoodsCount(0, true);
+                        cart.goods.forEach(function (good) {
+                            setCartGoodsCount(good.quantity);
+                        });
+                    }
                 });
             }
         },
         /**
          * 添加某商品或增加已有数量到购物车
-         * @param _id
+         * @param goodID
          */
-        addGoodToCart: function (_id, isDecrease) {
+        addGoodToCart: function (goodID, isDecrease) {
             if ($cookies.get('cart')) {
                 var cart = $cookies.getObject('cart');
 
-                this._updateCartAndCookie(cart, _id, isDecrease);
+                this._updateCartAndCookie(cart, goodID, isDecrease);
             } else {
                 CartSvc.get('56fbda74ade860ca0d29226d').then(function (result) {
                     //cart不存在则新建
                     if (result == null) {
-                        GoodSvc.get(_id).then(function (result) {
+                        GoodSvc.get(goodID).then(function (result) {
                             if (!result.code) {
                                 CartSvc.create('56fbda74ade860ca0d29226d', result)
                                     .then(function (cart) {
                                         $cookies.putObject('cart', cart);
-                                        setCartGoodsCount(cart.goods.quantity, true);
+                                        setCartGoodsCount(cart.goods[0].quantity, true);
                                     });
                             }
                         });
                     }
                     //cart存在,添加或更新goods
                     else if (!result.code) {
-                        this._updateCartAndCookie(result, _id, isDecrease);
+                        this._updateCartAndCookie(result, goodID, isDecrease);
                     }
                 });
             }
         },
         /**
-         * 私有方法:更新购物车和Cookie
+         * 私有方法:更新数据库和Cookie中的购物车
          * @param cart
-         * @param _id
+         * @param goodID
          * @private
          */
-        _updateCartAndCookie: function (cart, _id, isDecrease) {
+        _updateCartAndCookie: function (cart, goodID, isDecrease) {
             var isGoodFound = false;
             var factor = isDecrease ? -1 : 1;
 
+            setCartGoodsCount(0, true);
             cart.goods.forEach(function (good) {
-                if (good.goodID == _id) {
+                if (good.goodID == goodID) {
                     good.quantity += factor;
                     isGoodFound = true;
                 }
-                setCartGoodsCount(good.quantity, true);
+                setCartGoodsCount(good.quantity);
             });
             if (!isGoodFound) {
-                GoodSvc.get(_id).then(function (result) {
+                GoodSvc.get(goodID).then(function (result) {
                     if (!result.code) {
                         cart.goods.push({
-                            goodID: _id,
+                            goodID: goodID,
                             name: result.name,
                             price: result.price,
                             pic: result.pics[0],
@@ -81,12 +86,16 @@ app.factory('GlobalCartSvc', function ($http, $cookies, GoodSvc, CartSvc) {
                         });
                         setCartGoodsCount(1);
                     }
+
+                    CartSvc.update(cart).then(function () {
+                        $cookies.putObject('cart', cart);
+                    });
+                });
+            } else {
+                CartSvc.update(cart).then(function () {
+                    $cookies.putObject('cart', cart);
                 });
             }
-
-            CartSvc.update(cart).then(function () {
-                $cookies.putObject('cart', cart);
-            });
         }
     }
 });

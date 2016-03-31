@@ -3,8 +3,10 @@
  */
 var app = angular.module('mobile');
 
-app.controller('Goods', function ($scope, GlobalCartSvc, $http, $routeParams, $cookies) {
+app.controller('Goods', function ($scope, GlobalCartSvc, $http, $routeParams) {
     document.title = 'Goods List';
+    activateNavItem('#category');
+
     GlobalCartSvc.initGlobalCart();
     $scope.category = $routeParams.category;
 
@@ -16,13 +18,6 @@ app.controller('Goods', function ($scope, GlobalCartSvc, $http, $routeParams, $c
 
     $scope.addToCart = function (_id, isToAdd) {
         if (!isToAdd) return;
-
-        if ($cookies.get('cart')) {
-            GlobalCartSvc.addGoodToCart(_id);
-        } else {
-            GlobalCartSvc.initGlobalCart().then(function () {
-                GlobalCartSvc.addGoodToCart(_id);
-            });
-        }
+        GlobalCartSvc.addGoodToCart(_id);
     };
 });

@@ -47,20 +47,6 @@ module.exports.listPaged = function (req, res) {
 };
 
 
-module.exports.detail = function (req, res) {
-    Good.findById(req.params._id)
-        .lean()
-        .exec(function (err, doc) {
-            if (err) {
-                res.json({code: 500, message: err});
-            }
-            else {
-                res.json(doc);
-            }
-        });
-};
-
-
 module.exports.create = function (req, res) {
     var v = ValidateGood(req.body);
     if (!v.isValid()) {
@@ -73,11 +59,28 @@ module.exports.create = function (req, res) {
             if (err) {
                 res.json({code: 500, message: err});
             }
+            else if (!good) {
+                res.json({code: 500, message: '商品创建失败'});
+            }
             else {
                 res.json(good._id.toString());
             }
         });
     }
+};
+
+
+module.exports.detail = function (req, res) {
+    Good.findById(req.params._id)
+        .lean()
+        .exec(function (err, doc) {
+            if (err) {
+                res.json({code: 500, message: err});
+            }
+            else {
+                res.json(doc);
+            }
+        });
 };
 
 

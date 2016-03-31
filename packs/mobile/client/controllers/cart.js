@@ -5,16 +5,17 @@ var app = angular.module('mobile');
 
 app.controller('Cart', function ($scope, GlobalCartSvc, $http, $routeParams, $cookies) {
     document.title = 'Cart';
+    activateNavItem('#cart');
+
+    $scope.isEdit = false;
+    $scope.totalAmount = 0;
     GlobalCartSvc.initGlobalCart();
 
     var initPage = function () {
         if ($cookies.get('cart')) {
             $scope.cart = $cookies.getObject('cart');
             if ($scope.cart.goods.length > 0) {
-                $('.js_cart_edit').show();
-                $('.js_cart_empty').hide();
-                $('.js_cart_nonempty').show();
-                $('.js-cart-bottom-checkout').show();
+                toggleCartDisplay(CartDisplayEnum.Buy);
             }
         }
     };
@@ -34,11 +35,48 @@ app.controller('Cart', function ($scope, GlobalCartSvc, $http, $routeParams, $co
             GlobalCartSvc.addGoodToCart(_id, isDecrease);
             subChange(_id, -1);
         }
+
+        $scope.calculateTotal();
+    };
+
+    $scope.calculateTotal = function () {
+        var indexs = getGoodsToBuy();
+        var targetGoods = [];
+        for (var i in $scope.cart.goods) {
+            if (indexs.indexOf(i) > -1) {
+                targetGoods.push($scope.cart.goods[i]);
+            }
+        }
+
+        $scope.totalAmount = calcTotal(targetGoods);
+    };
+
+    $scope.buy = function () {
+        var goodsToBuy = getGoodsToBuy();
+
+        //判断商品是否存在,是否卖完
+
+        //Other Things To Do
+    };
+
+    $scope.edit = function () {
+        $scope.isEdit = !$scope.isEdit;
+        var displayType = $scope.isEdit ? CartDisplayEnum.Edit : CartDisplayEnum.Buy;
+        toggleCartDisplay(displayType);
+        if (!$scope.isEdit) {
+            $scope.goodsToDelete = [];
+        }
+    };
+
+    $scope.delete = function () {
+        var goodsToDelete = getGoodsToDelete();
+
+        //To Do
     };
 
     var subChange = function (_id, factor) {
         $scope.cart.goods.forEach(function (good) {
             if (good.goodID == _id) good.quantity += factor;
         });
-    }
+    };
 });

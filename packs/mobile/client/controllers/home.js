@@ -5,5 +5,6 @@ var app = angular.module('mobile');
 
 app.controller('Home', function ($scope, GlobalCartSvc, $http, $cookies) {
     document.title = 'Home';
+    activateNavItem('#home');
     GlobalCartSvc.initGlobalCart();
 });
