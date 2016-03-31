@@ -1,0 +1,77 @@
+<form class="form-horizontal" ng-control="UserManager">
+
+    <table class="table table-bordered table-striped table-hover table-condensed">
+        <tr>
+            <th class="text-center">User Name</th>
+            <th class="text-center">WeChat</th>
+            <th class="text-center">User Role</th>
+            <th class="text-center">Mobile</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Description</th>
+            <th class="text-center"></th>
+        </tr>
+        <tr ng-repeat="u in Users">
+            <td>{{u.name}}</td>
+            <td>&nbsp;&nbsp;{{u.weChatId}}</td>
+            <td>&nbsp;&nbsp;{{u.role}}</td>
+            <td>&nbsp;&nbsp;{{u.mobile}}</td>
+            <td>&nbsp;&nbsp;{{u.email}}</td>
+            <td>&nbsp;&nbsp;{{u.description}}</td>
+            <td class="text-center">
+                <input class="btn btn-sm" type="button" ng-click="deleteUser(u._id)" value="Delete">
+            </td>
+        </tr>
+        <tr ng-show="Users.length==0">
+            <td class="text-center" colspan="11">
+                <br>No User created yet. Please create one.
+                &nbsp;&nbsp;<br><br>
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">User Name</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="User.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">WeChat</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="User.weChatId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Mobile</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="User.mobile">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Email</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="User.email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Role</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="User.role">
+                    <option selected>--请选择--</option>
+                    <option ng-repeat="roleCategory in RoleCategories">{{roleCategory}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Description</label>
+            <div class="col-sm-11">
+                <textarea class="form-control input-sm" type="text" ng-model="User.description"/>
+            </div>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-success" type="button" ng-click="createUser(User)" value="Create User">
+        </div>
+    </div>
+
+</form>

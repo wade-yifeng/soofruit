@@ -1,0 +1,61 @@
+<form class="form-horizontal" ng-control="PermissionManager">
+
+    <table class="table table-bordered table-striped table-hover table-condensed">
+        <tr>
+            <th class="text-center">名称</th>
+            <th class="text-center">分类</th>
+            <th class="text-center">描述</th>
+            <th class="text-center"></th>
+        </tr>
+        <tr ng-repeat="p in Permissions">
+            <td>{{p.name}}</td>
+            <td>&nbsp;&nbsp;{{p.permissionType}}</td>
+            <td>&nbsp;&nbsp;{{p.description}}</td>
+            <td class="text-center">
+                <input class="btn btn-sm" type="button" ng-click="deletePermission(p._id)" value="Delete">
+            </td>
+        </tr>
+        <tr ng-show="Permissions.length==0">
+            <td class="text-center" colspan="11">
+                <br>No Permission created yet. Please create one.
+                &nbsp;&nbsp;<br><br>
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Permission Name</label>
+            <div class="col-sm-11">
+                <input class="form-control input-sm" type="text" ng-model="Permission.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Type</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="Permission.permissionType">
+                    <option selected>--请选择--</option>
+                    <option ng-repeat="roleCategory in RoleCategories">{{roleCategory}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Description</label>
+            <div class="col-sm-11">
+                <textarea class="form-control input-sm" type="text" ng-model="Permission.description"/>
+            </div>
+        </div>
+        <!--<div class="form-group">
+            <label class="col-sm-1 control-label">Role</label>
+            <div class="col-sm-11">
+                <select class="form-control input-sm" ng-model="selectedRoleName">
+                    <option ng-repeat="role in Roles">{{role.roleName}}</option>
+                </select>
+            </div>
+        </div>-->
+        <div class="text-center">
+            <input class="btn btn-success" type="button" ng-click="createPermission(Permission)" value="Create Permission">
+        </div>
+    </div>
+
+</form>

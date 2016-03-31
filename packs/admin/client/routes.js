@@ -21,7 +21,15 @@ app.config(function ($routeProvider) {
             controller: 'userCtrl',
             templateUrl: 'pages/admin_user.html'
         })
+        .when('/usermanager', {
+            controller: 'UserManager',
+            templateUrl: 'pages/admin_user_manager.html'
+        })
+        .when('/permission', {
+            controller: 'PermissionManager',
+            templateUrl: 'pages/admin_permission.html'
+        })
         .otherwise({
-            redirectTo: '/good'
+            redirectTo: '/usermanager'
         });
 });

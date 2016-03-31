@@ -6,6 +6,8 @@ var dic = require('./services/dic');
 var strategy = require('./services/strategy');
 var good = require('./services/good');
 var user = require('./services/user');
+var permission = require('./services/permissions');
+var role = require('./services/role');
 
 // dictionary services
 router.get('/dics', dic.list)
@@ -36,9 +38,20 @@ router.get('/strategies', strategy.list)
 router.get('/enums', strategy.getEnums);
 
 // user services
-router.get('/users', user.list);
+router.get('/user', user.list).post('/user', user.createUser);
 router.post('/user/signin', user.signin);
 router.get('/user/signout', user.signout);
 router.post('/user/register', user.register);
+
+router.get('/user/:_id', user.userDetail)
+    .put('/user/:_id', user.editUser)
+    .delete('/user/:_id', user.deleteUser);
+
+router.get('/permissions', permission.permissionList)
+    .post('/permissions', permission.createPermission);
+
+router.delete('/permissions/:_id',permission.deletePermission);
+
+router.get('/roleCategories', role.getRoleCategories);
 
 module.exports = router;

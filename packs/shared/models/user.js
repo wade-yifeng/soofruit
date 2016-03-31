@@ -34,6 +34,8 @@ var UserSchema = new mongoose.Schema({
 
     createTime: { type: Date, default: Date.now},
 
+    isBlocked: { type: Boolean, default: false},
+
     activeTime: Date
 });
 
