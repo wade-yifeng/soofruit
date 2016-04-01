@@ -3,7 +3,7 @@
  */
 var app = angular.module('admin');
 
-app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
+app.controller('Good', function ($scope, $http, $route, Upload) {
     document.title = 'Goods Management';
 
     $http.get('/goodCategories').success(function (result) {
@@ -88,9 +88,7 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
             });
 
             file.upload.then(function (response) {
-                $timeout(function () {
-                    $scope.good.pics.push(response.data);
-                });
+                $scope.good.pics.push(response.data);
             }, function (response) {
                 if (response.status > 0)
                     $scope.errorMsg = response.status + ': ' + response.data;
@@ -104,11 +102,7 @@ app.controller('Good', function ($scope, $http, $route, Upload, $timeout) {
     $scope.deleteFile = function (file) {
         $http.delete('/pics/' + file).success(function (result) {
             if (result.code == 0) {
-                var originPics = $scope.good.pics;
-                $scope.good.pics = [];
-                originPics.forEach(function (pic) {
-                    if (pic != file) $scope.good.pics.push(pic);
-                });
+                $scope.good.pics.splice($scope.good.pics.indexOf(file), 1);
             }
         })
     };

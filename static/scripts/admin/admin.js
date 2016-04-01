@@ -9,12 +9,11 @@ var showConfirm = function (info) {
 };
 
 var showValidationResult = function (msgs) {
-    $('div.alert').empty();
-    for (var i in msgs) {
-        $('div.alert').append(msgs[i].msg);
-        if (msgs.length > 1 && i < msgs.length - 1) $('div.alert').append('<br/>');
-    }
-    $('div.alert').show();
+    $('div.alert').html(
+        msgs.map(function (item) {
+            return item.msg;
+        }).join('<br/>')
+    ).show();
 };
 
 $('.sidebar-nav li').click(function () {
