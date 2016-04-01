@@ -16,7 +16,7 @@ var getGoodsToBuy = function () {
     var indexs = [];
     $('.js-cart-checkbox-select-buy input').each(function () {
         if ($(this).is(':checked')) {
-            indexs.push($(this).attr('index'));
+            indexs.push(parseInt($(this).attr('index')));
         }
     });
     return indexs;

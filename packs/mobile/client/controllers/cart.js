@@ -41,14 +41,9 @@ app.controller('Cart', function ($scope, GlobalCartSvc, $http, $routeParams, $co
 
     $scope.calculateTotal = function () {
         var indexs = getGoodsToBuy();
-        var targetGoods = [];
-        for (var i in $scope.cart.goods) {
-            if (indexs.indexOf(i) > -1) {
-                targetGoods.push($scope.cart.goods[i]);
-            }
-        }
-
-        $scope.totalAmount = calcTotal(targetGoods);
+        $scope.totalAmount = calcTotal($scope.cart.goods.filter(function (item) {
+            return indexs.indexOf($scope.cart.goods.indexOf(item)) > -1;
+        }));
     };
 
     $scope.buy = function () {
