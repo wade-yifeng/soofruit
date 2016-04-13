@@ -31,18 +31,12 @@ app.use(session({
 // 服务器端路由
 app.use('/', require('./packs/mobile/server/routes'))
     .use(require('./packs/admin/server/routes'))
-    .use(require('./packs/orders/server/routes'))
     .use(require('./wechat/routes'));
 
 // 子站点主页映射
 app.get('/', function (req, res) {
-    //console.log(req);
     res.render('index.html');
-}).get('/pc', function (req, res) {
-    //console.log(req);
-    res.render('orders_index.html');
 }).get('/admin', function (req, res) {
-    //console.log(req);
     res.render('admin_index.html');
 });
 

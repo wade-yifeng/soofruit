@@ -1,6 +1,3 @@
-/**
- * Created by Leo on 2016/3/13.
- */
 var gulp = require('gulp');
 var rename = require('gulp-rename');
 var minifyhtml = require('gulp-minify-html');

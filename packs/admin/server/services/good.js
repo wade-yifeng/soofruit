@@ -1,6 +1,3 @@
-/**
- * Created by xz_liu on 2016/3/18.
- */
 var fs = require('fs');
 var path = require('path');
 var models = require('../../../shared/models');

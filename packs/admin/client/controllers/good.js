@@ -1,9 +1,6 @@
-/**
- * Created by xz_liu on 2016/3/9.
- */
 var app = angular.module('admin');
 
-app.controller('Good', function ($scope, $http, $route, Upload) {
+app.controller('Good', function ($scope, $http, Upload) {
     document.title = 'Goods Management';
 
     $http.get('/goodCategories').success(function (result) {

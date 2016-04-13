@@ -1,6 +1,3 @@
-/**
- * Created by xz_liu on 2016/3/18.
- */
 var Cart = require('../../../shared/models').Cart;
 
 

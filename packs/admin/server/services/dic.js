@@ -1,6 +1,3 @@
-/**
- * Created by xz_liu on 2016/3/18.
- */
 var Dic = require('../../../shared/models').Dic;
 
 

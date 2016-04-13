@@ -1,6 +1,3 @@
-/**
- * Created by xz_liu on 2016/3/18.
- */
 var router = require('express').Router();
 var dic = require('./services/dic');
 var strategy = require('./services/strategy');

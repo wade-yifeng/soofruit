@@ -1,6 +1,3 @@
-/**
- * Created by leo on 3/27/16.
- */
 function ValidateResult() {
     this.msgs = [];
 

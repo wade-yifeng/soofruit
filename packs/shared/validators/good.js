@@ -1,6 +1,3 @@
-/**
- * Created by leo on 3/27/16.
- */
 var ValidateResult = require('./validate_result');
 var validator = require('validator');
 

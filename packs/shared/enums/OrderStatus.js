@@ -1,6 +1,3 @@
-/**
- * Created by xz_liu on 2016/3/17.
- */
 module.exports = {
 
     //待付款

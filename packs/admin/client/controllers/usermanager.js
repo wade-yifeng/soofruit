@@ -1,7 +1,3 @@
-/**
- * Created by Jesse Qin on 3/19/2016.
- */
-
 var app = angular.module('admin');
 var title = 'User Management';
 

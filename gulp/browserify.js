@@ -1,6 +1,3 @@
-/**
- * Created by leo on 3/27/16.
- */
 var gulp = require('gulp');
 var browserify = require('browserify');
 var replace = require('gulp-replace');
