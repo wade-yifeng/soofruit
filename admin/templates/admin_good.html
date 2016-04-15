@@ -73,7 +73,8 @@
             <label class="col-sm-2 control-label">图片</label>
             <div class="col-sm-10">
                 <button class="form-control btn-info" ngf-select="uploadFiles($files)" accept="image/*"
-                        ngf-max-height="1000" ngf-max-size="1MB" multiple>选择图片 (可多选, 为了显示效果请尽量选接近500*500的正方形图片)
+                        ngf-max-height="1024" ngf-max-size="1MB" multiple>
+                    选择图片 (可多选, 为了显示效果请尽量选接近500*500的正方形图片)
                 </button>
                 <div>
                     <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="path in good.pics">
@@ -122,7 +123,7 @@
             </div>
         </div>
         <div class="text-center">
-            <input class="btn btn-success" type="button" ng-click="saveGood(good)" ng-value="buttonName">
+            <input class="btn btn-success" type="button" ng-click="saveGood(good)" ng-value="isUpdate ? '提交编辑' : '新建商品'">
             <input class="btn btn-success" type="button" ng-click="cancelEdit()" value="撤销编辑" ng-show="isUpdate">
         </div>
     </div>

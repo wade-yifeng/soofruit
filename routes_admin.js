@@ -20,7 +20,7 @@ router.get('/goods', good.list)
 router.get('/goods/:_id', good.detail)
     .put('/goods/:_id', good.update)
     .delete('/goods/:_id', good.delete);
-router.post('/pics', good.uploadPics)
+router.post('/pics', good.uploadPic)
     .delete('/pics/:_path', good.deletePic);
 
 // user services

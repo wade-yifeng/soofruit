@@ -1,30 +1,21 @@
 var app = angular.module('admin');
 
-app.controller('Good', function ($scope, $http, Upload) {
+app.controller('Good', function ($scope, GoodSvc, Upload) {
     document.title = 'Goods Management';
 
     var commonGetPagedGoods = function (page) {
-        $http.get('/goodsPaged?page=' + page).success(function (result) {
-            if (!result.code) {
-                $scope.goods = [];
-                $scope.goods.push.apply($scope.goods, result.data);
-                $scope.pages = result.pages;
-                $scope.pageArray = getPageArray(result.pages.current, result.pages.total);
-                $scope.goodsTotal = result.items.total;
-            }
+        GoodSvc.listPaged(page).then(function (result) {
+            $scope.goods = [];
+            $scope.goods.push.apply($scope.goods, result.data);
+            $scope.pages = result.pages;
+            $scope.pageArray = getPageArray(result.pages.current, result.pages.total);
+            $scope.goodsTotal = result.items.total;
         });
-    };
-
-    var getPageArray = function (current, total) {
-        var start = current > 5 ? current - 4 : 1;
-        var end = total - current > 3 ? current + 4 : total;
-        return _.range(start, end + 1);
     };
 
     var toggleCreateUpdate = function (isUpdate) {
         $('div.alert').hide();
         $scope.isUpdate = isUpdate;
-        $scope.buttonName = isUpdate ? '提交编辑' : '新建商品';
         if (!isUpdate) {
             $scope.good = {pics: []};
 
@@ -44,6 +35,7 @@ app.controller('Good', function ($scope, $http, Upload) {
         }
     };
 
+    //页面初始化
     commonGetPagedGoods(1);
     toggleCreateUpdate(false);
 
@@ -51,15 +43,11 @@ app.controller('Good', function ($scope, $http, Upload) {
         commonGetPagedGoods(page);
     };
 
-    $scope.editGood = function (_id) {
-        $http.get('/goods/' + _id).success(function (result) {
-            if (!result.code) {
-                $scope.good = result;
-                toggleCreateUpdate(true);
-                $('#editForm').addClass('animated bounceInUp').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                    $('#editForm').removeClass('animated bounceInUp')
-                });
-            }
+    $scope.editGood = function (goodID) {
+        GoodSvc.get(goodID).then(function (result) {
+            $scope.good = result;
+            toggleCreateUpdate(true);
+            editFormFlyIn();
         });
     };
 
@@ -71,25 +59,21 @@ app.controller('Good', function ($scope, $http, Upload) {
         var res = window.ValidateGood(good);
         if (res.isValid()) {
             if (!$scope.isUpdate) {
-                $http.post('/goods', good).success(function (result) {
-                    if (!result.code) {
-                        showInfo('商品创建成功');
-                        $('div.alert').hide();
+                GoodSvc.create(good).then(function () {
+                    showInfo('商品创建成功');
+                    $('div.alert').hide();
 
-                        //新建成功跳到新商品所在页
-                        $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
-                        commonGetPagedGoods($scope.pages.current);
-                        $scope.good = {pics: []};
-                    }
+                    //新建成功跳到新商品所在页
+                    $scope.pages.current = Math.ceil(($scope.goodsTotal + 1) / $scope.pages.limit);
+                    commonGetPagedGoods($scope.pages.current);
+                    $scope.good = {pics: []};
                 });
             }
             else {
-                $http.put('/goods/' + good._id, good).success(function (result) {
-                    if (result.code == 0) {
-                        showInfo('商品更新成功');
-                        commonGetPagedGoods($scope.pages.current);
-                        toggleCreateUpdate(false);
-                    }
+                GoodSvc.update(good).then(function () {
+                    showInfo('商品更新成功');
+                    commonGetPagedGoods($scope.pages.current);
+                    toggleCreateUpdate(false);
                 });
             }
         }
@@ -98,20 +82,18 @@ app.controller('Good', function ($scope, $http, Upload) {
         }
     };
 
-    $scope.deleteGood = function (_id) {
+    $scope.deleteGood = function (goodID) {
         showConfirm('确定要删除商品吗?');
-        $scope.entityToOperate = _id;
+        $scope.entityToOperate = goodID;
     };
 
-    $scope.confirmOperation = function (_id) {
-        $http.delete('/goods/' + _id).success(function (result) {
-            if (result.code == 0) {
-                //删除当页最后一条后跳到前一页
-                if ((($scope.goodsTotal - 1) % 10 == 0) && !$scope.pages.hasNext) {
-                    $scope.pages.current -= 1;
-                }
-                commonGetPagedGoods($scope.pages.current);
+    $scope.confirmOperation = function (goodID) {
+        GoodSvc.delete(goodID).then(function () {
+            //删除当页最后一条后跳到前一页
+            if ((($scope.goodsTotal - 1) % 10 == 0) && !$scope.pages.hasNext) {
+                $scope.pages.current -= 1;
             }
+            commonGetPagedGoods($scope.pages.current);
         });
     };
 
@@ -135,10 +117,14 @@ app.controller('Good', function ($scope, $http, Upload) {
     };
 
     $scope.deleteFile = function (file) {
-        $http.delete('/pics/' + file).success(function (result) {
-            if (result.code == 0) {
-                $scope.good.pics.splice($scope.good.pics.indexOf(file), 1);
-            }
-        })
+        GoodSvc.deletePic(file).then(
+            $scope.good.pics.splice($scope.good.pics.indexOf(file), 1)
+        );
+    };
+
+    var getPageArray = function (current, total) {
+        var start = current > 5 ? current - 4 : 1;
+        var end = total - current > 3 ? current + 4 : total;
+        return _.range(start, end + 1);
     };
 });
