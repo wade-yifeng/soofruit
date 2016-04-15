@@ -29,6 +29,12 @@ $ npm install gulp -g
 2.安装依赖模块:
 ```bash
 $ npm install
+
+# tips:
+npm install will install both "dependencies" and "devDependencies"
+npm install --production will only install "dependencies"
+npm install --dev will only install "devDependencies"
+
 ```
 3.用gulp打包->运行->监听文件变化:
 ```bash
