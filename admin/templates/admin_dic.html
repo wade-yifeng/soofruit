@@ -5,17 +5,20 @@
         <tr>
             <th class="text-center">字典类型</th>
             <th class="text-center">字典名称</th>
-            <th class="text-center">字典数值</th>
+            <th class="text-center">字典值</th>
             <th class="text-center">字典描述</th>
             <th class="text-center"></th>
         </tr>
-        <tr ng-repeat="dic in dics">
-            <td>{{dic.Type}}</td>
-            <td>&nbsp;&nbsp;{{dic.Name}}</td>
-            <td>&nbsp;&nbsp;{{dic.Value}}</td>
-            <td>&nbsp;&nbsp;{{dic.Desc}}</td>
+        <tr ng-repeat="dic in dics" ng-style="dic.type=='DicType'?{fontWeight:'bold'}:{}">
+            <td>{{dic.type}}</td>
+            <td>&nbsp;&nbsp;{{dic.name}}</td>
+            <td>&nbsp;&nbsp;{{dic.value}}</td>
+            <td>&nbsp;&nbsp;{{dic.desc}}</td>
             <td class="text-center">
-                <input class="btn btn-sm" type="button" ng-click="deleteDic(dic._id)" value="Delete" ng-show="dic.Name!='DicType'">
+                <input class="btn btn-sm" type="button" ng-click="editDic(dic._id)" value="Edit"
+                       ng-hide="dic.readonly||dic.type=='DicType'">
+                <input class="btn btn-sm" type="button" ng-click="deleteDic(dic._id)" value="Delete"
+                       ng-hide="dic.readonly||dic.type=='DicType'">
             </td>
         </tr>
         <tr ng-show="dics.length==0">
@@ -29,35 +32,45 @@
     <!-- Create/Edit Dic -->
     <div class="form-horizontal">
         <div class="form-group">
-            <label class="col-sm-1 control-label">字典类型</label>
-            <div class="col-sm-11">
-                <select class="form-control input-sm" ng-model="dicEdit.Type">
+            <label class="col-sm-2 control-label">字典类型</label>
+            <div class="col-sm-10">
+                <select class="form-control input-sm" ng-model="dicEdit.type">
                     <option selected>DicType</option>
-                    <option ng-repeat="type in dicTypes">{{type.Name}}</option>
+                    <option ng-repeat="type in dicTypes">{{type.name}}</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-1 control-label">字典名称</label>
-            <div class="col-sm-11">
-                <input class="form-control input-sm" ng-model="dicEdit.Name">
+            <label class="col-sm-2 control-label">字典名称</label>
+            <div class="col-sm-10">
+                <input class="form-control input-sm" ng-model="dicEdit.name">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-1 control-label">字典数值</label>
-            <div class="col-sm-11">
-                <input class="form-control input-sm" type="text" ng-model="dicEdit.Value">
+            <label class="col-sm-2 control-label">字典值</label>
+            <div class="col-sm-10">
+                <input class="form-control input-sm" type="text" ng-model="dicEdit.value">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-1 control-label">字典描述</label>
-            <div class="col-sm-11">
-                <input class="form-control input-sm" type="text" ng-model="dicEdit.Desc">
+            <label class="col-sm-2 control-label">字典描述</label>
+            <div class="col-sm-10">
+                <input class="form-control input-sm" type="text" ng-model="dicEdit.desc">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">只读(创建后不可更改)</label>
+            <div class="col-sm-10 pull-left">
+                <input class="form-control" style="width:30px;height:30px;" type="checkbox" ng-model="dicEdit.readonly">
             </div>
         </div>
         <div class="text-center">
-            <input class="btn btn-success" type="button" ng-click="createDic(dicEdit)" value="创建字典入口">
+            <input class="btn btn-success" type="button" ng-click="saveDic(dicEdit)"
+                   ng-value="isUpdate?'编辑字典项':'创建字典项'">
+            <input class="btn btn-success" type="button" ng-click="cancelEdit()" value="撤销编辑" ng-show="isUpdate">
         </div>
     </div>
+
+    <div ng-include="'/pages/admin_popup_confirm.html'"></div>
 
 </form>

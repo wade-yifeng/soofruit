@@ -1,37 +1,58 @@
 var app = angular.module('admin');
 
-app.controller('Dic', function ($scope, $http, $route) {
+app.controller('Dic', function ($scope, DicSvc, $state) {
     document.title = 'Dictionary Management';
 
-    $http.get('/dics').success(function (result) {
+    var toggleCreateUpdate = function (isUpdate) {
+        $scope.isUpdate = isUpdate;
+        if (!isUpdate) {
+            $scope.dicEdit = {};
+        }
+    };
+
+    toggleCreateUpdate(false);
+
+    DicSvc.list().then(function (result) {
         $scope.dics = result;
     });
 
-    $http.get('/dicTypes').success(function (result) {
+    DicSvc.getDicTypes().then(function (result) {
         $scope.dicTypes = result;
     });
 
-    $scope.getDic = function (_id) {
-        $http.get('/dics/' + _id).success(function (result) {
-            if (!result.code) {
-                $scope.dicEdit = result;
-            }
+    $scope.editDic = function (dicID) {
+        toggleCreateUpdate(true);
+        DicSvc.get(dicID).then(function (result) {
+            $scope.dicEdit = result;
         });
     };
 
-    $scope.createDic = function (dic) {
-        $http.post('/dics', dic).success(function (result) {
-            if (!result.code) {
-                $route.reload();
-            }
-        });
+    $scope.cancelEdit = function () {
+        toggleCreateUpdate(false);
     };
 
-    $scope.deleteDic = function (_id) {
-        $http.delete('/dics/' + _id).success(function (result) {
-            if (result.code == 0) {
-                $route.reload();
-            }
+    $scope.saveDic = function (dic) {
+        if (!$scope.isUpdate)
+            DicSvc.create(dic).then(function () {
+                showInfo('字典项创建成功');
+                $state.reload();
+            });
+        else
+            DicSvc.update(dic).then(function () {
+                showInfo('字典项编辑成功');
+                $state.reload();
+            });
+    };
+
+    $scope.deleteDic = function (dicID) {
+        showConfirm('确定要删除字典项吗?');
+        $scope.entityToOperate = dicID;
+    };
+
+    $scope.confirmOperation = function (dicID) {
+        DicSvc.delete(dicID).then(function () {
+            showInfo('字典项删除成功');
+            $state.reload();
         });
     };
 });
