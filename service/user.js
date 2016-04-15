@@ -1,10 +1,10 @@
 var jwt = require('jsonwebtoken');
-var tokenManager = require('../../../../util/token');
+var tokenManager = require('../lib/token');
 //var redisClient = require('../../../../util/redisdb').redisClient;
 var config = require('config');
-var User = require('../../../shared/models').User;
-var UserPermission = require('../../../shared/models').UserPermission;
-var Permission = require('../../../shared/models').Permission;
+var User = require('../models').User;
+var UserPermission = require('../models').UserPermission;
+var Permission = require('../models').Permission;
 
 module.exports.list = function (req, res) {
     User.find(function (err, users) {

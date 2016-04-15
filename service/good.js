@@ -1,10 +1,9 @@
 var fs = require('fs');
 var path = require('path');
-var models = require('../../../shared/models');
+var models = require('../models');
 var Good = models.Good;
 var ValidateGood = models.ValidateGood;
 var uploadPath = require('config').UploadDir.substr(2);
-var GoodCategory = require('../../../shared/enums').GoodCategory;
 
 
 module.exports.list = function (req, res) {
@@ -121,11 +120,6 @@ module.exports.delete = function (req, res) {
                 });
         }
     });
-};
-
-
-module.exports.getgoodCategories = function (req, res) {
-    res.send(GoodCategory);
 };
 
 

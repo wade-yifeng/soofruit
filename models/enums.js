@@ -1,4 +1,7 @@
-module.exports = {
+/**
+ * 订单状态枚举
+ */
+module.exports.OrderStatus = {
 
     //待付款
     AwaitPay: 'AwaitPay',
@@ -14,4 +17,16 @@ module.exports = {
 
     //已撤销
     Cancelled: 'Cancelled'
+};
+
+/**
+ * 角色分类枚举
+ */
+module.exports.RoleCategory = {
+
+    Admin: 'Administrator',
+
+    Agency: 'Agency',
+
+    User: 'Common User'
 };

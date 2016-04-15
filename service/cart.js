@@ -1,4 +1,4 @@
-var Cart = require('../../../shared/models').Cart;
+var Cart = require('../models').Cart;
 
 
 module.exports.create = function (req, res) {

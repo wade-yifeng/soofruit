@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var cart = require('./services/cart');
+var cart = require('./service/cart');
 
 // cart services
 router.post('/cart', cart.create);

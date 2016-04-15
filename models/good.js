@@ -11,9 +11,6 @@ var GoodSchema = new mongoose.Schema({
     //描述
     desc: String,
 
-    //分类
-    category: String,
-
     //图片相对路径
     pics: [String],
 

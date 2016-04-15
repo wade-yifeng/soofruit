@@ -1,4 +1,4 @@
-var Dic = require('../../../shared/models').Dic;
+var Dic = require('../models').Dic;
 
 
 module.exports.list = function (req, res) {

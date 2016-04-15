@@ -5,8 +5,8 @@ var config = require('config');
 var compression = require('compression');
 var bodyParser = require('body-parser');
 var multipart = require('connect-multiparty');
-var socket = require('./packs/shared/socket');
 var session = require('express-session');
+var socket = require('./lib/socket');
 
 var app = new express();
 var server = http.Server(app);
@@ -29,8 +29,8 @@ app.use(session({
 }));
 
 // 服务器端路由
-app.use('/', require('./packs/mobile/server/routes'))
-    .use(require('./packs/admin/server/routes'))
+app.use('/', require('./routes_mobile'))
+    .use(require('./routes_admin'))
     .use(require('./wechat/routes'));
 
 // 子站点主页映射

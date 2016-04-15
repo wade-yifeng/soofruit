@@ -1,10 +1,9 @@
 var router = require('express').Router();
-var dic = require('./services/dic');
-var strategy = require('./services/strategy');
-var good = require('./services/good');
-var user = require('./services/user');
-var permission = require('./services/permissions');
-var role = require('./services/role');
+var dic = require('./service/dic');
+var good = require('./service/good');
+var user = require('./service/user');
+var permission = require('./service/permissions');
+var role = require('./service/role');
 
 // dictionary services
 router.get('/dics', dic.list)
@@ -21,18 +20,8 @@ router.get('/goods', good.list)
 router.get('/goods/:_id', good.detail)
     .put('/goods/:_id', good.update)
     .delete('/goods/:_id', good.delete);
-router.get('/goodCategories', good.getgoodCategories)
-    .post('/pics', good.uploadPics)
+router.post('/pics', good.uploadPics)
     .delete('/pics/:_path', good.deletePic);
-
-// strategy services
-router.get('/strategies', strategy.list)
-    .get('/strategies/:id', strategy.detail)
-    .post('/strategies', strategy.save)
-    .put('/strategies/:id', strategy.update)
-    .delete('/strategies/:id', strategy.delete);
-// enums
-router.get('/enums', strategy.getEnums);
 
 // user services
 router.get('/user', user.list).post('/user', user.createUser);

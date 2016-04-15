@@ -4,29 +4,13 @@ var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('js:admin', function () {
-    return gulp.src([
-            //必须按顺序将内容压缩进去,否则不能正常执行
-            'static/scripts/admin/**/*.js',
-            'packs/admin/client/routes.js',
-            'packs/admin/client/services/*.js',
-            'packs/admin/client/controllers/*.js'
-        ])
-        .pipe(sourcemaps.init())    //Debug需要
-        .pipe(ngAnnotate())         //uglify需要
-        .pipe(concat('admin.js'))
-        //.pipe(uglify())           //生产环境需要
-        .pipe(sourcemaps.write())   //Debug需要
-        .pipe(gulp.dest('assets'));
-});
-
 gulp.task('js:mobile', function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/mobile/**/*.js',
-            'packs/mobile/client/routes.js',
-            'packs/mobile/client/services/*.js',
-            'packs/mobile/client/controllers/*.js'
+            'mobile/routes.js',
+            'mobile/*.svc.js',
+            'mobile/*.ctrl.js'
         ])
         .pipe(sourcemaps.init())    //Debug需要
         .pipe(ngAnnotate())         //uglify需要
@@ -36,7 +20,23 @@ gulp.task('js:mobile', function () {
         .pipe(gulp.dest('assets'));
 });
 
-gulp.task('js:common', ['js:admin', 'js:mobile'], function () {
+gulp.task('js:admin', function () {
+    return gulp.src([
+            //必须按顺序将内容压缩进去,否则不能正常执行
+            'static/scripts/admin/**/*.js',
+            'admin/routes.js',
+            'admin/*.svc.js',
+            'admin/*.ctrl.js'
+        ])
+        .pipe(sourcemaps.init())    //Debug需要
+        .pipe(ngAnnotate())         //uglify需要
+        .pipe(concat('admin.js'))
+        //.pipe(uglify())           //生产环境需要
+        .pipe(sourcemaps.write())   //Debug需要
+        .pipe(gulp.dest('assets'));
+});
+
+gulp.task('js:common', ['js:mobile', 'js:admin'], function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/angular.js',
@@ -67,8 +67,11 @@ gulp.task('watch:js', ['js:common'], function () {
         'static/scripts/underscore.js',
         'static/scripts/mobile/**/*.js',
         'static/scripts/admin/**/*.js',
-        'packs/**/client/routes.js',
-        'packs/**/client/services/*.js',
-        'packs/**/client/controllers/*.js'
+        'mobile/routes.js',
+        'mobile/*.svc.js',
+        'mobile/*.ctrl.js',
+        'admin/routes.js',
+        'admin/*.svc.js',
+        'admin/*.ctrl.js'
     ], ['js:common']);
 });

@@ -3,11 +3,49 @@ var app = angular.module('admin');
 app.controller('Good', function ($scope, $http, Upload) {
     document.title = 'Goods Management';
 
-    $http.get('/goodCategories').success(function (result) {
-        commonGetPagedGoods(1);
-        toggleCreateUpdate(false);
-        $scope.goodCategories = result;
-    });
+    var commonGetPagedGoods = function (page) {
+        $http.get('/goodsPaged?page=' + page).success(function (result) {
+            if (!result.code) {
+                $scope.goods = [];
+                $scope.goods.push.apply($scope.goods, result.data);
+                $scope.pages = result.pages;
+                $scope.pageArray = getPageArray(result.pages.current, result.pages.total);
+                $scope.goodsTotal = result.items.total;
+            }
+        });
+    };
+
+    var getPageArray = function (current, total) {
+        var start = current > 5 ? current - 4 : 1;
+        var end = total - current > 3 ? current + 4 : total;
+        return _.range(start, end + 1);
+    };
+
+    var toggleCreateUpdate = function (isUpdate) {
+        $('div.alert').hide();
+        $scope.isUpdate = isUpdate;
+        $scope.buttonName = isUpdate ? '提交编辑' : '新建商品';
+        if (!isUpdate) {
+            $scope.good = {pics: []};
+
+            //测试用数据
+            $scope.good = {
+                name: '草莓',
+                desc: '描述',
+                pics: [],
+                spec: '1kg',
+                provenance: '上海',
+                shelfLife: 1,
+                storage: '阴凉',
+                price: 10,
+                sales: 0,
+                balance: 120
+            };
+        }
+    };
+
+    commonGetPagedGoods(1);
+    toggleCreateUpdate(false);
 
     $scope.getPagedGoods = function (page) {
         commonGetPagedGoods(page);
@@ -102,47 +140,5 @@ app.controller('Good', function ($scope, $http, Upload) {
                 $scope.good.pics.splice($scope.good.pics.indexOf(file), 1);
             }
         })
-    };
-
-    var commonGetPagedGoods = function (page) {
-        $http.get('/goodsPaged?page=' + page).success(function (result) {
-            if (!result.code) {
-                $scope.goods = [];
-                $scope.goods.push.apply($scope.goods, result.data);
-                $scope.pages = result.pages;
-                $scope.pageArray = getPageArray(result.pages.current, result.pages.total);
-                $scope.goodsTotal = result.items.total;
-            }
-        });
-    };
-
-    var getPageArray = function (current, total) {
-        var start = current > 5 ? current - 4 : 1;
-        var end = total - current > 3 ? current + 4 : total;
-        return _.range(start, end + 1);
-    };
-
-    var toggleCreateUpdate = function (isUpdate) {
-        $('div.alert').hide();
-        $scope.isUpdate = isUpdate;
-        $scope.buttonName = isUpdate ? '提交编辑' : '新建商品';
-        if (!isUpdate) {
-            $scope.good = {pics: []};
-
-            //测试用数据
-            $scope.good = {
-                name: '草莓',
-                desc: '描述',
-                category: 'Berry',
-                pics: [],
-                spec: '1kg',
-                provenance: '上海',
-                shelfLife: 1,
-                storage: '阴凉',
-                price: 10,
-                sales: 0,
-                balance: 120
-            };
-        }
     };
 });

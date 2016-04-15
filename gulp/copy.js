@@ -13,12 +13,18 @@ gulp.task('copy:imgs', function () {
 });
 
 gulp.task('copy:templates', ['copy:fonts', 'copy:imgs'], function () {
-    return gulp.src('packs/**/client/templates/**/*.html')
+    return gulp.src([
+            'mobile/templates/**/*.html',
+            'admin/templates/**/*.html'
+        ])
         .pipe(rename({dirname: 'pages'}))
         .pipe(minifyhtml())
         .pipe(gulp.dest('assets/'));
 });
 
 gulp.task('watch:html', ['copy:templates'], function () {
-    gulp.watch('packs/**/client/templates/**/*.html', ['copy:templates']);
+    gulp.watch([
+        'mobile/templates/**/*.html',
+        'admin/templates/**/*.html'
+    ], ['copy:templates']);
 });
