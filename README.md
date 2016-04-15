@@ -30,7 +30,7 @@ $ npm install gulp -g
 ```bash
 $ npm install
 
-# tips:
+Tips:
 npm install will install both "dependencies" and "devDependencies"
 npm install --production will only install "dependencies"
 npm install --dev will only install "devDependencies"
