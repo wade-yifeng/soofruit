@@ -2,6 +2,9 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var config = require('config');
 
+/**
+ * 用户
+ */
 var UserSchema = new mongoose.Schema({
 
     username: String,

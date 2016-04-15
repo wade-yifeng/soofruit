@@ -1,15 +1,14 @@
 GLOBAL._ = require('underscore');
-var express = require('express');
-var http = require('http');
-var config = require('config');
-var compression = require('compression');
-var bodyParser = require('body-parser');
-var multipart = require('connect-multiparty');
-var session = require('express-session');
-var socket = require('./lib/socket');
+var express = require('express'),
+    http = require('http'),
+    config = require('config'),
+    compression = require('compression'),
+    bodyParser = require('body-parser'),
+    multipart = require('connect-multiparty'),
+    session = require('express-session'),
+    socket = require('./lib/socket');
 
 var app = new express();
-var server = http.Server(app);
 
 app.engine('html', require('ejs-mate'))
     .set('views', './assets/pages')
@@ -20,7 +19,7 @@ app.engine('html', require('ejs-mate'))
     .use(express.static('assets'))
     .use(express.query());
 
-// session configuration
+// session配置
 app.use(session({
     //store: new redisStore({ host: 'localhost', port: 6379, client: redisClient }),
     secret: config.SECRET_SESSION,
@@ -33,16 +32,17 @@ app.use('/', require('./routes_mobile'))
     .use(require('./routes_admin'))
     .use(require('./wechat/routes'));
 
-// 子站点主页映射
+// 站点主页映射
 app.get('/', function (req, res) {
     res.render('index.html');
 }).get('/admin', function (req, res) {
     res.render('admin_index.html');
 });
 
-// 启动socket
-socket.initSocket(server);
-
-server.listen(config.port, function () {
+// 启动server
+var server = app.listen(config.port, function () {
     console.log('Site is up on http://localhost:' + config.port);
 });
+
+// socket监听server
+socket.initSocket(server);

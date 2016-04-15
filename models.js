@@ -9,22 +9,26 @@ mongoose.connect(config.db, {
     }
 });
 
+require('./models/address');
+require('./models/cart');
+require('./models/coupon');
 require('./models/dic');
 require('./models/good');
 require('./models/order');
-require('./models/order_user_good');
-require('./models/user');
 require('./models/permission');
+require('./models/user');
+require('./models/user_coupon');
 require('./models/user_permission');
-require('./models/cart');
 
+module.exports.Address = mongoose.model('Address');
+module.exports.Cart = mongoose.model('Cart');
+module.exports.Coupon = mongoose.model('Coupon');
 module.exports.Dic = mongoose.model('Dic');
 module.exports.Good = mongoose.model('Good');
 module.exports.Order = mongoose.model('Order');
-module.exports.OrderUserGood = mongoose.model('OrderUserGood');
-module.exports.User = mongoose.model('User');
 module.exports.Permission = mongoose.model('Permission');
+module.exports.User = mongoose.model('User');
+module.exports.UserCoupon = mongoose.model('UserCoupon');
 module.exports.UserPermission = mongoose.model('UserPermission');
-module.exports.Cart = mongoose.model('Cart');
 
 module.exports.ValidateGood = require('./validators/good').ValidateGood;

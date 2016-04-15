@@ -6,16 +6,19 @@ var mongoose = require('mongoose');
 var DicSchema = new mongoose.Schema({
 
     //类型
-    Type: String,
+    type: String,
 
     //名称
-    Name: String,
+    name: String,
 
     //数值
-    Value: Number,
+    value: String,
 
     //描述
-    Desc: String
+    desc: String,
+
+    //只读
+    readonly: Boolean
 });
 
 mongoose.model('Dic', DicSchema);

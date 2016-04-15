@@ -23,7 +23,7 @@ module.exports = {
         // 公众号密钥
         appSecret: "c2f8def6c499b979bc46f7beee43091d",
         // 公众号预设Token    
-        token: "Soostep123",
+        token: "Soostep123"
     },
 
     OpenAPI: {

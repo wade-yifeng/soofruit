@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 
+/**
+ * 权限
+ */
 var PermissionSchema = new mongoose.Schema({
 
     permissionType: String,

@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 
+/**
+ * 用户权限关系
+ */
 var UserPermissionSchema = new mongoose.Schema({
 
     userId: mongoose.Schema.Types.ObjectId,
