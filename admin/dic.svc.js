@@ -37,9 +37,9 @@ app.factory('DicSvc', function ($http, $q) {
                 });
                 return defer.promise;
             },
-            getDicTypes: function () {
+            getDicsOfType: function (dicType) {
                 var defer = $q.defer();
-                $http.get('/dicTypes').success(function (result) {
+                $http.get('/dicsOfType/' + dicType).success(function (result) {
                     httpSuccess(result, defer, true);
                 });
                 return defer.promise;

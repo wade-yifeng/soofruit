@@ -63,8 +63,8 @@ module.exports.delete = function (req, res) {
 };
 
 
-module.exports.getDicTypes = function (req, res) {
-    Dic.find({type: 'DicType'}, {_id: 0, name: 1}).lean()
+module.exports.getDicsOfType = function (req, res) {
+    Dic.find({type: req.params.dicType}, {_id: 0, name: 1}).lean()
         .exec(function (err, doc) {
             if (err) {
                 res.json({code: 500, msg: err});

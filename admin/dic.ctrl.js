@@ -10,13 +10,12 @@ app.controller('Dic', function ($scope, DicSvc, $state) {
         }
     };
 
+    //页面初始化
     toggleCreateUpdate(false);
-
     DicSvc.list().then(function (result) {
         $scope.dics = result;
     });
-
-    DicSvc.getDicTypes().then(function (result) {
+    DicSvc.getDicsOfType('DicType').then(function (result) {
         $scope.dicTypes = result;
     });
 

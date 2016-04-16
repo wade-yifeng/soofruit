@@ -5,7 +5,10 @@
         <tr>
             <th class="text-center">名称/标题</th>
             <th class="text-center">描述</th>
+            <th class="text-center">标签</th>
             <th class="text-center">图片</th>
+            <th class="text-center">保证项</th>
+            <th class="text-center">规格</th>
             <th class="text-center">原产地</th>
             <th class="text-center">保质期</th>
             <th class="text-center">存储方式</th>
@@ -15,17 +18,20 @@
             <th class="text-center"></th>
         </tr>
         <tr ng-repeat="g in goods">
-            <td>{{g.name}}</td>
+            <td>&nbsp;&nbsp;{{g.name}}</td>
             <td>&nbsp;&nbsp;{{g.desc}}</td>
-            <td>
-                <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="path in g.pics">
+            <td><span ng-repeat="tag in g.tags">{{tag}}<br/></span></td>
+            <td style="max-width:185px;">
+                <div class="pull-left" style="padding:5px 5px 0 0;" ng-repeat="path in g.pics">
                     <img src="/imgs/upload/{{path}}" style="width:100px;">
                 </div>
             </td>
+            <td><span ng-repeat="ens in g.ensures">{{ens}}<br/></span></td>
+            <td>&nbsp;&nbsp;{{g.spec}}</td>
             <td>&nbsp;&nbsp;{{g.provenance}}</td>
             <td>&nbsp;&nbsp;{{g.shelfLife}}</td>
             <td>&nbsp;&nbsp;{{g.storage}}</td>
-            <td>&nbsp;&nbsp;{{g.price|currency:'￥'}}</td>
+            <td>原价:{{g.originPrice|currency:'￥'}}<br/>卖价:{{g.sellPrice|currency:'￥'}}</td>
             <td>&nbsp;&nbsp;{{g.sales}}</td>
             <td>&nbsp;&nbsp;{{g.balance}}</td>
             <td class="text-center">
@@ -34,7 +40,7 @@
             </td>
         </tr>
         <tr ng-show="goods.length==0">
-            <td class="text-center" colspan="11">
+            <td class="text-center" colspan="13">
                 <br>No goods created yet. Please create one.
                 &nbsp;&nbsp;<br><br>
             </td>
@@ -70,24 +76,37 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label">标签</label>
+            <div class="col-sm-10">
+                <input class="form-control input-sm" type="text" ng-repeat="tag in good.tags track by $index" ng-value="tag">
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label">图片</label>
             <div class="col-sm-10">
                 <button class="form-control btn-info" ngf-select="uploadFiles($files)" accept="image/*"
-                        ngf-max-height="1024" ngf-max-size="1MB" multiple>
+                        ngf-max-height="1000" ngf-max-size="1MB" multiple>
                     选择图片 (可多选, 为了显示效果请尽量选接近500*500的正方形图片)
                 </button>
                 <div>
-                    <div style="padding:5px 5px 0 0;" class="pull-left" ng-repeat="path in good.pics">
+                    <div class="pull-left" style="padding:5px 5px 0 0;" ng-repeat="path in good.pics">
                         <img src="/imgs/upload/{{path}}" style="width:290px;">
                         <div class="glyphicon glyphicon-remove-sign pull-right"
                              style="left:-23px; font-size:1.5em; cursor:pointer;" ng-click="deleteFile(path)"></div>
                     </div>
                 </div>
-                {{errorMsg}}
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">规格(例如:1kg)</label>
+            <label class="col-sm-2 control-label">保证项</label>
+            <div class="col-sm-10">
+                <select class="form-control input-sm chosen" data-placeholder="请选择保证项" multiple>
+                    <option ng-repeat="ens in ensuresList" ng-selected="ens.selected">{{ens.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">规格(例如:500g)</label>
             <div class="col-sm-10">
                 <input class="form-control input-sm" type="text" ng-model="good.spec">
             </div>
@@ -111,9 +130,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">价格</label>
-            <div class="col-sm-10">
-                <input class="form-control input-sm" type="number" ng-model="good.price">
+            <label class="col-sm-2 control-label">原价</label>
+            <div class="col-sm-4">
+                <input class="form-control input-sm" type="number" ng-model="good.originPrice">
+            </div>
+            <label class="col-sm-1 control-label">卖价</label>
+            <div class="col-sm-5">
+                <input class="form-control input-sm" type="number" ng-model="good.sellPrice">
             </div>
         </div>
         <div class="form-group">
@@ -123,7 +146,8 @@
             </div>
         </div>
         <div class="text-center">
-            <input class="btn btn-success" type="button" ng-click="saveGood(good)" ng-value="isUpdate ? '提交编辑' : '新建商品'">
+            <input class="btn btn-success" type="button" ng-click="saveGood(good)"
+                   ng-value="isUpdate ? '提交编辑' : '新建商品'">
             <input class="btn btn-success" type="button" ng-click="cancelEdit()" value="撤销编辑" ng-show="isUpdate">
         </div>
     </div>

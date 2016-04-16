@@ -11,7 +11,7 @@ router.get('/dics', dic.list)
 router.get('/dics/:_id', dic.detail)
     .put('/dics/:_id', dic.update)
     .delete('/dics/:_id', dic.delete);
-router.get('/dicTypes', dic.getDicTypes);
+router.get('/dicsOfType/:dicType', dic.getDicsOfType);
 
 // good services
 router.get('/goods', good.list)

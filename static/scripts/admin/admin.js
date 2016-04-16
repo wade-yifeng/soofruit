@@ -16,6 +16,12 @@ var showValidationResult = function (msgs) {
     $('div.alert').html(alignMsgs(msgs)).show();
 };
 
+var editFormFlyIn = function () {
+    $('#editForm').addClass('animated bounceInUp').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        $('#editForm').removeClass('animated bounceInUp')
+    });
+};
+
 var httpSuccess = function (result, defer, withData) {
     if (result.code == 0) {
         if (withData)
@@ -41,8 +47,12 @@ var alignMsgs = function (msgs) {
     }).join('<br/>');
 };
 
-var editFormFlyIn = function () {
-    $('#editForm').addClass('animated bounceInUp').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-        $('#editForm').removeClass('animated bounceInUp')
-    });
+var delay = function (func) {
+    setTimeout(func, 100);
+};
+
+var getPageArray = function (current, total) {
+    var start = current > 5 ? current - 4 : 1;
+    var end = total - current > 3 ? current + 4 : total;
+    return _.range(start, end + 1);
 };
