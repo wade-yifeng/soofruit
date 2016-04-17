@@ -1,0 +1,68 @@
+<div class="mod_container" style="visibility: visible;">
+    <div class="wx_bar">
+        <div class="wx_bar_tit">收货地址</div>
+        <div class="wx_bar_back pull-right"></div>
+    </div>
+
+    <div class="wx_wrap address_new">
+        <p>
+            <span class="tit">收货人</span>
+            <input style="background-color:white;" placeholder="名字" type="text">
+        </p>
+        <p>
+            <span class="tit">手机号码</span>
+            <input style="background-color:white;" placeholder="手机号码" type="tel">
+        </p>
+        <p>
+            <span class="tit">省份</span>
+            <select data-duplex-changed="onProvinceEdited">
+                <option value="0">- 选择省 -</option>
+                <option value="2">北京</option><!--repeat259888797846-->
+                <option value="3">安徽</option><!--repeat259888797846-->
+                <option value="4">福建</option><!--repeat259888797846-->
+                <option value="6">广东</option><!--repeat259888797846-->
+                <option value="7">广西</option><!--repeat259888797846-->
+                <option value="8">贵州</option><!--repeat259888797846-->
+                <option value="10">河北</option><!--repeat259888797846-->
+                <option value="11">河南</option><!--repeat259888797846-->
+                <option value="12">黑龙江</option><!--repeat259888797846-->
+                <option value="13">湖北</option><!--repeat259888797846-->
+                <option value="14">湖南</option><!--repeat259888797846-->
+                <option value="15">吉林</option><!--repeat259888797846-->
+                <option value="16">江苏</option><!--repeat259888797846-->
+                <option value="17">江西</option><!--repeat259888797846-->
+                <option value="18">辽宁</option><!--repeat259888797846-->
+                <option value="22">山东</option><!--repeat259888797846-->
+                <option value="23">山西</option><!--repeat259888797846-->
+                <option value="24">陕西</option><!--repeat259888797846-->
+                <option value="25">上海</option><!--repeat259888797846-->
+                <option value="26">四川</option><!--repeat259888797846-->
+                <option value="27">天津</option><!--repeat259888797846-->
+                <option value="30">云南</option><!--repeat259888797846-->
+                <option value="31">浙江</option><!--repeat259888797846-->
+                <option value="32">重庆</option><!--repeat259888797846-->
+            </select>
+        </p>
+        <p>
+            <span class="tit">市</span>
+            <select data-duplex-changed="onCityEdited">
+                <option value="0">- 选择市 -</option>
+            </select>
+        </p>
+        <p>
+            <span class="tit">区/县</span>
+            <select data-duplex-changed="onDistrictEdited">
+                <option value="0">- 选择区/县 -</option>
+            </select>
+        </p>
+        <p>
+            <span class="tit">详细地址</span>
+            <input style="background-color:white;" placeholder="详细地址" type="text">
+        </p>
+
+        <p class="action">
+            <button id="confirm_address" class="submit">确认</button>
+            <button id="delete_address" class="submit" style="display: none; background-color: red;">删除</button>
+        </p>
+    </div>
+</div>

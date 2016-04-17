@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>北海之南商城</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0">
+    <link rel='stylesheet' type="text/css" href='/common.css'>
+    <link rel='stylesheet' type="text/css" href='/mobile.css'>
+</head>
+<body ng-app="mobile">
+
+<button class="btn" ui-sref="list">list</button>&nbsp;
+<button class="btn" ui-sref="detail">detail</button>&nbsp;
+<button class="btn" ui-sref="cart">cart</button>&nbsp;
+<button class="btn" ui-sref="checkout">checkout</button>&nbsp;
+<button class="btn" ui-sref="ordersOngoing">ordersOngoing</button>&nbsp;
+<button class="btn" ui-sref="ordersDone">ordersDone</button>&nbsp;
+<button class="btn" ui-sref="addressSelect">addressSelect</button>&nbsp;
+<button class="btn" ui-sref="addressEdit">addressEdit</button>
+
+<div ui-view></div>
+
+<div class="pin-toast-container">
+    <div class="pin-toast" style="display: none; opacity: 1;">呵呵哒</div>
+</div>
+
+<div id="go_top_goods" style="bottom: 115px; opacity: 1;"><span>顶部</span></div>
+<div id="go_cart" style="bottom: 64px; opacity: 1;"><span class="glyphicon glyphicon-shopping-cart"></span></div>
+
+<script type="text/javascript" src='/common.js'></script>
+<script type="text/javascript" src='/browserified.js'></script>
+<script type="text/javascript" src='/mobile.js'></script>
+
+</body>
+</html>
