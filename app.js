@@ -5,10 +5,10 @@ var express = require('express'),
     compression = require('compression'),
     bodyParser = require('body-parser'),
     multipart = require('connect-multiparty'),
-    session = require('express-session'),
+    sessionStore = require('./lib/session_store'),
     socket = require('./lib/socket');
 
-var app = new express();
+var app = express();
 
 app.engine('html', require('ejs-mate'))
     .set('views', './assets/pages')
@@ -19,13 +19,8 @@ app.engine('html', require('ejs-mate'))
     .use(express.static('assets'))
     .use(express.query());
 
-// session配置
-app.use(session({
-    //store: new redisStore({ host: 'localhost', port: 6379, client: redisClient }),
-    secret: config.SECRET_SESSION,
-    resave: false,
-    saveUninitialized: false
-}));
+// 初始化Session Redis Store
+sessionStore.initSessionStore(app);
 
 // 服务器端路由
 app.use('/', require('./routes_mobile'))

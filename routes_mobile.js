@@ -1,9 +1,8 @@
 var router = require('express').Router();
-var cart = require('./service/cart');
+var session = require('./service/session');
 
-// cart services
-router.post('/cart', cart.create);
-router.get('/cart/:userID', cart.detail)
-    .put('/cart/:userID', cart.update);
+// redis session测试
+router.get('/session/:key', session.getSession);
+router.post('/session', session.setSession);
 
 module.exports = router;
