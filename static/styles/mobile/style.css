@@ -2356,7 +2356,7 @@ body {
     bottom: 110px;
     padding: 7px 0 0 8px;
     z-index: 999;
-    background: url(imgs/mobile/go_cart.png) no-repeat;
+    background: url(/assets/imgs/mobile/go_cart.png) no-repeat;
     background-size: contain;
     opacity: 0;
     font-size: 25px;
@@ -2373,7 +2373,7 @@ body {
     right: 20px;
     bottom: 110px;
     z-index: 999;
-    background: url(imgs/mobile/buttons.png) -125px -103px no-repeat;
+    background: url(/assets/imgs/mobile/buttons.png) -125px -103px no-repeat;
     background-size: 218px auto;
     opacity: 0;
     -webkit-transition: bottom .8s ease, opacity .6s ease;
@@ -2394,7 +2394,7 @@ body {
 }
 
 #go_top_close {
-    background: url(imgs/mobile/buttons.png) -171px -103px no-repeat;
+    background: url(/assets/imgs/mobile/buttons.png) -171px -103px no-repeat;
     background-size: 218px auto;
 }
 
@@ -7208,7 +7208,7 @@ a.fixopt_share {
     right: 20px;
     bottom: 64px;
     z-index: 999;
-    background-image: url(/imgs/mobile/buttons.png);
+    background-image: url(/assets/imgs/mobile/buttons.png);
     background-repeat: no-repeat;
     background-size: 220.5px 178.5px;
     background-position: -117.6px -105px;
@@ -14062,7 +14062,7 @@ input[type=text], textarea {
     height: 22px;
     margin: -43px 25px 0 0;
     position: relative;
-    background: url(imgs/mobile/buttons.png) no-repeat 0 -57px transparent;
+    background: url(/assets/imgs/mobile/buttons.png) no-repeat 0 -57px transparent;
     background-size: 250px auto;
 }
 

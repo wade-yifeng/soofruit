@@ -6,15 +6,11 @@
  * 4. 微信开放平台配置      
  */
 module.exports = {
+    // 是否调试状态
+    debug: false,
 
     // 站点端口
-    port: 8000,
-
-    // 数据库连接字符串
-    db: "mongodb://localhost/test",
-
-    // 图片上传路径
-    UploadDir: "./assets/imgs/upload",
+    port: 80,
 
     // 微信
     WeChat: {

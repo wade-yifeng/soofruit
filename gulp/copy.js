@@ -18,7 +18,7 @@ gulp.task('copy:templates', ['copy:fonts', 'copy:imgs'], function () {
             'admin/templates/**/*.html'
         ])
         .pipe(rename({dirname: 'pages'}))
-        .pipe(minifyhtml())
+        //.pipe(minifyhtml())
         .pipe(gulp.dest('assets/'));
 });
 

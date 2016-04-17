@@ -5,7 +5,9 @@
  * 3. 微信公众号配置       
  * 4. 微信开放平台配置      
  */
-module.exports = {
+var config = {
+    // 是否调试状态
+    debug: false,
 
     // 站点端口
     port: 3000,
@@ -13,8 +15,15 @@ module.exports = {
     // 数据库连接字符串
     db: "mongodb://localhost/test",
 
+    // session的密钥字符
+    session_secret: 'soofruit__secret_dev',
+
+    // redis 配置，默认是本地
+    redis_host: '127.0.0.1',
+    redis_port: 6379,
+
     // 图片上传路径
-    UploadDir: "./assets/imgs/upload",
+    upload_directory: "./assets/imgs/upload",
 
     // 微信
     WeChat: {
@@ -32,15 +41,9 @@ module.exports = {
         oauth2URL: "https://api.weixin.qq.com/sns/oauth2/access_token",
         oauth2RefreshURL: "https://api.weixin.qq.com/sns/oauth2/refresh_token",
         authURL: "https://api.weixin.qq.com/sns/auth"
-    },
-    
-    SECRET_TOKEN: 'aMdoeb5ed87zorRdkD6greDML81DcnrzeSD648ferFejmplx',
-    
-    TOKEN_EXPIRATION_SEC: 60000 * 60,
-    
-    SECRET_SESSION: 'soostep',
-    
-    SESSION_TRY_TIMES: 3,
-    
-    SALT_WORK_FACTOR : 10
+    }
 };
+
+config.debug = process.env.NODE_ENV || 'DEV' === 'DEV';
+
+module.exports = config;

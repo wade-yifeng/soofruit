@@ -3,7 +3,7 @@ var path = require('path');
 var models = require('../models');
 var Good = models.Good;
 var ValidateGood = models.ValidateGood;
-var uploadPath = require('config').UploadDir.substr(2);
+var uploadPath = require('config').upload_directory.substr(2);
 
 
 module.exports.list = function (req, res) {
