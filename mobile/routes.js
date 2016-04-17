@@ -35,6 +35,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'OrdersDone',
             templateUrl: 'pages/orders_done.html'
         })
+        .state('account', {
+            url: "/account",
+            controller: 'Account',
+            templateUrl: 'pages/account.html'
+        })
         .state('addressSelect', {
             url: "/addressSelect",
             controller: 'AddressSelect',

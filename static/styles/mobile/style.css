@@ -14065,3 +14065,548 @@ input[type=text], textarea {
     background: url(imgs/mobile/buttons.png) no-repeat 0 -57px transparent;
     background-size: 250px auto;
 }
+
+.pddfnt_icon {
+    color: #878787;
+    font-size: 10px
+}
+
+.pddfnt_aid {
+    color: #878787;
+    font-size: 11px
+}
+
+.pddfnt_intro_24 {
+    color: #626262;
+    font-size: 12px;
+    line-height: 12px
+}
+
+.pddfnt_intro_26 {
+    color: #626262;
+    font-size: 13px;
+    line-height: 13px
+}
+
+.pddfnt_intro_28 {
+    color: #626262;
+    font-size: 14px;
+    line-height: 14px
+}
+
+.pddfnt_intro_light {
+    color: #878787
+}
+
+.pddfnt_title_20 {
+    color: #343434;
+    font-size: 10px;
+    line-height: 10px
+}
+
+.pddfnt_title_26 {
+    color: #343434;
+    font-size: 13px;
+    line-height: 13px
+}
+
+.pddfnt_title_30 {
+    color: #343434;
+    font-size: 15px;
+    line-height: 15px
+}
+
+.pddfnt_title_34 {
+    color: #343434;
+    font-size: 17px;
+    line-height: 17px
+}
+
+.pddfnt_title_38 {
+    color: #343434;
+    font-size: 19px;
+    line-height: 19px
+}
+
+.pddfnt_title_40 {
+    color: #343434;
+    font-size: 20px;
+    line-height: 20px
+}
+
+.pddfnt_homepage_price {
+    color: #ff2742;
+    font-size: 25px;
+    line-height: 25px
+}
+
+.pddfnt_highlight, price {
+    color: #ff2742
+}
+
+.my {
+    background: url("http://pinduoduo.img-cn-shanghai.aliyuncs.com/base/my_bg_v2.jpg") no-repeat scroll top/100% auto transparent;
+    height: 120px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 10px
+}
+
+.zindex {
+    z-index: 999
+}
+
+.my_head_pic {
+    padding: 20px 10px 20px 30px;
+}
+
+.my_head_img {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff;
+    height: 80px;
+    width: 80px;
+    display: inline-block;
+    background-repeat: no-repeat
+}
+
+.my_head_info {
+    color: #fff;
+    max-width: 230px;
+    margin: 20px
+}
+
+.my_head_name {
+    font-size: 14px;
+    line-height: 28px
+}
+
+.my_head_prototype {
+    font-size: 11px;
+    line-height: 1
+}
+
+.nav {
+    background: none repeat scroll 0 0 #fff;
+    position: relative;
+    margin-bottom: 10px
+}
+
+.nav:before {
+    border-bottom: 1px solid #dfdfdf;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.nav_item {
+    position: relative
+}
+
+.nav_item:after {
+    border-bottom: 1px solid #dfdfdf;
+    bottom: -.5px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0
+}
+
+.nav_item_order_hd {
+    position: relative;
+    overflow: hidden
+}
+
+.nav_item_order {
+    color: #4a4a4a;
+    font-size: 15px;
+    line-height: 48px;
+    padding-left: 10px;
+    float: left;
+    z-index: 1;
+    font-weight: 500
+}
+
+.nav_item_order_bd {
+    font-size: 12px;
+    line-height: 48px;
+    float: right;
+    padding-right: 24px;
+    color: #999
+}
+
+.nav_item_order_bd_arrow {
+    width: 8px;
+    height: 12px;
+    margin-top: 17px
+}
+
+.nav_item_hd {
+    color: #000;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 34px;
+    position: relative;
+    z-index: 1
+}
+
+.nav_item_hd:before {
+    background-image: url("http://cdn.yangkeduo.com/assets/img/sprite_icon-9adbcd7042.png");
+    background-repeat: no-repeat;
+    background-size: 24px auto;
+    content: "";
+    height: 24px;
+    left: 0;
+    position: absolute;
+    top: 10px;
+    width: 24px
+}
+
+.nav_item_hd_coupons {
+    color: #000;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 34px;
+    position: relative;
+    z-index: 1
+}
+
+.nav_item_hd_coupons:before {
+    background-image: url("http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png");
+    background-repeat: no-repeat;
+    background-size: 24 auto;
+    content: "";
+    height: 24px;
+    left: 0;
+    position: absolute;
+    top: 10px;
+    width: 24px;
+    border-radius: 100%
+}
+
+.new-tip {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    width: 40px;
+    height: auto;
+    z-index: 10
+}
+
+.new-tip img {
+    width: inherit
+}
+
+.nav_red .nav_item_hd:before {
+    background-position: 0 -238px
+}
+
+.nav_item_hd_coupons:after {
+    border-bottom: 1px solid #cdcdcd;
+    border-left: 1px solid #cdcdcd;
+    content: "";
+    display: inline-block;
+    height: 7px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    width: 7px
+}
+
+.nav_item_tip {
+    color: #888;
+    font-size: 11px;
+    position: absolute;
+    right: 18px;
+    top: 0
+}
+
+.nav_item_hd a {
+    display: block
+}
+
+.nav_item_bd {
+    font-size: 0;
+    padding: 3px 0 5px;
+    position: relative
+}
+
+.nav_item_bd:before {
+    border-bottom: 1px solid #efefef;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.nav_item_bd a {
+    color: #4a4a4a;
+    display: inline-block;
+    font-size: 11px;
+    position: relative;
+    text-align: center;
+    width: 33.3%
+}
+
+.nav_item_bd .nav_item_order_img {
+    background-image: url(imgs/mobile/icons.png);
+    background-repeat: no-repeat;
+    background-size: 133.33333px 133.33333px;
+    content: "";
+    height: 22px;
+    width: 23px;
+    margin: 10px auto 4px
+}
+
+.nav_item_order_img.order_unpay {
+    background-position: -24px 0;
+    width: 24px
+}
+
+.nav_item_order_img.order_unsend {
+    background-position: 0 0;
+    height: 22px
+}
+
+.nav_item_order_img.order_unreceived {
+    background-position: -50px -1px;
+    height: 20px
+}
+
+.nav_item_order_img.order_unevaluated {
+    background-position: -75px 0;
+    height: 21px;
+    width: 22px
+}
+
+.nav_item_txt {
+    position: relative
+}
+
+.nav_list {
+    overflow: hidden
+}
+
+.nav_list:after {
+    border-bottom: 1px solid #dfdfdf;
+    bottom: -.5px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0
+}
+
+.nav_list li {
+    display: inline-block;
+    position: relative;
+    width: 24.8%;
+    text-align: center;
+    float: left
+}
+
+.nav_list li:before {
+    border-left: 1px solid #efefef;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0
+}
+
+.nav_list li:after {
+    border-bottom: 1px solid #efefef;
+    bottom: -.5px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0
+}
+
+.nav_list_img {
+    background-image: url("http://cdn.yangkeduo.com/assets/img/personal_sprite-86afacddfd.png");
+    background-repeat: no-repeat;
+    background-size: 133.33333px 133.33333px;
+    content: "";
+    height: 33px;
+    width: 33px;
+    margin-top: 19%
+}
+
+.nav_list_img, .nav_list_txt {
+    margin-left: auto;
+    margin-right: auto
+}
+
+.nav_list_txt {
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
+    margin-top: 8%;
+    color: #4a4a4a
+}
+
+.nav_cheap .nav_list_img {
+    background-position: 0 -23px
+}
+
+.nav_lottory .nav_list_img {
+    background-position: -34px -23px
+}
+
+.nav_like .nav_list_img {
+    background-position: -68px -23px
+}
+
+.nav_cart .nav_list_img {
+    background-position: 0 -57px
+}
+
+.nav_adress .nav_list_img {
+    background-position: -34px -57px
+}
+
+.nav_msg .nav_list_img {
+    background-position: -68px -57px;
+    position: relative
+}
+
+.nav_faq .nav_list_img {
+    background-position: -34px -90px;
+    position: relative;
+    height: 34px
+}
+
+.nav_item_num {
+    background: none repeat scroll 0 0 #ff2741;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 11px;
+    position: absolute;
+    right: -5px;
+    top: -35px;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+    text-align: center
+}
+
+.nav_item_num.msg {
+    top: -5px;
+    right: -5px
+}
+
+.coupons_a {
+    display: block;
+    line-height: 45px
+}
+
+.nav_item_hd_logout {
+    color: #4a4a4a;
+    font-size: 15px;
+    height: 48px;
+    line-height: 48px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-top: 10px
+}
+
+.nav_item_hd_logout:after {
+    border-bottom: 1px solid #dfdfdf;
+    bottom: -.5px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0
+}
+
+.nav_item_hd_coupons_sale {
+    color: #000;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 34px;
+    position: relative;
+    z-index: 1
+}
+
+.nav_item_hd_coupons_sale:before {
+    background-image: url("http://cdn.yangkeduo.com/assets/img/phone-dadda5e73f.png");
+    background-repeat: no-repeat;
+    background-size: 24px auto;
+    content: "";
+    height: 24px;
+    left: 0;
+    position: absolute;
+    top: 10px;
+    width: 24px;
+    border-radius: 100%
+}
+
+.nav_download_app {
+    background: none repeat scroll 0 0 #fff;
+    margin-bottom: 10px;
+    color: #4a4a4a;
+    font-size: 15px;
+    height: 48px;
+    line-height: 48px;
+    position: relative;
+    z-index: 1;
+    margin-top: 10px
+}
+
+.nav_download_text {
+    margin-left: 40px
+}
+
+.nav_download_button {
+    float: right;
+    margin-right: 30px;
+    color: #ff2742
+}
+
+.nav_download_icon {
+    right: 10px;
+    top: 11px;
+    background-image: url(http://cdn.yangkeduo.com/assets/img/sprite_search-d13f06ef49.png);
+    background-size: 150px 67.5px;
+    background-position: -45px -37.5px
+}
+
+.nav_download_icon, .nav_download_image {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat
+}
+
+.nav_download_image {
+    left: 15px;
+    top: 15px;
+    background-image: url(http://cdn.yangkeduo.com/assets/img/personal_sprite-86afacddfd.png);
+    background-size: 133.33333px 133.33333px;
+    background-position: -100px 0
+}
+
+.vip_icon {
+    display: inline-block;
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+    background: url(imgs/mobile/icons.png) -130px 6px no-repeat;
+    background-size: 150px 110px;
+}
+
+.vip_text {
+    margin-left: 20px;
+    color: purple;
+}
