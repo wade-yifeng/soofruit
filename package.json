@@ -14,6 +14,8 @@
     "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "browserify": "^13.0.0",
+    "bytes": "^2.3.0",
+    "colors": "^1.1.2",
     "compression": "^1.6.1",
     "config": "^1.19.0",
     "connect-multiparty": "^2.0.0",

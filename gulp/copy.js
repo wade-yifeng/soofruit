@@ -17,9 +17,9 @@ gulp.task('copy:templates', ['copy:fonts', 'copy:imgs'], function () {
             'mobile/templates/**/*.html',
             'admin/templates/**/*.html'
         ])
-        .pipe(rename({dirname: 'pages'}))
-        //.pipe(minifyhtml())
-        .pipe(gulp.dest('assets/'));
+        //.pipe(rename({dirname: 'pages'}))
+        .pipe(minifyhtml())
+        .pipe(gulp.dest('views/'));
 });
 
 gulp.task('watch:html', ['copy:templates'], function () {

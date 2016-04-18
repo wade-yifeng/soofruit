@@ -8,32 +8,32 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('list', {
             url: "/list",
             controller: "List",
-            templateUrl: '/assets/pages/list.html'
+            templateUrl: '/views/list.html'
         })
         .state('detail', {
             url: "/detail",
             controller: 'Detail',
-            templateUrl: '/assets/pages/detail.html'
+            templateUrl: '/views/detail.html'
         })
         .state('cart', {
             url: "/cart",
             controller: 'Cart',
-            templateUrl: '/assets/pages/cart.html'
+            templateUrl: '/views/cart.html'
         })
         .state('checkout', {
             url: "/checkout",
             controller: 'Checkout',
-            templateUrl: '/assets/pages/checkout.html'
+            templateUrl: '/views/checkout.html'
         })
         .state('ordersOngoing', {
             url: "/ordersOngoing",
             controller: 'OrdersOngoing',
-            templateUrl: '/assets/pages/orders_ongoing.html'
+            templateUrl: '/views/orders_ongoing.html'
         })
         .state('ordersDone', {
             url: "/ordersDone",
             controller: 'OrdersDone',
-            templateUrl: '/assets/pages/orders_done.html'
+            templateUrl: '/views/orders_done.html'
         })
         .state('account', {
             url: "/account",
@@ -43,11 +43,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('addressSelect', {
             url: "/addressSelect",
             controller: 'AddressSelect',
-            templateUrl: '/assets/pages/popup_address_select.html'
+            templateUrl: '/views/popup_address_select.html'
         })
         .state('addressEdit', {
             url: "/addressEdit",
             controller: 'AddressEdit',
-            templateUrl: '/assets/pages/popup_address_edit.html'
+            templateUrl: '/views/popup_address_edit.html'
         });
 });

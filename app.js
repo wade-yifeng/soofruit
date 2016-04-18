@@ -26,20 +26,8 @@ var path = require('path');
 var sessionStore = require('./lib/session_store');
 var RedisStore = require('connect-redis')(session);
 
-var errorhandler = require('errorhandler');
-
-if(config.debug) {
-    // 设置控制台颜色，用于调试和监控
-    require('colors');
-    // This middleware is only intended to be used in a development environment, 
-    // as the full error stack traces and internal details of any object passed to this module will be 
-    // sent back to the client when an error occurs.
-}
-
 // 记录method,url,ip,time
 var requestLog = require('./middlewares/request_log');
-// render时记录日志
-var renderMiddleware = require('./middlewares/render');
 var logger = require('./lib/logger');
 // 打印 mongodb 查询日志
 require('./middlewares/mongoose_log');
@@ -50,20 +38,12 @@ var errorPageMiddleware = require('./middlewares/error_page');
 
 var app = express();
 
-app.set('views', path.join(__dirname, 'assets/pages'));
-//app.set('view engine', 'html');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
-
-// 记录请求时间
-app.use(requestLog);
-if (config.debug) {
-  // 记录渲染时间
-  app.use(renderMiddleware.render);
-}
-
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/views', express.static(path.join(__dirname, 'views')));
 // 浏览器中计算和显示相应时间
-app.use(require('response-time')());
 app.use(require('response-time')());
 // Only let me be framed by people of the same origin:
 app.use(helmet.frameguard('sameorigin'));
@@ -78,23 +58,45 @@ app.use(compress());
 // 初始化Session Redis Store
 sessionStore.initSessionStore(app);
 
-if (!config.debug) {
-  app.use(function (req, res, next) {
-    if (req.path === '/api' || req.path.indexOf('/api') === -1) {
-      csurf()(req, res, next);
-      return;
-    }
-    next();
-  });
-  app.set('view cache', true);
+// 记录请求时间
+app.use(requestLog);
+
+if(config.debug) {
+    // 设置控制台颜色，用于调试和监控
+    require('colors');
+    // render时记录日志
+    var renderMiddleware = require('./middlewares/render');
+    // This middleware is only intended to be used in a development environment, 
+    // as the full error stack traces and internal details of any object passed to this module will be 
+    // sent back to the client when an error occurs.
+    var errorhandler = require('errorhandler');
+
+    // 记录渲染时间
+    app.use(renderMiddleware.render);
+    app.use(errorhandler());
+} else {
+    app.use(function (err, req, res, next) {
+        logger.error(err);
+        return res.status(500).send('500 status');
+    });
 }
 
-/*app.use(function (req, res, next) {
-  // pass the csrfToken to the view
-  res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
-  next();
+if (!config.debug) {
+    app.use(function (req, res, next) {
+        if (req.path === '/api' || req.path.indexOf('/api') === -1) {
+          csurf()(req, res, next);
+          return;
+        }
+        next();
+    });
+    app.set('view cache', true);
+}
+
+app.use(function (req, res, next) {
+    // pass the csrfToken to the view
+    res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
+    next();
 });
-*/
 
 // 服务端路由
 // 模块化加载所有的route(controllers, middlewares)
@@ -105,14 +107,6 @@ app.use(require('./routes_admin'));
 
 // error handler
 app.use(errorPageMiddleware.errorPage);
-if (config.debug) {
-  app.use(errorhandler());
-} else {
-  app.use(function (err, req, res, next) {
-    logger.error(err);
-    return res.status(500).send('500 status');
-  });
-}
 
 // 站点主页映射
 app.get('/', function (req, res) {

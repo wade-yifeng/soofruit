@@ -2,7 +2,7 @@ var logger = require('../lib/logger');
 
 module.exports = function (req, res, next) {
   // Assets do not out log.
-  if (!/^\/assets\/pages/.test(req.url)) {
+  if (/^\/assets/.test(req.url)) {
     next();
     return;
   }
