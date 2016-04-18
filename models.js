@@ -31,4 +31,4 @@ module.exports.User = mongoose.model('User');
 module.exports.UserCoupon = mongoose.model('UserCoupon');
 module.exports.UserPermission = mongoose.model('UserPermission');
 
-module.exports.ValidateGood = require('./validators/good').ValidateGood;
+module.exports.ValidateGood = require('./models/validators/good').ValidateGood;

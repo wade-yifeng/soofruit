@@ -18,13 +18,11 @@ var helmet = require('helmet');
 // Utility to parse a string bytes to bytes and vice-versa
 var bytes = require('bytes');
 var path = require('path');
-// multiparty待定
-// var multipart = require('connect-multiparty'),
+var multipart = require('connect-multiparty');
 // TODO: socket形式的逻辑待定
 // socket = require('./lib/socket');
 
 var sessionStore = require('./lib/session_store');
-var RedisStore = require('connect-redis')(session);
 
 // 记录method,url,ip,time
 var requestLog = require('./middlewares/request_log');
@@ -48,11 +46,11 @@ app.use(require('response-time')());
 // Only let me be framed by people of the same origin:
 app.use(helmet.frameguard('sameorigin'));
 app.use(bodyParser.json({limit: '1mb'}));
-app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }));
+app.use(bodyParser.urlencoded({extended: true, limit: '1mb'}));
 // signed cookie support by passing a secret string
 app.use(require('cookie-parser')(config.session_secret));
 app.use(compress());
-//app.use(multipart({uploadDir: config.UploadDir}))
+app.use(multipart({uploadDir: config.upload_directory}));
 //app.use(express.query());
 
 // 初始化Session Redis Store
@@ -61,7 +59,7 @@ sessionStore.initSessionStore(app);
 // 记录请求时间
 app.use(requestLog);
 
-if(config.debug) {
+if (config.debug) {
     // 设置控制台颜色，用于调试和监控
     require('colors');
     // render时记录日志
@@ -84,8 +82,8 @@ if(config.debug) {
 if (!config.debug) {
     app.use(function (req, res, next) {
         if (req.path === '/api' || req.path.indexOf('/api') === -1) {
-          csurf()(req, res, next);
-          return;
+            csurf()(req, res, next);
+            return;
         }
         next();
     });

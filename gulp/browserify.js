@@ -6,8 +6,8 @@ var source = require('vinyl-source-stream');
 gulp.task('browserify', function () {
     return browserify({
         entries: [
-            'validators/validate_result.js',
-            'validators/good.js'
+            'models/validators/validate_result.js',
+            'models/validators/good.js'
         ]
     })
         .bundle()
