@@ -9,15 +9,25 @@
 </head>
 <body ng-app="mobile">
 
-<button class="btn" ui-sref="list">list</button>&nbsp;
-<button class="btn" ui-sref="detail">detail</button>&nbsp;
-<button class="btn" ui-sref="cart">cart</button>&nbsp;
-<button class="btn" ui-sref="checkout">checkout</button>&nbsp;
-<button class="btn" ui-sref="ordersOngoing">ordersOngoing</button>&nbsp;
-<button class="btn" ui-sref="ordersDone">ordersDone</button>&nbsp;
-<button class="btn" ui-sref="account">account</button>&nbsp;
-<button class="btn" ui-sref="addressSelect">addressSelect</button>&nbsp;
-<button class="btn" ui-sref="addressEdit">addressEdit</button>
+<div style="position:fixed;left:60px;z-index:10000;">
+    <button class="btn" ui-sref="list">list</button>
+    <br/><br/>
+    <button class="btn" ui-sref="detail">detail</button>
+    <br/><br/>
+    <button class="btn" ui-sref="cart">cart</button>
+    <br/><br/>
+    <button class="btn" ui-sref="checkout">checkout</button>
+    <br/><br/>
+    <button class="btn" ui-sref="ordersOngoing">ordersOngoing</button>
+    <br/><br/>
+    <button class="btn" ui-sref="ordersDone">ordersDone</button>
+    <br/><br/>
+    <button class="btn" ui-sref="account">account</button>
+    <br/><br/>
+    <button class="btn" ui-sref="addressSelect">addressSelect</button>
+    <br/><br/>
+    <button class="btn" ui-sref="addressEdit">addressEdit</button>
+</div>
 
 <div ui-view></div>
 
