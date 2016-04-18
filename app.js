@@ -101,7 +101,7 @@ app.use(function (req, res, next) {
 // app.use('/api/v1', cors(), apiRouterV1);
 app.use('/', require('./routes_mobile'));
 app.use(require('./routes_admin'));
-//app.use(require('./wechat/routes'));
+app.use(require('./wechat/routes'));
 
 // error handler
 app.use(errorPageMiddleware.errorPage);

@@ -45,7 +45,7 @@ var OAuth = function (appID, appSecret) {
 
     this.getToken = function(openid, callback) {
         callback(null, this.store[openid]);
-    }
+    };
 
     this.saveToken = function (openid, token, callback) {
         this.store[openid] = token;

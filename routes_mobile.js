@@ -1,8 +1,6 @@
 var router = require('express').Router();
-var session = require('./service/session');
+var account = require('./service/account');
 
-// redis session测试
-router.get('/session/:key', session.getSession);
-router.post('/session', session.setSession);
+router.get('/account', account.signin);
 
 module.exports = router;

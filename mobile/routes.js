@@ -38,7 +38,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('account', {
             url: "/account",
             controller: 'Account',
-            templateUrl: 'pages/account.html'
+            templateUrl: '/views/account.html'
         })
         .state('addressSelect', {
             url: "/addressSelect",

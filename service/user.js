@@ -85,7 +85,7 @@ module.exports.signin = function (req, res) {
                     if (err) {
                         console.log(err);
                         res.statusCode = 500;
-                        res.json({ msg: 'Auto create account error: ', err });
+                        res.json({ msg: 'Auto create account error: ' });
                         return;
                     }
                     // ???: is it nescessary to set expire time for jwt token?
