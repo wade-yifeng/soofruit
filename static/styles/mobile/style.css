@@ -14900,14 +14900,14 @@ body {
     color: #fff;
     margin-left: 7px;
     border-radius: 3px;
-    position: relative
+    position: relative;
+    text-align: center
 }
 
 .orders-order-btn a:before {
     text-align: center;
     line-height: 50px;
     font-size: 28px;
-    border: 1px solid #d5d5d5;
     border-radius: 6px;
     -webkit-border-radius: 6px;
     content: "";
@@ -14924,12 +14924,8 @@ body {
 
 .orders-order-btn ._order_btn_buy {
     background-color: #ef293c;
-    color: #fff
-}
-
-.orders-order-btn ._order_btn_buy:before {
+    text-align: center;
     border: 0;
-    content: "\53BB\652F\4ED8"
 }
 
 .orders-order-btn ._order_btn_receive {
@@ -14972,11 +14968,8 @@ body {
 
 .orders-order-btn ._order_btn_cancel {
     color: #686868;
-    background-color: #fff
-}
-
-.orders-order-btn ._order_btn_cancel:before {
-    content: "\53D6\6D88\8BA2\5355"
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
 }
 
 .orders-text {
@@ -14992,7 +14985,7 @@ body {
 
 .deal-list-status {
     font-size: 12px;
-    padding-top: 52px
+    padding-top: 12px
 }
 
 .img-rotate, .img_rotate {
@@ -15084,4 +15077,43 @@ body {
 .tag.tag-orange {
     color: #f60;
     border-color: #f60
+}
+
+.cart-checkbox-wrapper {
+    float: left;
+    padding-left: 15px;
+}
+
+.cart-checkbox-real {
+    z-index: 1;
+    position: relative;
+    top: 20px;
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.cart-checkbox-fake {
+    position: relative;
+    top: -10px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    padding-top: 3px;
+    border: 2px solid #d5d5d5;
+}
+
+.cart-checkbox-fake .glyphicon {
+    font-size: 14px;
+}
+
+.cart-checkbox-checkall .cart-checkbox-real {
+    top: 10px;
+    left: 12px;
+}
+
+.cart-checkbox-checkall .cart-checkbox-fake {
+    top: -21px;
+    left: 12px;
 }
