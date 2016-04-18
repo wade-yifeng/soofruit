@@ -7,7 +7,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('list', {
             url: "/list",
-            controller: "List",
+            controller: "Good",
             templateUrl: '/views/list.html'
         })
         .state('detail', {

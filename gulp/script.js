@@ -47,7 +47,8 @@ gulp.task('js:common', ['js:mobile', 'js:admin'], function () {
             'static/scripts/jquery.js',
             'static/scripts/bootstrap.js',
             'static/scripts/socket.io.js',
-            'static/scripts/underscore.js'
+            'static/scripts/underscore.js',
+            'static/scripts/site.js'
         ])
         .pipe(concat('common.js'))
         .pipe(uglify())
@@ -65,6 +66,7 @@ gulp.task('watch:js', ['js:common'], function () {
         'static/scripts/bootstrap.js',
         'static/scripts/socket.io.js',
         'static/scripts/underscore.js',
+        'static/scripts/site.js',
         'static/scripts/mobile/**/*.js',
         'static/scripts/admin/**/*.js',
         'mobile/routes.js',

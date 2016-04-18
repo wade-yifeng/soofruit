@@ -14,8 +14,7 @@ router.get('/dics/:_id', dic.detail)
 router.get('/dicsOfType/:dicType', dic.getDicsOfType);
 
 // good services
-router.get('/goods', good.list)
-    .get('/goodsPaged', good.listPaged)
+router.get('/goodsPaged', good.listPaged)
     .post('/goods', good.create);
 router.get('/goods/:_id', good.detail)
     .put('/goods/:_id', good.update)
@@ -35,7 +34,6 @@ router.get('/user/:_id', user.userDetail)
 
 router.get('/permissions', permission.permissionList)
     .post('/permissions', permission.createPermission);
-
 router.delete('/permissions/:_id',permission.deletePermission);
 
 router.get('/roleCategories', role.getRoleCategories);

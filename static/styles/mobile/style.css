@@ -605,7 +605,6 @@ dd, div, dl, dt, form, h1, h2, h3, h4, h5, img, li, p, ul {
 }
 
 body {
-    background: #f7f7f7;
     color: #555;
     font-size: 18px;
     margin: 0 auto;
@@ -10554,7 +10553,7 @@ input[type=text], textarea {
 .none {
     position: absolute;
     z-index: 100;
-    right: 33%;
+    right: 22%;
     top: 23px;
     color: red;
     font-size: 15px
@@ -14611,10 +14610,6 @@ input[type=text], textarea {
     color: purple;
 }
 
-body {
-    background-color: #eee !important
-}
-
 .orders-order {
     position: relative;
     margin-bottom: 12px;
@@ -15108,12 +15103,12 @@ body {
     font-size: 14px;
 }
 
-.cart-checkbox-checkall .cart-checkbox-real {
+.cart-footer .cart-checkbox-real {
     top: 10px;
     left: 12px;
 }
 
-.cart-checkbox-checkall .cart-checkbox-fake {
+.cart-footer .cart-checkbox-fake {
     top: -21px;
     left: 12px;
 }

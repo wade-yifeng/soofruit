@@ -4,10 +4,10 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover table-condensed">
             <tr>
-                <th class="text-center">名称/标题</th>
-                <th class="text-center">描述</th>
+                <th class="text-center" style="width:80px;">名称/标题</th>
+                <th class="text-center" style="width:200px;">描述</th>
                 <th class="text-center">标签</th>
-                <th class="text-center">图片</th>
+                <th class="text-center" style="width:100px;">图片</th>
                 <th class="text-center">保证项</th>
                 <th class="text-center">规格</th>
                 <th class="text-center">原产地</th>
@@ -22,7 +22,7 @@
                 <td>&nbsp;&nbsp;{{g.name}}</td>
                 <td>&nbsp;&nbsp;{{g.desc}}</td>
                 <td><span ng-repeat="tag in g.tags">{{tag}}<br/></span></td>
-                <td style="max-width:185px;">
+                <td>
                     <div class="pull-left" style="padding:5px 5px 0 0;" ng-repeat="path in g.pics">
                         <img src="/assets/imgs/upload/{{path}}" style="width:100px;">
                     </div>
@@ -36,8 +36,9 @@
                 <td>&nbsp;&nbsp;{{g.sales}}</td>
                 <td>&nbsp;&nbsp;{{g.balance}}</td>
                 <td class="text-center">
-                    <input class="btn btn-sm" type="button" ng-click="editGood(g._id)" value="Edit">
-                    <input class="btn btn-sm" type="button" ng-click="deleteGood(g._id)" value="Delete">
+                    <input class="btn btn-sm" style="width:50px;" type="button" ng-click="editGood(g._id)" value="Edit">
+                    <input class="btn btn-sm" style="width:50px;" type="button" ng-click="deleteGood(g._id)"
+                           value="Delete">
                 </td>
             </tr>
             <tr ng-show="goods.length==0">
@@ -74,7 +75,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">描述</label>
             <div class="col-sm-10">
-                <input class="form-control input-sm" type="text" ng-model="good.desc">
+                <textarea  class="form-control input-sm" ng-model="good.desc">
             </div>
         </div>
         <div class="form-group">

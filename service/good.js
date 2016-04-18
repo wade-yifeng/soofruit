@@ -6,18 +6,6 @@ var ValidateGood = models.ValidateGood;
 var uploadPath = require('config').upload_directory.substr(2);
 
 
-module.exports.list = function (req, res) {
-    Good.find().lean().exec(function (err, doc) {
-        if (err) {
-            res.json({code: 500, msg: err});
-        }
-        else {
-            res.json({code: 0, data: doc});
-        }
-    });
-};
-
-
 module.exports.listPaged = function (req, res) {
     var options = {
         limit: req.query.limit ? parseInt(req.query.limit, null) : 10,
