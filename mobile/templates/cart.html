@@ -4,7 +4,7 @@
         <div ng-include="'/views/cart_orders_nav.html'"></div>
 
         <div id="cart-container">
-            <div class="deal-list-status">
+            <div class="deal-list-status" ng-show="cart">
                 <!--<div class="orders-order">-->
                 <!--<div>-->
                 <!--<a>-->
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="orders-order-goods-img">
-                                <img src="/assets/imgs/upload/{{good.pic}}">
+                                <span style="background: url(/assets/imgs/upload/{{good.pic}}) no-repeat;background-size: 130px auto;"></span>
                             </div>
                             <div class="orders-order-goods-name">
                                 <div class="_goods_name">{{good.name}}</div>
@@ -100,7 +100,7 @@
                             <div class="orders-order-ft">
                                 <div class="orders-order-opt">
                                     <div class="orders-order-btn" style="position:absolute;top:14px;">
-                                        <a class="_order_btn_buy pull-right">{{cart.goods.length>1?'合并付款':'付款'}}</a>
+                                        <a class="_order_btn_buy pull-right" ng-click="checkout()">{{cart.goods.length>1?'合并付款':'付款'}}</a>
                                         <span class="pull-right eg_font_black">合计: {{totalAmount|currency:'￥'}}</span>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="empty-list">
+            <div class="empty-list" ng-hide="cart">
                 <div class="empty-list-header">
                     <h4>购物车快饿瘪了 T.T</h4>
                     <span>快给我挑点宝贝</span>

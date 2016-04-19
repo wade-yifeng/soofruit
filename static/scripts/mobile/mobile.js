@@ -1,13 +1,16 @@
+var initCartIcon = function (isToShow) {
+    if (isToShow) {
+        $('#go_cart').show();
+    }
+    else {
+        $('#go_cart').hide();
+    }
+};
+
 var activateNav = function (index) {
     delay(function () {
         $('.nav-fixed .fixed-nav-item-orders').eq(index).addClass('nav-cur').siblings().removeClass('nav-cur');
     });
-};
-
-var initCartIcon = function (cart) {
-    if (cart) {
-        $('#go_cart').show();
-    }
 };
 
 var showInfo = function (info) {
@@ -22,6 +25,16 @@ var getIdArrOfGoods = function (goods) {
     return goods.map(function (good) {
         return good.goodID;
     });
+};
+
+var getTotalAmount = function (goods) {
+    var total = 0;
+    goods.forEach(function (good) {
+        if (good.checked) {
+            total += good.sellPrice * good.quantity;
+        }
+    });
+    return total;
 };
 
 //#######################模拟Checkbox Group#######################

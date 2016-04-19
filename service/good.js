@@ -37,7 +37,7 @@ module.exports.create = function (req, res) {
                 res.json({code: 500, msg: err});
             }
             else if (!good) {
-                res.json({code: 1, msg: '商品创建失败'});
+                res.json({code: 100, msg: '商品创建失败'});
             }
             else {
                 res.json({code: 0, data: good._id.toString()});
@@ -62,7 +62,7 @@ module.exports.detail = function (req, res) {
 module.exports.update = function (req, res) {
     Good.findById(req.params._id, function (err, doc) {
         if (!doc) {
-            res.json({code: 1, msg: "商品不存在或已被删除"});
+            res.json({code: 100, msg: "商品不存在或已被删除"});
         } else {
             var v = ValidateGood(req.body);
             if (!v.isValid()) {

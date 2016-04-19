@@ -8477,7 +8477,7 @@ a.fixopt_share {
     top: 5px
 }
 
-.order_goods_img img {
+.order_goods_img span {
     border: 1px solid #d7d7d7;
     display: block;
     height: 60px;
@@ -14721,7 +14721,7 @@ input[type=text], textarea {
     float: left
 }
 
-.orders-order-goods-img img {
+.orders-order-goods-img span {
     display: block;
     width: 77px;
     height: 77px;
