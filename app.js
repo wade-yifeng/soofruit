@@ -98,8 +98,11 @@ if (!config.debug) {
 
 // 服务端路由
 // 模块化加载所有的route(controllers, middlewares)
-// app.use('/api/v1', cors(), apiRouterV1);
+// app.use('/api/v1',  cors(), apiRouterV1);
 app.use('/', require('./routes_mobile'));
+// TODO: Account需要跳转处理，等待之后拆分再统一Roote
+var account = require('./service/account');
+app.use('/account', account.signin);
 app.use(require('./routes_admin'));
 app.use(require('./wechat/routes'));
 

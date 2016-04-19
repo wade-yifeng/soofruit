@@ -45,6 +45,7 @@
     "path": "^0.12.7",
     "querystring": "^0.2.0",
     "redis": "^2.6.0-0",
+    "request": "^2.72.0",
     "response-time": "^2.3.1",
     "socket.io": "^1.4.5",
     "underscore": "^1.8.3",

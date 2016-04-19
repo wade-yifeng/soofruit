@@ -10,7 +10,7 @@ var config = {
     debug: false,
 
     // 站点端口
-    port: 3000,
+    port: 80,
 
     // 数据库连接字符串
     db: "mongodb://localhost/test",
@@ -28,9 +28,9 @@ var config = {
     // 微信
     WeChat: {
         // 公众号ID
-        appID: "wx94911ed9aa3ef58c",
+        appID: "wx36418b8bcd9f8c8a",
         // 公众号密钥
-        appSecret: "c2f8def6c499b979bc46f7beee43091d",
+        appSecret: "f5e38fb6f3f29d7ae73004b106f8de45",
         // 公众号预设Token    
         token: "Soostep123"
     },
@@ -40,7 +40,8 @@ var config = {
         authorizeURLForWebsite: "https://open.weixin.qq.com/connect/qrconnect",
         oauth2URL: "https://api.weixin.qq.com/sns/oauth2/access_token",
         oauth2RefreshURL: "https://api.weixin.qq.com/sns/oauth2/refresh_token",
-        authURL: "https://api.weixin.qq.com/sns/auth"
+        verifyTokenURL: "https://api.weixin.qq.com/sns/auth",
+        getUserURL: "https://api.weixin.qq.com/sns/userinfo"
     }
 };
 

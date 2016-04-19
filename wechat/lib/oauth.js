@@ -9,6 +9,7 @@ var urllib = require('urllib');
 var config = require('config');
 var wrapper = require('./util').wrapper;
 var querystring = require('querystring');
+var logger = require('../../lib/logger');
 
 // 以data保存当前AccessToken
 var AccessToken = function (data) {
@@ -20,6 +21,8 @@ var AccessToken = function (data) {
 
 // 判断是否过期，加入缓冲时间
 AccessToken.prototype.isValid = function () {
+    logger.info("现在的时间", new Date().getTime());
+    logger.info("很意外，为啥要检查token", this.data);
     // 过期时间，因网络延迟等，将实际过期时间提前10秒，以防止临界点
     return !!this.data.access_token && (new Date().getTime()) < (this.data.create_at + (this.data.expires_in  - 10) * 1000);
 };
@@ -65,7 +68,7 @@ OAuth.prototype.setOpts = function (opts) {
 // 处理微信请求公共类
 OAuth.prototype.request = function (url, opts, callback) {
     var options = {};
-    extend(options, this.defaults);
+    _.extend(options, this.defaults);
 
     if (typeof opts === 'function') {
         callback = opts;
@@ -78,7 +81,7 @@ OAuth.prototype.request = function (url, opts, callback) {
         }
         else if(opts.headers) {
             options.headers = options.headers || {};
-            extend(options.headers, opts.headers);
+            _.extend(options.headers, opts.headers);
         }
     }
 
@@ -95,7 +98,7 @@ OAuth.prototype.getAuthorizeURL = function (redirect, state, scope) {
     var url = config.OpenAPI.authorizeURL;
 
     var info = {
-        appid: this.appid,
+        appID: this.appID,
         redirect_uri: redirect,
         response_type: 'code',
         scope: scope || 'snsapi_base',
@@ -115,7 +118,7 @@ OAuth.prototype.getAuthorizeURLForWebsite = function (redirect, state, scope) {
     var url = onfig.OpenAPI.authorizeURLForWebsite;
 
     var info = {
-        appid: this.appid,
+        appID: this.appID,
         redirect_uri: redirect,
         response_type: 'code',
         scope: scope || 'snsapi_login',
@@ -144,8 +147,8 @@ OAuth.prototype.getAccessToken = function (code, callback) {
     var url = config.OpenAPI.oauth2URL;
 
     var info = {
-        appid: this.appid,
-        secret: this.appsecret,
+        appID: this.appID,
+        secret: this.appSecret,
         code: code,
         grant_type: 'authorization_code'
     };
@@ -176,7 +179,7 @@ OAuth.prototype.refreshAccessToken = function (refreshToken, callback) {
     var url = config.OpenAPI.oauth2RefreshURL;
 
     var info = {
-        appid: this.appid,
+        appID: this.appID,
         grant_type: 'refresh_token',
         refresh_token: refreshToken
     };
@@ -191,7 +194,7 @@ OAuth.prototype.refreshAccessToken = function (refreshToken, callback) {
 
 // 获取用户信息
 OAuth.prototype._getUser = function (options, accessToken, callback) {
-    var url = 'https://api.weixin.qq.com/sns/userinfo';
+    var url = config.OpenAPI.getUserURL;
 
     var info = {
         access_token: accessToken,
@@ -250,6 +253,7 @@ OAuth.prototype.getUser = function (options, callback) {
         var token = new AccessToken(data);
         
         if (token.isValid()) {
+            logger.info("这Token到底啥情况", token);
             that._getUser(options, token.data.access_token, callback);
         } else {
             that.refreshAccessToken(token.data.refresh_token, function (err, token) {
@@ -264,7 +268,7 @@ OAuth.prototype.getUser = function (options, callback) {
 };
 
 OAuth.prototype._verifyToken  = function (openid, accessToken, callback) {
-    var url = config.OpenAPI.authURL;
+    var url = config.OpenAPI.verifyTokenURL;
 
     var info = {
         access_token: accessToken,

@@ -1,28 +1,41 @@
 var oauthApi = require('../wechat/api_oauth');
 var async = require('async');
 var logger = require('../lib/logger');
+var request = require('request');
 
 module.exports.signin = function (req, res) {
-    async.waterfall([
-        function(callback){
-            var url = oauthApi.getAuthorizeURL(req.url);
-            callback(null, url);
-        }, function(url, callback){
-            var code = "";
-            request.get(url).end(function (err, res) {
-                code = res;
-            });
-            callback(null, code);
-        }, function(code, callback){
-            var accessToken, openid;
-            oauthApi.getAccessToken(req.code, function (err, result) {
-                accessToken = result.data.access_token;
-                openid = result.data.openid;
-            });
-            callback(null, accessToken, openid);
-    }], function (err, accessToken, openid) {
-        if(err !== null){
-            logger.error(err);
-        }
-    });
+    if(req.query.code === undefined) {
+        logger.info("get auth code");
+        var absoluteURL = req.protocol + '://' + req.get('host') + req.originalUrl;
+        var url = oauthApi.getAuthorizeURL(absoluteURL);
+        res.redirect(url);
+    }
+    else {
+        logger.info("get back code", req.query.code);
+        async.waterfall([
+            function(callback){
+                logger.info("get auth openID");
+                oauthApi.getAccessToken(req.query.code, function (err, result) {
+                    logger.info("get back openID", result);
+                    if(result.data === undefined || result.data.openid == undefined) {
+                        callback(true);
+                    }
+                    callback(null, result.data.access_token, result.data.openid);
+                });
+            }, function(access_token, openID, callback){
+                logger.info("get auth baseinfo");
+                oauthApi.getUser(openID, function(result){
+                    logger.info("get back baseinfo", result);
+                    callback(null, result);
+                });
+            }], function (err, baseInfo) {
+                logger.info("Congratulation!", baseInfo);
+                if(err !== null){
+                    logger.error(err);
+                }
+
+            }
+        );
+    }
+    
 };
