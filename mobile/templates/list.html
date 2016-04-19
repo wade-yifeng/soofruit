@@ -1,6 +1,6 @@
 <div class="container" ng-controller="List">
     <div id="banner" style="height: 350px;">
-        <div class="activity-banner" avalonctrl="banner" style="height: 350px;">
+        <div class="activity-banner" style="height: 350px;">
             <ul id="index-slider" style="position: relative; transition: none; width: 4480px; left: -1920px;">
                 <!--repeat1729790719843-->
                 <li data-repeat-rendered="bannerRendered" style="float: left; display: inline;">
@@ -48,7 +48,7 @@
         </div>
     </div>
     <section class="main-view tuan" id="goods_list">
-        <div class="base-list-wrapper" avalonctrl="goods_list">
+        <div class="base-list-wrapper">
 
             <!--<div>-->
             <!--<div class="tuan_g">-->
@@ -97,7 +97,7 @@
             <div ng-repeat="good in goods">
                 <div class="tuan_g">
                     <div class="tuan_g_img" ui-sref="detail({goodID:'{{good._id}}'})">
-                        <img src="assets/imgs/upload/{{good.pics[0]}}">
+                        <img src="/assets/imgs/upload/{{good.pics[0]}}">
                         <div class="tuan_g_img_text">
                             <div class="tuan_g_img_item" ng-repeat="tag in good.tags">
                                 <div class="tuan_g_img_round"></div>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="tuan_g_core">
                         <div class="tuan_g_core_img">
-                            <img src="assets/imgs/mobile/tuan.png">
+                            <img src="/assets/imgs/mobile/tuan.png">
                         </div>
                         <div class="tuan_g_price price-big" style="width: 200px;">
                             <span>活动价</span><b>{{good.sellPrice|currency:'￥'}}</b>
@@ -120,7 +120,7 @@
                         <div class="tuan_g_btn" ui-sref="detail({goodID:'{{good._id}}'})">查看详情</div>
                     </div>
                     <div class="like goods_list_like">
-                        <img src="assets/imgs/mobile/unlike.png">
+                        <img src="/assets/imgs/mobile/unlike.png">
                         <div class="like_click_button"></div>
                     </div>
                 </div>
@@ -129,9 +129,11 @@
             <div class="load-more pullUp_show">
                 <div class="list-center">
                     <div class="img-rotate"></div>
-                    <span class="orders_text" ms-text="loadingTxt">正在玩命的加载...</span>
+                    <span class="orders_text">正在玩命的加载...</span>
                 </div>
             </div>
         </div>
     </section>
+
+    <div id="go_cart" ui-sref="cart"><span class="glyphicon glyphicon-shopping-cart"></span></div>
 </div>

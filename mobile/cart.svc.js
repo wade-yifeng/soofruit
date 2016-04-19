@@ -33,17 +33,25 @@ app.factory('CartSvc', function ($http, $q, ShareSvc) {
             return defer.promise;
         },
         addToCart: function (good) {
+            var self = this;
             this.getCartSession().then(function (cart) {
-                cart.goods.push({
-                    goodID: good._id,
-                    name: good.name,
-                    sellPrice: good.sellPrice,
-                    pic: good.pics[0],
-                    quantity: 1
-                });
-                return this.setCartSession(cart);
+                var idArr = getIdArrOfGoods(cart.goods);
+                var indexInArr = idArr.indexOf(good._id);
+                if (indexInArr > -1) {
+                    cart.goods[indexInArr].quantity += 1;
+                }
+                else {
+                    cart.goods.push({
+                        goodID: good._id,
+                        name: good.name,
+                        sellPrice: good.sellPrice,
+                        pic: good.pics[0],
+                        quantity: 1
+                    });
+                }
+                return self.setCartSession(cart);
             }, function () {
-                return this.setCartSession({
+                return self.setCartSession({
                     userID: ShareSvc.UserID,
                     goods: [{
                         goodID: good._id,

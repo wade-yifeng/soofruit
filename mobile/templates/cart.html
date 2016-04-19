@@ -5,87 +5,80 @@
 
         <div id="cart-container">
             <div class="deal-list-status">
-                <div class="orders-order">
+                <!--<div class="orders-order">-->
+                <!--<div>-->
+                <!--<a>-->
+                <!--<div class="orders-order-glist">-->
+                <!--<div class="orders-mall-title">-->
+                <!--<img class="_icon"-->
+                <!--src="http://omsproduction.b0.upaiyun.com/goods/d06f144f1d/310/310/de34736278c65349a2bd1533a8448f42.jpg">-->
+                <!--<span class="_mall_name">益果汇</span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="orders-order-goods">-->
+                <!--<div class="cart-checkbox-wrapper">-->
+                <!--<input type="checkbox" class="cart-checkbox-real"/>-->
+                <!--<div class="cart-checkbox-fake">-->
+                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="orders-order-goods-img" style="margin-left:25px;">-->
+                <!--<img src="http://omsproduction.b0.upaiyun.com/goods/280b2c9f2b7c3361c7bb95ae75c5a1c5813244b9f9.jpg">-->
+                <!--</div>-->
+                <!--<div class="orders-order-goods-name" style="margin-left:160px;">-->
+                <!--<div class="_goods_name">9.8元越南青芒2斤（4个左右）进口芒果 新鲜水果（江浙沪专享）（预售，4月27日完成发货）</div>-->
+                <!--</div>-->
+                <!--<div class="orders-order-goods-payed">-->
+                <!--&lt;!&ndash;ms-if&ndash;&gt;-->
+                <!--<div class="payed-head">实付:</div>-->
+                <!--<div class="payed-amount">￥19.00</div>-->
+                <!--<div class="payed-free">&nbsp;(免运费)</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</a>-->
+                <!--<div class="orders-order-bd-bottom">-->
+                <!--<div class="orders-order-ft">-->
+                <!--<div class="orders-order-opt">-->
+                <!--<div class="orders-order-btn">-->
+                <!--<a class="_order_btn_cancel">移除</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="orders-order" ng-repeat="good in cart.goods">
                     <div>
-                        <a>
-                            <div class="orders-order-glist">
-                                <div class="orders-mall-title">
-                                    <img class="_icon"
-                                         src="http://omsproduction.b0.upaiyun.com/goods/d06f144f1d/310/310/de34736278c65349a2bd1533a8448f42.jpg">
-                                    <span class="_mall_name">益果汇</span>
+                        <div class="orders-order-goods">
+                            <div class="cart-checkbox-wrapper">
+                                <input type="checkbox" class="cart-checkbox-real item" ng-model="good.checked"
+                                       ng-click="checked()">
+                                <div class="cart-checkbox-fake">
+                                    <span class="glyphicon glyphicon-ok"></span>
                                 </div>
                             </div>
-                            <div class="orders-order-goods">
-                                <div class="cart-checkbox-wrapper">
-                                    <input type="checkbox" class="cart-checkbox-real"/>
-                                    <div class="cart-checkbox-fake">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </div>
-                                </div>
-                                <div class="orders-order-goods-img" style="margin-left:25px;">
-                                    <img src="http://omsproduction.b0.upaiyun.com/goods/280b2c9f2b7c3361c7bb95ae75c5a1c5813244b9f9.jpg">
-                                </div>
-                                <div class="orders-order-goods-name" style="margin-left:160px;">
-                                    <div class="_goods_name">9.8元越南青芒2斤（4个左右）进口芒果 新鲜水果（江浙沪专享）（预售，4月27日完成发货）</div>
-                                </div>
-                                <div class="orders-order-goods-payed">
-                                    <!--ms-if-->
-                                    <div class="payed-head">实付:</div>
-                                    <div class="payed-amount">￥19.00</div>
-                                    <div class="payed-free">&nbsp;(免运费)</div>
-                                </div>
+                            <div class="orders-order-goods-img">
+                                <img src="/assets/imgs/upload/{{good.pic}}">
                             </div>
-                        </a>
-                        <div class="orders-order-bd-bottom">
-                            <div class="orders-order-ft">
-                                <div class="orders-order-opt">
-                                    <div class="orders-order-btn">
-                                        <a class="_order_btn_cancel">移除</a>
-                                    </div>
-                                </div>
+                            <div class="orders-order-goods-name">
+                                <div class="_goods_name">{{good.name}}</div>
+                                <div class="_spec">金色(待定)</div>
+                            </div>
+                            <div class="orders-order-goods-payed">
+                                <div class="payed-head">实付:</div>
+                                <div class="payed-amount">{{good.sellPrice*good.quantity|currency:'￥'}}</div>
+                                <div class="payed-free">&nbsp;(免运费)</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="orders-order">
-                    <div>
-                        <a>
-                            <div class="orders-order-glist">
-                                <div class="orders-mall-title">
-                                    <img class="_icon"
-                                         src="http://omsproduction.b0.upaiyun.com/goods/d06f144f1da6bcb7940a5b07edeff888a9445b431a.jpg">
-                                    <span class="_mall_name">宜美家</span>
-                                </div>
-                            </div>
-                            <div class="orders-order-goods">
-                                <div class="cart-checkbox-wrapper">
-                                    <input type="checkbox" class="cart-checkbox-real"/>
-                                    <div class="cart-checkbox-fake">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </div>
-                                </div>
-                                <div class="orders-order-goods-img" style="margin-left:25px;">
-                                    <img src="http://omsproduction.b0.upaiyun.com/goods/b2d946cdf3/200/200/d56744a1f9e93d3c0182a8947da437d0.jpg">
-                                </div>
-                                <div class="orders-order-goods-name" style="margin-left:160px;">
-                                    <div class="_goods_name">【秒杀59元】 迷你洗衣机 洗衣棒 家用便携式 手持式 超小型 局部清洁去污渍洗衣棒【秒杀20:00开始
-                                        限量100份】
-                                    </div>
-                                    <div class="_spec">金色</div>
-                                </div>
-                                <div class="orders-order-goods-payed">
-                                    <div class="payed-head">实付:</div>
-                                    <div class="payed-amount">￥69.00</div>
-                                    <div class="payed-free">(免运费)</div>
-                                </div>
-                            </div>
-                        </a>
                         <div class="orders-order-bd-bottom">
                             <div class="orders-order-ft">
                                 <div class="orders-order-opt">
                                     <div class="orders-order-btn">
-                                        <a class="_order_btn_cancel">移除</a>
+                                        <a class="_order_btn_cancel pull-left" ng-click="minus(good)">-</a>
+                                        <input class="pull-left" type="text" ng-value="good.quantity" disabled>
+                                        <a class="_order_btn_cancel pull-left" ng-click="plus(good)">+</a>
+                                        <a class="_order_btn_cancel" ng-click="remove(good)">移除</a>
                                     </div>
                                 </div>
                             </div>
@@ -96,16 +89,19 @@
                 <div class="orders-order cart-footer">
                     <div>
                         <div class="orders-order-bd-bottom">
-                            <div class="cart-checkbox-wrapper cart-checkbox-checkall">
-                                <input type="checkbox" class="cart-checkbox-real"/>
+                            <div class="cart-checkbox-wrapper">
+                                <input type="checkbox" class="cart-checkbox-real chief" ng-model="checkedAll"
+                                       ng-click="checked(true)"/>
                                 <div class="cart-checkbox-fake">
                                     <span class="glyphicon glyphicon-ok"></span>
                                 </div>
+                                <span class="text">全选</span>
                             </div>
                             <div class="orders-order-ft">
                                 <div class="orders-order-opt">
-                                    <div class="orders-order-btn" style="position:relative;top:-46px;">
-                                        <a class="_order_btn_buy">付款/合并付款</a>
+                                    <div class="orders-order-btn" style="position:absolute;top:14px;">
+                                        <a class="_order_btn_buy pull-right">{{cart.goods.length>1?'合并付款':'付款'}}</a>
+                                        <span class="pull-right eg_font_black">合计: {{totalAmount|currency:'￥'}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +110,6 @@
                 </div>
 
                 <div class="wrap_position pullUp_show">
-                    <!--ms-if-->
                     <div class="posi_abso up">
                         <div class="center" id="center_pullup">
                             <span class="orders-text"></span>
@@ -123,15 +118,15 @@
                 </div>
             </div>
 
-            <div class="empty-list " style="padding-top:60px;">
+            <div class="empty-list">
                 <div class="empty-list-header">
                     <h4>购物车快饿瘪了 T.T</h4>
                     <span>快给我挑点宝贝</span>
                 </div>
 
-                <div class="empty-list-content"><a
-                        href="https://wap.koudaitong.com/v2/showcase/homepage?kdt_id=15573072"
-                        class="js-go-home home-page tag tag-big tag-orange">去逛逛</a></div>
+                <div class="empty-list-content">
+                    <a ui-sref="list" class="js-go-home home-page tag tag-big tag-orange">去逛逛</a>
+                </div>
             </div>
         </div>
     </div>
