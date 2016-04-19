@@ -8,6 +8,7 @@
 var urllib = require('urllib');
 var config = require('config');
 var wrapper = require('./util').wrapper;
+var querystring = require('querystring');
 
 // 以data保存当前AccessToken
 var AccessToken = function (data) {
@@ -39,8 +40,8 @@ var processToken = function (that, callback) {
 };
 
 var OAuth = function (appID, appSecret) {
-    this.appID = appID || config.OAuth.appID;
-    this.appSecret = appSecret || config.OAuth.appSecret;
+    this.appID = appID || config.WeChat.appID;
+    this.appSecret = appSecret || config.WeChat.appSecret;
     this.store = {};
 
     this.getToken = function(openid, callback) {

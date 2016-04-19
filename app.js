@@ -90,11 +90,11 @@ if (!config.debug) {
     app.set('view cache', true);
 }
 
-app.use(function (req, res, next) {
-    // pass the csrfToken to the view
-    res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
-    next();
-});
+//app.use(function (req, res, next) {
+//    // pass the csrfToken to the view
+//    res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
+//    next();
+//});
 
 // 服务端路由
 // 模块化加载所有的route(controllers, middlewares)
