@@ -7,11 +7,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('list', {
             url: "/list",
-            controller: "Good",
+            controller: "List",
             templateUrl: '/views/list.html'
         })
         .state('detail', {
-            url: "/detail",
+            url: "/detail:goodID",
             controller: 'Detail',
             templateUrl: '/views/detail.html'
         })

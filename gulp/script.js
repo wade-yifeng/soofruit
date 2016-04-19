@@ -9,6 +9,7 @@ gulp.task('js:mobile', function () {
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/mobile/**/*.js',
             'mobile/routes.js',
+            'mobile/filters.js',
             'mobile/*.svc.js',
             'mobile/*.ctrl.js'
         ])
@@ -25,6 +26,7 @@ gulp.task('js:admin', function () {
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/admin/**/*.js',
             'admin/routes.js',
+            'admin/filters.js',
             'admin/*.svc.js',
             'admin/*.ctrl.js'
         ])
@@ -70,9 +72,11 @@ gulp.task('watch:js', ['js:common'], function () {
         'static/scripts/mobile/**/*.js',
         'static/scripts/admin/**/*.js',
         'mobile/routes.js',
+        'mobile/filters.js',
         'mobile/*.svc.js',
         'mobile/*.ctrl.js',
         'admin/routes.js',
+        'admin/filters.js',
         'admin/*.svc.js',
         'admin/*.ctrl.js'
     ], ['js:common']);

@@ -1,9 +1,9 @@
 var app = angular.module('mobile');
 
-app.controller('Good', function ($scope, GoodSvc) {
+app.controller('Detail', function ($scope, GoodSvc, $stateParams) {
     document.title = '欢迎来到北海之南大果园';
 
-    GoodSvc.listPaged(1).then(function (result) {
-        $scope.goods = result.data;
+    GoodSvc.get($stateParams.goodID).then(function (result) {
+        $scope.good = result;
     });
 });

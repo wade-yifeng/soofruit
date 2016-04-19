@@ -1,4 +1,4 @@
-<div class="container goods-container no-footer" avalonctrl="root" style="visibility: visible;">
+<div class="container goods-container no-footer" ng-controller="Detail">
     <section class="main-view">
         <div id="focus" class="focus goods-focus ect-padding-lr ect-margin-tb" style="height: 400px;">
             <div class="hd">
@@ -9,17 +9,9 @@
                 </ul>
             </div>
             <div class="bd">
-                <div class="tempWrap" style="overflow:hidden; position:relative;">
-                    <ul style="width: 1920px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translate(-640px, 0px) translateZ(0px);">
-                        <li style="display: table-cell; vertical-align: top; width: 640px;"><img
-                                src="http://omsproduction.b0.upaiyun.com/goods/4a607329a8aecb29df4c4fa13b30893318c0c36fea.jpg!750">
-                        </li>
-                        <li style="display: table-cell; vertical-align: top; width: 640px;"><img
-                                src="http://omsproduction.b0.upaiyun.com/goods/4a607329a8bf86bd23407ebd313282805ce7ba0f1a.jpg!750">
-                        </li>
-                        <li style="display: table-cell; vertical-align: top; width: 640px;"><img
-                                src="http://omsproduction.b0.upaiyun.com/goods/4a607329a82ad01502992f4001da8af7075cda753f.jpg!750">
-                        </li>
+                <div class="tempWrap">
+                    <ul>
+                        <li ng-repeat="pic in good.pics"><img src="assets/imgs/upload/{{pic}}"></li>
                     </ul>
                 </div>
             </div>
@@ -27,37 +19,18 @@
         <div class="tmm">
             <div class="td2">
                 <div class="td2_original_price">
-                    <span>￥1.00</span>
+                    <span>{{good.sellPrice|currency:'￥'}}</span>
                     <div class="mar_price">
-                        <del>￥</del>
-                        <del id="market_price">99.00</del>
+                        <del id="market_price">{{good.originPrice|currency:'￥'}}</del>
                     </div>
-                    <div class="lotteryIcon">抽奖</div>
-                    <div class="td2_sold_quantity"><span>累计销量：<i id="sold_quantity">10000+</i>件</span></div>
+                    <div class="lotteryIcon">特价</div>
+                    <div class="td2_sold_quantity"><span>累计销量：<i id="sold_quantity">{{good.sales}}+</i>件</span></div>
                 </div>
-                <div class="td2_name">【限量250份】1元1个泰国进口榴莲（3-4斤）再慢就被别人抢完啦！【水果之王 肉质细腻 入口绵密】</div>
-                <div class="td2_cx">
-                    榴莲美味拿回家！S号榴莲一个3-4斤，口感独特，榴莲香气浓郁，果肉厚实饱满，清凉甜蜜，酥软味甜，新鲜绵滑，还具有很高的营养价值哦【榴莲水份丢失率较高，大约有正负100g浮动，亲们这是正常的哦】【新鲜的榴莲您收到时可能还没熟，在温度为15℃以上的地方放1-2天，比如暖气片、小太阳旁边，很快就会熟哦！】
-                </div>
-                <div class="lotteryRule">
-                    <span class="lotteryRuleHead">抽奖规则</span>
-                    <span>活动时间: 4月10日18:00-4月17日18:00</span>
-                    <span>1、活动结束后从组团成功的订单中随机抽取250份。</span>
-                    <span>2、组团成功未抽中者退款+安慰代金券88元！</span>
-                    <span>3、中奖的商品预计4.20号发放。</span>
-                </div>
+                <div class="td2_name">{{good.name}}</div>
+                <div class="td2_cx">{{good.desc}}</div>
                 <div class="td2_info">
-                    <div class="mall_detail_1">
-                        <img src="http://cdn.yangkeduo.com/assets/img/td2_num_img-51155b64c3.png">
-                        <span>包邮</span>
-                    </div>
-                    <div class="mall_detail_2">
-                        <img src="http://cdn.yangkeduo.com/assets/img/td2_num_img-51155b64c3.png">
-                        <span>7天退换</span>
-                    </div>
-                    <div class="mall_detail_3">
-                        <img src="http://cdn.yangkeduo.com/assets/img/td2_num_img-51155b64c3.png">
-                        <span>正品保障</span>
+                    <div class="mall_detail_{{$index+1}}" ng-repeat="ens in good.ensures">
+                        <span class="ensure"></span><span>{{ens}}</span>
                     </div>
                     <div class="td2_num">支付开团并邀请<span id="tuan_more_need_number">9</span>人参团，人数不足自动退款</div>
                 </div>
@@ -91,10 +64,10 @@
         </a>
 
         <a id="tuan_more_btn" class="kt_item">
-            <div class="kt_price"><span id="tuan_more_price">¥&nbsp;58.00</span></div>
+            <div class="kt_price"><span id="tuan_more_price">{{good.sellPrice|currency:'￥'}}</span></div>
             <div class="kt_btn"><b id="tuan_more_number">加入购物车</b></div>
         </a>
     </div>
 </div>
 
-<div id="go_top_close" style="bottom: 166px; opacity: 1;"><span>关闭</span></div>
+<div id="go_top_close"><span>关闭</span></div>

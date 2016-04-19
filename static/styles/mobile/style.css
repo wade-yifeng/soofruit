@@ -2352,12 +2352,12 @@ body {
     height: 43px;
     position: fixed;
     right: 20px;
-    bottom: 110px;
+    bottom: 64px;
     padding: 7px 0 0 8px;
     z-index: 999;
     background: url(/assets/imgs/mobile/go_cart.png) no-repeat;
     background-size: contain;
-    opacity: 0;
+    opacity: 1;
     font-size: 25px;
     color: #666;
     -webkit-transition: bottom .8s ease, opacity .6s ease;
@@ -2393,8 +2393,15 @@ body {
 }
 
 #go_top_close {
+    bottom: 166px;
+    opacity: 1;
     background: url(/assets/imgs/mobile/buttons.png) -171px -103px no-repeat;
     background-size: 218px auto;
+}
+
+#go_top_goods {
+    bottom: 115px;
+    opacity: 1;
 }
 
 #go_home_goods {
@@ -2814,6 +2821,14 @@ body {
     height: 32px;
     width: 100%;
     background-color: #f5f5f5
+}
+
+.td2_info .ensure {
+    width: 20px;
+    height: 16px;
+    vertical-align: middle;
+    background: url(/assets/imgs/mobile/buttons.png) -108px -131px no-repeat;
+    background-size: 218px auto;
 }
 
 .td2_num {
@@ -7015,7 +7030,7 @@ a.fixopt_share {
 }
 
 .rank_g_btn:after, .rank_g_core:before, .tuan_g_btn:after, .tuan_g_img_round, .tuan_mark {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(/assets/imgs/mobile/icons_bg.png);
     background-repeat: no-repeat;
     background-size: 265px 126px
 }
@@ -7809,7 +7824,7 @@ a.fixopt_share {
     position: relative;
     display: inline-block;
     float: left;
-    width: 16%;
+    width: 19.8%;
     margin-left: 3%
 }
 
@@ -7833,7 +7848,7 @@ a.fixopt_share {
     position: relative;
     display: inline-block;
     float: left;
-    width: 22%;
+    width: 20%;
     margin-left: 3%
 }
 
@@ -7857,7 +7872,7 @@ a.fixopt_share {
     position: relative;
     display: inline-block;
     float: left;
-    width: 22%;
+    width: 20%;
     margin-left: 3%
 }
 
@@ -7881,7 +7896,7 @@ a.fixopt_share {
     position: relative;
     display: inline-block;
     float: left;
-    width: 22%;
+    width: 20%;
     margin-left: 3%
 }
 
@@ -7905,7 +7920,7 @@ a.fixopt_share {
     position: relative;
     display: inline-block;
     float: left;
-    width: 22%;
+    width: 20%;
     margin-left: 3%
 }
 
@@ -7918,30 +7933,6 @@ a.fixopt_share {
 }
 
 .mall_detail_5 span {
-    font-size: 12px;
-    color: #666;
-    display: inline-block;
-    text-align: center;
-    margin-top: 1px
-}
-
-.mall_detail_6 {
-    position: relative;
-    display: inline-block;
-    float: left;
-    width: 28%;
-    margin-left: 3%
-}
-
-.mall_detail_6 img {
-    vertical-align: center;
-    margin-right: 1%;
-    height: 15px;
-    width: 15px;
-    margin-top: 9px
-}
-
-.mall_detail_6 span {
     font-size: 12px;
     color: #666;
     display: inline-block;
@@ -14144,7 +14135,7 @@ input[type=text], textarea {
 }
 
 .my {
-    background: url("imgs/mobile/account_bg.jpg") no-repeat scroll top/100% auto transparent;
+    background: url(/assets/imgs/mobile/account_bg.jpg) no-repeat scroll top/100% auto transparent;
     height: 120px;
     position: relative;
     width: 100%;
@@ -14357,7 +14348,7 @@ input[type=text], textarea {
 }
 
 .nav_item_bd .nav_item_order_img {
-    background-image: url(imgs/mobile/icons.png);
+    background-image: url(/assets/imgs/mobile/icons.png);
     background-repeat: no-repeat;
     background-size: 133.33333px 133.33333px;
     content: "";
@@ -14431,7 +14422,7 @@ input[type=text], textarea {
 }
 
 .nav_list_img {
-    background-image: url(imgs/mobile/icons.png);
+    background-image: url(/assets/imgs/mobile/icons.png);
     background-repeat: no-repeat;
     background-size: 133.33333px 133.33333px;
     content: "";
@@ -14591,7 +14582,7 @@ input[type=text], textarea {
 .nav_download_image {
     left: 15px;
     top: 15px;
-    background-image: url(imgs/mobile/icons.png);
+    background-image: url(/assets/imgs/mobile/icons.png);
     background-size: 133.33333px 133.33333px;
     background-position: -100px 0
 }
@@ -14601,7 +14592,7 @@ input[type=text], textarea {
     margin-left: 5px;
     width: 20px;
     height: 20px;
-    background: url(imgs/mobile/icons.png) -130px 6px no-repeat;
+    background: url(/assets/imgs/mobile/icons.png) -130px 6px no-repeat;
     background-size: 150px 110px;
 }
 
@@ -15111,4 +15102,25 @@ input[type=text], textarea {
 .cart-footer .cart-checkbox-fake {
     top: -21px;
     left: 12px;
+}
+
+.tempWrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.tempWrap ul {
+    width: 1920px;
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+    transition-duration: 200ms;
+    transform: translate(-640px, 0px) translateZ(0px);
+}
+
+.tempWrap li {
+    display: table-cell;
+    vertical-align: top;
+    width: 640px;
 }

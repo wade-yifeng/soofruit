@@ -33,7 +33,7 @@ app.controller('Good', function ($scope, GoodSvc, DicSvc, Upload) {
                 storage: '阴凉',
                 originPrice: 99,
                 sellPrice: 58,
-                sales: 0,
+                sales: 100,
                 balance: 120
             };
         }

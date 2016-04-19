@@ -1,4 +1,4 @@
-<div class="container" ng-controller="Good">
+<div class="container" ng-controller="List">
     <div id="banner" style="height: 350px;">
         <div class="activity-banner" avalonctrl="banner" style="height: 350px;">
             <ul id="index-slider" style="position: relative; transition: none; width: 4480px; left: -1920px;">
@@ -51,52 +51,52 @@
         <div class="base-list-wrapper" avalonctrl="goods_list">
 
             <!--<div>-->
-                <!--<div class="tuan_g">-->
-                    <!--<div class="tuan_g_img">-->
-                        <!--<img src="http://omsproduction.b0.upaiyun.com/goods/4a607329a8af7b7faf658b88d2b7a1a0fcc117ba97.jpg!750">-->
-                        <!--<div class="tuan_g_img_text">-->
-                            <!--<div class="tuan_g_img_item">-->
-                                <!--<div class="tuan_g_img_round"></div>-->
-                                <!--<div class="tuan_img_text_border">-->
-                                    <!--<span>泰国进口榴莲</span>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="tuan_g_img_item">-->
-                                <!--<div class="tuan_g_img_round"></div>-->
-                                <!--<div class="tuan_img_text_border">-->
-                                    <!--<span>新鲜空运 质地饱满</span>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="tuan_g_img_item">-->
-                                <!--<div class="tuan_g_img_round"></div>-->
-                                <!--<div class="tuan_img_text_border">-->
-                                    <!--<span>活血散寒 健脾补气</span>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="tuan_g_info">-->
-                        <!--<p class="tuan_g_name">【限量250份】1元1个泰国进口榴莲（3-4斤）再慢就被别人抢完啦！【水果之王 肉质细腻 入口绵密】</p>-->
-                    <!--</div>-->
-                    <!--<div class="tuan_g_core">-->
-                        <!--<div class="tuan_g_core_img">-->
-                            <!--<img src="http://cdn.yangkeduo.com/assets/img/tuan_g_core-4935ae4c83.png">-->
-                        <!--</div>-->
-                        <!--<div class="tuan_g_price price-big" style="width: 200px;">-->
-                            <!--<span>10人团</span><b>￥1.00</b>-->
-                        <!--</div>-->
-                        <!--<div class="tuan_g_btn">查看详情</div>-->
-                    <!--</div>-->
-                    <!--<div class="like goods_list_like">-->
-                        <!--<img src="assets/imgs/mobile/unlike.png">-->
-                        <!--<div class="like_click_button"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="tuan_g">-->
+            <!--<div class="tuan_g_img">-->
+            <!--<img src="http://omsproduction.b0.upaiyun.com/goods/4a607329a8af7b7faf658b88d2b7a1a0fcc117ba97.jpg!750">-->
+            <!--<div class="tuan_g_img_text">-->
+            <!--<div class="tuan_g_img_item">-->
+            <!--<div class="tuan_g_img_round"></div>-->
+            <!--<div class="tuan_img_text_border">-->
+            <!--<span>泰国进口榴莲</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="tuan_g_img_item">-->
+            <!--<div class="tuan_g_img_round"></div>-->
+            <!--<div class="tuan_img_text_border">-->
+            <!--<span>新鲜空运 质地饱满</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="tuan_g_img_item">-->
+            <!--<div class="tuan_g_img_round"></div>-->
+            <!--<div class="tuan_img_text_border">-->
+            <!--<span>活血散寒 健脾补气</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="tuan_g_info">-->
+            <!--<p class="tuan_g_name">【限量250份】1元1个泰国进口榴莲（3-4斤）再慢就被别人抢完啦！【水果之王 肉质细腻 入口绵密】</p>-->
+            <!--</div>-->
+            <!--<div class="tuan_g_core">-->
+            <!--<div class="tuan_g_core_img">-->
+            <!--<img src="http://cdn.yangkeduo.com/assets/img/tuan_g_core-4935ae4c83.png">-->
+            <!--</div>-->
+            <!--<div class="tuan_g_price price-big" style="width: 200px;">-->
+            <!--<span>10人团</span><b>￥1.00</b>-->
+            <!--</div>-->
+            <!--<div class="tuan_g_btn">查看详情</div>-->
+            <!--</div>-->
+            <!--<div class="like goods_list_like">-->
+            <!--<img src="assets/imgs/mobile/unlike.png">-->
+            <!--<div class="like_click_button"></div>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
 
             <div ng-repeat="good in goods">
                 <div class="tuan_g">
-                    <div class="tuan_g_img">
+                    <div class="tuan_g_img" ui-sref="detail({goodID:'{{good._id}}'})">
                         <img src="assets/imgs/upload/{{good.pics[0]}}">
                         <div class="tuan_g_img_text">
                             <div class="tuan_g_img_item" ng-repeat="tag in good.tags">
@@ -117,7 +117,7 @@
                         <div class="tuan_g_price price-big" style="width: 200px;">
                             <span>活动价</span><b>{{good.sellPrice|currency:'￥'}}</b>
                         </div>
-                        <div class="tuan_g_btn">查看详情</div>
+                        <div class="tuan_g_btn" ui-sref="detail({goodID:'{{good._id}}'})">查看详情</div>
                     </div>
                     <div class="like goods_list_like">
                         <img src="assets/imgs/mobile/unlike.png">
