@@ -1,4 +1,5 @@
 var oauthApi = require('../wechat/api_oauth');
+var api = require('../wechat/api');
 var async = require('async');
 var logger = require('../lib/logger');
 var request = require('request');
@@ -17,14 +18,14 @@ module.exports.signin = function (req, res) {
                 logger.info("get auth openID");
                 oauthApi.getAccessToken(req.query.code, function (err, result) {
                     logger.info("get back openID", result);
-                    if(result.data === undefined || result.data.openid == undefined) {
+                    if(result.data === undefined || result.data.openid === undefined) {
                         callback(true);
                     }
                     callback(null, result.data.access_token, result.data.openid);
                 });
-            }, function(access_token, openID, callback){
+            }, function(openID, callback){
                 logger.info("get auth baseinfo");
-                oauthApi.getUser(openID, function(result){
+                api.getUser(openID, function(result){
                     logger.info("get back baseinfo", result);
                     callback(null, result);
                 });

@@ -21,37 +21,34 @@ var AccessToken = function (data) {
 
 // 判断是否过期，加入缓冲时间
 AccessToken.prototype.isValid = function () {
-    logger.info("现在的时间", new Date().getTime());
-    logger.info("很意外，为啥要检查token", this.data);
     // 过期时间，因网络延迟等，将实际过期时间提前10秒，以防止临界点
     return !!this.data.access_token && (new Date().getTime()) < (this.data.create_at + (this.data.expires_in  - 10) * 1000);
 };
 
 // 处理AccessToken的私有方法
 var processToken = function (that, callback) {
-  return function (err, data, res) {
-    if (err) {
-        return callback(err, data);
-    }
+    return function (err, data, res) {
+        if (err) {
+            return callback(err, data);
+        }
 
-    data.create_at = new Date().getTime();
-    // 存储token
-    that.saveToken(data.openid, data, function (err) {
-        callback(err, new AccessToken(data));
-    });
-  };
+        data.create_at = new Date().getTime();
+        // 存储token
+        that.saveToken(data.openid, data, function (err) {
+            callback(err, new AccessToken(data));
+        });
+    };
 };
 
-var OAuth = function (appID, appSecret) {
+var OAuth = function (appID, appSecret, getToken, saveToken) {
     this.appID = appID || config.WeChat.appID;
     this.appSecret = appSecret || config.WeChat.appSecret;
     this.store = {};
 
-    this.getToken = function(openid, callback) {
+    this.getToken = getToken || function(openid, callback) {
         callback(null, this.store[openid]);
     };
-
-    this.saveToken = function (openid, token, callback) {
+    this.saveToken = saveToken || function (openid, token, callback) {
         this.store[openid] = token;
         callback(null);
     };
@@ -131,15 +128,6 @@ OAuth.prototype.getAuthorizeURLForWebsite = function (redirect, state, scope) {
 /**
  * 根据授权获取到的code，换取access token和openid
  * 获取openid之后，可以调用`OAuth.API`来获取更多信息
- * {
- *  data: {
- *    "access_token": "ACCESS_TOKEN",
- *    "expires_in": 7200,
- *    "refresh_token": "REFRESH_TOKEN",
- *    "openid": "OPENID",
- *    "scope": "SCOPE"
- *  }
- * }
  * @param {String} code 授权获取到的code
  * @param {Function} callback 回调函数
  */
@@ -163,15 +151,6 @@ OAuth.prototype.getAccessToken = function (code, callback) {
 
 /**
  * 根据refresh token，刷新access token，调用getAccessToken后才有效
- * {
- *  data: {
- *    "access_token": "ACCESS_TOKEN",
- *    "expires_in": 7200,
- *    "refresh_token": "REFRESH_TOKEN",
- *    "openid": "OPENID",
- *    "scope": "SCOPE"
- *  }
- * }
  * @param {String} refreshToken refreshToken
  * @param {Function} callback 回调函数
  */
@@ -213,19 +192,6 @@ OAuth.prototype._getUser = function (options, accessToken, callback) {
 /**
  * 根据openid，获取用户信息。
  * 当access token无效时，自动通过refresh token获取新的access token。然后再获取用户信息
- * {
- *  "openid": "OPENID",
- *  "nickname": "NICKNAME",
- *  "sex": "1",
- *  "province": "PROVINCE"
- *  "city": "CITY",
- *  "country": "COUNTRY",
- *  "headimgurl": "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
- *  "privilege": [
- *    "PRIVILEGE1"
- *    "PRIVILEGE2"
- *  ]
- * }
  * @param {Object|String} options 传入openid或者参见Options
  * @param {Function} callback 回调函数
  */
@@ -285,19 +251,6 @@ OAuth.prototype._verifyToken  = function (openid, accessToken, callback) {
 
 /**
  * 根据code，获取用户信息。
- * {
- *  "openid": "OPENID",
- *  "nickname": "NICKNAME",
- *  "sex": "1",
- *  "province": "PROVINCE"
- *  "city": "CITY",
- *  "country": "COUNTRY",
- *  "headimgurl": "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
- *  "privilege": [
- *    "PRIVILEGE1"
- *    "PRIVILEGE2"
- *  ]
- * }
  * @param {String} code 授权获取到的code
  * @param {Function} callback 回调函数
  */
@@ -313,10 +266,3 @@ OAuth.prototype.getUserByCode = function (code, callback) {
 };
 
 module.exports = OAuth;
-
-/*
-// 微信API
-var api = new API(config.appID, config.appSecret, function(callback) {
-    
-})
-*/

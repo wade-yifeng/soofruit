@@ -1,29 +1,25 @@
-var wechat = require('wechat');
+/*!
+ * 主动调用微信API的基础类：
+ * 多进程间共享Redis数据，订阅AccessToken刷新事件
+ */
+
 var config = require('config');
+var API = require('./lib/active');
+// 用户信息
+API.mixin(require('./lib/active_user'));
+var fs = require('fs');
 
-module.exports.post = wechat(config.WeChat, function (req, res, next) {
-  // 微信输入信息都在req.weixin上
-  var message = req.weixin;
-  console.log(message);
-  if(message != undefined) {
-    console.log(message);
-    res.reply([
-        {
-            title: '快来试试登录功能吧',
-            description: '总算搞清楚公众号怎么玩了，大家庆祝下！',
-            picurl: 'http://imgsrc.baidu.com/forum/w%3D580/sign=3a975df0f2deb48ffb69a1d6c01e3aef/35d68f345982b2b717cffe5530adcbef77099b66.jpg',
-            url: 'baidu.com'
-        }
-    ]);
-  }
-});
-
-module.exports.get = function (req, res) {
-    console.log(req.query);
-    // 签名成功
-    if (wechat.checkSignature(req.query, config.WeChat.token)) {
-        res.status(200).send(req.query.echostr);
-    } else {
-        res.status(200).send('fail');
+module.exports = new API(config.WeChat.appID, config.WeChat.appSecret, 
+    function (openid, callback) {
+      // 获取对应的全局token
+        fs.readFile('access_token.txt', 'utf8', function (err, txt) {
+            if (err) {
+                return callback(err);
+            }
+            callback(null, JSON.parse(txt));
+        });
+    }, function (openid, token, callback) {
+        // 使用redis的发布订阅模式存储token，需要在cluster模式及多机情况下使用
+        fs.writeFile('access_token.txt', JSON.stringify(token), callback);
     }
-};
+);

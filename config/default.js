@@ -41,7 +41,13 @@ var config = {
         oauth2URL: "https://api.weixin.qq.com/sns/oauth2/access_token",
         oauth2RefreshURL: "https://api.weixin.qq.com/sns/oauth2/refresh_token",
         verifyTokenURL: "https://api.weixin.qq.com/sns/auth",
-        getUserURL: "https://api.weixin.qq.com/sns/userinfo"
+        getUserURL: "https://api.weixin.qq.com/sns/userinfo",
+        apiURL: 'https://api.weixin.qq.com/cgi-bin/',
+        mpURL: 'https://mp.weixin.qq.com/cgi-bin/',
+        fileServerURL: 'http://file.api.weixin.qq.com/cgi-bin/',
+        payURL: 'https://api.weixin.qq.com/pay/',
+        merchantURL: 'https://api.weixin.qq.com/merchant/',
+        customserviceURL: 'https://api.weixin.qq.com/customservice/'
     }
 };
 

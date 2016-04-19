@@ -1,8 +1,8 @@
 var router = require('express').Router();
-var api = require('./api');
+var reply = require('./reply');
 
-// wechat service
-router.get('/wechat', api.get)
-    .post('/wechat', api.post);
+// wechat reply and sign service
+router.get('/wechat', reply.get)
+    .post('/wechat', reply.post);
 
 module.exports = router;
