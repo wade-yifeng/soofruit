@@ -1,9 +1,13 @@
 var app = angular.module('mobile');
 
-app.controller('Detail', function ($scope, GoodSvc, $stateParams) {
+app.controller('Detail', function ($scope, $stateParams, GoodSvc, CartSvc) {
     document.title = '欢迎来到北海之南大果园';
 
     GoodSvc.get($stateParams.goodID).then(function (result) {
         $scope.good = result;
     });
+
+    $scope.addToCart = function (good) {
+        CartSvc.addToCart(good);
+    };
 });

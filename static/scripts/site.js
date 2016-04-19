@@ -22,3 +22,7 @@ var alignMsgs = function (msgs) {
         return item.msg;
     }).join('<br/>');
 };
+
+var delay = function (func) {
+    setTimeout(func, 100);
+};

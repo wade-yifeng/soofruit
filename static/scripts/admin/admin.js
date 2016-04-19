@@ -22,10 +22,6 @@ var editFormFlyIn = function () {
     });
 };
 
-var delay = function (func) {
-    setTimeout(func, 100);
-};
-
 var getPageArray = function (current, total) {
     var start = current > 5 ? current - 4 : 1;
     var end = total - current > 3 ? current + 4 : total;

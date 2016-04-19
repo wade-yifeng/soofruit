@@ -13,7 +13,7 @@ var CartSchema = new mongoose.Schema({
     goods: [{
         goodID: ObjectId,
         name: String,
-        price: Number,
+        sellPrice: Number,
         pic: String,
         quantity: Number
     }],

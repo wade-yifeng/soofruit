@@ -1,17 +1,7 @@
-<div class="container " style="min-height: 361px;">
+<div class="container" style="min-height: 361px;" ng-controller="Cart">
     <div class="content clearfix js-page-content">
 
-        <div class="nav-fixed">
-            <a class="fixed-nav-item-orders">
-                <span class="nav-cur">购物车</span>
-            </a>
-            <a class="fixed-nav-item-orders">
-                <span>未完成订单</span>
-            </a>
-            <a class="fixed-nav-item-orders">
-                <span>已完成订单</span>
-            </a>
-        </div>
+        <div ng-include="'/views/cart_orders_nav.html'"></div>
 
         <div id="cart-container">
             <div class="deal-list-status">
