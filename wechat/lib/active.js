@@ -4,8 +4,9 @@
  * 2. 提供微信AccessToken的发布(定期刷新)和订阅
  */
 var urllib = require('urllib');
-var util = require('./lib/util');
+var util = require('./util');
 var wrapper = util.wrapper;
+var config = require('config');
 
 var AccessToken = function (accessToken, expireTime) {
     if (!(this instanceof AccessToken)) {
@@ -43,7 +44,7 @@ API.prototype.setOpts = function (opts) {
 // 处理微信请求公共类
 API.prototype.request = function (url, opts, callback) {
     var options = {};
-    extend(options, this.defaults);
+    _.extend(options, this.defaults);
     if (typeof opts === 'function') {
         callback = opts;
         opts = {};
@@ -53,7 +54,7 @@ API.prototype.request = function (url, opts, callback) {
             options[key] = opts[key];
         } else if (opts.headers) {
             options.headers = options.headers || {};
-            extend(options.headers, opts.headers);
+            _.extend(options.headers, opts.headers);
         }
     }
     urllib.request(url, options, callback);
@@ -65,7 +66,8 @@ API.prototype.request = function (url, opts, callback) {
  * @param {Function} callback 回调函数
  */
 API.prototype.getAccessToken = function (callback) {
-    var url = this.prefix + 'token?grant_type=client_credential&appid=' + this.appid + '&secret=' + this.appsecret;
+    var that = this;
+    var url = config.OpenAPI.apiURL + 'token?grant_type=client_credential&appid=' + this.appid + '&secret=' + this.appsecret;
     this.request(url, {dataType: 'json'}, wrapper(function (err, data) {
         if (err) {
             return callback(err);
@@ -73,7 +75,7 @@ API.prototype.getAccessToken = function (callback) {
         // 过期时间，因网络延迟等，将实际过期时间提前10秒，以防止临界点
         var expireTime = (new Date().getTime()) + (data.expires_in - 10) * 1000;
         var token = AccessToken(data.access_token, expireTime);
-        this.saveToken(token, function (err) {
+        that.saveToken(token, function (err) {
             if (err) {
                 return callback(err);
             }
@@ -90,9 +92,10 @@ API.prototype.getAccessToken = function (callback) {
  * @param {Array} args 方法需要的参数
  */
 API.prototype.preRequest = function (method, args, retryed) {
+    var that = this;
     var callback = args[args.length - 1];
     // 调用用户传入的获取token的异步方法，获得token之后使用（并缓存它）。
-    this.getToken(function (err, token) {
+    that.getToken(function (err, token) {
         if (err) {
             return callback(err);
         }
@@ -100,32 +103,32 @@ API.prototype.preRequest = function (method, args, retryed) {
         // 有token并且token有效直接调用
         if (token && (accessToken = AccessToken(token.accessToken, token.expireTime)).isValid()) {
             // 暂时保存token
-            this.token = accessToken;
+            that.token = accessToken;
             if (!retryed) {
                 var retryHandle = function (err, data, res) {
                     // 40001 重试
                     if (data && data.errcode && data.errcode === 40001) {
-                        return this.preRequest(method, args, true);
+                        return that.preRequest(method, args, true);
                     }
                     callback(err, data, res);
                 };
                 // 替换callback
                 var newargs = Array.prototype.slice.call(args, 0, -1);
                 newargs.push(retryHandle);
-                method.apply(this, newargs);
+                method.apply(that, newargs);
             } else {
-                method.apply(this, args);
+                method.apply(that, args);
             }
         } else {
             // 使用appid/appsecret获取token
-            this.getAccessToken(function (err, token) {
+            that.getAccessToken(function (err, token) {
                 // 如遇错误，通过回调函数传出
                 if (err) {
                     return callback(err);
                 }
                 // 暂时保存token
-                this.token = token;
-                method.apply(this, args);
+                that.token = token;
+                method.apply(that, args);
             });
         }
     });
@@ -137,8 +140,9 @@ API.prototype.preRequest = function (method, args, retryed) {
  * @param {Array} args 方法需要的参数
  */
 API.prototype.getLatestToken = function (callback) {
+    var that = this;
     // 调用用户传入的获取token的异步方法，获得token之后使用（并缓存它）。
-    this.getToken(function (err, token) {
+    that.getToken(function (err, token) {
         if (err) {
             return callback(err);
         }
@@ -148,7 +152,7 @@ API.prototype.getLatestToken = function (callback) {
             callback(null, accessToken);
         } else {
             // 使用appid/appsecret获取token
-            this.getAccessToken(callback);
+            that.getAccessToken(callback);
         }
     });
 };

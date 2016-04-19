@@ -11,7 +11,7 @@ module.exports = new OAuth(config.WeChat.appID, config.WeChat.appSecret,
     function (openid, callback) {
         // 根据openid获取对应的全局token
         fs.readFile(openid +':access_token.txt', 'utf8', function (err, txt) {
-            if (err) {
+            if (err || !txt) {
                 return callback(err);
             }
             callback(null, JSON.parse(txt));

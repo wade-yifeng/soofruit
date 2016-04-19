@@ -23,11 +23,10 @@ exports.getUser = function (options, callback) {
 exports._getUser = function (options, callback) {
     if (typeof options !== 'object') {
         options = {
-            openid: options,
-            lang: 'en'
+            openid: options
         };
     }
-    var url = config.OpenAPI.apiURL + 'user/info?openid=' + options.openid + '&lang=' + options.lang + '&access_token=' + this.token.accessToken;
+    var url = config.OpenAPI.apiURL + 'user/info?openid=' + options.openid + '&access_token=' + this.token.accessToken;
     this.request(url, {dataType: 'json'}, wrapper(callback));
 };
 
@@ -47,7 +46,7 @@ exports._batchGetUsers = function (openids, callback) {
     var url = config.OpenAPI.apiURL + 'user/info/batchget?access_token=' + this.token.accessToken;
     var data = {};
     data.user_list = openids.map(function (openid) {
-        return {openid: openid, language: "zh-CN"};
+        return {openid: openid};
     });
     this.request(url, postJSON(data), wrapper(callback));
 };

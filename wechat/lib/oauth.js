@@ -9,7 +9,6 @@ var urllib = require('urllib');
 var config = require('config');
 var wrapper = require('./util').wrapper;
 var querystring = require('querystring');
-var logger = require('../../lib/logger');
 
 // 以data保存当前AccessToken
 var AccessToken = function (data) {
@@ -177,8 +176,7 @@ OAuth.prototype._getUser = function (options, accessToken, callback) {
 
     var info = {
         access_token: accessToken,
-        openid: options.openid,
-        lang: options.lang || 'en'
+        openid: options.openid
     };
 
     var args = {
@@ -219,7 +217,6 @@ OAuth.prototype.getUser = function (options, callback) {
         var token = new AccessToken(data);
         
         if (token.isValid()) {
-            logger.info("这Token到底啥情况", token);
             that._getUser(options, token.data.access_token, callback);
         } else {
             that.refreshAccessToken(token.data.refresh_token, function (err, token) {

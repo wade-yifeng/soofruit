@@ -25,19 +25,25 @@ exports.wrapper = function (callback) {
  * 对提交参数一层封装，当POST JSON，并且结果也为JSON时使用
  */
 exports.postJSON = function (data) {
-  return {
-    dataType: 'json',
-    type: 'POST',
-    data: data,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
+    return {
+        dataType: 'json',
+        type: 'POST',
+        data: data,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
 };
 
 exports.make = function (host, name, fn) {
-  host[name] = function () {
-    this.preRequest(this['_' + name], arguments);
-  };
-  host['_' + name] = fn;
+    host[name] = function () {
+        this.preRequest(this['_' + name], arguments);
+    };
+    host['_' + name] = fn;
+};
+
+exports.isNullOrWhitespace = function(input) {
+    if (typeof input === 'undefined' || input === null) return true;
+
+    return input.replace(/\s/g, '').length < 1;
 };

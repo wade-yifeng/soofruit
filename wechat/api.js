@@ -4,21 +4,22 @@
  */
 
 var config = require('config');
+var util = require('./lib/util');
 var API = require('./lib/active');
 // 用户信息
 API.mixin(require('./lib/active_user'));
 var fs = require('fs');
 
 module.exports = new API(config.WeChat.appID, config.WeChat.appSecret, 
-    function (openid, callback) {
+    function (callback) {
       // 获取对应的全局token
         fs.readFile('access_token.txt', 'utf8', function (err, txt) {
-            if (err) {
+            if (err || util.isNullOrWhitespace(txt)) {
                 return callback(err);
             }
             callback(null, JSON.parse(txt));
         });
-    }, function (openid, token, callback) {
+    }, function (token, callback) {
         // 使用redis的发布订阅模式存储token，需要在cluster模式及多机情况下使用
         fs.writeFile('access_token.txt', JSON.stringify(token), callback);
     }
