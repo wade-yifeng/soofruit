@@ -1,6 +1,6 @@
 var app = angular.module('mobile');
 
-app.controller('Cart', function ($scope, CartSvc) {
+app.controller('Cart', function ($scope, CartSvc, $state) {
     document.title = '我的购物车';
     activateNav(0);
     $scope.checkedAll = false;
@@ -58,6 +58,16 @@ app.controller('Cart', function ($scope, CartSvc) {
             });
     };
 
+    $scope.checkout = function () {
+        if ($scope.totalAmount == 0) {
+            showInfo('请至少选中一件商品');
+        } else {
+            CartSvc.setCartSession($scope.cart).then(function () {
+                $state.go('checkout');
+            });
+        }
+    };
+
     var setAllChecked = function (checked) {
         $scope.cart.goods.forEach(function (good) {
             good.checked = checked;
@@ -65,11 +75,6 @@ app.controller('Cart', function ($scope, CartSvc) {
     };
 
     var setTotalAmount = function () {
-        $scope.totalAmount = 0;
-        $scope.cart.goods.forEach(function (good) {
-            if (good.checked) {
-                $scope.totalAmount += good.sellPrice * good.quantity;
-            }
-        });
+        $scope.totalAmount = getTotalAmount($scope.cart.goods);
     };
 });

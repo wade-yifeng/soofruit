@@ -6,12 +6,13 @@ var httpSuccess = function (result, defer, withData) {
             defer.resolve();
     }
     else {
-        if (result.code < 100)      //自定义错误,直接显示
+        if (result.code == 100)      //自定义错误,直接显示
             showInfo(result.msg);
         else if (result.code == 400)//多条错误,多行显示
             showInfo(alignMsgs(result.msg));
         else if (result.code == 500)//其它
             showInfo("服务器异常,请稍候重试");
+            //showInfo(result.msg);
 
         defer.reject();
     }

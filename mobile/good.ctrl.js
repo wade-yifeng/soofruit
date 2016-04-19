@@ -6,11 +6,14 @@ app.controller('Detail', function ($scope, $stateParams, GoodSvc, CartSvc) {
         document.title = result.name;
     });
 
-    CartSvc.getCartSession().then(function (cart) {
-        initCartIcon(cart);
-    });
+    CartSvc.getCartSession().then(function () {
+            initCartIcon(true);
+        },
+        initCartIcon);
 
     $scope.addToCart = function (good) {
-        CartSvc.addToCart(good);
+        CartSvc.addToCart(good).then(function () {
+            initCartIcon(true);
+        });
     };
 });

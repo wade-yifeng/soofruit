@@ -7,7 +7,8 @@ app.controller('List', function ($scope, GoodSvc, CartSvc) {
         $scope.goods = result.data;
     });
 
-    CartSvc.getCartSession().then(function (cart) {
-        initCartIcon(cart);
-    });
+    CartSvc.getCartSession().then(function () {
+            initCartIcon(true);
+        },
+        initCartIcon);
 });

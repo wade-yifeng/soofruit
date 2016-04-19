@@ -10,7 +10,7 @@ var config = {
     debug: false,
 
     // 站点端口
-    port: 80,
+    port: 3000,
 
     // 数据库连接字符串
     db: "mongodb://localhost/test",
