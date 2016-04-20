@@ -11,8 +11,8 @@ var httpSuccess = function (result, defer, withData) {
         else if (result.code == 400)//多条错误,多行显示
             showInfo(alignMsgs(result.msg));
         else if (result.code == 500)//其它
-            showInfo("服务器异常,请稍候重试");
-            //showInfo(result.msg);
+            //showInfo("服务器异常,请稍候重试");
+            showInfo(JSON.stringify(result.msg));
 
         defer.reject();
     }

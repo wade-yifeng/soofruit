@@ -9,6 +9,12 @@ var AddressSchema = new mongoose.Schema({
     //用户ID
     userID: ObjectId,
 
+    //收货人
+    receiver: String,
+
+    //电话
+    phone: String,
+
     //省
     province: String,
 

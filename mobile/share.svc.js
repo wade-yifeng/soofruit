@@ -1,11 +1,16 @@
 var app = angular.module('mobile');
 
 app.factory('ShareSvc', function () {
-    var getCurrentUser = function () {
-        return "test";
+    var getUserID = function () {
+        return "5717992a2bfc5eac119ecec3";
+    };
+
+    var getUserName = function () {
+        return "习近平";
     };
 
     return {
-        UserID: getCurrentUser()
+        UserID: getUserID(),
+        UserName: getUserName()
     }
 });
