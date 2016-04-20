@@ -2,7 +2,6 @@ var oauthApi = require('../wechat/api_oauth');
 var api = require('../wechat/api');
 var async = require('async');
 var logger = require('../lib/logger');
-var request = require('request');
 
 module.exports.signin = function (req, res) {
     if(req.query.code === undefined) {

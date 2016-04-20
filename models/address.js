@@ -16,7 +16,7 @@ var AddressSchema = new mongoose.Schema({
     city: String,
 
     //区
-    region: String,
+    district: String,
 
     //详细地址
     detail: String,

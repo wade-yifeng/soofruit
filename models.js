@@ -10,6 +10,7 @@ mongoose.connect(config.db, {
 });
 
 require('./models/address');
+require('./models/address_origin');
 require('./models/cart');
 require('./models/coupon');
 require('./models/dic');
@@ -21,6 +22,9 @@ require('./models/user_coupon');
 require('./models/user_permission');
 
 module.exports.Address = mongoose.model('Address');
+module.exports.Province = mongoose.model('Province');
+module.exports.City = mongoose.model('City');
+module.exports.District = mongoose.model('District');
 module.exports.Cart = mongoose.model('Cart');
 module.exports.Coupon = mongoose.model('Coupon');
 module.exports.Dic = mongoose.model('Dic');

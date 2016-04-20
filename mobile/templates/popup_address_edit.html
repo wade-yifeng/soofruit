@@ -1,4 +1,4 @@
-<div class="mod_container" style="visibility: visible;">
+<div class="mod_container" style="display:block;" ng-controller="AddressEdit">
     <div class="wx_bar">
         <div class="wx_bar_tit">收货地址</div>
         <div class="wx_bar_back pull-right"></div>
@@ -15,44 +15,24 @@
         </p>
         <p>
             <span class="tit">省份</span>
-            <select data-duplex-changed="onProvinceEdited">
-                <option value="0">- 选择省 -</option>
-                <option value="2">北京</option><!--repeat259888797846-->
-                <option value="3">安徽</option><!--repeat259888797846-->
-                <option value="4">福建</option><!--repeat259888797846-->
-                <option value="6">广东</option><!--repeat259888797846-->
-                <option value="7">广西</option><!--repeat259888797846-->
-                <option value="8">贵州</option><!--repeat259888797846-->
-                <option value="10">河北</option><!--repeat259888797846-->
-                <option value="11">河南</option><!--repeat259888797846-->
-                <option value="12">黑龙江</option><!--repeat259888797846-->
-                <option value="13">湖北</option><!--repeat259888797846-->
-                <option value="14">湖南</option><!--repeat259888797846-->
-                <option value="15">吉林</option><!--repeat259888797846-->
-                <option value="16">江苏</option><!--repeat259888797846-->
-                <option value="17">江西</option><!--repeat259888797846-->
-                <option value="18">辽宁</option><!--repeat259888797846-->
-                <option value="22">山东</option><!--repeat259888797846-->
-                <option value="23">山西</option><!--repeat259888797846-->
-                <option value="24">陕西</option><!--repeat259888797846-->
-                <option value="25">上海</option><!--repeat259888797846-->
-                <option value="26">四川</option><!--repeat259888797846-->
-                <option value="27">天津</option><!--repeat259888797846-->
-                <option value="30">云南</option><!--repeat259888797846-->
-                <option value="31">浙江</option><!--repeat259888797846-->
-                <option value="32">重庆</option><!--repeat259888797846-->
+            <select ng-model="PID" ng-change="fillCities(PID, true)">
+                <option value="0" selected>- 选择省 -</option>
+                <option ng-value="province.PID" ng-repeat="province in provinces|orderBy:'Seq'">{{province.Val}}
+                </option>
             </select>
         </p>
         <p>
             <span class="tit">市</span>
-            <select data-duplex-changed="onCityEdited">
+            <select ng-model="CID" ng-change="fillCities(CID)">
                 <option value="0">- 选择市 -</option>
+                <option ng-value="city.CID" ng-repeat="city in cities|orderBy:'Seq'">{{city.Val}}</option>
             </select>
         </p>
         <p>
             <span class="tit">区/县</span>
-            <select data-duplex-changed="onDistrictEdited">
+            <select>
                 <option value="0">- 选择区/县 -</option>
+                <option ng-repeat="district in districts">{{district.Val}}</option>
             </select>
         </p>
         <p>

@@ -30,3 +30,15 @@ module.exports.RoleCategory = {
 
     User: 'Common User'
 };
+
+/**
+ * 地址级别
+ */
+module.exports.AddressLevel = {
+
+    Province: 'Province',
+
+    City: 'City',
+
+    District: 'District'
+};
