@@ -2,6 +2,26 @@ var app = angular.module('mobile', ['ui.router']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
+    var addressSelect = {
+        views: {
+            'popup': {
+                url: "/addressSelect",
+                controller: 'AddressSelect',
+                templateUrl: '/views/popup_address_select.html'
+            }
+        }
+    };
+
+    var addressEdit = {
+        views: {
+            'popup': {
+                url: "/addressEdit:addressID",
+                controller: 'AddressEdit',
+                templateUrl: '/views/popup_address_edit.html'
+            }
+        }
+    };
+
     $urlRouterProvider.otherwise("/list");
 
     $stateProvider
@@ -35,19 +55,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'OrdersDone',
             templateUrl: '/views/orders_done.html'
         })
-        .state('account', {
-            url: "/account",
-            controller: 'Account',
-            templateUrl: '/views/account.html'
+        .state('my', {
+            url: "/my",
+            controller: 'My',
+            templateUrl: '/views/my.html'
         })
-        .state('addressSelect', {
-            url: "/addressSelect",
-            controller: 'AddressSelect',
-            templateUrl: '/views/popup_address_select.html'
-        })
-        .state('addressEdit', {
-            url: "/addressEdit:addressID",
-            controller: 'AddressEdit',
-            templateUrl: '/views/popup_address_edit.html'
-        });
+        .state('checkout.addressSelect', addressSelect)
+        .state('checkout.addressEdit', addressEdit)
+        .state('account.addressSelect', addressSelect)
+        .state('account.addressEdit', addressEdit);
 });
