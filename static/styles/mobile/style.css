@@ -2364,7 +2364,7 @@ body {
     webkit-transition: bottom .8s ease, opacity .6s ease
 }
 
-#go_top_close, #go_top_goods {
+#go_top_close, #go_to_top {
     display: block;
     width: 43px;
     height: 43px;
@@ -2379,7 +2379,7 @@ body {
     webkit-transition: bottom .8s ease, opacity .6s ease
 }
 
-#go_top_close span, #go_top_goods span {
+#go_top_close span, #go_to_top span {
     position: absolute;
     left: -1px;
     bottom: 7px;
@@ -2399,8 +2399,8 @@ body {
     background-size: 218px auto;
 }
 
-#go_top_goods {
-    bottom: 115px;
+#go_to_top {
+    bottom: -100px; /*115px*/
     opacity: 1;
 }
 

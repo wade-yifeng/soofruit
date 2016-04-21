@@ -6,7 +6,7 @@ var httpSuccess = function (result, defer, withData) {
             defer.resolve();
     }
     else {
-        if (result.code == 100)      //自定义错误,直接显示
+        if (result.code == 100)     //自定义错误,直接显示
             showInfo(result.msg);
         else if (result.code == 400)//多条错误,多行显示
             showInfo(alignMsgs(result.msg));
@@ -25,10 +25,10 @@ var alignMsgs = function (msgs) {
 };
 
 var delay = function (func) {
-    setTimeout(func, 100);
+    setTimeout(func, 50);
 };
 
 var showConfirm = function (info) {
-    $('#dialogConfirm .modal-body p').text(info);
+    $('#dialogConfirm p').text(info);
     $('#dialogConfirm').modal('show');
 };

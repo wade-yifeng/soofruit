@@ -1,12 +1,39 @@
+$(document).ready(function () {
+    //初始化边缘按钮
+    var btn = $('#go_to_top');
+    var page = $(this);
+    var shown = false;
+    var hidden = false;
+
+    if (page.scrollTop() <= 200)
+        btn.css({bottom: '-100px'});
+
+    page.scroll(function () {
+        if (!shown && page.scrollTop() > 200) {
+            btn.animate({bottom: '115px'}, 1000);
+            shown = true;
+            hidden = false;
+        } else if (!hidden && page.scrollTop() <= 200) {
+            btn.animate({bottom: '-100px'}, 1000);
+            shown = false;
+            hidden = true;
+        }
+    });
+
+    btn.click(function () {
+        $('body').animate({scrollTop: 0}, 300);
+    });
+});
+
 var activateSlider = function () {
-    delay(function () {
-        $('.flexslider').flexslider({
-            animation: 'slide',
-            directionNav: false,
-            animationLoop: true,
-            slideshowSpeed: 3000,
-            touch: true
-        })
+    $('.flexslider').flexslider({
+        animation: 'slide',
+        directionNav: false,
+        animationLoop: true,
+        slideshowSpeed: 3000,
+        pauseOnAction: true,
+        pauseOnHover: true,
+        touch: true
     });
 };
 
