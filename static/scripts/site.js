@@ -27,3 +27,8 @@ var alignMsgs = function (msgs) {
 var delay = function (func) {
     setTimeout(func, 100);
 };
+
+var showConfirm = function (info) {
+    $('#dialogConfirm .modal-body p').text(info);
+    $('#dialogConfirm').modal('show');
+};

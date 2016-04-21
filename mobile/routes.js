@@ -46,7 +46,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: '/views/popup_address_select.html'
         })
         .state('addressEdit', {
-            url: "/addressEdit",
+            url: "/addressEdit:addressID",
             controller: 'AddressEdit',
             templateUrl: '/views/popup_address_edit.html'
         });

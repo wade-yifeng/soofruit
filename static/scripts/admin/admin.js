@@ -7,11 +7,6 @@ var showInfo = function (info) {
     $('#dialogInfo').modal('show');
 };
 
-var showConfirm = function (info) {
-    $('#dialogConfirm .modal-body p').text(info);
-    $('#dialogConfirm').modal('show');
-};
-
 var showValidationResult = function (msgs) {
     $('div.alert').html(alignMsgs(msgs)).show();
 };

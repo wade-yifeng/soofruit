@@ -35,9 +35,12 @@
 
         <p class="action">
             <button id="confirm_address" class="submit" ng-click="save()">确认</button>
-            <button id="delete_address" class="submit" style="display: none; background-color: red;"
-                    ng-click="delete()">删除
+            <button id="delete_address" class="submit" style="background-color: red;"
+                    ng-show="displayDelete()" ng-click="delete()">删除
             </button>
         </p>
     </div>
+
+    <div ng-include="'/views/admin_popup_confirm.html'"></div>
+
 </div>
