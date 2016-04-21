@@ -1,4 +1,4 @@
-<div class="mod_container" style="display:block;" ng-controller="AddressEdit">
+<div class="mod_container" ng-controller="AddressEdit">
     <div class="wx_bar">
         <div class="wx_bar_tit">收货地址</div>
         <div class="wx_bar_back pull-right"></div>
@@ -16,17 +16,17 @@
         <p>
             <span class="tit">省份</span>
             <select ng-model="province" ng-options="p as p.Val for p in provinces|orderBy:'Seq'"
-                    ng-change="fillChild(province)"></select>
+                    ng-change="fillChildList(province)"></select>
         </p>
         <p>
             <span class="tit">市</span>
             <select ng-model="city" ng-options="c as c.Val for c in cities|orderBy:'Seq'"
-                    ng-change="fillChild(city)"></select>
+                    ng-change="fillChildList(city)"></select>
         </p>
         <p>
             <span class="tit">区/县</span>
             <select ng-model="district" ng-options="d as d.Val for d in districts"
-                    ng-change="fillChild(district)"></select>
+                    ng-change="fillChildList(district)"></select>
         </p>
         <p>
             <span class="tit">详细地址</span>

@@ -1,6 +1,6 @@
 var app = angular.module('mobile');
 
-app.factory('ShareSvc', function () {
+app.factory('ShareSvc', function ($q) {
     var getUserID = function () {
         return "5717992a2bfc5eac119ecec3";
     };
@@ -11,6 +11,11 @@ app.factory('ShareSvc', function () {
 
     return {
         UserID: getUserID(),
-        UserName: getUserName()
+        UserName: getUserName(),
+        promise: function (logic) {
+            var defer = $q.defer();
+            logic(defer);
+            return defer.promise;
+        }
     }
 });

@@ -3,7 +3,7 @@ var httpSuccess = function (result, defer, withData) {
         if (withData)
             defer.resolve(result.data);
         else
-            defer.resolve();
+            defer.resolve(result.msg);
     }
     else {
         if (result.code == 100)     //自定义错误,直接显示

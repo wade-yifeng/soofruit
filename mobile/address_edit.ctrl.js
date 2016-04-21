@@ -1,26 +1,65 @@
 var app = angular.module('mobile');
 
-app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $stateParams) {
+app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $q, $state, $stateParams) {
     document.title = '我的收货地址';
     var emptyCities = [{Val: '- 选择市 -'}];
     var emptyDistricts = [{Val: '- 选择区/县 -'}];
 
     if ($stateParams.addressID) {
+        //获取地址
         AddressSvc.get($stateParams.addressID).then(function (result) {
-            $scope.address = result;
-        });
+                $scope.address = result;
+            })
+            //获取列表并选中省
+            .then(function () {
+                return ShareSvc.promise(function (defer) {
+                    AddressSvc.originList(AddressLevel.Province, 0).then(function (list) {
+                        list.forEach(function (pro, index) {
+                            if (pro.Val == $scope.address.province) {
+                                defer.resolve(pro.PID);
+                                initProvinces(list, index);
+                                return;
+                            }
+                        });
+                    });
+                });
+            })
+            //获取列表并选中市
+            .then(function (PID) {
+                return ShareSvc.promise(function (defer) {
+                    AddressSvc.originList(AddressLevel.City, PID).then(function (list) {
+                        list.forEach(function (city, index) {
+                            if (city.Val == $scope.address.city) {
+                                defer.resolve(city.CID);
+                                initCities(list, index);
+                                return;
+                            }
+                        });
+                    });
+                });
+            })
+            //获取列表并选中区
+            .then(function (CID) {
+                AddressSvc.originList(AddressLevel.District, CID).then(function (list) {
+                    list.forEach(function (dis, index) {
+                        if (dis.Val == $scope.address.district) {
+                            initDistricts(list, index);
+                            return;
+                        }
+                    });
+                });
+            });
     } else {
         $scope.address = {userID: ShareSvc.UserID};
+
+        AddressSvc.originList(AddressLevel.Province, 0).then(function (list) {
+            initProvinces(list);
+            initCities(emptyCities);
+            initDistricts(emptyDistricts);
+        });
     }
 
-    AddressSvc.originList(AddressLevel.Province, 0).then(function (list) {
-        $scope.provinces = list;
-        $scope.province = $scope.provinces[0];
-        initCities(emptyCities);
-        initDistricts(emptyDistricts);
-    });
-
-    $scope.fillChild = function (entity) {
+    $scope.fillChildList = function (entity) {
         if (entity.PID != undefined || entity.CID != undefined) {
             var addrLv = entity.PID != undefined ? AddressLevel.City : AddressLevel.District;
             var id = entity.PID != undefined ? entity.PID : entity.CID;
@@ -63,17 +102,23 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
         return $stateParams.addressID;
     };
 
-    var initCities = function (list) {
+    var initProvinces = function (list, index) {
+        $scope.provinces = list;
+        $scope.province = $scope.provinces[index || 0];
+    };
+
+    var initCities = function (list, index) {
         $scope.cities = list;
-        $scope.city = $scope.cities[0];
+        $scope.city = $scope.cities[index || 0];
     };
 
-    var initDistricts = function (list) {
+    var initDistricts = function (list, index) {
         $scope.districts = list;
-        $scope.district = $scope.districts[0];
+        $scope.district = $scope.districts[index || 0];
     };
 
-    var redirect = function () {
-        $state.go('addressSelect');
+    var redirect = function (info) {
+        showInfo(info);
+        $state.go('checkout.addressSelect');
     }
 });

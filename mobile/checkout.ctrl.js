@@ -2,6 +2,7 @@ var app = angular.module('mobile');
 
 app.controller('Checkout', function ($scope, CheckoutSvc, CartSvc) {
     document.title = '北海之南大果园 - 购物结算';
+    $scope.state = 'checkout';
 
     CartSvc.getCartSession().then(function (cart) {
         $scope.cart = $.extend(true, {}, cart);

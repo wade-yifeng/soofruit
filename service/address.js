@@ -28,10 +28,10 @@ module.exports.create = function (req, res) {
                 res.json({code: 500, msg: err});
             }
             else if (!address) {
-                res.json({code: 100, msg: '地址创建失败'});
+                res.json({code: 100, msg: '收货地址创建失败'});
             }
             else {
-                res.json({code: 0, data: address._id.toString()});
+                res.json({code: 0, msg: '收货地址创建成功'});
             }
         });
     //}
@@ -65,7 +65,7 @@ module.exports.update = function (req, res) {
                         res.json({code: 500, msg: err});
                     }
                     else {
-                        res.json({code: 0});
+                        res.json({code: 0, msg: '收货地址更新成功'});
                     }
                 });
             //}
@@ -80,7 +80,7 @@ module.exports.delete = function (req, res) {
             res.json({code: 500, msg: err});
         }
         else {
-            res.json({code: 0});
+            res.json({code: 0, msg: '收货地址删除成功'});
         }
     });
 };
