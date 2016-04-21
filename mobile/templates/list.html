@@ -1,98 +1,21 @@
 <div class="container" ng-controller="List">
-    <div id="banner" style="height: 350px;">
-        <div class="activity-banner" style="height: 350px;">
-            <ul id="index-slider" style="position: relative; transition: none; width: 4480px; left: -1920px;">
-                <!--repeat1729790719843-->
-                <li data-repeat-rendered="bannerRendered" style="float: left; display: inline;">
-                    <a>
-                        <img src="http://omsproduction.b0.upaiyun.com/goods/d181311b8ae0e9d6aa80f5317523e874e528deda5f.jpg!750">
-                    </a>
-                    <!--ms-if-->
-                </li><!--repeat1729790719843-->
-                <li data-repeat-rendered="bannerRendered" style="float: left; display: inline;">
-                    <a>
-                        <img src="http://omsproduction.b0.upaiyun.com/goods/e1a3a07e15/640/352/efd2215d9dbd7ab8ea9a6edb23010fb0.jpg!750">
-                    </a>
-                    <!--ms-if-->
-                </li><!--repeat1729790719843-->
-                <li data-repeat-rendered="bannerRendered" style="float: left; display: inline;">
-                    <a>
-                        <img src="http://omsproduction.b0.upaiyun.com/goods/40bb84a1ee/640/350/21cf1b9694f69248f37cbec7f072be81.jpg!750">
-                    </a>
-                    <!--ms-if-->
-                </li><!--repeat1729790719843-->
-                <li data-repeat-rendered="bannerRendered" style="float: left; display: inline;">
-                    <a>
-                        <img src="http://omsproduction.b0.upaiyun.com/goods/d181311b8ae0e9d6aa80f5317523e874e528deda5f.jpg!750">
-                    </a>
-                    <!--ms-if-->
-                </li><!--repeat1729790719843-->
-                <li data-repeat-rendered="bannerRendered" style="float: left; display: inline;">
-                    <a>
-                        <img src="http://omsproduction.b0.upaiyun.com/goods/b3da740182/640/350/450c6410184d9e95c878e731c5809290.jpg!750">
-                    </a>
-                    <!--ms-if-->
-                </li><!--repeat1729790719843-->
+    <div id="banner">
+        <div class="flexslider">
+            <ul class="slides">
+                <li>
+                    <img src="http://omsproduction.b0.upaiyun.com/goods/d181311b8ae0e9d6aa80f5317523e874e528deda5f.jpg!750">
+                </li>
+                <li>
+                    <img src="http://omsproduction.b0.upaiyun.com/goods/e1a3a07e15/640/352/efd2215d9dbd7ab8ea9a6edb23010fb0.jpg!750">
+                </li>
+                <li>
+                    <img src="http://omsproduction.b0.upaiyun.com/goods/b3da740182/640/350/450c6410184d9e95c878e731c5809290.jpg!750">
+                </li>
             </ul>
-            <div class="banner-focus">
-                <div class="banner-hd">
-                    <ul>
-                        <li class="on"></li><!--repeat49402037761-->
-                        <li class=""></li><!--repeat49402037761-->
-                        <li class=""></li><!--repeat49402037761-->
-                        <li class=""></li><!--repeat49402037761-->
-                        <li class=""></li><!--repeat49402037761-->
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
     <section class="main-view tuan" id="goods_list">
         <div class="base-list-wrapper">
-
-            <!--<div>-->
-            <!--<div class="tuan_g">-->
-            <!--<div class="tuan_g_img">-->
-            <!--<img src="http://omsproduction.b0.upaiyun.com/goods/4a607329a8af7b7faf658b88d2b7a1a0fcc117ba97.jpg!750">-->
-            <!--<div class="tuan_g_img_text">-->
-            <!--<div class="tuan_g_img_item">-->
-            <!--<div class="tuan_g_img_round"></div>-->
-            <!--<div class="tuan_img_text_border">-->
-            <!--<span>泰国进口榴莲</span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="tuan_g_img_item">-->
-            <!--<div class="tuan_g_img_round"></div>-->
-            <!--<div class="tuan_img_text_border">-->
-            <!--<span>新鲜空运 质地饱满</span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="tuan_g_img_item">-->
-            <!--<div class="tuan_g_img_round"></div>-->
-            <!--<div class="tuan_img_text_border">-->
-            <!--<span>活血散寒 健脾补气</span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="tuan_g_info">-->
-            <!--<p class="tuan_g_name">【限量250份】1元1个泰国进口榴莲（3-4斤）再慢就被别人抢完啦！【水果之王 肉质细腻 入口绵密】</p>-->
-            <!--</div>-->
-            <!--<div class="tuan_g_core">-->
-            <!--<div class="tuan_g_core_img">-->
-            <!--<img src="http://cdn.yangkeduo.com/assets/img/tuan_g_core-4935ae4c83.png">-->
-            <!--</div>-->
-            <!--<div class="tuan_g_price price-big" style="width: 200px;">-->
-            <!--<span>10人团</span><b>￥1.00</b>-->
-            <!--</div>-->
-            <!--<div class="tuan_g_btn">查看详情</div>-->
-            <!--</div>-->
-            <!--<div class="like goods_list_like">-->
-            <!--<img src="assets/imgs/mobile/unlike.png">-->
-            <!--<div class="like_click_button"></div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
 
             <div ng-repeat="good in goods">
                 <div class="tuan_g">

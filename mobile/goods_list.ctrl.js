@@ -5,6 +5,7 @@ app.controller('List', function ($scope, GoodSvc, CartSvc) {
 
     GoodSvc.listPaged(1).then(function (result) {
         $scope.goods = result.data;
+        activateSlider();
     });
 
     CartSvc.getCartSession().then(function () {

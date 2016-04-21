@@ -1,3 +1,15 @@
+var activateSlider = function () {
+    delay(function () {
+        $('.flexslider').flexslider({
+            animation: 'slide',
+            directionNav: false,
+            animationLoop: true,
+            slideshowSpeed: 3000,
+            touch: true
+        })
+    });
+};
+
 var initCartIcon = function (isToShow) {
     if (isToShow) {
         $('#go_cart').show();
