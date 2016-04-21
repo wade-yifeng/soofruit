@@ -1,5 +1,5 @@
 <div class="wx_wrap" ng-controller="Checkout">
-    <a class="send_address">
+    <a class="send_address" ng-click="selectAddress()">
         <div id="sendTo">
             <div class="address address_defalut">
                 <h3><b class="send_margin">送至</b><br></h3>
@@ -95,4 +95,8 @@
     <div class="order_coupon_button">确认</div>
 </div>
 
-<div ui-view></div>
+<div class="modal fade in" id="dialogAddress" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content" ui-view></div>
+    </div>
+</div>

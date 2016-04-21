@@ -1,6 +1,6 @@
 var app = angular.module('mobile');
 
-app.controller('Checkout', function ($scope, CheckoutSvc, CartSvc) {
+app.controller('Checkout', function ($scope, CartSvc, $state) {
     document.title = '北海之南大果园 - 购物结算';
     $scope.state = 'checkout';
 
@@ -14,6 +14,11 @@ app.controller('Checkout', function ($scope, CheckoutSvc, CartSvc) {
         });
         setTotalAmount();
     });
+
+    $scope.selectAddress = function () {
+        $state.go('checkout.addressSelect');
+        showAddressDialog();
+    };
 
     $scope.minus = function (good) {
         if (good.quantity > 1) {

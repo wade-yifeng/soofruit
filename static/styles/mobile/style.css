@@ -10513,10 +10513,11 @@ input[type=text], textarea {
     position: fixed;
     height: 70px;
     line-height: 70px;
+    margin:0 1.5%;
     background-color: #f1f1f2;
     text-align: center;
-    width: 100%;
-    bottom: 46px;
+    width: 97%;
+    bottom: 20px;
     z-index: 999;
     max-width: 640px
 }
@@ -10987,7 +10988,8 @@ input[type=text], textarea {
 }
 
 .margin_footer {
-    height: 120px
+    height: 120px;
+    padding: 0 10px
 }
 
 .loadWeixinAddress {

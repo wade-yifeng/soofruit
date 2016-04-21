@@ -60,6 +60,14 @@ var showInfo = function (info) {
     });
 };
 
+var showAddressDialog = function () {
+    $('#dialogAddress').modal('show');
+};
+
+$('body').on('click', '.wx_bar_back', function () {
+    $('#dialogAddress').modal('hide');
+});
+
 var getIdArrOfGoods = function (goods) {
     return goods.map(function (good) {
         return good.goodID;
