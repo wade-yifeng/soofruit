@@ -1,13 +1,13 @@
 var app = angular.module('mobile');
 
-app.factory('AccountSvc', function ($http, $q) {
+app.factory('AccountSvc', function ($http, ShareSvc) {
     return {
         getUser: function () {
-            var defer = $q.defer();
-            $http.get('/account').success(function (result) {
-                httpSuccess(result, defer, true);
+            return ShareSvc.promise(function (defer) {
+                $http.get('/account').success(function (result) {
+                    httpSuccess(result, defer, true);
+                });
             });
-            return defer.promise;
         }
     };
 });
