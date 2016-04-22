@@ -4,50 +4,7 @@
         <div ng-include="'/views/cart_orders_nav.html'"></div>
 
         <div id="cart-container">
-            <div class="deal-list-status" ng-show="cart">
-                <!--<div class="orders-order">-->
-                <!--<div>-->
-                <!--<a>-->
-                <!--<div class="orders-order-glist">-->
-                <!--<div class="orders-mall-title">-->
-                <!--<img class="_icon"-->
-                <!--src="http://omsproduction.b0.upaiyun.com/goods/d06f144f1d/310/310/de34736278c65349a2bd1533a8448f42.jpg">-->
-                <!--<span class="_mall_name">益果汇</span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="orders-order-goods">-->
-                <!--<div class="cart-checkbox-wrapper">-->
-                <!--<input type="checkbox" class="cart-checkbox-real"/>-->
-                <!--<div class="cart-checkbox-fake">-->
-                <!--<span class="glyphicon glyphicon-ok"></span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="orders-order-goods-img" style="margin-left:25px;">-->
-                <!--<img src="http://omsproduction.b0.upaiyun.com/goods/280b2c9f2b7c3361c7bb95ae75c5a1c5813244b9f9.jpg">-->
-                <!--</div>-->
-                <!--<div class="orders-order-goods-name" style="margin-left:160px;">-->
-                <!--<div class="_goods_name">9.8元越南青芒2斤（4个左右）进口芒果 新鲜水果（江浙沪专享）（预售，4月27日完成发货）</div>-->
-                <!--</div>-->
-                <!--<div class="orders-order-goods-payed">-->
-                <!--&lt;!&ndash;ms-if&ndash;&gt;-->
-                <!--<div class="payed-head">实付:</div>-->
-                <!--<div class="payed-amount">￥19.00</div>-->
-                <!--<div class="payed-free">&nbsp;(免运费)</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</a>-->
-                <!--<div class="orders-order-bd-bottom">-->
-                <!--<div class="orders-order-ft">-->
-                <!--<div class="orders-order-opt">-->
-                <!--<div class="orders-order-btn">-->
-                <!--<a class="_order_btn_cancel">移除</a>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-
+            <div class="deal-list-status" ng-show="cart && cart.goods.length>0">
                 <div class="orders-order" ng-repeat="good in cart.goods">
                     <div>
                         <div class="orders-order-goods">
@@ -118,7 +75,7 @@
                 </div>
             </div>
 
-            <div class="empty-list" ng-hide="cart">
+            <div class="empty-list" ng-hide="cart && cart.goods.length>0">
                 <div class="empty-list-header">
                     <h4>购物车快饿瘪了 T.T</h4>
                     <span>快给我挑点宝贝</span>

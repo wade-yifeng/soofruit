@@ -30,6 +30,13 @@ app.factory('AddressSvc', function ($http, ShareSvc) {
                 });
             });
         },
+        getDefault: function (userID) {
+            return ShareSvc.promise(function (defer) {
+                $http.get('/addressDefault/' + userID).success(function (result) {
+                    httpSuccess(result, defer, true);
+                });
+            });
+        },
         update: function (address) {
             return ShareSvc.promise(function (defer) {
                 $http.put('/address/' + address._id, address).success(function (result) {

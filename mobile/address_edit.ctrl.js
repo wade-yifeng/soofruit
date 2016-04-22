@@ -1,6 +1,6 @@
 var app = angular.module('mobile');
 
-app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $q, $state, $stateParams) {
+app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $stateParams) {
     document.title = '我的收货地址';
     var emptyCities = [{Val: '- 选择市 -'}];
     var emptyDistricts = [{Val: '- 选择区/县 -'}];
@@ -18,7 +18,6 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $q, $state
                             if (pro.Val == $scope.address.province) {
                                 defer.resolve(pro.PID);
                                 initProvinces(list, index);
-                                return;
                             }
                         });
                     });
@@ -32,7 +31,6 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $q, $state
                             if (city.Val == $scope.address.city) {
                                 defer.resolve(city.CID);
                                 initCities(list, index);
-                                return;
                             }
                         });
                     });
@@ -44,7 +42,6 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $q, $state
                     list.forEach(function (dis, index) {
                         if (dis.Val == $scope.address.district) {
                             initDistricts(list, index);
-                            return;
                         }
                     });
                 });
@@ -84,7 +81,14 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $q, $state
 
     $scope.save = function () {
         if (!$scope.address._id) {
-            AddressSvc.create($scope.address).then(redirect);
+            if ($scope.$parent.firstAddress) {
+                $scope.address.isDefault = true;
+            }
+            AddressSvc.create($scope.address).then(function (info) {
+                $scope.updateParentAddress($scope.address);
+                showInfo(info);
+                hideAddressDialog();
+            });
         } else {
             AddressSvc.update($scope.address).then(redirect);
         }

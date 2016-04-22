@@ -7,14 +7,14 @@ app.controller('Detail', function ($scope, $stateParams, GoodSvc, CartSvc) {
         activateSlider();
     });
 
-    CartSvc.getCartSession().then(function () {
-            initCartIcon(true);
+    CartSvc.getCartSession().then(function (cart) {
+            initCartIcon(cart);
         },
         initCartIcon);
 
     $scope.addToCart = function (good) {
         CartSvc.addToCart(good).then(function () {
-            initCartIcon(true);
+            initCartIcon(null, true);
         });
     };
 });

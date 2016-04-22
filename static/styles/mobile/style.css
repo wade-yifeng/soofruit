@@ -10513,10 +10513,10 @@ input[type=text], textarea {
     position: fixed;
     height: 70px;
     line-height: 70px;
-    margin:0 1.5%;
+    margin:0 3%;
     background-color: #f1f1f2;
     text-align: center;
-    width: 97%;
+    width: 90%;
     bottom: 20px;
     z-index: 999;
     max-width: 640px
@@ -10542,12 +10542,21 @@ input[type=text], textarea {
     min-width: 300px
 }
 
-.none {
+.default {
     position: absolute;
     z-index: 100;
     right: 22%;
     top: 23px;
     color: red;
+    font-size: 15px
+}
+
+.not_default {
+    position: absolute;
+    z-index: 100;
+    right: 22%;
+    top: 23px;
+    color: green;
     font-size: 15px
 }
 

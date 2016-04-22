@@ -21,19 +21,19 @@ module.exports.create = function (req, res) {
     //    res.json({code: 400, msg: v.msgs});
     //}
     //else {
-        var address = new Address(req.body);
+    var address = new Address(req.body);
 
-        address.save(function (err) {
-            if (err) {
-                res.json({code: 500, msg: err});
-            }
-            else if (!address) {
-                res.json({code: 100, msg: '收货地址创建失败'});
-            }
-            else {
-                res.json({code: 0, msg: '收货地址创建成功'});
-            }
-        });
+    address.save(function (err) {
+        if (err) {
+            res.json({code: 500, msg: err});
+        }
+        else if (!address) {
+            res.json({code: 100, msg: '收货地址创建失败'});
+        }
+        else {
+            res.json({code: 0, msg: '收货地址创建成功'});
+        }
+    });
     //}
 };
 
@@ -60,14 +60,14 @@ module.exports.update = function (req, res) {
             //    res.json({code: 400, msg: v.msgs});
             //}
             //else {
-                Address.update({_id: req.params._id}, req.body, function (err) {
-                    if (err) {
-                        res.json({code: 500, msg: err});
-                    }
-                    else {
-                        res.json({code: 0, msg: '收货地址更新成功'});
-                    }
-                });
+            Address.update({_id: req.params._id}, req.body, function (err) {
+                if (err) {
+                    res.json({code: 500, msg: err});
+                }
+                else {
+                    res.json({code: 0, msg: '收货地址更新成功'});
+                }
+            });
             //}
         }
     });
@@ -81,6 +81,18 @@ module.exports.delete = function (req, res) {
         }
         else {
             res.json({code: 0, msg: '收货地址删除成功'});
+        }
+    });
+};
+
+
+module.exports.default = function (req, res) {
+    Address.findOne({userID: req.params.userID, isDefault: true}).lean().exec(function (err, doc) {
+        if (err) {
+            res.json({code: 500, msg: err});
+        }
+        else {
+            res.json({code: 0, data: doc});
         }
     });
 };

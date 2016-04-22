@@ -15,5 +15,6 @@ router.post('/address', address.create);
 router.get('/address/:_id', address.detail)
     .put('/address/:_id', address.update)
     .delete('/address/:_id', address.delete);
+router.get('/addressDefault/:userID', address.default);
 
 module.exports = router;

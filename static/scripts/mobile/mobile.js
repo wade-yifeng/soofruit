@@ -37,8 +37,8 @@ var activateSlider = function () {
     });
 };
 
-var initCartIcon = function (isToShow) {
-    if (isToShow) {
+var initCartIcon = function (cart, showDirectly) {
+    if ((cart && cart.goods.length > 0) || showDirectly) {
         $('#go_cart').show();
     }
     else {
@@ -64,8 +64,13 @@ var showAddressDialog = function () {
     $('#dialogAddress').modal('show');
 };
 
+var hideAddressDialog = function () {
+    $('#dialogAddress').modal('hide');
+};
+
 $('body').on('click', '.wx_bar_back', function () {
     $('#dialogAddress').modal('hide');
+    $('.modal-backdrop').remove();
 });
 
 var getIdArrOfGoods = function (goods) {

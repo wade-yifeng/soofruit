@@ -35,7 +35,7 @@ app.factory('CartSvc', function ($http, ShareSvc) {
         addToCart: function (good) {
             var self = this;
             return ShareSvc.promise(function (defer) {
-                this.getCartSession().then(function (cart) {
+                self.getCartSession().then(function (cart) {
                     var idArr = getIdArrOfGoods(cart.goods);
                     var indexInArr = idArr.indexOf(good._id);
                     if (indexInArr > -1) {

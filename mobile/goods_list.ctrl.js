@@ -8,8 +8,8 @@ app.controller('List', function ($scope, GoodSvc, CartSvc) {
         activateSlider();
     });
 
-    CartSvc.getCartSession().then(function () {
-            initCartIcon(true);
+    CartSvc.getCartSession().then(function (cart) {
+            initCartIcon(cart);
         },
         initCartIcon);
 });

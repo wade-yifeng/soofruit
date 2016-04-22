@@ -52,9 +52,9 @@
             <div class="kt_message_text">客服</div>
         </a>
 
-        <a id="tuan_more_btn" class="kt_item">
+        <a id="tuan_more_btn" class="kt_item" ng-click="addToCart(good)">
             <div class="kt_price"><span id="tuan_more_price">{{good.sellPrice|currency:'￥'}}</span></div>
-            <div class="kt_btn" ng-click="addToCart(good)"><b id="tuan_more_number">加入购物车</b></div>
+            <div class="kt_btn"><b id="tuan_more_number">加入购物车</b></div>
         </a>
     </div>
 </div>
