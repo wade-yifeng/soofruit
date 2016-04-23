@@ -21,7 +21,7 @@ app.controller('AddressSelect', function ($scope, AddressSvc, $state) {
                 $state.go('checkout.addressEdit');
             }
             showAddressDialog();
-        }, 300);
+        }, 500);
     };
 
     $scope.setDefault = function (address) {

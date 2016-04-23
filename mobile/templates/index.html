@@ -17,8 +17,6 @@
     <button class="btn" ui-sref="ordersOngoing">ordersOngoing</button>
     <br/><br/>
     <button class="btn" ui-sref="ordersDone">ordersDone</button>
-    <br/><br/>
-    <button class="btn" ui-sref="my">my</button>
 </div>
 
 <div ui-view></div>
@@ -28,6 +26,7 @@
 </div>
 
 <div id="go_to_top"><span>顶部</span></div>
+<div id="go_to_my" ui-sref="my"></div>
 
 <div class="pin-spinner" style="display:{{stateIsLoading?'block':'none'}}">
     <div class="pin-spinner-container pin-spinner-container1">

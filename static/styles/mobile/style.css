@@ -2352,7 +2352,7 @@ body {
     height: 43px;
     position: fixed;
     right: 20px;
-    bottom: 64px;
+    bottom: 124px;
     padding: 7px 0 0 8px;
     z-index: 999;
     background: url(/assets/imgs/mobile/go_cart.png) no-repeat;
@@ -2364,7 +2364,7 @@ body {
     webkit-transition: bottom .8s ease, opacity .6s ease
 }
 
-#go_top_close, #go_to_top {
+#go_top_close, #go_to_top, #go_to_my {
     display: block;
     width: 43px;
     height: 43px;
@@ -2393,7 +2393,7 @@ body {
 }
 
 #go_top_close {
-    bottom: 166px;
+    bottom: 226px;
     opacity: 1;
     background: url(/assets/imgs/mobile/buttons.png) -171px -103px no-repeat;
     background-size: 218px auto;
@@ -2401,6 +2401,15 @@ body {
 
 #go_to_top {
     bottom: -100px; /*115px*/
+    opacity: 1;
+}
+
+#go_to_my {
+    bottom: 73px;
+    width: 45px;
+    height: 45px;
+    background: url(/assets/imgs/mobile/icons_bg.png) -238px -115px no-repeat;
+    background-size: 340px auto;
     opacity: 1;
 }
 
@@ -15169,7 +15178,7 @@ input[type=text], textarea {
     position: absolute;
     z-index: 3;
     display: block;
-    width: 350px;
+    width: 300px;
     height: 60px;
-    margin: -62px 0 0 0px;
+    margin: -62px 100px 0 0px;
 }

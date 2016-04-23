@@ -134,6 +134,6 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
         setTimeout(function () {
             $state.go('checkout.addressSelect');
             showAddressDialog();
-        }, 300);
+        }, 500);
     }
 });

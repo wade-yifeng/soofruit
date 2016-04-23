@@ -1,30 +1,28 @@
 <div class="wx_wrap" ng-controller="Checkout">
-    <a class="send_address" ng-click="selectAddress()">
-        <div id="sendTo">
-            <div class="address address_defalut" ng-hide="address">
-                <h3><b class="send_margin">送至</b><br></h3>
-                <ul>
-                    <li><strong>{{initialAddress.receiver}}</strong>&nbsp;&nbsp;{{initialAddress.phone}}
-                    </li>
-                    <li>
-                        {{initialAddress.province+initialAddress.city+initialAddress.district+initialAddress.detail}}
-                    </li>
-                </ul>
-            </div>
-            <div class="address address_defalut" ng-show="address">
-                <h3><b class="send_margin">送至</b><br></h3>
-                <ul>
-                    <li><strong>{{address.receiver}}</strong>&nbsp;&nbsp;{{address.phone}}
-                    </li>
-                    <li>
-                        {{address.province+address.city+address.district+address.detail}}
-                    </li>
-                </ul>
-            </div>
-            <div class="address_bottom"><img
-                    src="http://cdn.yangkeduo.com/assets/img/checkout_address-630fa38b90.png"></div>
+    <div id="sendTo" ng-click="selectAddress()">
+        <div class="address address_defalut" ng-hide="address">
+            <h3><b class="send_margin">送至</b><br></h3>
+            <ul>
+                <li><strong>{{initialAddress.receiver}}</strong>&nbsp;&nbsp;{{initialAddress.phone}}
+                </li>
+                <li>
+                    {{initialAddress.province+initialAddress.city+initialAddress.district+initialAddress.detail}}
+                </li>
+            </ul>
         </div>
-    </a>
+        <div class="address address_defalut" ng-show="address">
+            <h3><b class="send_margin">送至</b><br></h3>
+            <ul>
+                <li><strong>{{address.receiver}}</strong>&nbsp;&nbsp;{{address.phone}}
+                </li>
+                <li>
+                    {{address.province+address.city+address.district+address.detail}}
+                </li>
+            </ul>
+        </div>
+        <div class="address_bottom"><img
+                src="http://cdn.yangkeduo.com/assets/img/checkout_address-630fa38b90.png"></div>
+    </div>
 
     <div style="margin-top:5px;" ng-repeat="good in cart.goods">
         <div class="order_modified">

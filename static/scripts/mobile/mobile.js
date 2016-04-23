@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     page.scroll(function () {
         if (!shown && page.scrollTop() > 200) {
-            btn.animate({bottom: '115px'}, 1000);
+            btn.animate({bottom: '176px'}, 1000);
             shown = true;
             hidden = false;
         } else if (!hidden && page.scrollTop() <= 200) {
