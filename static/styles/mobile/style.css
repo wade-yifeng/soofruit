@@ -307,7 +307,7 @@ body, html {
     font-family: Helvetica Neue, Helvetica, Arial, Microsoft YaHei, \\5FAE\8F6F\96C5\9ED1, STXihei, \\534E\6587\7EC6\9ED1, serif
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
     display: block
 }
 
@@ -10513,7 +10513,7 @@ input[type=text], textarea {
     position: fixed;
     height: 70px;
     line-height: 70px;
-    margin:0 3%;
+    margin: 0 3%;
     background-color: #f1f1f2;
     text-align: center;
     width: 90%;
@@ -10580,7 +10580,7 @@ input[type=text], textarea {
     background-color: #fff;
     background-size: 18px 18px;
     z-index: 99;
-    left: 9px
+    left: 20px
 }
 
 .default_address_1 {
@@ -10614,7 +10614,7 @@ input[type=text], textarea {
 }
 
 .address_list .edit:after, .address_list ul:before {
-    background-image: url("http://pinduoduo.img-cn-shanghai.aliyuncs.com/base/sprites_v3.png");
+    background-image: url(/assets/imgs/mobile/sprites.png);
     background-repeat: no-repeat;
     background-size: 100px 100px
 }
@@ -10624,7 +10624,7 @@ input[type=text], textarea {
 }
 
 .address_list_link .item.item_wx:after, .address_list_link .item:after {
-    background-image: url("http://pinduoduo.img-cn-shanghai.aliyuncs.com/base/sprites_v3.png");
+    background-image: url(/assets/imgs/mobile/sprites.png);
     background-repeat: no-repeat;
     background-size: 100px 100px
 }
@@ -10763,7 +10763,7 @@ input[type=text], textarea {
 }
 
 .address_list ul:before, .appointment_type ul:before, .invoice_list li:before, .pay_list li:before, .promo_list .cash li:before, .promo_list .jd li:before, .promo_list .man li:before, .shipping_type ul:before {
-    background-position: -20px -50px;
+    background-position: 0px -50px;
     content: " ";
     height: 20px;
     left: 10px;
@@ -15163,4 +15163,13 @@ input[type=text], textarea {
     display: table-cell;
     vertical-align: top;
     width: 640px;
+}
+
+.select_mask {
+    position: absolute;
+    z-index: 3;
+    display: block;
+    width: 350px;
+    height: 60px;
+    margin: -62px 0 0 0px;
 }

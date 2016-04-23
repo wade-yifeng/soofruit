@@ -14,7 +14,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: '/views/popup_address_edit.html'
     };
 
-    $urlRouterProvider.otherwise('/list');
+    $urlRouterProvider.otherwise('/list/');
 
     $stateProvider
         .state('list', {

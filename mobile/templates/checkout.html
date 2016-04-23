@@ -1,7 +1,17 @@
 <div class="wx_wrap" ng-controller="Checkout">
     <a class="send_address" ng-click="selectAddress()">
         <div id="sendTo">
-            <div class="address address_defalut">
+            <div class="address address_defalut" ng-hide="address">
+                <h3><b class="send_margin">送至</b><br></h3>
+                <ul>
+                    <li><strong>{{initialAddress.receiver}}</strong>&nbsp;&nbsp;{{initialAddress.phone}}
+                    </li>
+                    <li>
+                        {{initialAddress.province+initialAddress.city+initialAddress.district+initialAddress.detail}}
+                    </li>
+                </ul>
+            </div>
+            <div class="address address_defalut" ng-show="address">
                 <h3><b class="send_margin">送至</b><br></h3>
                 <ul>
                     <li><strong>{{address.receiver}}</strong>&nbsp;&nbsp;{{address.phone}}

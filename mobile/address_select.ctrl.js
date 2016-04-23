@@ -8,16 +8,20 @@ app.controller('AddressSelect', function ($scope, AddressSvc, $state) {
     });
 
     $scope.select = function (address) {
-        $scope.updateParentAddress(address);
+        $scope.updateSelected(address);
         hideAddressDialog();
     };
 
     $scope.openEdit = function (addressID) {
         hideAddressDialog();
-        setTimeout(function(){
-            $state.go('checkout.addressEdit', {addressID: addressID});
+        setTimeout(function () {
+            if (addressID) {
+                $state.go('checkout.addressEdit', {addressID: addressID});
+            } else {
+                $state.go('checkout.addressEdit');
+            }
             showAddressDialog();
-        },500);
+        }, 300);
     };
 
     $scope.setDefault = function (address) {

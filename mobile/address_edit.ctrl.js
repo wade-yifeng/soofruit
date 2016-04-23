@@ -85,9 +85,14 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
                 $scope.address.isDefault = true;
             }
             AddressSvc.create($scope.address).then(function (info) {
-                $scope.updateParentAddress($scope.address);
-                showInfo(info);
-                hideAddressDialog();
+                if ($scope.$parent.firstAddress) {
+                    showInfo(info);
+                    hideAddressDialog();
+                    $scope.selectAddress($scope.address);
+                }
+                else {
+                    redirect(info);
+                }
             });
         } else {
             AddressSvc.update($scope.address).then(redirect);
@@ -123,6 +128,12 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
 
     var redirect = function (info) {
         showInfo(info);
+        hideAddressDialog();
         $state.go('checkout.addressSelect');
+        // 多点几次会出bug,需要加载两次state
+        setTimeout(function () {
+            $state.go('checkout.addressSelect');
+            showAddressDialog();
+        }, 300);
     }
 });
