@@ -1,10 +1,11 @@
 <section class="main-view container" ng-controller="My">
     <div class="my my_head">
         <div class="my_head_pic pull-left">
-            <img id="uinLogo" class="my_head_img" src="http://pinduoduo.oss-cn-shanghai.aliyuncs.com/base/mobile_user_avatar.png">
+            <img id="uinLogo" class="my_head_img" ng-src="userInfo.headimgurl">
         </div>
         <div class="my_head_info pull-left">
-            <h4 id="nickname" class="my_head_name">呵呵哒<span class="vip_icon"></span><span class="vip_text">VIP1</span></h4>
+            <h4 id="nickname" class="my_head_name">{{userInfo.nickname}}<span class="vip_icon"></span><span
+                    class="vip_text">VIP1</span></h4>
             <h4 id="nickname" class="my_head_name">187****8069</h4>
             <h4 id="nickname" class="my_head_name">加入时间: 2016-04-17 15:59</h4>
         </div>
@@ -15,7 +16,8 @@
             <div class="nav_item_order_hd">
                 <div class="nav_item_order">我的订单</div>
                 <div class="nav_item_order_bd">查看全部订单
-                    <img class="nav_item_order_bd_arrow" src="http://cdn.yangkeduo.com/assets/img/personal_arrow-dd13467d78.png">
+                    <img class="nav_item_order_bd_arrow"
+                         src="http://cdn.yangkeduo.com/assets/img/personal_arrow-dd13467d78.png">
                 </div>
             </div>
             <div class="nav_item_bd">
@@ -60,7 +62,9 @@
             <li class="nav_faq" style="height: 160px;"></li>
         </ul>
     </div>
-    <div class="nav nav_item_hd_logout"><div class="coupons_a">退出登录</div></div>
+    <div class="nav nav_item_hd_logout">
+        <div class="coupons_a">退出登录</div>
+    </div>
 </section>
 
 <div ui-view="popup"></div>

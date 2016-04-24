@@ -78,7 +78,7 @@ app.factory('CartSvc', function ($http, ShareSvc) {
         },
         getCartSession: function () {
             return ShareSvc.promise(function (defer) {
-                $http.get('/cartSession/' + ShareSvc.UserID).success(function (result) {
+                $http.get('/cartSession').success(function (result) {
                     httpSuccess(result, defer, true);
                 });
             });

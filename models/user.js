@@ -25,8 +25,8 @@ var UserSchema = new mongoose.Schema({
 
     weChatId: { type: String, unique: true },
 
-    //微信
-    unifyuserid: { type: String, unique: true },
+    //用户的微信id
+    unionid: { type: String, unique: true },
 
     isDeleted: { type: Boolean, default: false},
 

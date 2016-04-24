@@ -1,10 +1,9 @@
 var app = angular.module('mobile');
 
-app.controller('My', function ($scope, AccountSvc, $state) {
+app.controller('My', function ($scope, AccountSvc) {
     document.title = '个人中心';
 
-    AccountSvc.getUser().then(function (result) {
+    AccountSvc.getUserInfo().then(function (result) {
         $scope.userInfo = result;
-        showInfo(result);
     });
 });

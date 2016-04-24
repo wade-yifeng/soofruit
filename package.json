@@ -43,6 +43,7 @@
     "log4js": "^0.6.35",
     "mongoose": "^4.4.6",
     "path": "^0.12.7",
+    "q": "^1.4.1",
     "querystring": "^0.2.0",
     "redis": "^2.6.0-0",
     "response-time": "^2.3.1",

@@ -5,8 +5,9 @@ var addressOrigin = require('./service/address_origin');
 var address = require('./service/address');
 
 router.get('/account', account.signin);
+router.get('/userSession', account.getUserSession);
 
-router.get('/cartSession/:_id', cart.getCartSession)
+router.get('/cartSession', cart.getCartSession)
     .post('/cartSession', cart.setCartSession);
 
 router.get('/addressOrigin/:addrLv/:id', addressOrigin.list);
