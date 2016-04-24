@@ -31,7 +31,7 @@ module.exports.create = function (req, res) {
             res.json({code: 100, msg: '收货地址创建失败'});
         }
         else {
-            res.json({code: 0, msg: '收货地址创建成功'});
+            res.json({code: 0, data: address._id.toString(), msg: '收货地址创建成功'});
         }
     });
     //}
@@ -53,7 +53,7 @@ module.exports.detail = function (req, res) {
 module.exports.update = function (req, res) {
     Address.findById(req.params._id, function (err, doc) {
         if (!doc) {
-            res.json({code: 100, msg: "商品不存在或已被删除"});
+            res.json({code: 100, msg: "收货地址不存在或已被删除"});
         } else {
             //var v = ValidateAddress(req.body);
             //if (!v.isValid()) {

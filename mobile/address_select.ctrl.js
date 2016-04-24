@@ -8,7 +8,7 @@ app.controller('AddressSelect', function ($scope, AddressSvc, $state) {
     });
 
     $scope.select = function (address) {
-        $scope.updateSelected(address);
+        $scope.updateSelectedAddress(address);
         hideAddressDialog();
     };
 

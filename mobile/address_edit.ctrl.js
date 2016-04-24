@@ -81,21 +81,25 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
 
     $scope.save = function () {
         if (!$scope.address._id) {
+            $scope.address.userID = ShareSvc.UserID;
             if ($scope.$parent.firstAddress) {
                 $scope.address.isDefault = true;
             }
-            AddressSvc.create($scope.address).then(function (info) {
+            AddressSvc.create($scope.address).then(function (newID) {
+                var info = '收货地址创建成功';
                 if ($scope.$parent.firstAddress) {
+                    $scope.address._id = newID;
                     showInfo(info);
                     hideAddressDialog();
-                    $scope.selectAddress($scope.address);
+                    $scope.updateSelectedAddress($scope.address);
+                    $scope.updateFirstAddressFlag(false);
                 }
                 else {
-                    redirect(info);
+                    $scope.redirect(info);
                 }
             });
         } else {
-            AddressSvc.update($scope.address).then(redirect);
+            AddressSvc.update($scope.address).then($scope.redirect);
         }
     };
 
@@ -104,7 +108,48 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
     };
 
     $scope.confirmOperation = function () {
-        AddressSvc.delete($scope.address._id).then(redirect);
+        var deletedWasDefault = $scope.address.isDefault;
+        var deletedWasSelected = $scope.getSelectedAddress()._id == $scope.address._id;
+
+        AddressSvc.delete($scope.address._id)
+            .then(function (info) {
+                showInfo(info);
+                $scope.address = null;
+                return AddressSvc.list();
+            })
+            .then(function (list) {
+                return ShareSvc.promise(function (defer) {
+                    if (list.length > 0) {
+                        if (deletedWasSelected) {
+                            var newSelected = list[0];
+                            if (deletedWasDefault) {
+                                newSelected.isDefault = true;
+                                AddressSvc.update(newSelected).then(function () {
+                                    defer.resolve(newSelected);
+                                });
+                            }
+                            else {
+                                defer.resolve(newSelected);
+                            }
+                        } else {
+                            defer.resolve();
+                        }
+                    }
+                    else {
+                        defer.reject();
+                        showInfo('请先添加一个收货地址');
+                        $scope.updateFirstAddressFlag(true);
+                        $scope.updateSelectedAddress({});
+                        $scope.redirect(null, true);
+                    }
+                });
+            })
+            .then(function (newSelected) {
+                if (newSelected) {
+                    $scope.updateSelectedAddress(newSelected);
+                }
+                $scope.redirect();
+            });
     };
 
     $scope.displayDelete = function () {
@@ -125,15 +170,5 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
         $scope.districts = list;
         $scope.district = $scope.districts[index || 0];
     };
-
-    var redirect = function (info) {
-        showInfo(info);
-        hideAddressDialog();
-        $state.go('checkout.addressSelect');
-        // 多点几次会出bug,需要加载两次state
-        setTimeout(function () {
-            $state.go('checkout.addressSelect');
-            showAddressDialog();
-        }, 500);
-    }
-});
+})
+;

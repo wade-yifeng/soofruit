@@ -27,12 +27,7 @@ app.controller('Checkout', function ($scope, CartSvc, AddressSvc, ShareSvc, $sta
     });
 
     $scope.selectAddress = function () {
-        showAddressDialog();
-        $state.go('checkout.addressSelect');
-        // 多点几次会出bug,需要加载两次state
-        delay(function () {
-            $state.go('checkout.addressSelect');
-        });
+        $scope.redirect();
     };
 
     $scope.minus = function (good) {
@@ -58,7 +53,11 @@ app.controller('Checkout', function ($scope, CartSvc, AddressSvc, ShareSvc, $sta
         // 支付成功更新订单
     };
 
-    $scope.updateSelected = function (address) {
+    $scope.updateFirstAddressFlag = function (flag) {
+        $scope.firstAddress = flag;
+    };
+
+    $scope.updateSelectedAddress = function (address) {
         $scope.address = address;
     };
 
@@ -69,4 +68,20 @@ app.controller('Checkout', function ($scope, CartSvc, AddressSvc, ShareSvc, $sta
     var setTotalAmount = function () {
         $scope.totalAmount = getTotalAmount($scope.cart.goods);
     };
+
+    $scope.redirect = function (info, openAddressEdit) {
+        if (info) {
+            showInfo(info);
+        }
+
+        var target = openAddressEdit ? 'Edit' : 'Select';
+
+        hideAddressDialog();
+        $state.go('checkout.address' + target);
+        // 多点几次会出bug,需要加载两次state
+        setTimeout(function () {
+            $state.go('checkout.address' + target);
+            showAddressDialog();
+        }, 500);
+    }
 });

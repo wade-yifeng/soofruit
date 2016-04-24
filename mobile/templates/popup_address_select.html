@@ -18,11 +18,8 @@
             <span class="select_mask" ng-click="select(address)"></span>
             <span class="icon_address1 bg_color" ng-hide="address._id==getSelectedAddress()._id"></span>
         </div>
-        <div class="margin_footer"></div>
     </div>
-    <div class="add_address_red">
-        <div class="inner_red">
-            <a class="add_text_red" style="color:white" ng-click="openEdit()">新增地址</a>
-        </div>
+    <div class="address_new">
+        <button class="submit" style="background-color: red;" ng-click="openEdit()">新增地址</button>
     </div>
 </div>

@@ -10447,7 +10447,7 @@ input[type=text], textarea {
     background: none repeat scroll 0 0 #fff;
     border-bottom: 1px solid #e2e2e2;
     font-size: 12px;
-    padding: 0 10px 15px
+    padding: 0 10px 15px;
 }
 
 .post_sale_title {
@@ -10685,6 +10685,10 @@ input[type=text], textarea {
 
 .marginleft {
     margin-left: -20px
+}
+
+.address_list {
+    min-height: 300px;
 }
 
 .address_list ul {
@@ -15176,9 +15180,9 @@ input[type=text], textarea {
 
 .select_mask {
     position: absolute;
-    z-index: 3;
+    z-index: 1000;
     display: block;
-    width: 300px;
+    width: 200px;
     height: 60px;
-    margin: -62px 100px 0 0px;
+    margin: -65px 100px 0 0px;
 }
