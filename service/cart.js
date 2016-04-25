@@ -44,8 +44,8 @@ module.exports.update = function (req, res) {
 
 
 module.exports.getCartSession = function (req, res) {
-    if (req.session && req.session['fake'] && req.session['fake'].cart) {
-        res.json({code: 0, data: req.session['fake'].cart});
+    if (req.session && req.session.fake && req.session.fake.cart) {
+        res.json({code: 0, data: req.session.fake.cart});
         return;
     }
     res.json({code: 1, msg: '请求的session不存在'});
@@ -55,10 +55,10 @@ module.exports.getCartSession = function (req, res) {
 module.exports.setCartSession = function (req, res) {
     if (req.session && req.body) {
         var cart = req.body;
-        if (!req.session['fake']) {
-            req.session['fake'] = {};
+        if (!req.session.fake) {
+            req.session.fake = {};
         }
-        req.session['fake'].cart = cart;
+        req.session.fake.cart = cart;
         res.json({code: 0});
         return;
     }

@@ -5,7 +5,10 @@ var logger = require('../lib/logger');
 var Q = require('q');
 
 module.exports.signin = function (req, res) {
-    if (req.session && req.session['fake'] && req.session['fake'].info) {
+    var targetPage = req.query.targetPage == 'home' ? '' : req.query.targetPage;
+
+    if (req.session && req.session.fake && req.session.fake.user) {
+        res.redirect('/' + targetPage);
         return;
     }
 
@@ -38,25 +41,33 @@ module.exports.signin = function (req, res) {
                     return;
                 }
 
-                getUserByUnionid(baseInfo.unionid).then(function (user) {
-                    if (!user) {
-                        //注册微信用户到系统中
-                    }
-                    if (!req.session['fake']) {
-                        req.session['fake'] = {};
-                    }
-                    req.session['fake'].info = baseInfo;
-                });
+                //getUserByUnionid(baseInfo.unionid).then(function (user) {
+                //    if (!user) {
+                //        //注册微信用户到系统中
+                //    }
+                //    if (!req.session['fake']) {
+                //        req.session['fake'] = {};
+                //    }
+                //    req.session['fake'].user = baseInfo;
+                //});
 
-                res.status(200).send(baseInfo);
+                if (!req.session.fake) {
+                    req.session.fake = {};
+                }
+                req.session.fake.user = baseInfo;
+
+                logger.info(baseInfo);
+
+                //res.status(200).send(baseInfo);
+                res.redirect('/' + targetPage);
             }
         );
     }
 };
 
 module.exports.getUserSession = function (req, res) {
-    if (req.session && req.session['fake']) {
-        res.json({code: 0, data: req.session['fake'].info});
+    if (req.session && req.session.fake && req.session.fake.user) {
+        res.json({code: 0, data: req.session.fake.user});
         return;
     }
     res.json({code: 1, msg: '请求的session不存在'});

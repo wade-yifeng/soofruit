@@ -99,10 +99,10 @@ if (!config.debug) {
 // 服务端路由
 // 模块化加载所有的route(controllers, middlewares)
 // app.use('/api/v1',  cors(), apiRouterV1);
-app.use('/', require('./routes_mobile'));
 //// TODO: Account需要跳转处理，等待之后拆分再统一Roote
 //var account = require('./service/account');
 //app.use('/account', account.signin);
+app.use(require('./routes_mobile'));
 app.use(require('./routes_admin'));
 app.use(require('./wechat/routes'));
 
@@ -111,7 +111,11 @@ app.use(errorPageMiddleware.errorPage);
 
 // 站点主页映射
 app.get('/', function (req, res) {
-    res.render('index.html');
+    if (req.session && req.session.fake && req.session.fake.user) {
+        res.render('index.html');
+    } else {
+        res.redirect('/account?targetPage=home');
+    }
 }).get('/admin', function (req, res) {
     res.render('admin_index.html');
 });
