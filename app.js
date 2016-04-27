@@ -111,11 +111,7 @@ app.use(errorPageMiddleware.errorPage);
 
 // 站点主页映射
 app.get('/', function (req, res) {
-    if (req.session && req.session.fake && req.session.fake.user) {
-        res.render('index.html');
-    } else {
-        res.redirect('/account?targetPage=home');
-    }
+    res.render('index.html');
 }).get('/admin', function (req, res) {
     res.render('admin_index.html');
 });

@@ -5,11 +5,20 @@ var logger = require('../lib/logger');
 var Q = require('q');
 
 module.exports.signin = function (req, res) {
-    var targetPage = req.query.targetPage == 'home' ? '' : req.query.targetPage;
+    var targetUrl = req.params.targetUrl;
 
     if (req.session && req.session.fake && req.session.fake.user) {
-        res.redirect('/' + targetPage);
+        //加一个url是/account的判断,以使测试微信post能正常运行,后期需要去掉
+        if (req.originalUrl == '/account') {
+            res.status(200).send(req.session.fake.user);
+        } else {
+            res.redirect(targetUrl);
+        }
         return;
+    }
+
+    if (req.originalUrl != '/account') {
+
     }
 
     if (req.query.code === undefined) {
@@ -38,30 +47,31 @@ module.exports.signin = function (req, res) {
             }], function (err, baseInfo) {
                 if (err) {
                     logger.error(err);
-                    return;
                 }
+                else {
+                    //getUserByUnionid(baseInfo.unionid).then(function (user) {
+                    //    if (!user) {
+                    //        //注册微信用户到系统中
+                    //    }
+                    //    if (!req.session['fake']) {
+                    //        req.session['fake'] = {};
+                    //    }
+                    //    req.session['fake'].user = baseInfo;
+                    //});
 
-                //getUserByUnionid(baseInfo.unionid).then(function (user) {
-                //    if (!user) {
-                //        //注册微信用户到系统中
-                //    }
-                //    if (!req.session['fake']) {
-                //        req.session['fake'] = {};
-                //    }
-                //    req.session['fake'].user = baseInfo;
-                //});
+                    if (!req.session.fake) {
+                        req.session.fake = {};
+                    }
+                    req.session.fake.user = baseInfo;
 
-                if (!req.session.fake) {
-                    req.session.fake = {};
+                    //加一个url是/account的判断,以使测试微信post能正常运行,后期需要去掉
+                    if (req.originalUrl == '/account') {
+                        res.status(200).send(baseInfo);
+                    } else {
+                        res.redirect(targetUrl);
+                    }
                 }
-                req.session.fake.user = baseInfo;
-
-                logger.info(baseInfo);
-
-                //res.status(200).send(baseInfo);
-                res.redirect('/' + targetPage);
-            }
-        );
+            });
     }
 };
 

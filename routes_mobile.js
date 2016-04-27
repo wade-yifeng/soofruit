@@ -4,7 +4,10 @@ var cart = require('./service/cart');
 var addressOrigin = require('./service/address_origin');
 var address = require('./service/address');
 
+//wechat reply.post测试所用route
 router.get('/account', account.signin);
+
+router.get('/account/:targetUrl', account.signin);
 router.get('/userSession', account.getUserSession);
 
 router.get('/cartSession', cart.getCartSession)
