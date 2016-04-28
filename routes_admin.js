@@ -23,10 +23,11 @@ router.post('/pics', good.uploadPic)
     .delete('/pics/:_path', good.deletePic);
 
 // user services
-router.get('/user', user.list).post('/user', user.createUser);
-router.post('/user/signin', user.signin);
-router.get('/user/signout', user.signout);
-router.post('/user/register', user.register);
+router.get('/users', user.listPaged)
+    .post('/users', user.createUser);
+//router.post('/user/signin', user.signin);
+//router.get('/user/signout', user.signout);
+//router.post('/user/register', user.register);
 
 router.get('/user/:_id', user.userDetail)
     .put('/user/:_id', user.editUser)
@@ -34,7 +35,7 @@ router.get('/user/:_id', user.userDetail)
 
 router.get('/permissions', permission.permissionList)
     .post('/permissions', permission.createPermission);
-router.delete('/permissions/:_id',permission.deletePermission);
+router.delete('/permissions/:_id', permission.deletePermission);
 
 router.get('/roleCategories', role.getRoleCategories);
 

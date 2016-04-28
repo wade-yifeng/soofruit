@@ -1,8 +1,8 @@
 var oauthApi = require('../wechat/api_oauth');
 var api = require('../wechat/api');
 var async = require('async');
+var user = require('./user');
 var logger = require('../lib/logger');
-var Q = require('q');
 
 module.exports.signin = function (req, res) {
     var targetUrl = req.params.targetUrl;
@@ -49,20 +49,34 @@ module.exports.signin = function (req, res) {
                     logger.error(err);
                 }
                 else {
-                    //getUserByUnionid(baseInfo.unionid).then(function (user) {
-                    //    if (!user) {
-                    //        //注册微信用户到系统中
-                    //    }
-                    //    if (!req.session['fake']) {
-                    //        req.session['fake'] = {};
-                    //    }
-                    //    req.session['fake'].user = baseInfo;
-                    //});
-
                     if (!req.session.fake) {
                         req.session.fake = {};
                     }
                     req.session.fake.user = baseInfo;
+
+                    //系统无此用户,则注册微信用户到系统中
+                    user.getByWechatID(baseInfo.unionid).then(function (result) {
+                        if (result.code == 0 && !result.data) {
+                            user.create({
+                                wechatID: baseInfo.unionid,
+                                nickName: baseInfo.nickname,
+                                sex: baseInfo.sex,
+                                country: baseInfo.country,
+                                province: baseInfo.province,
+                                city: baseInfo.city,
+                                headImg: baseInfo.headimgurl,
+                                subcribeTime: baseInfo.subscribe_time
+                            }).then(function (result) {
+                                if (result.code != 0) {
+                                    logger.error(result.msg);
+                                }
+                            });
+                        } else if (result.code == 0 && result.data) {
+                            //数据如有变化,更新到系统中
+                        } else {
+                            logger.error(result.msg);
+                        }
+                    });
 
                     //加一个url是/account的判断,以使测试微信post能正常运行,后期需要去掉
                     if (req.originalUrl == '/account') {
@@ -81,17 +95,4 @@ module.exports.getUserSession = function (req, res) {
         return;
     }
     res.json({code: 1, msg: '请求的session不存在'});
-};
-
-var getUserByUnionid = function (unionid) {
-    var defer = Q.defer();
-    User.findOne({unionid: unionid}).lean().exec(function (err, doc) {
-        if (err) {
-            defer.reject(err);
-        }
-        else {
-            defer.resolve(doc);
-        }
-    });
-    return defer.promise;
 };

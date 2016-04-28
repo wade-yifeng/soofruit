@@ -25,17 +25,17 @@ var OrderSchema = new mongoose.Schema({
     //优惠券减免额度
     couponDeduction: {type: Number, default: 0},
 
-    //订单日期
-    orderDate: Date,
+    //创建时间
+    createTime: Date,
 
-    //付款日期(用户线下打款后在线上点击"我已付款")
-    payDate: Date,
+    //付款时间
+    payTime: Date,
 
-    //收货日期(用户收货后在线上点击"确认收货")
-    pickDate: Date,
+    //收货时间(用户收货后在线上点击"确认收货")
+    pickTime: Date,
 
-    //成交日期(确认收货 N 天后自动记入)
-    finishDate: Date,
+    //成交时间(确认收货 N 天后自动记入)
+    finishTime: Date,
 
     //收货地址ID
     addressID: ObjectId,
@@ -46,6 +46,6 @@ var OrderSchema = new mongoose.Schema({
     //快递单号
     expressNO: String
 });
-OrderSchema.index({orderDate: -1});
+OrderSchema.index({createTime: -1});
 
 mongoose.model('Order', OrderSchema);

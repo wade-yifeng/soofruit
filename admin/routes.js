@@ -19,9 +19,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'userCtrl',
             templateUrl: '/views/admin_user.html'
         })
-        .state('usermanager', {
-            url: "/usermanager",
-            controller: 'UserManager',
+        .state('usermana', {
+            url: "/usermana",
+            controller: 'UserMana',
             templateUrl: '/views/admin_user_manager.html'
         })
         .state('permission', {

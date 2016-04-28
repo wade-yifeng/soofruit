@@ -42,7 +42,10 @@ var GoodSchema = new mongoose.Schema({
     sales: Number,
 
     //库存
-    balance: Number
+    balance: Number,
+
+    //创建时间
+    createTime: {type: Date, default: Date.now}
 });
 GoodSchema.plugin(require('./plugins/paged_find'));
 

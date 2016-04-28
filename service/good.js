@@ -16,8 +16,7 @@ module.exports.listPaged = function (req, res) {
     Good.pagedFind(options, function (err, doc) {
         if (err) {
             res.json({code: 500, msg: err});
-        }
-        else {
+        } else {
             res.json({code: 0, data: doc});
         }
     });
@@ -28,18 +27,15 @@ module.exports.create = function (req, res) {
     var v = ValidateGood(req.body);
     if (!v.isValid()) {
         res.json({code: 400, msg: v.msgs});
-    }
-    else {
+    } else {
         var good = new Good(req.body);
 
         good.save(function (err) {
             if (err) {
                 res.json({code: 500, msg: err});
-            }
-            else if (!good) {
+            } else if (!good) {
                 res.json({code: 100, msg: '商品创建失败'});
-            }
-            else {
+            } else {
                 res.json({code: 0, data: good._id.toString()});
             }
         });
@@ -51,8 +47,7 @@ module.exports.detail = function (req, res) {
     Good.findById(req.params._id).lean().exec(function (err, doc) {
         if (err) {
             res.json({code: 500, msg: err});
-        }
-        else {
+        } else {
             res.json({code: 0, data: doc});
         }
     });
@@ -67,13 +62,11 @@ module.exports.update = function (req, res) {
             var v = ValidateGood(req.body);
             if (!v.isValid()) {
                 res.json({code: 400, msg: v.msgs});
-            }
-            else {
+            } else {
                 Good.update({_id: req.params._id}, req.body, function (err) {
                     if (err) {
                         res.json({code: 500, msg: err});
-                    }
-                    else {
+                    } else {
                         res.json({code: 0});
                     }
                 });
@@ -87,8 +80,7 @@ module.exports.delete = function (req, res) {
     Good.remove({_id: req.params._id}, function (err) {
         if (err) {
             res.json({code: 500, msg: err});
-        }
-        else {
+        } else {
             res.json({code: 0});
 
             //同时异步删掉所有无用图片文件
@@ -125,8 +117,7 @@ module.exports.deletePic = function (req, res) {
     fs.unlink(path.resolve(uploadPath, req.params._path), function (err) {
         if (err) {
             res.json({code: 500, msg: err});
-        }
-        else {
+        } else {
             res.json({code: 0});
         }
     });
