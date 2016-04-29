@@ -47,12 +47,8 @@ module.exports.editUser = function (req, res) {
             //if (!v.isValid()) {
             //    res.json({code: 400, msg: v.msgs});
             //} else {
-            User.update({_id: req.params._id}, req.body, function (err) {
-                if (err) {
-                    res.json({code: 500, msg: err});
-                } else {
-                    res.json({code: 0});
-                }
+            update(req.body).then(function (result) {
+                res.json(result);
             });
             //}
         }
@@ -81,9 +77,23 @@ function create(userInfo) {
     });
 }
 
+function update(userInfo) {
+    return promise(function (defer) {
+        User.update({_id: userInfo._id}, userInfo, function (err) {
+            var result;
+            if (err) {
+                result = {code: 500, msg: err};
+            } else {
+                result = {code: 0};
+            }
+            defer.resolve(result);
+        });
+    });
+}
+
 function getByWechatID(unionid) {
     return promise(function (defer) {
-        User.findOne({unionid: unionid}).lean().exec(function (err, doc) {
+        User.findOne({wechatID: unionid}).lean().exec(function (err, doc) {
             var result;
             if (err) {
                 result = {code: 500, msg: err};
@@ -103,6 +113,7 @@ function promise(func) {
 }
 
 module.exports.create = create;
+module.exports.update = update;
 module.exports.getByWechatID = getByWechatID;
 
 //module.exports.list = function (req, res) {

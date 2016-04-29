@@ -17,10 +17,6 @@ module.exports.signin = function (req, res) {
         return;
     }
 
-    if (req.originalUrl != '/account') {
-
-    }
-
     if (req.query.code === undefined) {
         var absoluteURL = req.protocol + '://' + req.get('host') + req.originalUrl;
         var url = oauthApi.getAuthorizeURL(absoluteURL);
@@ -49,45 +45,78 @@ module.exports.signin = function (req, res) {
                     logger.error(err);
                 }
                 else {
-                    if (!req.session.fake) {
-                        req.session.fake = {};
-                    }
-                    req.session.fake.user = baseInfo;
-
-                    //系统无此用户,则注册微信用户到系统中
                     user.getByWechatID(baseInfo.unionid).then(function (result) {
-                        if (result.code == 0 && !result.data) {
-                            user.create({
-                                wechatID: baseInfo.unionid,
-                                nickName: baseInfo.nickname,
-                                sex: baseInfo.sex,
-                                country: baseInfo.country,
-                                province: baseInfo.province,
-                                city: baseInfo.city,
-                                headImg: baseInfo.headimgurl,
-                                subcribeTime: baseInfo.subscribe_time
-                            }).then(function (result) {
-                                if (result.code != 0) {
-                                    logger.error(result.msg);
-                                }
-                            });
-                        } else if (result.code == 0 && result.data) {
-                            //数据如有变化,更新到系统中
-                        } else {
-                            logger.error(result.msg);
-                        }
-                    });
+                            if (result.code == 0) {
+                                var entity = {
+                                    wechatID: baseInfo.unionid,
+                                    nickName: baseInfo.nickname,
+                                    sex: baseInfo.sex,
+                                    country: baseInfo.country,
+                                    province: baseInfo.province,
+                                    city: baseInfo.city,
+                                    headImg: baseInfo.headimgurl,
+                                    remark: baseInfo.remark,
+                                    subcribeTime: new Date(baseInfo.subscribe_time * 1000),
+                                    lastLoginTime: Date.now(),
+                                    username: '',
+                                    tag: '',
+                                    mobile: '',
+                                    points: 0,
+                                    isBlocked: false
+                                };
 
-                    //加一个url是/account的判断,以使测试微信post能正常运行,后期需要去掉
-                    if (req.originalUrl == '/account') {
-                        res.status(200).send(baseInfo);
-                    } else {
-                        res.redirect(targetUrl);
-                    }
+                                if (!result.data) {
+                                    //系统无此用户,则注册到系统中
+                                    user.create(entity).then(function (result) {
+                                        if (result.code != 0) {
+                                            logger.error(result.msg);
+                                        } else {
+                                            //创建后将_id更新到Session中
+                                            req.session.fake.user._id = result.data;
+                                        }
+                                    });
+                                } else {
+                                    //数据如有变化,则更新到系统中
+                                    entity._id = result.data._id;
+                                    entity.username = result.data.username;
+                                    entity.tag = result.data.tag;
+                                    entity.mobile = result.data.mobile;
+                                    entity.points = result.data.points;
+                                    entity.isBlocked = result.data.isBlocked;
+
+                                    user.update(entity).then(function (result) {
+                                        if (result.code != 0) {
+                                            logger.error(result.msg);
+                                        }
+                                    });
+                                }
+
+                                //不等待数据库更改操作,直接设置Session
+                                entity.lastLoginTime = new Date(entity.lastLoginTime);
+                                setUserSession(req, entity);
+
+                                //加一个url是/account的判断,以使测试微信post能正常运行,后期需要去掉
+                                if (req.originalUrl == '/account') {
+                                    res.status(200).send(baseInfo);
+                                } else {
+                                    res.redirect(targetUrl);
+                                }
+                            } else {
+                                logger.error(result.msg);
+                            }
+                        }
+                    );
                 }
             });
     }
 };
+
+function setUserSession(req, entity) {
+    if (!req.session.fake) {
+        req.session.fake = {};
+    }
+    req.session.fake.user = entity;
+}
 
 module.exports.getUserSession = function (req, res) {
     if (req.session && req.session.fake && req.session.fake.user) {

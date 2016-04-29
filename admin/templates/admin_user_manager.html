@@ -8,7 +8,8 @@
             <th class="text-center">User Role</th>
             <th class="text-center">Mobile</th>
             <th class="text-center">Email</th>
-            <th class="text-center">Description</th>
+            <th class="text-center">关注时间</th>
+            <th class="text-center">最后登录</th>
             <th class="text-center"></th>
         </tr>
         <tr ng-repeat="u in users">
@@ -18,7 +19,8 @@
             <td>&nbsp;&nbsp;{{u.role}}</td>
             <td>&nbsp;&nbsp;{{u.mobile}}</td>
             <td>&nbsp;&nbsp;{{u.email}}</td>
-            <td>&nbsp;&nbsp;{{u.description}}</td>
+            <td>&nbsp;&nbsp;{{formatDatetime(u.subcribeTime)}}</td>
+            <td>&nbsp;&nbsp;{{formatDatetime(u.lastLoginTime)}}</td>
             <td class="text-center">
                 <input class="btn btn-sm" type="button" ng-click="deleteUser(u._id)" value="Delete">
             </td>

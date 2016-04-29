@@ -1,13 +1,13 @@
 <section class="main-view container" ng-controller="My">
     <div class="my my_head">
         <div class="my_head_pic pull-left">
-            <img id="uinLogo" class="my_head_img" src="{{userInfo.headimgurl}}">
+            <img id="uinLogo" class="my_head_img" src="{{userInfo.headImg.substr(0,userInfo.headImg.length-1)+'132'}}">
         </div>
         <div class="my_head_info pull-left">
-            <h4 id="nickname" class="my_head_name">{{userInfo.nickname}}<span class="vip_icon"></span><span
-                    class="vip_text">VIP1</span></h4>
-            <h4 id="nickname" class="my_head_name">187****8069</h4>
-            <h4 id="nickname" class="my_head_name">加入时间: 2016-04-17 15:59</h4>
+            <h4 class="my_head_name">{{userInfo.nickName}}<span class="vip_icon"></span>
+                <span class="vip_text">VIP1</span></h4>
+            <h4 class="my_head_name">187****8069</h4>
+            <h4 class="my_head_name">加入时间: {{formatDate(userInfo.subcribeTime)}}</h4>
         </div>
     </div>
 

@@ -7,38 +7,55 @@ var mongoose = require('mongoose');
  */
 var UserSchema = new mongoose.Schema({
 
-    //unionid: 用户微信ID
+    //微信参数unionid: 用户微信ID
     wechatID: {type: String, unique: true},
 
-    //nickname: 用户微信昵称
+    //微信参数nickname: 用户微信昵称
     nickName: String,
 
-    //sex: 性别 (值为1时是男性，值为2时是女性，值为0时是未知)
+    //微信参数sex: 性别(值为1时是男性，值为2时是女性，值为0时是未知)
     sex: Number,
 
-    //country: 用户所在国家
+    //微信参数country: 用户所在国家
     country: String,
 
-    //province:	用户所在省份
+    //微信参数province: 用户所在省份
     province: String,
 
-    //city: 用户所在城市(直辖市时对应城区, 例如: 浦东新区)
+    //微信参数city: 用户所在城市(直辖市时对应城区，例如: 浦东新区)
     city: String,
 
-    //headimgurl: 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像）.
+    //微信参数headimgurl: 用户头像，最后一个数值代表正方形头像大小(有0、46、64、96、132数值可选，0代表640*640正方形头像).
     //用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。
     headImg: String,
 
-    //subscribe_time: 用户关注时间，为时间戳. 如果用户曾多次关注，则取最后关注时间.
-    subcribeTime: Date
+    //微信参数remark: 微信公众号运营者对粉丝的备注
+    remark: String,
 
-    //username: String,
-    //
+    //微信参数subscribe_time: 用户关注时间，为时间戳. 如果用户曾多次关注，则取最后关注时间.
+    subcribeTime: Date,
+
+    //最后一次登录时间
+    lastLoginTime: Date,
+
+    //用户名
+    username: String,
+
+    //用户标签(通过专门微信接口获取，暂时用来管理权限，比如:SuperAdmin)
+    tag: String,
+
+    //默认手机号码
+    mobile: String,
+
+    //用户积分
+    points: Number,
+
+    //帐号是否锁定
+    isBlocked: Boolean
+
     //password: String,
     //
     //appUserId: String,
-    //
-    //mobile: String,
     //
     //email: String,
     //
@@ -52,8 +69,6 @@ var UserSchema = new mongoose.Schema({
     //
     //isDeleted: { type: Boolean, default: false},
     //
-    //lastLoginTime: Date,
-    //
     //createTime: { type: Date, default: Date.now},
     //
     //isBlocked: { type: Boolean, default: false},
@@ -61,7 +76,6 @@ var UserSchema = new mongoose.Schema({
     //activeTime: Date
 });
 
-UserSchema.index({wechatID: 1});
 UserSchema.plugin(require('./plugins/paged_find'));
 
 //UserSchema.pre('save', function (next) {

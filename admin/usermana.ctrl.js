@@ -4,11 +4,11 @@ var title = 'User Management';
 app.controller('UserMana', function ($scope, UserManaSvc, $http) {
     document.title = title;
 
-    UserManaSvc.listPaged(1).then(function(result){
+    UserManaSvc.listPaged(1).then(function (result) {
         $scope.users = result.data;
     });
 
-    $http.get('/roleCategories').success(function (result){
+    $http.get('/roleCategories').success(function (result) {
         $scope.RoleCategories = result;
     });
 
@@ -36,4 +36,8 @@ app.controller('UserMana', function ($scope, UserManaSvc, $http) {
     //        }
     //    });
     //};
+
+    $scope.formatDatetime = function (datetime) {
+        return new Date(datetime).toLocaleString();
+    }
 });
