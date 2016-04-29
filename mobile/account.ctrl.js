@@ -1,9 +1,9 @@
 var app = angular.module('mobile');
 
-app.controller('My', function ($scope, AccountSvc) {
+app.controller('My', function ($scope, ShareSvc) {
     document.title = '个人中心';
 
-    AccountSvc.getUserInfo().then(function (result) {
+    ShareSvc.user().then(function (result) {
         $scope.userInfo = result;
     });
 

@@ -9,18 +9,23 @@ var OrderSchema = new mongoose.Schema({
     //商品
     goods: [{
         goodID: ObjectId,
+        name: String,
         sellPrice: Number,
+        pic: String,
         quantity: Number
     }],
 
     //用户ID
-    userID: String,
+    userID: ObjectId,
 
     //订单状态
     status: Number,
 
     //订单总额
     totalAmount: Number,
+
+    //实际付款
+    payAmount: Number,
 
     //优惠券减免额度
     couponDeduction: {type: Number, default: 0},

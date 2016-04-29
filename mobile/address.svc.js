@@ -11,8 +11,10 @@ app.factory('AddressSvc', function ($http, ShareSvc) {
         },
         list: function () {
             return ShareSvc.promise(function (defer) {
-                $http.get('/addresses/' + ShareSvc.UserID).success(function (result) {
-                    httpSuccess(result, defer, true);
+                ShareSvc.user().then(function (user) {
+                    $http.get('/addresses/' + user._id).success(function (result) {
+                        httpSuccess(result, defer, true);
+                    });
                 });
             });
         },

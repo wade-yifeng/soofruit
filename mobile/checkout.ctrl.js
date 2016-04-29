@@ -1,18 +1,20 @@
 var app = angular.module('mobile');
 
-app.controller('Checkout', function ($scope, CartSvc, AddressSvc, ShareSvc, $state) {
+app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, OrderSvc, $state) {
     document.title = '北海之南大果园 - 购物结算';
     $scope.state = 'checkout';
 
-    AddressSvc.getDefault(ShareSvc.UserID).then(function (address) {
-        if (!address) {
-            showInfo('请先添加一个收货地址');
-            $scope.firstAddress = true;
-            $state.go('checkout.addressEdit');
-            showAddressDialog();
-        } else {
-            $scope.initialAddress = address;
-        }
+    ShareSvc.user().then(function (user) {
+        AddressSvc.getDefault(user._id).then(function (address) {
+            if (!address) {
+                showInfo('请先添加一个收货地址');
+                $scope.firstAddress = true;
+                $state.go('checkout.addressEdit');
+                showAddressDialog();
+            } else {
+                $scope.initialAddress = address;
+            }
+        });
     });
 
     CartSvc.getCartSession().then(function (cart) {
@@ -43,14 +45,27 @@ app.controller('Checkout', function ($scope, CartSvc, AddressSvc, ShareSvc, $sta
     };
 
     $scope.pay = function () {
-        // 子scope无法更新由父scope初始化的父scope值initialAddress. 所以重选地址之后使用address.
         var orderAddress = $scope.getSelectedAddress();
+        var couponDeduction = $scope.couponDeduction || 0;
 
         // 生成订单
+        ShareSvc.user().then(function (user) {
+            OrderSvc.create({
+                goods: $scope.cart.goods,
+                userID: user._id,
+                status: OrderStatus.AwaitPay,
+                totalAmount: $scope.totalAmount,
+                payAmount: totalAmount - couponDeduction,
+                couponDeduction: couponDeduction,
+                createTime: Date.now(),
+                addressID: orderAddress._id
+            }).then(function () {
 
-        // 支付
+                // 支付
 
-        // 支付成功更新订单
+                // 支付成功更新订单
+            });
+        });
     };
 
     $scope.updateFirstAddressFlag = function (flag) {
@@ -62,6 +77,7 @@ app.controller('Checkout', function ($scope, CartSvc, AddressSvc, ShareSvc, $sta
     };
 
     $scope.getSelectedAddress = function () {
+        // 子scope无法更新由父scope初始化的父scope值initialAddress. 所以重选地址之后使用address.
         return $scope.address || $scope.initialAddress;
     };
 

@@ -3,6 +3,7 @@ var account = require('./service/account');
 var cart = require('./service/cart');
 var addressOrigin = require('./service/address_origin');
 var address = require('./service/address');
+var order = require('./service/order');
 
 //wechat reply.post测试所用route
 router.get('/account', account.signin);
@@ -20,5 +21,11 @@ router.get('/address/:_id', address.detail)
     .put('/address/:_id', address.update)
     .delete('/address/:_id', address.delete);
 router.get('/addressDefault/:userID', address.default);
+
+router.get('/ordersPaged', order.listPaged)
+    .post('/orders', order.create);
+router.get('/orders/:_id', order.detail)
+    .put('/orders/:_id', order.update)
+    .delete('/orders/:_id', order.delete);
 
 module.exports = router;

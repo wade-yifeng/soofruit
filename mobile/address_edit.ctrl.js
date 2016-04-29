@@ -47,12 +47,14 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
                 });
             });
     } else {
-        $scope.address = {userID: ShareSvc.UserID};
+        ShareSvc.user().then(function (user) {
+            $scope.address = {userID: user._id};
 
-        AddressSvc.originList(AddressLevel.Province, 0).then(function (list) {
-            initProvinces(list);
-            initCities(emptyCities);
-            initDistricts(emptyDistricts);
+            AddressSvc.originList(AddressLevel.Province, 0).then(function (list) {
+                initProvinces(list);
+                initCities(emptyCities);
+                initDistricts(emptyDistricts);
+            });
         });
     }
 
@@ -81,22 +83,24 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
 
     $scope.save = function () {
         if (!$scope.address._id) {
-            $scope.address.userID = ShareSvc.UserID;
-            if ($scope.$parent.firstAddress) {
-                $scope.address.isDefault = true;
-            }
-            AddressSvc.create($scope.address).then(function (newID) {
-                var info = '收货地址创建成功';
+            ShareSvc.user().then(function (user) {
+                $scope.address.userID = user._id;
                 if ($scope.$parent.firstAddress) {
-                    $scope.address._id = newID;
-                    showInfo(info);
-                    hideAddressDialog();
-                    $scope.updateSelectedAddress($scope.address);
-                    $scope.updateFirstAddressFlag(false);
+                    $scope.address.isDefault = true;
                 }
-                else {
-                    $scope.redirect(info);
-                }
+                AddressSvc.create($scope.address).then(function (newID) {
+                    var info = '收货地址创建成功';
+                    if ($scope.$parent.firstAddress) {
+                        $scope.address._id = newID;
+                        showInfo(info);
+                        hideAddressDialog();
+                        $scope.updateSelectedAddress($scope.address);
+                        $scope.updateFirstAddressFlag(false);
+                    }
+                    else {
+                        $scope.redirect(info);
+                    }
+                });
             });
         } else {
             AddressSvc.update($scope.address).then($scope.redirect);

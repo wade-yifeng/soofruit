@@ -4,24 +4,28 @@ app.factory('CartSvc', function ($http, ShareSvc) {
     return {
         create: function (good) {
             return ShareSvc.promise(function (defer) {
-                $http.post('/cart', {
-                    userID: ShareSvc.UserID,
-                    goods: [{
-                        goodID: good._id,
-                        name: good.name,
-                        sellPrice: good.sellPrice,
-                        pic: good.pics[0],
-                        quantity: 1
-                    }]
-                }).success(function (result) {
-                    httpSuccess(result, defer, true);
+                ShareSvc.user().then(function (user) {
+                    $http.post('/cart', {
+                        userID: user._id,
+                        goods: [{
+                            goodID: good._id,
+                            name: good.name,
+                            sellPrice: good.sellPrice,
+                            pic: good.pics[0],
+                            quantity: 1
+                        }]
+                    }).success(function (result) {
+                        httpSuccess(result, defer, true);
+                    });
                 });
             });
         },
         get: function () {
             return ShareSvc.promise(function (defer) {
-                $http.get('/cart/' + ShareSvc.UserID).success(function (result) {
-                    httpSuccess(result, defer, true);
+                ShareSvc.user().then(function (user) {
+                    $http.get('/cart/' + user._id).success(function (result) {
+                        httpSuccess(result, defer, true);
+                    });
                 });
             });
         },
@@ -54,17 +58,19 @@ app.factory('CartSvc', function ($http, ShareSvc) {
                         defer.resolve();
                     });
                 }, function () {
-                    self.setCartSession({
-                        userID: ShareSvc.UserID,
-                        goods: [{
-                            goodID: good._id,
-                            name: good.name,
-                            sellPrice: good.sellPrice,
-                            pic: good.pics[0],
-                            quantity: 1
-                        }]
-                    }).then(function () {
-                        defer.resolve();
+                    ShareSvc.user().then(function (user) {
+                        self.setCartSession({
+                            userID: user._id,
+                            goods: [{
+                                goodID: good._id,
+                                name: good.name,
+                                sellPrice: good.sellPrice,
+                                pic: good.pics[0],
+                                quantity: 1
+                            }]
+                        }).then(function () {
+                            defer.resolve();
+                        });
                     });
                 });
             });
