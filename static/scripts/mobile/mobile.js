@@ -46,8 +46,23 @@ var initCartIcon = function (cart, showDirectly) {
     }
 };
 
-var activateNav = function (index) {
+var activateNav = function (type) {
+    var index;
     delay(function () {
+        if (type == 'cart') {
+            document.title = '我的购物车';
+            index = 0;
+        } else if (type == 'ongoing') {
+            document.title = '我的未完成订单';
+            index = 1;
+        } else if (type == 'done') {
+            document.title = '我的已完成订单';
+            index = 2;
+        } else if (type == 'all') {
+            document.title = '我的全部订单';
+            index = 3;
+        }
+
         $('.nav-fixed .fixed-nav-item-orders').eq(index).addClass('nav-cur').siblings().removeClass('nav-cur');
     });
 };

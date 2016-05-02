@@ -37,15 +37,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'Checkout',
             templateUrl: '/views/checkout.html'
         })
-        .state('ordersOngoing', {
-            url: '/ordersOngoing/',
-            controller: 'OrdersOngoing',
-            templateUrl: '/views/orders_ongoing.html'
+        .state('orders', {
+            url: '/orders/:listType',
+            controller: 'Orders',
+            templateUrl: '/views/orders.html'
         })
-        .state('ordersDone', {
-            url: '/ordersDone/',
-            controller: 'OrdersDone',
-            templateUrl: '/views/orders_done.html'
+        .state('orderDetail', {
+            url: '/order/:orderID',
+            controller: 'orderDetail',
+            templateUrl: '/views/order_detail.html'
         })
         .state('my', {
             url: '/my/',

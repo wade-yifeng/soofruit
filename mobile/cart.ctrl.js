@@ -1,8 +1,7 @@
 var app = angular.module('mobile');
 
 app.controller('Cart', function ($scope, CartSvc, $state) {
-    document.title = '我的购物车';
-    activateNav(0);
+    activateNav('cart');
     $scope.checkedAll = false;
     $scope.totalAmount = 0;
 
