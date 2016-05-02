@@ -4,31 +4,28 @@
         <div ng-include="'/views/cart_orders_nav.html'"></div>
 
         <div id="order-list-container">
-            <div class="deal-list-status">
-                <div class="orders-order">
+            <div class="deal-list-status" ng-hide="orders.length==0">
+                <div class="orders-order" ng-repeat="order in orders">
                     <div>
-                        <a>
+                        <a ui-sref="order({orderID:'{{order._id}}'})">
                             <div class="orders-order-glist">
                                 <div class="orders-mall-title">
                                     <img class="_icon"
                                          src="http://omsproduction.b0.upaiyun.com/goods/d06f144f1d/310/310/de34736278c65349a2bd1533a8448f42.jpg">
-                                    <span class="_mall_name">益果汇</span>
-                                    <span class="_order_status">已完成</span>
+                                    <span class="_mall_name">北海之南大果园</span>
+                                    <span class="_order_status">{{getStatusName(order.status)}}</span>
                                 </div>
                             </div>
-                            <div class="orders-order-goods">
+                            <div class="orders-order-goods" ng-repeat="good in order.goods">
                                 <div class="orders-order-goods-img">
-                                    <img src="http://omsproduction.b0.upaiyun.com/goods/280b2c9f2b7c3361c7bb95ae75c5a1c5813244b9f9.jpg">
+                                    <img src="/assets/imgs/upload/{{good.pic}}">
                                 </div>
                                 <div class="orders-order-goods-name">
-                                    <div class="_goods_name">9.8元越南青芒2斤（4个左右）进口芒果 新鲜水果（江浙沪专享）（预售，4月27日完成发货）</div>
-                                    <!--ms-if-->
+                                    <div class="_goods_name">{{good.name}}</div>
                                 </div>
                                 <div class="orders-order-goods-payed">
-                                    <!--ms-if-->
-                                    <div class="payed-head">实付:</div>
-                                    <div class="payed-amount">￥19.00</div>
-                                    <div class="payed-free">(免运费)</div>
+                                    <div class="payed-head">{{good.sellPrice|currency:'￥'}}</div>
+                                    <div class="payed-amount">&nbsp;x {{good.quantity}}</div>
                                 </div>
                             </div>
                         </a>
@@ -36,82 +33,25 @@
                             <div class="orders-order-ft">
                                 <div class="orders-order-opt">
                                     <div class="orders-order-btn">
-                                        <a class="_order_btn_cancel">查看详情</a>
+                                        <div class="orders-order-goods-payed pull-left" style="left:0;">
+                                            <div class="payed-head">实付:</div>
+                                            <div class="payed-amount">{{order.totalAmount|currency:'￥'}}</div>
+                                            <div class="payed-free">&nbsp;(免运费)</div>
+                                        </div>
+                                        <div ng-show="order.status=='AwaitPay'">
+                                            <a class="_order_btn_buy" ui-sref="order({orderID:'{{order._id}}'})">去支付</a>
+                                            <a class="_order_btn_cancel" ng-click="cancelOrder(order._id)">取消订单</a>
+                                        </div>
+                                        <a class="_order_btn_receive" ng-show="order.status=='AwaitPick'"
+                                           ng-click="cancelOrder(order._id)">确认收货</a>
+                                        <a class="_order_btn_cancel" ng-hide="order.status=='AwaitPay'"
+                                           ui-sref="order({orderID:'{{order._id}}'})">查看详情</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="orders-order">
-                    <div>
-                        <a>
-                            <div class="orders-order-glist">
-                                <div class="orders-mall-title">
-                                    <img class="_icon"
-                                         src="http://omsproduction.b0.upaiyun.com/goods/d06f144f1d/310/310/de34736278c65349a2bd1533a8448f42.jpg">
-                                    <span class="_mall_name">益果汇</span>
-                                    <span class="_order_status">待支付</span>
-                                </div>
-                            </div>
-                            <div class="orders-order-goods">
-                                <div class="orders-order-goods-img">
-                                    <img src="http://omsproduction.b0.upaiyun.com/goods/280b2c9f2b7c3361c7bb95ae75c5a1c5813244b9f9.jpg">
-                                </div>
-                                <div class="orders-order-goods-name">
-                                    <div class="_goods_name">9.8元越南青芒2斤（4个左右）进口芒果 新鲜水果（江浙沪专享）（预售，4月27日完成发货）</div>
-                                    <!--ms-if-->
-                                </div>
-                                <div class="orders-order-goods-payed">
-                                    <!--ms-if-->
-                                    <div class="payed-head">实付:</div>
-                                    <div class="payed-amount">￥19.00</div>
-                                    <div class="payed-free">(免运费)</div>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="orders-order-bd-bottom">
-                            <div class="orders-order-ft">
-                                <div class="orders-order-opt">
-                                    <div class="orders-order-btn">
-                                        <a class="_order_btn_buy">去支付</a>
-                                        <a class="_order_btn_cancel">取消支付</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="orders-order">
-                    <div class="orders-lottery-status undefined"></div>
-                    <div>
-                        <a>
-                            <div class="orders-order-glist">
-                                <div class="orders-mall-title">
-                                    <img class="_icon" src="http://pinduoduo.b0.upaiyun.com/base/logo.jpg">
-                                    <span class="_mall_name">拼多多</span>
-                                    <span class="_order_status">交易已取消</span>
-                                </div>
-                            </div>
-                            <div class="orders-order-goods">
-                                <div class="orders-order-goods-img">
-                                    <img src="http://omsproduction.b0.upaiyun.com/goods/4a607329a87080b6838b3d965c79da7b8e1ee682fa.jpg">
-                                </div>
-                                <div class="orders-order-goods-name">
-                                    <div class="_goods_name">1.02元1个泰国进口榴莲（3-4斤）再慢就被别人抢完啦！【限量250份】</div>
-                                    <!--ms-if-->
-                                </div>
-                                <div class="orders-order-goods-payed">
-                                    <!--ms-if-->
-                                    <div class="payed-head">实付:</div>
-                                    <div class="payed-amount">￥1.02</div>
-                                    <div class="payed-free">(免运费)</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
 
                 <div class="wrap_position pullUp_show">
                     <div class="posi_abso up">
@@ -122,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="empty-list list-finished">
+            <div class="empty-list list-finished" ng-show="orders.length==0">
                 <div>
                     <h4>居然还没有订单</h4>
                     <p class="font-size-12">好东西，手慢无</p>

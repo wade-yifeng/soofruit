@@ -7,6 +7,26 @@ var logger = require('../lib/logger');
 module.exports.signin = function (req, res) {
     var targetUrl = req.params.targetUrl;
 
+    ////dev测试数据
+    //setUserSession(req, {
+    //    "wechatID": "oLrdbwNK9rd2hFQ1SFG1wglLr5KI",
+    //    "nickName": "DreamsAchieved",
+    //    "sex": 1,
+    //    "country": "\xe4\xb8\xad\xe5\x9b\xbd",
+    //    "province": "\xe4\xb8\x8a\xe6\xb5\xb7",
+    //    "city": "\xe6\xb5\xa6\xe4\xb8\x9c\xe6\x96\xb0\xe5\x8c\xba",
+    //    "headImg": "http://wx.qlogo.cn/mmopen/jYqyn1Qzc2MY19LmST9wNlxoDjWzmOTsvFNDnhqo3nXRTclFhibkpBMzeznl5qetaBRjcsp1iaTOPPtgabMxFs3ywnl44EMp5l/0",
+    //    "remark": "",
+    //    "subcribeTime": "2016-03-15T07:49:32.000Z",
+    //    "lastLoginTime": "2016-05-02T09:28:04.479Z",
+    //    "username": "",
+    //    "tag": "",
+    //    "mobile": "",
+    //    "points": 0,
+    //    "isBlocked": false,
+    //    "_id": "5723a9a96b9c56b864ee58d9"
+    //});
+
     if (req.session && req.session.fake && req.session.fake.user) {
         //加一个url是/account的判断,以使测试微信post能正常运行,后期需要去掉
         if (req.originalUrl == '/account') {

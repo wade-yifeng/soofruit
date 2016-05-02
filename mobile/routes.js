@@ -42,7 +42,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'Orders',
             templateUrl: '/views/orders.html'
         })
-        .state('orderDetail', {
+        .state('order', {
             url: '/order/:orderID',
             controller: 'orderDetail',
             templateUrl: '/views/order_detail.html'

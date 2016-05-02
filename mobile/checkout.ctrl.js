@@ -18,6 +18,7 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
     });
 
     CartSvc.getCartSession().then(function (cart) {
+        $scope.originCart = cart;
         $scope.cart = $.extend(true, {}, cart);
         $scope.cart.goods = [];
         cart.goods.forEach(function (good) {
@@ -48,6 +49,11 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
         var orderAddress = $scope.getSelectedAddress();
         var couponDeduction = $scope.couponDeduction || 0;
 
+        if (!orderAddress) {
+            showInfo('请先添加或者选择一个收货地址');
+            return;
+        }
+
         // 生成订单
         ShareSvc.user().then(function (user) {
             OrderSvc.create({
@@ -55,15 +61,22 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
                 userID: user._id,
                 status: OrderStatus.AwaitPay,
                 totalAmount: $scope.totalAmount,
-                payAmount: totalAmount - couponDeduction,
+                payAmount: $scope.totalAmount - couponDeduction,
                 couponDeduction: couponDeduction,
                 createTime: Date.now(),
                 addressID: orderAddress._id
-            }).then(function () {
+            }).then(function (orderID) {
+                // 从购物车清除已买东西
+                $scope.cart.goods.forEach(function (good) {
+                    var idArr = getIdArrOfGoods($scope.originCart.goods);
+                    $scope.originCart.goods.splice(idArr.indexOf(good.goodID), 1);
+                });
+                CartSvc.setCartSession($scope.originCart);
 
                 // 支付
 
-                // 支付成功更新订单
+                // 支付成功更新订单,并跳转到订单详情
+                $state.go('order', {orderID: orderID});
             });
         });
     };

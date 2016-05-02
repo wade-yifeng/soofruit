@@ -3,32 +3,31 @@
  */
 module.exports.OrderStatus = {
 
+    //已取消
+    Cancelled: 'Cancelled',
+
     //待付款
     AwaitPay: 'AwaitPay',
 
     //已付款
     Payed: 'Payed',
 
-    //已收货
-    Picked: 'Picked',
+    //待收货
+    AwaitPick: 'AwaitPick',
 
     //已成交
-    Finish: 'Finish',
-
-    //已撤销
-    Cancelled: 'Cancelled'
+    Done: 'Done'
 };
 
-/**
- * 角色分类枚举
- */
-module.exports.RoleCategory = {
+module.exports.OrdersListType = {
+    //未完成订单
+    Ongoing: 'Ongoing',
 
-    Admin: 'Administrator',
+    //已完成订单
+    Done: 'Done',
 
-    Agency: 'Agency',
-
-    User: 'Common User'
+    //全部订单
+    All: 'All'
 };
 
 /**
@@ -41,4 +40,16 @@ module.exports.AddressLevel = {
     City: 'City',
 
     District: 'District'
+};
+
+/**
+ * 角色分类枚举
+ */
+module.exports.RoleCategory = {
+
+    Admin: 'Administrator',
+
+    Agency: 'Agency',
+
+    User: 'Common User'
 };

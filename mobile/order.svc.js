@@ -2,9 +2,9 @@ var app = angular.module('mobile');
 
 app.factory('OrderSvc', function ($http, ShareSvc) {
     return {
-        listPaged: function (page) {
+        listPaged: function (listType, page) {
             return ShareSvc.promise(function (defer) {
-                $http.get('/ordersPaged?page=' + page).success(function (result) {
+                $http.get('/ordersPaged?listType=' + listType + '&page=' + page).success(function (result) {
                     httpSuccess(result, defer, true);
                 });
             });

@@ -14613,7 +14613,9 @@ input[type=text], textarea {
 
 .vip_icon {
     display: inline-block;
+    position: relative;
     margin-left: 5px;
+    top: 3px;
     width: 20px;
     height: 20px;
     background: url(/assets/imgs/mobile/icons.png) -130px 6px no-repeat;
@@ -14621,7 +14623,6 @@ input[type=text], textarea {
 }
 
 .vip_text {
-    margin-left: 20px;
     color: purple;
 }
 
@@ -14945,11 +14946,6 @@ input[type=text], textarea {
     background-color: #ef293c
 }
 
-.orders-order-btn ._order_btn_receive:before {
-    border: 0;
-    content: "\786E\8BA4\6536\8D27"
-}
-
 .orders-order-btn ._order_btn_shipping {
     color: #686868;
     background-color: #fff
@@ -15220,28 +15216,24 @@ input[type=text], textarea {
     background-size: 50px 50px
 }
 
+.order-banner .order_cancel {
+    background-image: url(/assets/imgs/mobile/order_cancel.png)
+}
+
 .order-banner .order_unpay {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/order_unpay-1a56912e68.png)
+    background-image: url(/assets/imgs/mobile/order_unpay.png)
 }
 
 .order-banner .order_payed {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/order_payed-b65366e307.png)
-}
-
-.order-banner .order_shiping {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/order_shiping-b2f082d552.png)
+    background-image: url(/assets/imgs/mobile/order_payed.png)
 }
 
 .order-banner .order_receive {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/order_receive-d111b979c1.png)
+    background-image: url(/assets/imgs/mobile/order_receive.png)
 }
 
 .order-banner .order_received {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/order_received-d256f6ba59.png)
-}
-
-.order-banner .order_cancel {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/order_cancel-6b3d5da69a.png)
+    background-image: url(/assets/imgs/mobile/order_received.png)
 }
 
 .order-banner ._banner_txt {
@@ -15455,10 +15447,9 @@ input[type=text], textarea {
     font-size: 13px;
     right: 75px;
     color: #1a1a1a;
-    margin-left: 12px;
+    margin-left: 85px;
     max-height: 77px;
-    overflow: hidden;
-    display: inline-block
+    overflow: hidden
 }
 
 .order-order-goods-name ._goods_name {
@@ -15481,27 +15472,14 @@ input[type=text], textarea {
 
 .order-order-goods-attr {
     float: right;
-    width: 50px
+    margin-top: 6px;
 }
 
-.order-order-goods-price {
-    float: right;
-    font-size: 13px
-}
-
-.order-order-goods-price ._price {
+.order-order-goods-attr ._price {
     color: #1a1a1a
 }
 
-.order-order-goods-price ._coupon_des {
-    font-size: 12px
-}
-
-.order-order-goods-price div {
-    text-align: right
-}
-
-.order-order-goods-price ._num {
+.order-order-goods-attr ._num {
     color: #878787
 }
 
@@ -15841,11 +15819,4 @@ input[type=text], textarea {
 
 #order-list-container .orders-order-goods-name {
     margin-left: 90px;
-}
-
-.orders-order-goods-img img {
-    display: block;
-    width: 77px;
-    height: 77px;
-    border: 1px solid #ededed;
 }

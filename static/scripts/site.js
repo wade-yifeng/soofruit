@@ -1,4 +1,4 @@
-var httpSuccess = function (result, defer, withData) {
+function httpSuccess(result, defer, withData) {
     if (result.code == 0) {
         if (withData)
             defer.resolve(result.data);
@@ -16,23 +16,32 @@ var httpSuccess = function (result, defer, withData) {
 
         defer.reject();
     }
-};
+}
 
-var alignMsgs = function (msgs) {
+function alignMsgs(msgs) {
     return msgs.map(function (item) {
         return item.msg;
     }).join('<br/>');
-};
+}
 
-var delay = function (func) {
+function delay(func) {
     setTimeout(func, 50);
-};
+}
 
-var showConfirm = function (info) {
+function formatDatetime(datetime, showTime) {
+    datetime = new Date(datetime);
+    var result = datetime.getFullYear() + '-' + (datetime.getMonth() + 1) + '-' + datetime.getDate();
+    if (showTime) {
+        result += ' ' + datetime.getHours() + ':' + datetime.getMinutes() + ':' + datetime.getSeconds();
+    }
+    return result;
+}
+
+function showConfirm(info) {
     $('#dialogConfirm p').text(info);
     $('#dialogConfirm').modal('show');
-};
+}
 
-var hideConfirm = function () {
+function hideConfirm() {
     $('#dialogConfirm').modal('hide');
-};
+}

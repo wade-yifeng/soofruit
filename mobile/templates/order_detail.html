@@ -1,22 +1,24 @@
 <div class="container" style="min-height: 361px;" ng-controller="orderDetail">
     <div>
         <div class="order-banner">
-            <div class="_banner_img order_unpay">
+            <div class="_banner_img {{getStatusInfo(order.status).imgClass}}">
             </div>
             <div class="_banner_txt">
-                <div class="_msg_tag">等待买家付款</div>
+                <div class="_msg_tag">{{getStatusInfo(order.status).longName}}</div>
                 <div class="_msg_content"></div>
             </div>
         </div>
 
         <div class="order-address-info">
-            <img class="order-address-icon" src="http://cdn.yangkeduo.com/assets/img/address_locate-a8a004db65.png">
+            <img class="order-address-icon" src="/assets/imgs/mobile/address_locate.png">
             <div class="order-address-body">
                 <div class="address-body-top">
-                    <div class="_address_person">收货人：dfasdf</div>
-                    <div class="_address_mobile">12345678901</div>
+                    <div class="_address_person">收货人：{{address.receiver}}</div>
+                    <div class="_address_mobile">{{address.phone}}</div>
                 </div>
-                <div class="address-body-detail">收货地址：北京 西城区 dfasdfasd</div>
+                <div class="address-body-detail">收货地址：{{address.province}} {{address.city}} {{address.district}}
+                    {{address.detail}}
+                </div>
             </div>
         </div>
 
@@ -25,24 +27,20 @@
                 <div class="order-mall-title">
                     <img class="_icon"
                          src="http://omsproduction.b0.upaiyun.com/goods/5061b215b5/310/310/d7af9f343bb4817a746b0af612cc7324.jpg">
-                    <span class="_mall_name">九阳官方旗舰店</span>
-                    <span class="_order_status">待支付</span>
+                    <span class="_mall_name">北海之南大果园</span>
+                    <span class="_order_status">{{getStatusInfo(order.status).shortName}}</span>
                 </div>
             </div>
-            <div class="order-order-goods">
-                <div class="order-order-goods-img">
-                    <img src="http://testpdd.b0.upaiyun.com/goods/d41d8cd98f271d9f94ff67f9d97643c36821ef01db.jpg">
+            <div class="order-order-goods" ng-repeat="good in order.goods">
+                <div class="orders-order-goods-img" style="margin-left:0;">
+                    <span style="background: url(/assets/imgs/upload/{{good.pic}}) no-repeat #fff;background-size: 130px auto;"></span>
                 </div>
-                <div class="order-order-goods-name" style="width: 470px;">
-                    <div class="_goods_name">799元 九阳JYL-Y92 加热破壁机家用多功能智能破壁料理宝宝辅食进口玻璃养生机</div>
+                <div class="order-order-goods-name">
+                    <div class="_goods_name">{{good.name}}</div>
                 </div>
                 <div class="order-order-goods-attr">
-                    <div class="order-order-goods-attr-item">
-                        <div class="order-order-goods-price">
-                            <div class="_price"><i>￥</i>1298.00</div>
-                            <div class="_num">×1</div>
-                        </div>
-                    </div>
+                    <span class="_price">{{good.sellPrice|currency:'￥'}}
+                        <span class="_num">× {{good.quantity}}</span></span>
                 </div>
                 <div class="order-order-group-detail">
                 </div>
@@ -51,7 +49,10 @@
                 <div class="order-order-ft">
                     <div class="order-order-total">
                         <div class="_right">
-                            <div class="_order_price">共1件商品&nbsp;合计：<span>￥&nbsp;1298.00</span>&nbsp;(免运费)</div>
+                            <div class="_order_price">
+                                共{{order.goods.length}}件商品&nbsp;合计：
+                                <span>{{order.totalAmount|currency:'￥'}}</span>&nbsp;(免运费)
+                            </div>
                         </div>
                     </div>
                     <div class="order-order-more-info">
@@ -73,7 +74,7 @@
             <div class="order-detail-row">
                 <div class="_row_key">订单编号：</div>
                 <div class="_row_value">
-                    <span>160502-35487738898</span>
+                    <span>{{order._id}}</span>
                 </div>
             </div>
             <div class="order-detail-row">
@@ -82,7 +83,7 @@
             </div>
             <div class="order-detail-row">
                 <div class="_row_key">下单时间：</div>
-                <div class="_row_value">2016-05-02 10:27:24</div>
+                <div class="_row_value">{{formatDatetime(order.createTime)}}</div>
             </div>
 
             <div class="order-detail-row" style="display: none;">
@@ -107,9 +108,10 @@
         </div>
 
         <div class="order-state-btn">
-            <a class="_state_btn_2 action_button"></a>
-            <a class="_state_btn_1 action_button"></a>
-
+            <a class="_state_btn_2 action_button" ng-show="order.status=='AwaitPay'"></a>
+            <a class="_state_btn_1 action_button" ng-show="order.status=='AwaitPay'"></a>
+            <a class="_state_btn_3 action_button" ng-show="order.status=='AwaitPick'"></a>
+            <a class="_state_btn_5 action_button" ng-show="order.status=='AwaitPick'||order.status=='Done'"></a>
         </div>
     </div>
     <div class="order-detail-bottom"></div>

@@ -7,7 +7,7 @@
             <h4 class="my_head_name">{{userInfo.nickName}}<span class="vip_icon"></span>
                 <span class="vip_text">VIP1</span></h4>
             <h4 class="my_head_name">187****8069</h4>
-            <h4 class="my_head_name">加入时间: {{formatDate(userInfo.subcribeTime)}}</h4>
+            <h4 class="my_head_name">加入时间: {{formatDatetime(userInfo.subcribeTime)}}</h4>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
         <div class="nav_item nav_order">
             <div class="nav_item_order_hd">
                 <div class="nav_item_order">我的订单</div>
-                <div class="nav_item_order_bd" ui-sref="orders({listType:'all'})">查看全部订单
+                <div class="nav_item_order_bd" ui-sref="orders({listType:'All'})">查看全部订单
                     <img class="nav_item_order_bd_arrow"
                          src="http://cdn.yangkeduo.com/assets/img/personal_arrow-dd13467d78.png">
                 </div>
@@ -25,11 +25,11 @@
                     <div class="nav_item_order_img order_unreceived"></div>
                     <span class="nav_item_txt">购物车<!--ms-if--></span>
                 </a>
-                <a ui-sref="orders({listType:'ongoing'})">
+                <a ui-sref="orders({listType:'Ongoing'})">
                     <div class="nav_item_order_img order_unpay"></div>
                     <span class="nav_item_txt">未完成<!--ms-if--></span>
                 </a>
-                <a ui-sref="orders({listType:'done'})">
+                <a ui-sref="orders({listType:'Done'})">
                     <div class="nav_item_order_img order_unsend"></div>
                     <span class="nav_item_txt">已完成<!--ms-if--></span>
                 </a>

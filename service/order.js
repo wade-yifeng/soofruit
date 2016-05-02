@@ -1,4 +1,7 @@
 var Order = require('../models').Order;
+var enums = require('../models/enums');
+var OrdersListType = enums.OrdersListType;
+var OrderStatus = enums.OrderStatus;
 
 
 module.exports.listPaged = function (req, res) {
@@ -7,6 +10,24 @@ module.exports.listPaged = function (req, res) {
         page: req.query.page ? parseInt(req.query.page, null) : 1,
         sort: req.query.sort ? req.query.sort : '_id'
     };
+
+    var listType = req.query.listType;
+    if (listType && (listType != OrdersListType.All)) {
+        if (listType == OrdersListType.Ongoing) {
+            options.filters = {
+                status: {
+                    $in: [
+                        OrderStatus.AwaitPay,
+                        OrderStatus.Payed,
+                        OrderStatus.AwaitPick
+                    ]
+                }
+            };
+        }
+        else {
+            options.filters = {status: OrderStatus.Done};
+        }
+    }
 
     Order.pagedFind(options, function (err, doc) {
         if (err) {

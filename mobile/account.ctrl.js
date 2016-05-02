@@ -7,8 +7,7 @@ app.controller('My', function ($scope, ShareSvc) {
         $scope.userInfo = result;
     });
 
-    $scope.formatDate = function (datetime) {
-        var date = new Date(datetime);
-        return date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日';
+    $scope.formatDatetime = function (datetime) {
+        return formatDatetime(datetime);
     }
 });

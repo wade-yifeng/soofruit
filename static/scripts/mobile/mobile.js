@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 });
 
-var activateSlider = function () {
+function activateSlider() {
     $('.flexslider').flexslider({
         animation: 'slide',
         directionNav: false,
@@ -35,66 +35,66 @@ var activateSlider = function () {
         pauseOnHover: true,
         touch: true
     });
-};
+}
 
-var initCartIcon = function (cart, showDirectly) {
+function initCartIcon(cart, showDirectly) {
     if ((cart && cart.goods.length > 0) || showDirectly) {
         $('#go_cart').show();
     }
     else {
         $('#go_cart').hide();
     }
-};
+}
 
-var activateNav = function (type) {
+function activateNav(type) {
     var index;
     delay(function () {
         if (type == 'cart') {
             document.title = '我的购物车';
             index = 0;
-        } else if (type == 'ongoing') {
+        } else if (type == OrdersListType.Ongoing) {
             document.title = '我的未完成订单';
             index = 1;
-        } else if (type == 'done') {
+        } else if (type == OrdersListType.Done) {
             document.title = '我的已完成订单';
             index = 2;
-        } else if (type == 'all') {
+        } else if (type == OrdersListType.All) {
             document.title = '我的全部订单';
             index = 3;
         }
 
         $('.nav-fixed .fixed-nav-item-orders').eq(index).addClass('nav-cur').siblings().removeClass('nav-cur');
     });
-};
+}
 
-var showInfo = function (info) {
+function showInfo(info) {
     $('.pin-toast').html(info).fadeIn(1000, function () {
         setTimeout(function () {
             $('.pin-toast').fadeOut(1000);
         }, 1000);
     });
-};
+}
 
-var showAddressDialog = function () {
+function showAddressDialog() {
     $('#dialogAddress').modal('show');
-};
+}
 
-var hideAddressDialog = function () {
+function hideAddressDialog() {
     $('#dialogAddress').modal('hide');
-};
+}
 
 $('body').on('click', '.wx_bar_back', function () {
     $('#dialogAddress').modal('hide');
     $('.modal-backdrop').remove();
 });
 
-var getIdArrOfGoods = function (goods) {
+function getIdArrOfGoods(goods) {
     return goods.map(function (good) {
         return good.goodID;
     });
-};
+}
 
-var getTotalAmount = function (goods) {
+function getTotalAmount(goods) {
     var total = 0;
     goods.forEach(function (good) {
         if (good.checked) {
@@ -102,7 +102,21 @@ var getTotalAmount = function (goods) {
         }
     });
     return total;
-};
+}
+
+function getOrderStatusInfo(status) {
+    if (status == OrderStatus.Cancelled) {
+        return {shortName: '已取消', longName: '订单已取消', imgClass: 'order_cancel'};
+    } else if (status == OrderStatus.AwaitPay) {
+        return {shortName: '待付款', longName: '等待买家付款', imgClass: 'order_unpay'};
+    } else if (status == OrderStatus.Payed) {
+        return {shortName: '已付款', longName: '订单已付款,等待卖家发货', imgClass: 'order_payed'};
+    } else if (status == OrderStatus.AwaitPick) {
+        return {shortName: '已发货', longName: '订单已发货,等待买家确认收货', imgClass: 'order_receive'};
+    } else if (status == OrderStatus.Done) {
+        return {shortName: '已完成', longName: '订单已成交', imgClass: 'order_received'};
+    }
+}
 
 //#######################模拟Checkbox Group#######################
 $('body').on('click', '.cart-checkbox-real', function () {

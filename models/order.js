@@ -19,7 +19,7 @@ var OrderSchema = new mongoose.Schema({
     userID: ObjectId,
 
     //订单状态
-    status: Number,
+    status: String,
 
     //订单总额
     totalAmount: Number,
@@ -52,5 +52,6 @@ var OrderSchema = new mongoose.Schema({
     expressNO: String
 });
 OrderSchema.index({createTime: -1});
+OrderSchema.plugin(require('./plugins/paged_find'));
 
 mongoose.model('Order', OrderSchema);

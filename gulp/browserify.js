@@ -16,8 +16,9 @@ gulp.task('browserify', function () {
         //替换为window.XXXXX以便将方法暴露出供客户端调用
         .pipe(replace('module.exports.ValidateGood', 'window.ValidateGood'))
         .pipe(replace('module.exports.OrderStatus', 'window.OrderStatus'))
-        .pipe(replace('module.exports.RoleCategory', 'window.RoleCategory'))
+        .pipe(replace('module.exports.OrdersListType', 'window.OrdersListType'))
         .pipe(replace('module.exports.AddressLevel', 'window.AddressLevel'))
+        .pipe(replace('module.exports.RoleCategory', 'window.RoleCategory'))
         .pipe(gulp.dest('assets/'));
 });
 
