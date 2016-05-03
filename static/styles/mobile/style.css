@@ -2406,9 +2406,9 @@ body {
 
 #go_to_my {
     bottom: 73px;
-    width: 46px;
+    width: 47px;
     height: 45px;
-    background: url(/assets/imgs/mobile/icons_bg.png) -236px -115px no-repeat;
+    background: url(/assets/imgs/mobile/icons_bg.png) -235px -115px no-repeat;
     background-size: 340px auto;
     opacity: 1;
 }
@@ -14231,7 +14231,7 @@ input[type=text], textarea {
 
 .nav_item_order {
     color: #4a4a4a;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 48px;
     padding-left: 10px;
     float: left;
@@ -14248,9 +14248,10 @@ input[type=text], textarea {
 }
 
 .nav_item_order_bd_arrow {
-    width: 8px;
-    height: 12px;
-    margin-top: 17px
+    width: 9px;
+    height: 13px;
+    margin-top: 16px;
+    margin-left: 10px;
 }
 
 .nav_item_hd {
@@ -15819,4 +15820,25 @@ input[type=text], textarea {
 
 #order-list-container .orders-order-goods-name {
     margin-left: 90px;
+}
+
+.code {
+    margin-top: 10px;
+    width: 23px;
+    height: 23px;
+}
+
+.recommend_by{
+    width:100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tight{
+    margin-top: -15px;
+}
+
+.balance{
+    margin: 4px 9px;
+    color: #999;
 }
