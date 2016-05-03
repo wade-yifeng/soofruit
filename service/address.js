@@ -1,6 +1,6 @@
 var models = require('../models');
 var Address = models.Address;
-
+var ValidateAddress = models.ValidateAddress;
 
 module.exports.list = function (req, res) {
     var userID = req.params.userID;
@@ -16,25 +16,25 @@ module.exports.list = function (req, res) {
 
 
 module.exports.create = function (req, res) {
-    //var v = ValidateAddress(req.body);
-    //if (!v.isValid()) {
-    //    res.json({code: 400, msg: v.msgs});
-    //}
-    //else {
-    var address = new Address(req.body);
+    var v = ValidateAddress(req.body);
+    if (!v.isValid()) {
+        res.json({code: 400, msg: v.msgs});
+    }
+    else {
+        var address = new Address(req.body);
 
-    address.save(function (err) {
-        if (err) {
-            res.json({code: 500, msg: err});
-        }
-        else if (!address) {
-            res.json({code: 100, msg: '收货地址创建失败'});
-        }
-        else {
-            res.json({code: 0, data: address._id.toString(), msg: '收货地址创建成功'});
-        }
-    });
-    //}
+        address.save(function (err) {
+            if (err) {
+                res.json({code: 500, msg: err});
+            }
+            else if (!address) {
+                res.json({code: 100, msg: '收货地址创建失败'});
+            }
+            else {
+                res.json({code: 0, data: address._id.toString(), msg: '收货地址创建成功'});
+            }
+        });
+    }
 };
 
 
@@ -55,20 +55,20 @@ module.exports.update = function (req, res) {
         if (!doc) {
             res.json({code: 100, msg: "收货地址不存在或已被删除"});
         } else {
-            //var v = ValidateAddress(req.body);
-            //if (!v.isValid()) {
-            //    res.json({code: 400, msg: v.msgs});
-            //}
-            //else {
-            Address.update({_id: req.params._id}, req.body, function (err) {
-                if (err) {
-                    res.json({code: 500, msg: err});
-                }
-                else {
-                    res.json({code: 0, msg: '收货地址更新成功'});
-                }
-            });
-            //}
+            var v = ValidateAddress(req.body);
+            if (!v.isValid()) {
+                res.json({code: 400, msg: v.msgs});
+            }
+            else {
+                Address.update({_id: req.params._id}, req.body, function (err) {
+                    if (err) {
+                        res.json({code: 500, msg: err});
+                    }
+                    else {
+                        res.json({code: 0, msg: '收货地址更新成功'});
+                    }
+                });
+            }
         }
     });
 };

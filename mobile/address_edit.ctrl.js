@@ -82,6 +82,12 @@ app.controller('AddressEdit', function ($scope, AddressSvc, ShareSvc, $state, $s
     };
 
     $scope.save = function () {
+        var res = window.ValidateAddress($scope.address);
+        if (!res.isValid()) {
+            showInfo(alignMsgs(res.msgs));
+            return;
+        }
+
         if (!$scope.address._id) {
             ShareSvc.user().then(function (user) {
                 $scope.address.userID = user._id;
