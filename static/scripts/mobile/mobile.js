@@ -1,3 +1,8 @@
+function initUICommon(toState) {
+    $('#go_to_top').css({bottom: '-100px'});
+    toState == 'my' ? $('#go_to_my').hide() : $('#go_to_my').show();
+}
+
 $(document).ready(function () {
     //初始化边缘按钮
     var btn = $('#go_to_top');

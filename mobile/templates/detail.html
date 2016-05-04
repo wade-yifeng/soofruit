@@ -40,8 +40,9 @@
             <div class="kt_index_text">首页</div>
         </a>
         <a id="kt_like_btn" class="kt_like">
-            <div class="kt_index_img">
-                <div class="kt_index_img_bg"></div>
+            <div class="kt_index_img" ng-click="setLike(good._id)">
+                <div class="kt_index_img_bg" ng-hide="isLike(good._id)"></div>
+                <div class="kt_index_img_bg liked" ng-show="isLike(good._id)"></div>
             </div>
             <div class="kt_index_text">收藏</div>
         </a>

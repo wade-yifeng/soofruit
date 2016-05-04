@@ -27,6 +27,8 @@ app.run(function ($rootScope, $urlRouter, ShareSvc) {
                 });
             }
         }
+
+        initUICommon(toState.name);
     });
 
     $rootScope.$on('$stateChangeSuccess', function () {
