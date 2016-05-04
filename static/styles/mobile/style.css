@@ -15828,17 +15828,137 @@ input[type=text], textarea {
     height: 23px;
 }
 
-.recommend_by{
-    width:100%;
+.recommend_by {
+    width: 100%;
     text-align: center;
     margin-bottom: 10px;
 }
 
-.tight{
+.tight {
     margin-top: -15px;
 }
 
-.balance{
+.balance {
     margin: 4px 9px;
     color: #999;
+}
+
+.no-like {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 18px;
+    position: absolute;
+    bottom: 50%;
+}
+
+.like-item {
+    position: relative;
+    background-color: #fff;
+    padding: 0 10px;
+    min-height: 104px;
+    margin-bottom: 10px;
+}
+
+.like-item .goods-img {
+    position: absolute;
+    max-width: 78px;
+    max-height: 78px;
+    top: 13px;
+    left: 10px;
+}
+
+.like-item .goods-img img {
+    display: block;
+    width: 78px;
+    height: 78px;
+    border: 1px solid #d7d7d7;
+}
+
+.like-item .goods-name {
+    position: absolute;
+    font-size: 12px;
+    left: 106px;
+    top: 10px;
+    color: #3d4244;
+    right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 20px;
+    height: 40px;
+}
+
+.core-container {
+    position: absolute;
+    left: 106px;
+    bottom: 15px;
+    max-width: 215px;
+}
+
+.core-container, .group-desc {
+    height: 28px;
+    line-height: 28px;
+}
+
+.group-desc {
+    display: inline-block;
+    float: left;
+    width: 125px;
+    border: 1px solid #ee0a3b;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-left: 6px;
+    color: #ee0a3b;
+}
+
+.group-desc b {
+    display: inline-block;
+    position: absolute;
+    min-width: 70px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 3px 0 2px;
+    height: 26px;
+    line-height: 26px;
+}
+
+.group-button {
+    background-color: #ee0a3b;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    padding: 1px 22px 0 12px;
+    position: relative;
+    font-size: 13px;
+    color: #fff;
+}
+
+.group-button:after {
+    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-01ff7574e6.png);
+    background-repeat: no-repeat;
+    background-size: 310px 180px;
+    background-position: -140px -105px;
+    content: "";
+    height: 11px;
+    position: absolute;
+    right: 8px;
+    top: 9px;
+    width: 7px;
+}
+
+.like-button {
+    position: absolute;
+    right: 0;
+    bottom: 11px;
+    width: 55px;
+    height: 55px;
 }

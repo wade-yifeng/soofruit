@@ -43,8 +43,9 @@
                         <div class="tuan_g_btn" ui-sref="detail({goodID:'{{good._id}}'})">查看详情</div>
                     </div>
                     <div class="like goods_list_like">
-                        <img src="/assets/imgs/mobile/unlike.png">
-                        <div class="like_click_button"></div>
+                        <img src="/assets/imgs/mobile/unlike.png" ng-hide="isLike(good._id)">
+                        <img src="/assets/imgs/mobile/like.png" ng-show="isLike(good._id)">
+                        <div class="like_click_button" ng-click="setLike(good._id)"></div>
                     </div>
                 </div>
             </div>

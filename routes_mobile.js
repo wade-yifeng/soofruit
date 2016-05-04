@@ -4,6 +4,7 @@ var cart = require('./service/cart');
 var addressOrigin = require('./service/address_origin');
 var address = require('./service/address');
 var order = require('./service/order');
+var favorite = require('./service/favorite');
 
 //wechat reply.post测试所用route
 router.get('/account', account.signin);
@@ -27,5 +28,10 @@ router.get('/ordersPaged', order.listPaged)
 router.get('/orders/:_id', order.detail)
     .put('/orders/:_id', order.update)
     .delete('/orders/:_id', order.delete);
+
+router.get('/favoriteSimple/:userID', favorite.listSimple);
+router.get('/favoriteIntact/:userID', favorite.listIntact);
+router.post('/favorite', favorite.create);
+router.delete('/favorite/:_id', favorite.delete);
 
 module.exports = router;

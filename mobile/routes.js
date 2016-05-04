@@ -52,6 +52,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'My',
             templateUrl: '/views/my.html'
         })
+        .state('favorite', {
+            url: '/favorite/',
+            controller: 'Favorite',
+            templateUrl: '/views/favorite.html'
+        })
         .state('checkout.addressSelect', addressSelect)
         .state('checkout.addressEdit', addressEdit)
         .state('my.addressSelect', addressSelect)
