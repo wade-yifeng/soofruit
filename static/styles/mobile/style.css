@@ -15962,3 +15962,68 @@ input[type=text], textarea {
     width: 55px;
     height: 55px;
 }
+
+.coupon {
+    position: relative;
+    font-size: 13px;
+    width: 100%;
+    height: 148px;
+    color: #fff;
+    background-color: #ccc;
+}
+
+.coupon * {
+    color: #fff;
+    font-family: tahoma, arial, 'Hiragino Sans GB', SimSun, '\5b8b\4f53', sans-serif;
+}
+
+.coupon a {
+    display: block;
+    float: left;
+    position: absolute;
+}
+
+.coupon a:hover {
+    color: #FACEB1;
+}
+
+.price-symbol {
+    top: 18px;
+    left: 16px;
+    font-size: 24px;
+    font-weight: 400;
+    font-family: "Microsoft Yahei", Simsun;
+}
+
+.amount {
+    top: 5px;
+    left: 38px;
+    font-size: 52px;
+    font-weight: 400
+}
+
+.scope {
+    top: 30px;
+    right: 20px;
+    font-weight: 700
+}
+
+.lb-use-cond {
+    top: 90px;
+    left: 16px
+}
+
+.use-cond {
+    top: 90px;
+    left: 84px
+}
+
+.lb-valid-date {
+    top: 110px;
+    left: 16px
+}
+
+.valid-date {
+    top: 110px;
+    left: 84px
+}

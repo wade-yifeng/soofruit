@@ -11,21 +11,21 @@ module.exports.listPaged = function (req, res) {
         sort: req.query.sort ? req.query.sort : '_id'
     };
 
+    options.filters = {userID: req.query.userID};
+
     var listType = req.query.listType;
     if (listType && (listType != OrdersListType.All)) {
         if (listType == OrdersListType.Ongoing) {
-            options.filters = {
-                status: {
-                    $in: [
-                        OrderStatus.AwaitPay,
-                        OrderStatus.Payed,
-                        OrderStatus.AwaitPick
-                    ]
-                }
+            options.filters.status = {
+                $in: [
+                    OrderStatus.AwaitPay,
+                    OrderStatus.Payed,
+                    OrderStatus.AwaitPick
+                ]
             };
         }
         else {
-            options.filters = {status: OrderStatus.Done};
+            options.filters.status = OrderStatus.Done;
         }
     }
 

@@ -72,6 +72,16 @@ function activateNav(type) {
     });
 }
 
+function initCouponNav(status) {
+    var index;
+    delay(function () {
+        if (status == CouponStatus.Usable) index = 0;
+        else if (status == CouponStatus.Pending) index = 1;
+        else if (status == CouponStatus.Unusable) index = 2;
+        $('.nav_fixed .fixed_nav_item_coupons').eq(index).addClass('nav-cur').siblings().removeClass('nav-cur');
+    });
+}
+
 function showInfo(info) {
     $('.pin-toast').html(info).fadeIn(1000, function () {
         setTimeout(function () {

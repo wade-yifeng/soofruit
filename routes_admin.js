@@ -4,6 +4,7 @@ var good = require('./service/good');
 var user = require('./service/user');
 var permission = require('./service/permissions');
 var role = require('./service/role');
+var coupon = require('./service/coupon');
 
 // dictionary services
 router.get('/dics', dic.list)
@@ -21,6 +22,13 @@ router.get('/goods/:_id', good.detail)
     .delete('/goods/:_id', good.delete);
 router.post('/pics', good.uploadPic)
     .delete('/pics/:_path', good.deletePic);
+
+// coupon services
+router.get('/coupons', coupon.list)
+    .post('/coupons', coupon.create);
+router.get('/coupons/:_id', coupon.detail)
+    .put('/coupons/:_id', coupon.update)
+    .delete('/coupons/:_id', coupon.delete);
 
 // user services
 router.get('/users', user.listPaged)

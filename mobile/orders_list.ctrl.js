@@ -1,10 +1,12 @@
 var app = angular.module('mobile');
 
-app.controller('Orders', function ($scope, OrderSvc, $stateParams) {
+app.controller('Orders', function ($scope, ShareSvc, OrderSvc, $stateParams) {
     activateNav($stateParams.listType);
 
-    OrderSvc.listPaged($stateParams.listType, 1).then(function (orders) {
-        $scope.orders = orders.data;
+    ShareSvc.user().then(function (user) {
+        OrderSvc.listPaged(user._id, $stateParams.listType, 1).then(function (orders) {
+            $scope.orders = orders.data;
+        });
     });
 
     $scope.getStatusName = function (status) {

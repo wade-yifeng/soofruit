@@ -5,24 +5,25 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/good");
 
     $stateProvider
+        .state('usermana', {
+            url: "/usermana",
+            controller: 'UserMana',
+            templateUrl: '/views/admin_user_mana.html'
+        })
         .state('good', {
             url: "/good",
             controller: "Good",
             templateUrl: '/views/admin_good.html'
-        }).state('dic', {
+        })
+        .state('coupon', {
+            url: "/coupon",
+            controller: 'Coupon',
+            templateUrl: '/views/admin_coupon.html'
+        })
+        .state('dic', {
             url: "/dic",
             controller: 'Dic',
             templateUrl: '/views/admin_dic.html'
-        })
-        .state('user', {
-            url: "/user",
-            controller: 'userCtrl',
-            templateUrl: '/views/admin_user.html'
-        })
-        .state('usermana', {
-            url: "/usermana",
-            controller: 'UserMana',
-            templateUrl: '/views/admin_user_manager.html'
         })
         .state('permission', {
             url: "/permission",

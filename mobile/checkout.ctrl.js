@@ -1,6 +1,6 @@
 var app = angular.module('mobile');
 
-app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, OrderSvc, $state) {
+app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, OrderSvc, CouponSvc, UserCouponSvc, $state) {
     document.title = '北海之南大果园 - 购物结算';
     $scope.state = 'checkout';
 
@@ -73,9 +73,28 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
                 });
                 CartSvc.setCartSession($scope.originCart);
 
+                // 赠送优惠券
+                CouponSvc.list().then(function (coupons) {
+                    var coupon;
+                    coupons.forEach(function (item) {
+                        if (item.minExpense <= $scope.totalAmount) {
+                            coupon = item;
+                        }
+                    });
+                    if (coupon) {
+                        UserCouponSvc.create({
+                            userID: user._id,
+                            orderID: orderID,
+                            couponID: coupon._id,
+                            status: CouponStatus.Pending
+                        }).then(showInfo);
+                    }
+                });
+
+
                 // 支付
 
-                // 支付成功更新订单,并跳转到订单详情
+                // 支付成功更新订单,更新赠送的优惠券状态,并跳转到订单详情
                 $state.go('order', {orderID: orderID});
             });
         });

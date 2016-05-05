@@ -20,6 +20,7 @@ module.exports.OrderStatus = {
 };
 
 module.exports.OrdersListType = {
+
     //未完成订单
     Ongoing: 'Ongoing',
 
@@ -40,6 +41,18 @@ module.exports.AddressLevel = {
     City: 'City',
 
     District: 'District'
+};
+
+module.exports.CouponStatus = {
+
+    //未激活
+    Pending: 'Pending',
+
+    //可使用
+    Usable: 'Usable',
+
+    //已使用/已过期
+    Unusable: 'Unusable'
 };
 
 /**

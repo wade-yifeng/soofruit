@@ -13,7 +13,11 @@ var UserCouponSchema = new mongoose.Schema({
     orderID: ObjectId,
 
     //优惠券ID
-    couponID: ObjectId
+    couponID: ObjectId,
+
+    //状态
+    status: String
 });
+UserCouponSchema.plugin(require('./plugins/paged_find'));
 
 mongoose.model('UserCoupon', UserCouponSchema);

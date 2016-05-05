@@ -1,6 +1,8 @@
 var app = angular.module('mobile');
 
 app.controller('Favorite', function ($scope, FavoriteSvc) {
+    document.title='我的收藏';
+
     initFavorites();
 
     $scope.unlike = function (goodID) {
