@@ -21,6 +21,7 @@ gulp.task('browserify', function () {
         .pipe(replace('module.exports.OrderStatus', 'window.OrderStatus'))
         .pipe(replace('module.exports.OrdersListType', 'window.OrdersListType'))
         .pipe(replace('module.exports.AddressLevel', 'window.AddressLevel'))
+        .pipe(replace('module.exports.CouponType', 'window.CouponType'))
         .pipe(replace('module.exports.CouponStatus', 'window.CouponStatus'))
         .pipe(gulp.dest('assets/'));
 });

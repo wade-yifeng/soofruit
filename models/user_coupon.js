@@ -9,13 +9,16 @@ var UserCouponSchema = new mongoose.Schema({
     //用户ID
     userID: ObjectId,
 
-    //订单ID
-    orderID: ObjectId,
+    //优惠券类型
+    type: String,
 
-    //优惠券ID
-    couponID: ObjectId,
+    //面值
+    amount: Number,
 
-    //状态
+    //要求最低用户积分
+    minPoints: Number,
+
+    //优惠券状态
     status: String
 });
 UserCouponSchema.plugin(require('./plugins/paged_find'));

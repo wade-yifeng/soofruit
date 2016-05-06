@@ -73,28 +73,34 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
                 });
                 CartSvc.setCartSession($scope.originCart);
 
-                // 赠送优惠券
-                CouponSvc.list().then(function (coupons) {
+                // 支付
+
+                // 更新订单
+
+                // 增加结算记录
+
+                // 用户积分增加
+
+                // 判断积分及已有优惠券, 满足条件则赠送相应优惠券 (后面用JOB做)
+                CouponSvc.listPointsExchange().then(function (coupons) {
                     var coupon;
                     coupons.forEach(function (item) {
-                        if (item.minExpense <= $scope.totalAmount) {
+                        if (item.minPoints <= $scope.totalAmount) {
                             coupon = item;
                         }
                     });
                     if (coupon) {
                         UserCouponSvc.create({
                             userID: user._id,
-                            orderID: orderID,
-                            couponID: coupon._id,
+                            type: coupon.type,
+                            amount: coupon.amount,
+                            minPoints: coupon.minPoints,
                             status: CouponStatus.Pending
                         }).then(showInfo);
                     }
                 });
 
-
-                // 支付
-
-                // 支付成功更新订单,更新赠送的优惠券状态,并跳转到订单详情
+                // 跳到订单详情
                 $state.go('order', {orderID: orderID});
             });
         });

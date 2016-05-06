@@ -2,17 +2,27 @@ var app = angular.module('admin');
 
 app.controller('Coupon', function ($scope, CouponSvc, $state) {
     document.title = 'Coupon Management';
+    $scope.couponEdit = {type: '- 请选择 -'};
+    $scope.type = $scope.couponEdit.type;
 
-    //页面初始化
+    $scope.couponTypes = Object.getOwnPropertyNames(CouponType);
+    Array.prototype.unshift.call($scope.couponTypes, '- 请选择 -');
     toggleCreateUpdate(false);
     CouponSvc.list().then(function (result) {
         $scope.coupons = result;
     });
 
+    $scope.typeChange = function (newType) {
+        $scope.couponEdit.type = newType;
+        if (newType == CouponType.NewUser) $scope.couponEdit.minPoints = null;
+        $scope.disableMinPoints = newType == CouponType.NewUser ? true : false;
+    };
+
     $scope.editCoupon = function (couponID) {
         toggleCreateUpdate(true);
         CouponSvc.get(couponID).then(function (result) {
             $scope.couponEdit = result;
+            $scope.type = $scope.couponEdit.type;
         });
     };
 
@@ -44,7 +54,6 @@ app.controller('Coupon', function ($scope, CouponSvc, $state) {
             $state.reload();
         });
     };
-
 
     function toggleCreateUpdate(isUpdate) {
         $scope.isUpdate = isUpdate;

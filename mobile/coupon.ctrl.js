@@ -30,10 +30,10 @@ app.controller('Coupon', function ($scope, ShareSvc, UserCouponSvc, CouponSvc, $
         return result;
     };
 
-    $scope.getMinExpense = function (couponID) {
+    $scope.getMinPoints = function (couponID) {
         var result = 0;
         $scope.coupons.forEach(function (item) {
-            if (item._id == couponID) result = item.minExpense;
+            if (item._id == couponID) result = item.minPoints;
         });
         return result;
     };

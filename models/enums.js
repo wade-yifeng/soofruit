@@ -1,5 +1,5 @@
 /**
- * 订单状态枚举
+ * 订单状态
  */
 module.exports.OrderStatus = {
 
@@ -19,6 +19,9 @@ module.exports.OrderStatus = {
     Done: 'Done'
 };
 
+/**
+ * 订单列表类型
+ */
 module.exports.OrdersListType = {
 
     //未完成订单
@@ -43,6 +46,23 @@ module.exports.AddressLevel = {
     District: 'District'
 };
 
+/**
+ * 优惠券类型
+ */
+module.exports.CouponType = {
+
+    //新用户送优惠券
+    NewUser: 'NewUser',
+
+    //积分兑换优惠券
+    PointsExchange: 'PointsExchange'
+
+    //敬请期待其它优惠券类型
+};
+
+/**
+ * 优惠券状态
+ */
 module.exports.CouponStatus = {
 
     //未激活
@@ -56,7 +76,7 @@ module.exports.CouponStatus = {
 };
 
 /**
- * 角色分类枚举
+ * 角色分类
  */
 module.exports.RoleCategory = {
 

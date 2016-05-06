@@ -9,6 +9,13 @@ app.factory('CouponSvc', function ($http, $q) {
                 });
                 return defer.promise;
             },
+            listPointsExchange: function () {
+                var defer = $q.defer();
+                $http.get('/coupons?type=PointsExchange').success(function (result) {
+                    httpSuccess(result, defer, true);
+                });
+                return defer.promise;
+            },
             create: function (coupon) {
                 var defer = $q.defer();
                 $http.post('/coupons', coupon).success(function (result) {
