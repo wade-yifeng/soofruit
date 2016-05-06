@@ -95,7 +95,7 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
                             type: coupon.type,
                             amount: coupon.amount,
                             minPoints: coupon.minPoints,
-                            status: CouponStatus.Pending
+                            status: CouponStatus.Usable
                         }).then(showInfo);
                     }
                 });
@@ -137,5 +137,14 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
             $state.go('checkout.address' + target);
             showAddressDialog();
         }, 500);
-    }
+    };
+
+    $scope.selectCoupon = function () {
+        hideAddressDialog();
+        $state.go('checkout.couponSelect');
+        setTimeout(function () {
+            $state.go('checkout.couponSelect');
+            showAddressDialog();
+        }, 500);
+    };
 });

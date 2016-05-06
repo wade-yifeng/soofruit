@@ -2,7 +2,9 @@ var Coupon = require('../models').Coupon;
 
 
 module.exports.list = function (req, res) {
-    Coupon.find().sort('amount').lean().exec(function (err, doc) {
+    var filters = req.query.type ? {type: req.query.type} : {};
+
+    Coupon.find(filters).sort('amount').lean().exec(function (err, doc) {
         if (err) {
             res.json({code: 500, msg: err});
         }

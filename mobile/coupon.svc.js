@@ -11,7 +11,7 @@ app.factory('CouponSvc', function ($http, $q) {
             },
             listPointsExchange: function () {
                 var defer = $q.defer();
-                $http.get('/coupons?type=PointsExchange').success(function (result) {
+                $http.get('/coupons?type=' + CouponType.PointsExchange).success(function (result) {
                     httpSuccess(result, defer, true);
                 });
                 return defer.promise;

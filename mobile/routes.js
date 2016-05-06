@@ -14,6 +14,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: '/views/popup_address_edit.html'
     };
 
+    var couponSelect = {
+        url: '',
+        controller: 'CouponSelect',
+        templateUrl: '/views/popup_coupon_select.html'
+    };
+
     $urlRouterProvider.otherwise('/list/');
 
     $stateProvider
@@ -65,5 +71,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('checkout.addressSelect', addressSelect)
         .state('checkout.addressEdit', addressEdit)
         .state('my.addressSelect', addressSelect)
-        .state('my.addressEdit', addressEdit);
+        .state('my.addressEdit', addressEdit)
+        .state('checkout.couponSelect', couponSelect);
 });

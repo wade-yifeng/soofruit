@@ -1738,6 +1738,10 @@ body {
     padding-bottom: 62px
 }
 
+.wrapper_coupons_select {
+    padding: 0 10px 30px
+}
+
 .coup_one {
     padding: 6px 0;
     margin: 3px 0;
@@ -16026,4 +16030,54 @@ input[type=text], textarea {
 .valid-date {
     top: 110px;
     left: 84px
+}
+
+.use_points, .use_coupon {
+    position: relative;
+    margin-top: 5px;
+    padding: 10px 24px;
+    border-top: 1px solid #dedede;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.use_points .cart-checkbox-real {
+    display: inline-block;
+    float: right;
+    margin: 0;
+    top: -2px;
+}
+
+.use_points .cart-checkbox-fake {
+    display: inline-block;
+    float: right;
+    top: -2px;
+    left: 25px;
+}
+
+.points-input {
+    font-size: 14px;
+    width: 60px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    text-align: center;
+    color: #000;
+    font-weight: 700;
+}
+
+.use_coupon span:after {
+    position: absolute;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    right: 30px;
+    background: none;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    content: " ";
+    display: block;
+    height: 9px;
+    margin-top: -5px;
+    top: 50%;
+    width: 9px;
 }

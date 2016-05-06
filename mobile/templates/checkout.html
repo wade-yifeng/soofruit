@@ -53,6 +53,17 @@
     </div>
 
     <div>
+        <div class="use_points">
+            使用积分&nbsp;&nbsp;
+            <div style="display:inline" ng-show="usePoints">
+                <input class="points-input" type="number" value="0">&nbsp;&nbsp;可用积分:500
+            </div>
+            <input type="checkbox" class="cart-checkbox-real" ng-model="usePoints">
+            <div class="cart-checkbox-fake"><span class="glyphicon glyphicon-ok"></span></div>
+        </div>
+        <div class="use_coupon" ng-click="selectCoupon()">
+            <span>使用优惠券</span>
+        </div>
         <div class="total">快递：￥0.00 总价：<span id="totalPrice" class="total_price">{{totalAmount|currency:'￥'}}</span>
         </div>
         <div class="pay2">

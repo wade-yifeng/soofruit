@@ -37,13 +37,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">面值</label>
             <div class="col-sm-10">
-                <input class="form-control input-sm" ng-model="couponEdit.amount" ng-disabled="disableMinPoints">
+                <input class="form-control input-sm" ng-model="couponEdit.amount">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">要求最低用户积分</label>
             <div class="col-sm-10">
-                <input class="form-control input-sm" type="text" ng-model="couponEdit.minPoints">
+                <input class="form-control input-sm" type="text" ng-model="couponEdit.minPoints" ng-disabled="disableMinPoints">
             </div>
         </div>
         <div class="text-center">

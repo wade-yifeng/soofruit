@@ -1,12 +1,9 @@
-<div ng-controller="Coupon">
-    <div class="nav_fixed">
-        <a class="fixed_nav_item_coupons" ui-sref="coupon({status:'Usable'})"><span class="nav_txt">可使用</span></a>
-        <a class="fixed_nav_item_coupons" ui-sref="coupon({status:'Pending'})"><span class="nav_txt nav_payment">未激活<b
-                class="nav_payment_num">{{pendingTotal}}</b></span></a>
-        <a class="fixed_nav_item_coupons" ui-sref="coupon({status:'Unusable'})"><span class="nav_txt nav_receiving">已用/已过期<b
-                class="nav_receiving_num">{{unusableTotal}}</b></span></a>
+<div ng-controller="CouponSelect">
+    <div class="wx_bar">
+        <div class="wx_bar_tit">我的优惠券</div>
+        <div class="wx_bar_back pull-right"></div>
     </div>
-    <div class="wrapper_coupons">
+    <div class="wrapper_coupons_select" style="min-height:300px;">
         <div style="margin-bottom:10px;" ng-repeat="coupon in userCoupons">
             <div class="coupon">
                 <a class="price-symbol">¥</a>
