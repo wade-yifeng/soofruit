@@ -56,7 +56,7 @@
         <div class="use_points">
             使用积分&nbsp;&nbsp;
             <div style="display:inline" ng-show="usePoints">
-                <input class="points-input" type="number" value="0">&nbsp;&nbsp;可用积分:500
+                <input class="points-input" type="number" value="0">&nbsp;&nbsp;可用积分:{{availablePoints}}
             </div>
             <input type="checkbox" class="cart-checkbox-real" ng-model="usePoints">
             <div class="cart-checkbox-fake"><span class="glyphicon glyphicon-ok"></span></div>

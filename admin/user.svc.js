@@ -1,6 +1,6 @@
 var app = angular.module('admin');
 
-app.factory('UserManaSvc', function ($http, $q) {
+app.factory('UserSvc', function ($http, $q) {
         return {
             listPaged: function (page) {
                 var defer = $q.defer();

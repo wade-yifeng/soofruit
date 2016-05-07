@@ -1,8 +1,12 @@
 var app = angular.module('mobile');
 
-app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, OrderSvc, CouponSvc, UserCouponSvc, $state) {
+app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, OrderSvc, UserSvc, CouponSvc, UserCouponSvc, $state) {
     document.title = '北海之南大果园 - 购物结算';
     $scope.state = 'checkout';
+    $scope.usePoints = false;
+    $scope.useCoupon = false;
+    $scope.pointsDeduction = 0;
+    $scope.couponDeduction = 0;
 
     ShareSvc.user().then(function (user) {
         AddressSvc.getDefault(user._id).then(function (address) {
@@ -14,6 +18,10 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
             } else {
                 $scope.initialAddress = address;
             }
+        });
+
+        UserSvc.getPoints(user._id).then(function (points) {
+            $scope.availablePoints = points;
         });
     });
 
@@ -29,10 +37,6 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
         setTotalAmount();
     });
 
-    $scope.selectAddress = function () {
-        $scope.redirect();
-    };
-
     $scope.minus = function (good) {
         if (good.quantity > 1) {
             good.quantity -= 1;
@@ -47,7 +51,8 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
 
     $scope.pay = function () {
         var orderAddress = $scope.getSelectedAddress();
-        var couponDeduction = $scope.couponDeduction || 0;
+        var couponDeduction = $scope.useCoupon ? $scope.couponDeduction : 0;
+        var payAmount = $scope.totalAmount - couponDeduction;
 
         if (!orderAddress) {
             showInfo('请先添加或者选择一个收货地址');
@@ -61,7 +66,7 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
                 userID: user._id,
                 status: OrderStatus.AwaitPay,
                 totalAmount: $scope.totalAmount,
-                payAmount: $scope.totalAmount - couponDeduction,
+                payAmount: payAmount,
                 couponDeduction: couponDeduction,
                 createTime: Date.now(),
                 addressID: orderAddress._id
@@ -80,6 +85,7 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
                 // 增加结算记录
 
                 // 用户积分增加
+                UserSvc.updatePoints(user._id, payAmount).then(showInfo);
 
                 // 判断积分及已有优惠券, 满足条件则赠送相应优惠券 (后面用JOB做)
                 CouponSvc.listPointsExchange().then(function (coupons) {
@@ -119,8 +125,17 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
         return $scope.address || $scope.initialAddress;
     };
 
-    var setTotalAmount = function () {
-        $scope.totalAmount = getTotalAmount($scope.cart.goods);
+    $scope.selectAddress = function () {
+        $scope.redirect();
+    };
+
+    $scope.selectCoupon = function () {
+        hideAddressDialog();
+        $state.go('checkout.couponSelect');
+        setTimeout(function () {
+            $state.go('checkout.couponSelect');
+            showAddressDialog();
+        }, 500);
     };
 
     $scope.redirect = function (info, openAddressEdit) {
@@ -139,12 +154,7 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
         }, 500);
     };
 
-    $scope.selectCoupon = function () {
-        hideAddressDialog();
-        $state.go('checkout.couponSelect');
-        setTimeout(function () {
-            $state.go('checkout.couponSelect');
-            showAddressDialog();
-        }, 500);
-    };
+    function setTotalAmount() {
+        $scope.totalAmount = getTotalAmount($scope.cart.goods);
+    }
 });

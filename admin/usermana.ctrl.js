@@ -1,10 +1,10 @@
 var app = angular.module('admin');
 var title = 'User Management';
 
-app.controller('UserMana', function ($scope, UserManaSvc, $http) {
+app.controller('UserMana', function ($scope, UserSvc, $http) {
     document.title = title;
 
-    UserManaSvc.listPaged(1).then(function (result) {
+    UserSvc.listPaged(1).then(function (result) {
         $scope.users = result.data;
     });
 

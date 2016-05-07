@@ -48,7 +48,7 @@ var UserSchema = new mongoose.Schema({
     mobile: String,
 
     //用户积分
-    points: Number,
+    points: {type: Number, default: 0},
 
     //帐号是否锁定
     isBlocked: Boolean

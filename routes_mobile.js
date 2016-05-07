@@ -6,6 +6,7 @@ var address = require('./service/address');
 var order = require('./service/order');
 var favorite = require('./service/favorite');
 var userCoupon = require('./service/user_coupon');
+var user = require('./service/user');
 
 //wechat reply.post测试所用route
 router.get('/account', account.signin);
@@ -40,5 +41,8 @@ router.get('/userCouponsPaged', userCoupon.listPaged)
 router.get('/userCoupons/:_id', userCoupon.detail)
     .put('/userCoupons/:_id', userCoupon.update)
     .delete('/userCoupons/:_id', userCoupon.delete);
+
+router.get('/userPoints/:_id', user.getPoints);
+router.post('/userPoints', user.updatePoints);
 
 module.exports = router;

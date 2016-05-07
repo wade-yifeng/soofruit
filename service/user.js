@@ -29,7 +29,7 @@ module.exports.createUser = function (req, res) {
 };
 
 module.exports.userDetail = function (req, res) {
-    User.findById(req.params._id).lean().exec(function (err, doc) {
+    User.findById(req.body._id).lean().exec(function (err, doc) {
         if (err) {
             res.json({code: 500, msg: err});
         } else {
@@ -39,7 +39,7 @@ module.exports.userDetail = function (req, res) {
 };
 
 module.exports.editUser = function (req, res) {
-    User.findById(req.params._id, function (err, doc) {
+    User.findById(req.body._id, function (err, doc) {
         if (!doc) {
             res.json({code: 100, msg: "用户不存在或已被删除"});
         } else {
@@ -57,6 +57,38 @@ module.exports.editUser = function (req, res) {
 
 module.exports.deleteUser = function (req, res) {
     //TODO: set isDeleted to true
+};
+
+/**
+ * 获取用户积分
+ */
+module.exports.getPoints = function (req, res) {
+    User.findOne({_id: req.params._id}, 'points').lean().exec(function (err, doc) {
+        if (err) {
+            res.json({code: 500, msg: err});
+        } else {
+            res.json({code: 0, data: doc.points});
+        }
+    });
+};
+
+/**
+ * 更新用户积分
+ * 注意:此方法对增加和扣减通用,定义的消息是增加时显示的,扣减时不要在前台显示
+ */
+module.exports.updatePoints = function (req, res) {
+    User.findById(req.body._id, function (err, doc) {
+        if (!doc) {
+            res.json({code: 100, msg: "用户不存在或已被删除"});
+        } else {
+            update({
+                _id: req.body._id,
+                points: doc.points ? doc.points + req.body.points : req.body.points
+            }, '订单所得积分已经存入您的积分账户').then(function (result) {
+                res.json(result);
+            });
+        }
+    });
 };
 
 function create(userInfo) {
@@ -77,14 +109,14 @@ function create(userInfo) {
     });
 }
 
-function update(userInfo) {
+function update(userInfo, msg) {
     return promise(function (defer) {
         User.update({_id: userInfo._id}, userInfo, function (err) {
             var result;
             if (err) {
                 result = {code: 500, msg: err};
             } else {
-                result = {code: 0};
+                result = msg ? {code: 0, msg: msg} : {code: 0};
             }
             defer.resolve(result);
         });
