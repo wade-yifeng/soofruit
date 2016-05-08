@@ -52,7 +52,8 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
     $scope.pay = function () {
         var orderAddress = $scope.getSelectedAddress();
         var couponDeduction = $scope.useCoupon ? $scope.couponDeduction : 0;
-        var payAmount = $scope.totalAmount - couponDeduction;
+        var pointsDeduction = $scope.usePoints ? $scope.pointsDeduction : 0;
+        var payAmount = $scope.totalAmount - couponDeduction - pointsDeduction;
 
         if (!orderAddress) {
             showInfo('请先添加或者选择一个收货地址');
@@ -67,7 +68,7 @@ app.controller('Checkout', function ($scope, AddressSvc, ShareSvc, CartSvc, Orde
                 status: OrderStatus.AwaitPay,
                 totalAmount: $scope.totalAmount,
                 payAmount: payAmount,
-                couponDeduction: couponDeduction,
+                deductAmount: couponDeduction + pointsDeduction,
                 createTime: Date.now(),
                 addressID: orderAddress._id
             }).then(function (orderID) {

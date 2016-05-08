@@ -20,6 +20,18 @@ module.exports.OrderStatus = {
 };
 
 /**
+ * 结算类型
+ */
+module.exports.SettleType = {
+
+    //优惠券扣减
+    CouponDeduction: 'CouponDeduction',
+
+    //积分扣减
+    PointsDeduction: 'PointsDeduction'
+};
+
+/**
  * 订单列表类型
  */
 module.exports.OrdersListType = {
@@ -32,18 +44,6 @@ module.exports.OrdersListType = {
 
     //全部订单
     All: 'All'
-};
-
-/**
- * 地址级别
- */
-module.exports.AddressLevel = {
-
-    Province: 'Province',
-
-    City: 'City',
-
-    District: 'District'
 };
 
 /**
@@ -73,6 +73,18 @@ module.exports.CouponStatus = {
 
     //已使用/已过期
     Unusable: 'Unusable'
+};
+
+/**
+ * 地址级别
+ */
+module.exports.AddressLevel = {
+
+    Province: 'Province',
+
+    City: 'City',
+
+    District: 'District'
 };
 
 /**

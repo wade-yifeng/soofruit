@@ -19,7 +19,7 @@ var CartSchema = new mongoose.Schema({
     }],
 
     //创建时间
-    createDate: {type: Date, default: Date.now}
+    createTime: {type: Date, default: Date.now}
 });
 
 mongoose.model('Cart', CartSchema);

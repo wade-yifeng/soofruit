@@ -28,7 +28,10 @@ var AddressSchema = new mongoose.Schema({
     detail: String,
 
     //默认地址
-    isDefault: Boolean
+    isDefault: Boolean,
+
+    //创建时间
+    createTime: {type: Date, default: Date.now}
 });
 
 mongoose.model('Address', AddressSchema);

@@ -19,7 +19,10 @@ var UserCouponSchema = new mongoose.Schema({
     minPoints: Number,
 
     //优惠券状态
-    status: String
+    status: String,
+
+    //创建时间
+    createTime: {type: Date, default: Date.now}
 });
 UserCouponSchema.plugin(require('./plugins/paged_find'));
 

@@ -38,6 +38,9 @@ var UserSchema = new mongoose.Schema({
     //最后一次登录时间
     lastLoginTime: Date,
 
+    //创建时间
+    createTime: { type: Date, default: Date.now},
+
     //用户名
     username: String,
 

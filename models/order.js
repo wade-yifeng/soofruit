@@ -27,11 +27,11 @@ var OrderSchema = new mongoose.Schema({
     //实际付款
     payAmount: Number,
 
-    //优惠券减免额度
-    couponDeduction: {type: Number, default: 0},
+    //减免额度(优惠券,积分,等)
+    deductAmount: {type: Number, default: 0},
 
     //创建时间
-    createTime: Date,
+    createTime: {type: Date, default: Date.now},
 
     //付款时间
     payTime: Date,
