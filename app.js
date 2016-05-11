@@ -140,5 +140,6 @@ var server = app.listen(config.port, function () {
     logger.info('Site is up on http://localhost:' + config.port);
 });
 
-// socket监听server
+/* TODO: socket监听server
 // socket.initSocket(server);
+*/
