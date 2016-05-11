@@ -1,10 +1,10 @@
 var router = require('express').Router();
-var dic = require('./service/dic');
-var good = require('./service/good');
-var user = require('./service/user');
-var permission = require('./service/permissions');
-var role = require('./service/role');
-var coupon = require('./service/coupon');
+var dic = require('../service/dic');
+var good = require('../service/good');
+var user = require('../service/user');
+var permission = require('../service/permissions');
+var role = require('../service/role');
+var coupon = require('../service/coupon');
 
 // dictionary services
 router.get('/dics', dic.list)

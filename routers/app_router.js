@@ -1,12 +1,12 @@
 var router = require('express').Router();
-var account = require('./service/account');
-var cart = require('./service/cart');
-var addressOrigin = require('./service/address_origin');
-var address = require('./service/address');
-var order = require('./service/order');
-var favorite = require('./service/favorite');
-var userCoupon = require('./service/user_coupon');
-var user = require('./service/user');
+var account = require('../service/account');
+var cart = require('../service/cart');
+var addressOrigin = require('../service/address_origin');
+var address = require('../service/address');
+var order = require('../service/order');
+var favorite = require('../service/favorite');
+var userCoupon = require('../service/user_coupon');
+var user = require('../service/user');
 
 //wechat reply.post测试所用route
 router.get('/account', account.signin);

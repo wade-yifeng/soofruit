@@ -6,8 +6,14 @@
  * 4. 微信开放平台配置      
  */
 var config = {
+    // 应用名称
+    name: 'Soofruit',
+
     // 是否调试状态
     debug: false,
+
+    // 监控网站性能
+    oneapm_key: 'XApSBgxfAQEe3e1DTV9HCVUfDR9f57BfCR0LVgQBG7a12lEFH1QOH1FUe93cAlMcCVUYBQM=',
 
     // 站点端口
     port: 3000,
@@ -16,11 +22,14 @@ var config = {
     db: "mongodb://localhost/test",
 
     // session的密钥字符
-    session_secret: 'soofruit__secret_dev',
+    session_secret: 'soofruit_secret_dev',
 
     // redis 配置，默认是本地
     redis_host: '127.0.0.1',
     redis_port: 6379,
+
+    // 文件上传限制
+    file_limit: '1MB',
 
     // 图片上传路径
     upload_directory: "./assets/imgs/upload",
