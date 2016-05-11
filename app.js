@@ -44,6 +44,10 @@ require('./middlewares/mongoose_log');
 
 var errorPageMiddleware = require('./middlewares/error_page');
 
+// 获取主机名
+var urlinfo = require('url').parse(config.host);
+config.hostname = urlinfo.hostname || config.host;
+
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -116,13 +120,12 @@ app.use(auth.authUser);
 /* TODO: 封装数据库访问
 var apiRouter = require('./api_router');
 */
+
 var appRouter = require('./routers/app_router');
-var adminRouter = require('./routers/admin_router');
 var wechatRouter = require('./routers/wechat_router');
 
 // app.use('/api', cors(), apiRouter);
 app.use('/', appRouter);
-app.use('/', adminRouter);
 app.use('/wechat', wechatRouter);
 
 // error handler
@@ -135,10 +138,19 @@ app.get('/', function (req, res) {
     res.render('admin_index.html');
 });
 
-// 启动server
-var server = app.listen(config.port, function () {
-    logger.info('Site is up on http://localhost:' + config.port);
-});
+if (!module.parent) {
+    // 启动server
+    var server = app.listen(config.port, function () {
+        logger.info('Site is up on http://localhost:' + config.port);
+    });
+    app.listen(config.port, function () {
+        logger.info('Soofruit listening on port', config.port);
+        logger.info('Be the better...');
+        logger.info('http://' + config.hostname + ':' + config.port);
+    });
+}
+
+module.exports = app;
 
 /* TODO: socket监听server
 // socket.initSocket(server);

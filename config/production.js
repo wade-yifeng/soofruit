@@ -12,6 +12,9 @@ module.exports = {
     // 站点端口
     port: 80,
 
+    // 网站的域名
+    host: 'soofruit.com',
+
     // 微信
     WeChat: {
         // 公众号ID
@@ -20,7 +23,5 @@ module.exports = {
         appSecret: "f5e38fb6f3f29d7ae73004b106f8de45",
         // 公众号预设Token
         token: "Soostep123"
-    },
-    
-    OpenAPI: {}
+    }
 };

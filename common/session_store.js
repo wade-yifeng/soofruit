@@ -1,6 +1,6 @@
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
-var redisClient = require('./redis_db').redisClient;
+var redisClient = require('./redis_client').redisClient;
 var config = require('config');
 
 module.exports.initSessionStore = function (app) {

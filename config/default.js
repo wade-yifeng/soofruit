@@ -1,9 +1,5 @@
 /*!     
- * 配置文件（开发环境）：
- * 1. 站点配置（端口，Host地址）       
- * 2. 数据库配置（mongodb，redis）
- * 3. 微信公众号配置       
- * 4. 微信开放平台配置      
+ * 配置文件（开发环境）：    
  */
 var config = {
     // 应用名称
@@ -14,6 +10,9 @@ var config = {
 
     // 监控网站性能
     oneapm_key: 'XApSBgxfAQEe3e1DTV9HCVUfDR9f57BfCR0LVgQBG7a12lEFH1QOH1FUe93cAlMcCVUYBQM=',
+
+    // 网站的域名
+    host: 'localhost',
 
     // 站点端口
     port: 3000,
@@ -34,7 +33,7 @@ var config = {
     // 图片上传路径
     upload_directory: "./assets/imgs/upload",
 
-    // 微信
+    // 微信(目前只是配置正式环境)
     WeChat: {
         // 公众号ID
         appID: "wx36418b8bcd9f8c8a",
