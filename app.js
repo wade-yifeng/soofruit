@@ -28,13 +28,16 @@ var bytes = require('bytes');
 var path = require('path');
 // A streaming parser for HTML form data for node.js
 var busboy = require('connect-busboy');
-
+// connect-redis is a Redis session store backed by node_redis, and is insanely fast
+// https://github.com/tj/connect-redis
+var RedisStore = require('connect-redis')(session);
 /* TODO: socket形式的逻辑待定
 // socket = require('./lib/socket');
 */
 
-// TODO: 初始化RedisStore
-var sessionStore = require('./lib/session_store');
+var auth = require('./middlewares/auth');
+var appRouter = require('./routers/app_router');
+var wechatRouter = require('./routers/wechat_router');
 
 // 记录method,url,ip,time
 var requestLog = require('./middlewares/request_log');
@@ -66,9 +69,17 @@ app.use(require('method-override')());
 // signed cookie support by passing a secret string
 app.use(require('cookie-parser')(config.session_secret));
 app.use(compress());
-
-// TODO: 初始化RedisStore
-sessionStore.initSessionStore(app);
+app.use(session({
+    secret: config.session_secret,
+    store: new RedisStore({
+        port: config.redis_port,
+        host: config.redis_host,
+    }),
+    // Forces the session to be saved back to the session store, 
+    // even if the session was never modified during the request. 
+    resave: true,
+    saveUninitialized: true,
+}));
 
 // 记录请求时间
 app.use(requestLog);
@@ -111,18 +122,12 @@ app.use(busboy({
     }
 }));
 
-/* TODO: 抽象身份验证逻辑
-var auth = require('./middlewares/auth');
 // custom middleware
 app.use(auth.authUser);
-*/
 
 /* TODO: 封装数据库访问
 var apiRouter = require('./api_router');
 */
-
-var appRouter = require('./routers/app_router');
-var wechatRouter = require('./routers/wechat_router');
 
 // app.use('/api', cors(), apiRouter);
 app.use('/', appRouter);
@@ -130,13 +135,6 @@ app.use('/wechat', wechatRouter);
 
 // error handler
 app.use(errorPageMiddleware.errorPage);
-
-// 站点主页映射
-app.get('/', function (req, res) {
-    res.render('index.html');
-}).get('/admin', function (req, res) {
-    res.render('admin_index.html');
-});
 
 if (!module.parent) {
     // 启动server

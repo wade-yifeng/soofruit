@@ -17,6 +17,12 @@ var config = {
     // 站点端口
     port: 3000,
 
+    // 单页最小记录数
+    min_page_size: 10,
+
+    // 首页最小活动数量
+    min_topic_size: 5,
+
     // 数据库连接字符串
     db: "mongodb://localhost/test",
 
@@ -26,6 +32,9 @@ var config = {
     // redis 配置，默认是本地
     redis_host: '127.0.0.1',
     redis_port: 6379,
+
+    // 保存身份Cookie的Key
+    auth_cookie_name: 'soofruit_auth',
 
     // 文件上传限制
     file_limit: '1MB',
