@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var logger   = require('../lib/logger');
+var logger   = require('../common/logger');
 var config = require('config');
 
 // debug模式纪录query到cheese文件中

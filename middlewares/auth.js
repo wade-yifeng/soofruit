@@ -16,16 +16,47 @@ exports.authUser = function (req, res, next) {
     // 先查找Session，找到直接放入locals
     if(req.session.user) {
         res.locals.current_user = req.session.user = new UserModel(req.session.user);
-    } else {
-        var auth_token = req.signedCookies[config.auth_cookie_name];
-        if (!auth_token) {
-            var targetUrl = req.params.targetUrl;
+        return next();
+    }
+
+    var auth_token = req.signedCookies[config.auth_cookie_name];
+    if (!auth_token) {
+        if (req.query.code === undefined) {
             var absoluteURL = req.protocol + '://' + req.get('host') + req.originalUrl;
             var url = oauthApi.getAuthorizeURL(absoluteURL);
             res.redirect(url);
             return next();
         }
-
+        logger.info("req.query.code:" + req.query.code);
+        async.waterfall(
+            [function (callback) {
+                oauthApi.getAccessToken(req.query.code, function (err, result) {
+                    if (err) {
+                        callback(err);
+                    }
+                    if (result.data === undefined || result.data.openid === undefined) {
+                        callback(new Error('调用微信API获取openid失败'));
+                    } else {
+                        callback(null, result.data.openid);
+                    }
+                });
+            }, function (openID, callback) {
+                api.getUser(openID, function (err, result) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, result);
+                    }
+                });
+            }], function (err, baseInfo) {
+                if (err) {
+                    logger.error(err);
+                }
+                else {
+                    // Create user if new
+                }
+            });
+    } else {
         var auth = auth_token.split('||');
         var wechat_id = auth[0];
         UserProxy.getUserByWeChatId(wechat_id, function(user){

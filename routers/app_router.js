@@ -1,5 +1,5 @@
 var express = require('express');
-var site = require('./controllers/site');
+var site = require('../controllers/site');
 
 var router = express.Router();
 

@@ -1,4 +1,4 @@
-var logger = require('../lib/logger');
+var logger = require('../common/logger');
 
 // Patch res.render method to output logger
 exports.render = function (req, res, next) {

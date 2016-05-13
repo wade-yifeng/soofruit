@@ -1,4 +1,4 @@
-var logger = require('../lib/logger');
+var logger = require('../common/logger');
 
 module.exports = function (req, res, next) {
   // Assets do not out log.

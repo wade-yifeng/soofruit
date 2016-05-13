@@ -32,21 +32,18 @@ var busboy = require('connect-busboy');
 // https://github.com/tj/connect-redis
 var RedisStore = require('connect-redis')(session);
 /* TODO: socket形式的逻辑待定
-// socket = require('./lib/socket');
+// socket = require('./common/socket');
 */
-
+// 记录method,url,ip,time
+var requestLog = require('./middlewares/request_log');
+var logger = require('./common/logger');
+// 打印 mongodb 查询日志
+require('./middlewares/mongoose_log');
+require('./models');
 var auth = require('./middlewares/auth');
 var appRouter = require('./routers/app_router');
 var wechatRouter = require('./routers/wechat_router');
-
-// 记录method,url,ip,time
-var requestLog = require('./middlewares/request_log');
-var logger = require('./lib/logger');
-// 打印 mongodb 查询日志
-require('./middlewares/mongoose_log');
-
 var errorPageMiddleware = require('./middlewares/error_page');
-
 // 获取主机名
 var urlinfo = require('url').parse(config.host);
 config.hostname = urlinfo.hostname || config.host;
@@ -138,9 +135,6 @@ app.use(errorPageMiddleware.errorPage);
 
 if (!module.parent) {
     // 启动server
-    var server = app.listen(config.port, function () {
-        logger.info('Site is up on http://localhost:' + config.port);
-    });
     app.listen(config.port, function () {
         logger.info('Soofruit listening on port', config.port);
         logger.info('Be the better...');
