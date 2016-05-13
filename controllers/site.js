@@ -1,5 +1,4 @@
-var models  = require('../models');
-var User    = models.User;
+var User = require('../proxy').User;
 var config = require('config');
 
 exports.index = function (req, res, next) {

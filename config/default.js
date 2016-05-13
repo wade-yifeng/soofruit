@@ -24,7 +24,7 @@ var config = {
     min_topic_size: 5,
 
     // 数据库连接字符串
-    db: "mongodb://localhost/test",
+    db: "mongodb://127.0.0.1/soofruit",
 
     // session的密钥字符
     session_secret: 'soofruit_secret_dev',
