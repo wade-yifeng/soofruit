@@ -4,39 +4,23 @@ var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('js:mobile', function () {
+gulp.task('js:app', function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
-            'static/scripts/mobile/**/*.js',
-            'mobile/routes.js',
-            'mobile/*.svc.js',
-            'mobile/*.ctrl.js'
+            'static/scripts/app/**/*.js',
+            'app/services/*.js',
+            'app/controllers/*.js',
+            'app/app.js'
         ])
         .pipe(sourcemaps.init())    //Debug需要
         .pipe(ngAnnotate())         //uglify需要
-        .pipe(concat('mobile.js'))
+        .pipe(concat('app.js'))
         //.pipe(uglify())           //生产环境需要
         .pipe(sourcemaps.write())   //Debug需要
         .pipe(gulp.dest('assets'));
 });
 
-gulp.task('js:admin', function () {
-    return gulp.src([
-            //必须按顺序将内容压缩进去,否则不能正常执行
-            'static/scripts/admin/**/*.js',
-            'admin/routes.js',
-            'admin/*.svc.js',
-            'admin/*.ctrl.js'
-        ])
-        .pipe(sourcemaps.init())    //Debug需要
-        .pipe(ngAnnotate())         //uglify需要
-        .pipe(concat('admin.js'))
-        //.pipe(uglify())           //生产环境需要
-        .pipe(sourcemaps.write())   //Debug需要
-        .pipe(gulp.dest('assets'));
-});
-
-gulp.task('js:common', ['js:mobile', 'js:admin'], function () {
+gulp.task('js:common', ['js:app'], function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/angular.js',
@@ -67,13 +51,9 @@ gulp.task('watch:js', ['js:common'], function () {
         'static/scripts/socket.io.js',
         'static/scripts/underscore.js',
         'static/scripts/site.js',
-        'static/scripts/mobile/**/*.js',
-        'static/scripts/admin/**/*.js',
-        'mobile/routes.js',
-        'mobile/*.svc.js',
-        'mobile/*.ctrl.js',
-        'admin/routes.js',
-        'admin/*.svc.js',
-        'admin/*.ctrl.js'
+        'static/scripts/app/**/*.js',
+        'app/services/*.js',
+        'app/controllers/*.js',
+        'app/app.js'
     ], ['js:common']);
 });

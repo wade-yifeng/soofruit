@@ -1,17 +1,7 @@
-<div class="container" ng-controller="List">
+<div class="container" ng-controller="IndexController">
     <div id="banner">
         <div class="flexslider">
-            <ul class="slides">
-                <li>
-                    <img src="http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/bg_3.jpg">
-                </li>
-                <li>
-                    <img src="http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/bg_2.jpg">
-                </li>
-                <li>
-                    <img src="http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/bg_1.jpg">
-                </li>
-            </ul>
+            <div ui-view="subjects" class="flexslider"></div>
         </div>
     </div>
     <section class="main-view tuan" id="goods_list">
@@ -34,7 +24,7 @@
                     </div>
                     <div class="tuan_g_core">
                         <div class="tuan_g_core_img">
-                            <img src="/assets/imgs/mobile/tuan.png">
+                            <img src="/assets/imgs/app/tuan.png">
                         </div>
                         <div class="tuan_g_price price-big">
                             <span>活动价</span><b>{{good.sellPrice|currency:'￥'}}</b>
@@ -42,8 +32,8 @@
                         <div class="tuan_g_btn" ui-sref="detail({goodID:'{{good._id}}'})">查看详情</div>
                     </div>
                     <div class="like goods_list_like">
-                        <img src="/assets/imgs/mobile/unlike.png" ng-hide="isLike(good._id)">
-                        <img src="/assets/imgs/mobile/like.png" ng-show="isLike(good._id)">
+                        <img src="/assets/imgs/app/unlike.png" ng-hide="isLike(good._id)">
+                        <img src="/assets/imgs/app/like.png" ng-show="isLike(good._id)">
                         <div class="like_click_button" ng-click="setLike(good._id)"></div>
                     </div>
                 </div>

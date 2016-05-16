@@ -14,17 +14,14 @@ gulp.task('copy:imgs', function () {
 
 gulp.task('copy:templates', ['copy:fonts', 'copy:imgs'], function () {
     return gulp.src([
-            'mobile/templates/**/*.html',
-            'admin/templates/**/*.html'
+            'app/templates/**/*.html'
         ])
-        .pipe(rename({dirname: 'views'}))
         .pipe(minifyhtml())
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('views/'));
 });
 
 gulp.task('watch:html', ['copy:templates'], function () {
     gulp.watch([
-        'mobile/templates/**/*.html',
-        'admin/templates/**/*.html'
+        'app/templates/**/*.html'
     ], ['copy:templates']);
 });

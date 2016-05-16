@@ -128,13 +128,13 @@ var apiRouter = require('./api_router');
 
 // app.use('/api', cors(), apiRouter);
 app.use('/', appRouter);
-// app.use('/wechat', wechatRouter);
+app.use('/wechat', wechatRouter);
 
 // error handler
 app.use(errorPageMiddleware.errorPage);
 
 app.get('/', function (req, res) {
-    res.render('index.html');
+    res.render('layout.html');
 });
 
 if (!module.parent) {

@@ -26,7 +26,7 @@ exports.getActiveSubject = function (query, opt, callback) {
                 return {
                     name: item.name,
                     title: item.desc,
-                    img: item.pic[0],
+                    img: item.pics[0],
                     tags: item.tags,
                     url: item.url
                 };
