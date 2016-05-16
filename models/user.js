@@ -1,14 +1,10 @@
 var mongoose = require('mongoose');
-//var bcrypt = require('bcrypt');
-//var config = require('config');
+var BaseModel = require("./base_model");
 
-/**
- * 用户
- */
 var UserSchema = new mongoose.Schema({
 
-    //微信参数unionid: 用户微信ID
-    wechatID: {type: String, unique: true},
+    //微信参数unionid: 用户对应公众号的唯一ID
+    unionID: {type: String, unique: true},
 
     //微信参数nickname: 用户微信昵称
     nickName: String,
@@ -41,6 +37,9 @@ var UserSchema = new mongoose.Schema({
     //创建时间
     createTime: { type: Date, default: Date.now},
 
+    //最近更新时间
+    lastUpdateTime: { type: Date, default: Date.now},
+
     //用户名
     username: String,
 
@@ -56,5 +55,8 @@ var UserSchema = new mongoose.Schema({
     //帐号是否锁定
     isBlocked: Boolean
 });
+
+UserSchema.plugin(BaseModel);
+UserSchema.index({createTime: -1});
 
 mongoose.model('User', UserSchema);

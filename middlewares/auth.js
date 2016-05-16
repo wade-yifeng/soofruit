@@ -2,71 +2,51 @@ var mongoose   = require('mongoose');
 var UserModel  = mongoose.model('User');
 var config     = require('config');
 var UserProxy  = require('../proxy').User;
-var eventproxy = require('eventproxy');
-var oauthApi = require('../wechat/api_oauth');
 
 // 验证用户是否登录
 exports.authUser = function (req, res, next) {
-    var ep = new eventproxy();
-    ep.fail(next);
-
+    if (/^\/assets/.test(req.url) || /^\/views\/section/.test(req.url)) {
+        return next();
+    }
+    
     // Ensure current_user always has defined.
     res.locals.current_user = null;
 
     // 先查找Session，找到直接放入locals
     if(req.session.user) {
-        res.locals.current_user = req.session.user = new UserModel(req.session.user);
+        var userModel = new UserModel(req.session.user);
+        res.locals.current_user = req.session.user = userModel;
+        res.locals.userID = req.session.userID = userModel.userID;
         return next();
     }
 
+    // 查找浏览器Cookie
     var auth_token = req.signedCookies[config.auth_cookie_name];
-    if (!auth_token) {
-        if (req.query.code === undefined) {
-            var absoluteURL = req.protocol + '://' + req.get('host') + req.originalUrl;
-            var url = oauthApi.getAuthorizeURL(absoluteURL);
-            res.redirect(url);
-            return next();
-        }
-        logger.info("req.query.code:" + req.query.code);
-        async.waterfall(
-            [function (callback) {
-                oauthApi.getAccessToken(req.query.code, function (err, result) {
-                    if (err) {
-                        callback(err);
-                    }
-                    if (result.data === undefined || result.data.openid === undefined) {
-                        callback(new Error('调用微信API获取openid失败'));
-                    } else {
-                        callback(null, result.data.openid);
-                    }
-                });
-            }, function (openID, callback) {
-                api.getUser(openID, function (err, result) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, result);
-                    }
-                });
-            }], function (err, baseInfo) {
-                if (err) {
-                    logger.error(err);
-                }
-                else {
-                    // Create user if new
-                }
-            });
-    } else {
+    if (auth_token) {
         var auth = auth_token.split('||');
-        var wechat_id = auth[0];
-        UserProxy.getUserByWeChatId(wechat_id, function(user){
+        var unionID = auth[0];
+        UserProxy.getUserByUnionID(unionID, function(user){
             res.locals.current_user = req.session.user = user;
+            res.locals.userID = req.session.userID = user.userID;
         });
+        return next();
     }
+
+    var isLogin = !!req.session.targetUrl;
+    if(!/^\/login/.test(req.url)) {
+        req.session.targetUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    }
+
+    if(isLogin) {
+        return next();
+    }
+    
+    res.redirect('/login');
 };
 
+// 目前只是以微信端unionid作为Session
 exports.gen_session = function(user, res) {
-    var auth_token = user._id + '||' + user.wechatID; 
+    var auth_token = user.unionid + '||'; 
     var opts = {
         path: '/',
         maxAge: 1000 * 60 * 60 * 24 * 30,

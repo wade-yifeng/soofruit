@@ -6,19 +6,25 @@ var config = {
     name: 'Soofruit',
 
     // 是否调试状态
-    debug: false,
+    debug: true,
 
     // 网站的域名
     host: 'localhost',
 
     // 站点端口
-    port: 3010,
+    port: 3000,
+
+    // 监控网站性能
+    oneapm_key: 'XApSBgxfAQEe3e1DTV9HCVUfDR9f57BfCR0LVgQBG7a12lEFH1QOH1FUe93cAlMcCVUYBQM=',
 
     // 单页最小记录数
     min_page_size: 10,
 
     // 首页最小活动数量
-    min_topic_size: 5,
+    min_subject_size: 5,
+
+    // 首页最小热点显示数量
+    min_spotlight_size: 10,
 
     // 数据库连接字符串
     db: "mongodb://127.0.0.1/soofruit",
@@ -38,6 +44,9 @@ var config = {
 
     // 图片上传路径
     upload_directory: "./assets/imgs/upload",
+
+    // 默认数据缓存时间，秒为单位
+    default_cache_time: 600,
 
     // 微信(目前只是配置正式环境)
     WeChat: {
@@ -65,6 +74,6 @@ var config = {
     }
 };
 
-config.debug = process.env.NODE_ENV || 'DEV' === 'DEV';
+config.debug = true;
 
 module.exports = config;

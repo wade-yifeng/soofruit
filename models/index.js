@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var config = require('config');
-var logger = require('../common/logger');
+var config   = require('config');
+var logger   = require('../common/logger');
 
 mongoose.connect(config.db, {
     server: {poolSize: 20}
@@ -11,6 +11,14 @@ mongoose.connect(config.db, {
     }
 });
 
+// models
 require('./user');
+require('./subject');
+require('./product');
+require('./favorite');
 
-exports.User = mongoose.model('User');
+exports.User    = mongoose.model('User');
+exports.Subject   = mongoose.model('Subject');
+exports.Enums   = require('./enums');
+exports.Product = mongoose.model('Product');
+exports.Favorite = mongoose.model('Favorite');
