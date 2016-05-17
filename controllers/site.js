@@ -73,22 +73,22 @@ exports.index = function (req, res, next) {
     
 };
 
-// exports.addFavorite = function (req, res, next) {
-//     Favorite.add(req.body, function (err, fav) {
-//         if (err || !fav) {
-//             res.json({code: enums.ResultCode.InternalError, msg: '商品收藏失败'});
-//         } else {
-//             res.json({code: enums.ResultCode.Success, data: fav._id.toString(), msg: '商品收藏成功,可到您的个人中心查看'});
-//         }
-//     });
-// };
+exports.addFavorite = function (req, res, next) {
+    Favorite.add(req.body, function (err, fav) {
+        if (err || !fav) {
+            res.json({code: enums.ResultCode.InternalError, msg: '商品收藏失败'});
+        } else {
+            res.json({code: enums.ResultCode.Success, data: fav._id.toString(), msg: '商品收藏成功,可到您的个人中心查看'});
+        }
+    });
+};
 
-// exports.removeFavorite = function (req, res, next) {
-//     Favorite.remove(res.locals.userID, req.params.itemID, function (err) {
-//         if (err) {
-//             res.json({code: enums.ResultCode.InternalError, msg: '商品取消收藏失败'});
-//         } else {
-//             res.json({code: enums.ResultCode.Success});
-//         }
-//     });
-// };
+exports.removeFavorite = function (req, res, next) {
+    Favorite.remove(res.locals.userID, req.params.itemID, function (err) {
+        if (err) {
+            res.json({code: enums.ResultCode.InternalError, msg: '商品取消收藏失败'});
+        } else {
+            res.json({code: enums.ResultCode.Success});
+        }
+    });
+};

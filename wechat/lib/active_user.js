@@ -87,7 +87,7 @@ exports.updateRemark = function (openid, remark, callback) {
  * 设置用户备注名的未封装版本
  */
 exports._updateRemark = function (openid, remark, callback) {
-    var url = this.prefix + 'user/info/updateremark?access_token=' + this.token.accessToken;
+    var url = config.OpenAPI.apiURL + 'user/info/updateremark?access_token=' + this.token.accessToken;
     var data = {
         openid: openid,
         remark: remark

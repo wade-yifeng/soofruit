@@ -8,6 +8,8 @@ var util = require('./lib/util');
 var API = require('./lib/active');
 // 用户信息
 API.mixin(require('./lib/active_user'));
+// 推广二维码
+API.mixin(require('./lib/active_qrcode'));
 var fs = require('fs');
 
 module.exports = new API(config.WeChat.appID, config.WeChat.appSecret, 

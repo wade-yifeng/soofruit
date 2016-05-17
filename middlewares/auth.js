@@ -5,7 +5,7 @@ var UserProxy  = require('../proxy').User;
 
 // 验证用户是否登录
 exports.authUser = function (req, res, next) {
-    if (/^\/assets/.test(req.url) || /^\/views\/section/.test(req.url)) {
+    if (/^\/assets/.test(req.url) || /^\/views\/section/.test(req.url) || /^\/wechat/.test(req.url)) {
         return next();
     }
     
@@ -16,7 +16,7 @@ exports.authUser = function (req, res, next) {
     if(req.session.user) {
         var userModel = new UserModel(req.session.user);
         res.locals.current_user = req.session.user = userModel;
-        res.locals.userID = req.session.userID = userModel.userID;
+        res.locals.userID = req.session.userID = userModel._id;
         return next();
     }
 
@@ -27,7 +27,7 @@ exports.authUser = function (req, res, next) {
         var unionID = auth[0];
         UserProxy.getUserByUnionID(unionID, function(user){
             res.locals.current_user = req.session.user = user;
-            res.locals.userID = req.session.userID = user.userID;
+            res.locals.userID = req.session.userID = user._id;
         });
         return next();
     }
