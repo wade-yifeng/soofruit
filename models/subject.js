@@ -3,19 +3,19 @@ var Schema    = mongoose.Schema;
 var ObjectId  = Schema.ObjectId;
 var BaseModel = require("./base_model");
 
-var subject1 = {
-    name: '测试2',
-    desc: '这是一个测试主题',
-    type: 'test',
-    tags: ['item', 'top5'],
-    url: 'www.baidu.com',
-    pic: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/bg_2.jpg'],
-    top: true,
-    priority: 2,
-    spotlight: true,
-    active: true,
-    createTime: '2016-05-15'
-};
+// var subject1 = {
+//     name: '测试2',
+//     desc: '这是一个测试主题',
+//     type: 'test',
+//     tags: ['item', 'top5'],
+//     url: 'www.baidu.com',
+//     pic: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/bg_2.jpg'],
+//     top: true,
+//     priority: 2,
+//     spotlight: true,
+//     active: true,
+//     createTime: '2016-05-15'
+// };
 
 var SubjectSchema = new Schema({
 
@@ -39,6 +39,9 @@ var SubjectSchema = new Schema({
 
     //对应的产品ID
     itemID: ObjectId,
+
+    //对应的文字ID
+    articleID: ObjectId,
 
     //是否在首页轮播显示
     top: { type: Boolean, default: false },

@@ -42,7 +42,7 @@ exports.updateUserByUnionID = function(baseInfo) {
     };
     User.update({unionID: entity.unionID}, entity, {upsert: true, setDefaultsOnInsert: true}, function(err) {
         if(err) {
-            logger.err('更新用户失败' + err);
+            logger.error('更新用户失败' + err);
         }
     });
 };

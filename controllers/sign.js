@@ -36,7 +36,7 @@ module.exports.login = function (req, res) {
             }
         ], function (err, baseInfo) {
                 if (err) {
-                    logger.error(err);
+                    logger.error("获取微信身份信息失败，错误：" + err);
                 }
                 else {
                     User.updateUserByUnionID(baseInfo);

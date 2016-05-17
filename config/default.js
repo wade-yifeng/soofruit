@@ -55,7 +55,9 @@ var config = {
         // 公众号密钥
         appSecret: "f5e38fb6f3f29d7ae73004b106f8de45",
         // 公众号预设Token    
-        token: "Soostep123"
+        token: "Soostep123",
+        //推广临时二维码失效时间
+        qrCodeExpire: 604800
     },
 
     OpenAPI: {

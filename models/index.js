@@ -16,9 +16,11 @@ require('./user');
 require('./subject');
 require('./product');
 require('./favorite');
+require('./article');
 
-exports.User    = mongoose.model('User');
-exports.Subject   = mongoose.model('Subject');
-exports.Enums   = require('./enums');
-exports.Product = mongoose.model('Product');
+exports.User     = mongoose.model('User');
+exports.Subject  = mongoose.model('Subject');
+exports.Enums    = require('./enums');
+exports.Product  = mongoose.model('Product');
 exports.Favorite = mongoose.model('Favorite');
+exports.Article  = mongoose.model('Article');

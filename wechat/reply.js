@@ -1,7 +1,9 @@
-var wechat = require('wechat');
-var config = require('config');
-var logger = require('../common/logger');
-var api    = require('../wechat/api');
+var wechat  = require('wechat');
+var config  = require('config');
+var async   = require('async');
+var logger  = require('../common/logger');
+var api     = require('../wechat/api');
+var Article = require('../proxy').Article;
 
 module.exports.post = wechat(config.WeChat, function (req, res, next) {
     // 微信输入信息都在req.weixin上
@@ -9,17 +11,54 @@ module.exports.post = wechat(config.WeChat, function (req, res, next) {
     logger.info(message);
     if(message !== undefined) {
         if(message.MsgType === 'text') {
-            // message.Content
-            api.createLimitQRCode(2001, function(err, result) {
-                var qrCodeURL = api.showQRCodeURL(result.ticket);
-                logger.info(qrCodeURL);
-                res.reply([{
-                    title: '快来关注吧',
-                    description: '总算搞清楚公众号怎么玩了，大家庆祝下！',
-                    picurl: qrCodeURL,
-                    url: qrCodeURL
-                }]);
-            });
+            if(/^ZW[0-9]+/.test(message.Content)) {
+                var target = message.Content.substring(2);
+                async.waterfall([
+                    function (callback) {
+                        Article.getArticleByQRCodeID(target, function(err, article){
+                            callback(err, article);
+                        });
+                    }, function (article, callback) {
+                        logger.info("尝试获取article" + article);
+                        if(!article) {
+                            api.createTmpQRCode(target, config.WeChat.qrCodeExpire, 
+                                function(err, result) {
+                                    if(err) {
+                                        callback(err);
+                                    }
+
+                                    var qrCodeURL = api.showQRCodeURL(result.ticket);
+                                    logger.info(qrCodeURL);
+                                    callback(null, false, qrCodeURL);
+                                }
+                            );
+                        } else {
+                            callback(null, true, article.qrCodeURL);
+                        }
+                    }
+                ], function (err, existed, qrCodeURL) {
+                        if (err) {
+                            logger.error("生成二维码失败，错误：" + err);
+                            res.reply('生成二维码失败，错误：' + err);
+                        }
+                        else {
+                            if (!existed) {
+                                Article.createArticleWithQRCode(target, qrCodeURL, function(err) {
+                                    if(err) {
+                                        logger.error("创建推广文章失败，错误：" + err);
+                                    }
+                                });
+                            }
+                        }
+
+                        res.reply([{
+                            title: '快来关注' + target + '吧',
+                            description: '请打开页面获取二维码，开始扫码推广吧！',
+                            picurl: qrCodeURL,
+                            url: qrCodeURL
+                        }]);
+                });
+            }
         }
     }
 });

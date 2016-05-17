@@ -14,7 +14,7 @@ exports.index = function (req, res, next) {
         function(callback){
             cache.get('subjects', function (err, subjects) {
                 if(err) {
-                    logger.err('获取缓存失败(Key: subjects)' + err);
+                    logger.error('获取缓存失败(Key: subjects)' + err);
                 }
 
                 if (subjects) {
@@ -34,7 +34,7 @@ exports.index = function (req, res, next) {
         }, function(callback){
             cache.get('spotlights', function (err, spotlights) {
                 if(err) {
-                    logger.err('获取缓存失败(Key: spotlights)' + err);
+                    logger.error('获取缓存失败(Key: spotlights)' + err);
                 }
 
                 if (spotlights) {

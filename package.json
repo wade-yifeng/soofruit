@@ -5,7 +5,8 @@
   "repository": "https://github.com/wade-yifeng/soostep",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node app.js"
+    "run": "NODE_ENV=production node app.js",
+    "start": "make start"
   },
   "author": "someone",
   "license": "ISC",
