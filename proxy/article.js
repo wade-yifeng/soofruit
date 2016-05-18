@@ -21,6 +21,25 @@ exports.getArticleByQRCodeID = function (qrCodeID, callback) {
     );
 };
 
+/**
+ * 根据推广二维码ID来记录关注人数增长
+ * Callback:
+ * - err, 数据库异常
+ * - records, 推荐关注人数
+ * @param {Number} qrCodeID 推广二维码编号
+ */
+function increaseArticleRecords(qrCodeID) {
+   var ret = db.counters.findAndModify(
+          {
+            query: { _id: name },
+            update: { $inc: { seq: 1 } },
+            new: true
+          }
+   );
+
+   return ret.seq;
+}
+
 exports.createArticleWithQRCode = function (qrCodeID, qrCodeURL, callback) {
     this.save(new Article({
         qrCodeID: qrCodeID,

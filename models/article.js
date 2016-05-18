@@ -33,6 +33,9 @@ var ArticleSchema = new Schema({
     //文章推广二维码获取地址
     qrCodeURL: String,
 
+    //文章推广关注数量
+    records: { type: Number, default: 0 },
+
     //是否在发现页顶部显示
     top: { type: Boolean, default: false },
 
