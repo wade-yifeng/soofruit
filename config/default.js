@@ -5,7 +5,7 @@ var config = {
     // 应用名称
     name: 'Soofruit',
 
-    // 是否调试状态
+    //默认调试状态开启
     debug: true,
 
     // 网站的域名
@@ -76,6 +76,8 @@ var config = {
     }
 };
 
-config.debug = true;
+if(process.env.NODE_ENV === 'production') {
+    config.debug = false;
+}
 
 module.exports = config;

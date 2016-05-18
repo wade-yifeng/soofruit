@@ -12,6 +12,9 @@ var ArticleSchema = new Schema({
     //文章标题
     title: String,
 
+    //作者
+    author: String,
+
     //文章概述
     desc: String,
 

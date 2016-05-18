@@ -1,7 +1,8 @@
-var mongoose   = require('mongoose');
-var UserModel  = mongoose.model('User');
-var config     = require('config');
-var UserProxy  = require('../proxy').User;
+var mongoose  = require('mongoose');
+var UserModel = mongoose.model('User');
+var config    = require('config');
+var UserProxy = require('../proxy').User;
+var logger    = require('../common/logger');
 
 // 验证用户是否登录
 exports.authUser = function (req, res, next) {
@@ -15,6 +16,7 @@ exports.authUser = function (req, res, next) {
     // 先查找Session，找到直接放入locals
     if(req.session.user) {
         var userModel = new UserModel(req.session.user);
+        logger.info('在session中找到了用户:' + userModel);
         res.locals.current_user = req.session.user = userModel;
         res.locals.userID = req.session.userID = userModel._id;
         return next();
@@ -25,17 +27,21 @@ exports.authUser = function (req, res, next) {
     if (auth_token) {
         var auth = auth_token.split('||');
         var unionID = auth[0];
-        UserProxy.getUserByUnionID(unionID, function(user){
-            res.locals.current_user = req.session.user = user;
-            res.locals.userID = req.session.userID = user._id;
+        UserProxy.getUserByUnionID(unionID, function(err, user){
+            if(!err) {
+                logger.info('在cookie中找到了用户:' + user);
+                res.locals.current_user = req.session.user = user;
+                res.locals.userID = req.session.userID = user._id;
+            }
         });
         return next();
     }
 
     var isLogin = !!req.session.targetUrl;
-    if(!/^\/login/.test(req.url)) {
-        req.session.targetUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    }
+    
+    req.session.targetUrl = !/^\/login/.test(req.url) ? 
+        req.protocol + '://' + req.get('host') + req.originalUrl : 
+        req.protocol + '://' + req.get('host');
 
     if(isLogin) {
         return next();

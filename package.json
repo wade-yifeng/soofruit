@@ -5,7 +5,7 @@
   "repository": "https://github.com/wade-yifeng/soostep",
   "main": "app.js",
   "scripts": {
-    "run": "NODE_ENV=production node app.js",
+    "test": "NODE_ENV=production node app.js",
     "start": "make start"
   },
   "author": "someone",
@@ -50,6 +50,7 @@
     "socket.io": "^1.4.5",
     "underscore": "^1.8.3",
     "urllib": "^2.8.0",
+    "util": "^0.10.3",
     "validator": "^5.2.0",
     "vinyl-source-stream": "^1.1.0",
     "wechat": "^2.0.3"

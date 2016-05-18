@@ -39,7 +39,16 @@ module.exports.login = function (req, res) {
                     logger.error("获取微信身份信息失败，错误：" + err);
                 }
                 else {
-                    User.updateUserByUnionID(baseInfo);
+                    User.updateUserByUnionID(baseInfo, function(err, result) {
+                        if(err) {
+                            logger.error('更新用户失败' + err);
+                        } else{
+                            logger.info('更新或新建用户：');
+                            console.log("result: %j", result);
+                            logger.info("result: %j", result);
+                        }
+                    });
+
                     authMiddleWare.gen_session(baseInfo, res);
                 }
 

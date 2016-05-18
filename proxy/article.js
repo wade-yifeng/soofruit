@@ -28,16 +28,8 @@ exports.getArticleByQRCodeID = function (qrCodeID, callback) {
  * - records, 推荐关注人数
  * @param {Number} qrCodeID 推广二维码编号
  */
-function increaseArticleRecords(qrCodeID) {
-   var ret = db.counters.findAndModify(
-          {
-            query: { _id: name },
-            update: { $inc: { seq: 1 } },
-            new: true
-          }
-   );
-
-   return ret.seq;
+function increaseArticleRecords(qrCodeID, callback) {
+    Article.findAndModify({qrCodeID: qrCodeID}, {$inc: {records: 1}}, {new: true}, callback);
 }
 
 exports.createArticleWithQRCode = function (qrCodeID, qrCodeURL, callback) {

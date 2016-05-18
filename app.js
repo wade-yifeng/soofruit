@@ -104,13 +104,15 @@ if (config.debug) {
         }
         next();
     });
-    app.set('view cache', true);
+    //app.set('view cache', true);
 }
 
 app.use(function (req, res, next) {
     // pass the csrfToken to the view
-    res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
-    next();
+    if(!/^\/wechat/.test(req.url)){
+        res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
+        next();
+    }
 });
 
 app.use(busboy({

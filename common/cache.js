@@ -1,5 +1,6 @@
 var redis  = require('./redis');
 var logger = require('./logger');
+var config = require('config');
 
 var get = function (key, callback) {
     var t = new Date();
@@ -12,7 +13,11 @@ var get = function (key, callback) {
         }
         data = JSON.parse(data);
         var duration = (new Date() - t);
-        logger.debug('Cache', 'get', key, (duration + 'ms').green);
+
+        if(config.debug) {
+            logger.debug('Cache', 'get', key, (duration + 'ms').green);
+        }
+
         callback(null, data);
     });
 };
@@ -36,7 +41,10 @@ var set = function (key, value, time, callback) {
         redis.setex(key, time, value, callback);
     }
     var duration = (new Date() - t);
-    logger.debug("Cache", "set", key, (duration + 'ms').green);
+
+    if(config.debug) {
+        logger.debug("Cache", "set", key, (duration + 'ms').green);
+    }
 };
 
 exports.set = set;

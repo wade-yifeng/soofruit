@@ -22,7 +22,7 @@ exports.getUserByUnionID = function (unionID, callback) {
  * 根据用户在公众号中的唯一ID，更新（创建）用户
  * @param {String} baseInfo 微信基础信息
  */
-exports.updateUserByUnionID = function(baseInfo) {
+exports.updateUserByUnionID = function(baseInfo, callback) {
     var entity = {
         unionID: baseInfo.unionid,
         nickName: baseInfo.nickname,
@@ -40,10 +40,6 @@ exports.updateUserByUnionID = function(baseInfo) {
         points: 0,
         isBlocked: false
     };
-    User.update({unionID: entity.unionID}, entity, {upsert: true, setDefaultsOnInsert: true}, function(err) {
-        if(err) {
-            logger.error('更新用户失败' + err);
-        }
-    });
+    User.findOneAndUpdate({unionID: entity.unionID}, entity, {upsert: true, setDefaultsOnInsert: true}, callback);
 };
                             
