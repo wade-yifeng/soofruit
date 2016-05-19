@@ -28,9 +28,9 @@ exports.getArticleByQRCodeID = function (qrCodeID, callback) {
  * - records, 推荐关注人数
  * @param {Number} qrCodeID 推广二维码编号
  */
-function increaseArticleRecords(qrCodeID, callback) {
-    Article.findAndModify({qrCodeID: qrCodeID}, {$inc: {records: 1}}, {new: true}, callback);
-}
+exports.increaseArticleRecords = function(qrCodeID, callback) {
+    Article.findOneAndUpdate({qrCodeID: qrCodeID}, {$inc: {records: 1}}, {new: true}, callback);
+};
 
 exports.createArticleWithQRCode = function (qrCodeID, qrCodeURL, callback) {
     this.save(new Article({

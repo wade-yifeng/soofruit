@@ -28,7 +28,10 @@ exports.authUser = function (req, res, next) {
         var auth = auth_token.split('||');
         var unionID = auth[0];
         UserProxy.getUserByUnionID(unionID, function(err, user){
-            if(!err) {
+            if(err) {
+                logger.err('根据unionID查找用户失败，错误：' + err);
+            }
+            if(user) {
                 logger.info('在cookie中找到了用户:' + user);
                 res.locals.current_user = req.session.user = user;
                 res.locals.userID = req.session.userID = user._id;

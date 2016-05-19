@@ -44,6 +44,7 @@ var auth = require('./middlewares/auth');
 var appRouter = require('./routers/app_router');
 var wechatRouter = require('./routers/wechat_router');
 var errorPageMiddleware = require('./middlewares/error_page');
+var api = require('./wechat/api');
 // 获取主机名
 var urlinfo = require('url').parse(config.host);
 config.hostname = urlinfo.hostname || config.host;
@@ -98,21 +99,20 @@ if (config.debug) {
         return res.status(500).send('500 status');
     });
     app.use(function (req, res, next) {
-        if (req.path === '/api' || req.path.indexOf('/api') === -1) {
+        if (req.path.indexOf('/wechat') === -1) {
             csurf()(req, res, next);
             return;
         }
+
         next();
     });
-    //app.set('view cache', true);
+    app.set('view cache', true);
 }
 
 app.use(function (req, res, next) {
     // pass the csrfToken to the view
-    if(!/^\/wechat/.test(req.url)){
-        res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
-        next();
-    }
+    res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
+    next();
 });
 
 app.use(busboy({
@@ -145,6 +145,11 @@ if (!module.parent) {
         logger.info('Soofruit listening on port', config.port);
         logger.info('Be the better...');
         logger.info('http://' + config.hostname + ':' + config.port);
+        api.createMenu(config.WeChat.menu, function(err) {
+            if(err) {
+                logger.error('创建菜单失败，错误：' + err);
+            }
+        });
     });
 }
 

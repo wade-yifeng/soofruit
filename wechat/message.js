@@ -4,6 +4,7 @@ var async   = require('async');
 var logger  = require('../common/logger');
 var api     = require('./api');
 var Article = require('../proxy').Article;
+var User = require('../proxy').User;
 
 exports.text = function(message, callback) {
     if(!message.Content) {
@@ -87,6 +88,7 @@ exports.SCAN = function(message, callback) {
 
 // 关注公众号
 exports.subscribe = function(message, callback) {
+    var that = this;
     var reply = 'Hi，亲爱的小主，小北在此等候多时了。这里是我们的新家，' + 
         '我们将为您提供新鲜的水果尝鲜抢购&每日热点资讯&有趣的文章&生活大发现，' + 
         '请敬请期待平台正式发布哦~';
@@ -101,7 +103,7 @@ exports.subscribe = function(message, callback) {
         Article.getArticleByQRCodeID(qrCodeID, function(err, article){
             if(!!article) {
                 if(!!message.FromUserName) {
-                    this.checkAndIncreaseRecords(message.FromUserName, qrCodeID);
+                    that.checkAndIncreaseRecords(qrCodeID, message.FromUserName, qrCodeID);
                 }
                 return callback(null, reply.concat('\n\n' + 
                     util.format('首先感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧，您也可以通过我们的菜单进入征文活动哦~', 
@@ -113,15 +115,47 @@ exports.subscribe = function(message, callback) {
     }
 };
 
+exports.CLICK = function(message, callback) {
+    if(!message.EventKey) {
+        return callback(null, '系统表示一脸懵逼，主子请稍等啊！');
+    }
+
+    return callback(null, '咦，咋点进来了，再宽限几天么♡o(╥﹏╥)o♡');
+};
 
 /**
  * 根据被推荐的关注用户信息来判断并增加推广记录
  * @param {Number} openID 关注用户的openID
  * @param {Number} qrCodeID 推广二维码编号
  */
-exports.checkAndIncreaseRecords = function(openID, qrCodeID) {
-    // api.getUser(openID, function (err, result) {
-    //     if()
-    //     User.updateUserByUnionID(baseInfo);
-    // });
+exports.checkAndIncreaseRecords = function(qrCodeURL, openID, qrCodeID) {
+    async.waterfall([
+            function (callback) {
+                api.getUser(openID, function (err, result) {
+                    return callback(err, result);
+                });
+            }, function (baseInfo, callback) {
+                User.updateUserByUnionID(baseInfo, function(err, result) {
+                    logger.info('%j', result);
+                    return callback(err, !!result);
+                });
+            }
+        ], function (err, existed) {
+                if (err) {
+                    var errorMsg = "增加推广关注失败" + err;
+                    logger.error(errorMsg);
+                }
+                
+                if (!existed) {
+                    Article.increaseArticleRecords(qrCodeURL, 
+                        function(err, result) {
+                            if(err) {
+                                logger.error("增加推广关注失败，错误：" + err);
+                            }
+                            logger.info('%j', result);
+                        }
+                    );
+                }
+        }
+    );
 };

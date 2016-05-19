@@ -10,6 +10,8 @@ var API = require('./lib/active');
 API.mixin(require('./lib/active_user'));
 // 推广二维码
 API.mixin(require('./lib/active_qrcode'));
+// 公众号菜单
+API.mixin(require('./lib/active_menu'));
 var fs = require('fs');
 
 module.exports = new API(config.WeChat.appID, config.WeChat.appSecret, 

@@ -24,7 +24,6 @@ module.exports.post = wechat(config.WeChat, function (req, res, next) {
 });
 
 module.exports.get = function (req, res) {
-    
     // 签名成功
     if (wechat.checkSignature(req.query, config.WeChat.token)) {
         res.status(200).send(req.query.echostr);

@@ -57,7 +57,55 @@ var config = {
         // 公众号预设Token    
         token: "Soostep123",
         //推广临时二维码失效时间
-        qrCodeExpire: 604800
+        qrCodeExpire: 604800,
+
+        menu: {
+            "button":[
+                {
+                    "name":"征文大赛",
+                    "sub_button":[
+                        {
+                            "type":"view",
+                            "name":"第一期结果公布",
+                            "url":"http://mp.weixin.qq.com/s?__biz=MzAwOTg0MzI5MQ==&mid=2649454134&idx=1&sn=830f7a8243fa7261cd008b99de0d674e&scene=0#wechat_redirect"
+                        },
+                        {
+                            "type":"view",
+                            "name":"第二期火爆来袭",
+                            "url":"http://mp.weixin.qq.com/s?__biz=MzAwOTg0MzI5MQ==&mid=2649454070&idx=1&sn=95d0de93697ea91e59ca95a234338ac0&scene=0#wechat_redirect"
+                        },
+                        {
+                            "type":"view",
+                            "name":"往期精选",
+                            "url":"http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MzAwOTg0MzI5MQ==#wechat_webview_type=1&wechat_redirect"
+                        }]
+                },
+                {
+                    "type":"click",
+                    "name":"嗖一下",
+                    "key":"COMMING_SOON"
+                },
+                {
+                    "name":"平台服务",
+                    "sub_button":[
+                        {
+                            "type":"click",
+                            "name":"征文排行榜",
+                            "key":"COMMING_SOON"
+                        },
+                        {
+                            "type":"click",
+                            "name":"属于您的",
+                            "key":"COMMING_SOON"
+                        },
+                        {
+                            "type":"click",
+                            "name":"关于我们",
+                            "key":"COMMING_SOON"
+                        }]
+                }
+            ]
+        }
     },
 
     OpenAPI: {
