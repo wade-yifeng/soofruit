@@ -16,7 +16,7 @@ gulp.task('copy:templates', ['copy:fonts', 'copy:imgs'], function () {
     return gulp.src([
             'app/templates/**/*.html'
         ])
-        .pipe(minifyhtml())
+        //.pipe(minifyhtml())
         .pipe(gulp.dest('views/'));
 });
 

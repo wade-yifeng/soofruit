@@ -95,6 +95,11 @@ var config = {
                         },
                         {
                             "type":"click",
+                            "name":"悄悄话",
+                            "key":"REPLY"
+                        },
+                        {
+                            "type":"click",
                             "name":"属于您的",
                             "key":"COMMING_SOON"
                         },

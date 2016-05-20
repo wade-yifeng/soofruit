@@ -33,7 +33,7 @@ exports.updateReply = function(reply, callback) {
     logger.info("更新回复消息");
     logger.info(reply);
     logger.info(replyModel);
-    Reply.findOneAndUpdate({userID: replyModel.userID, nickName: replyModel.nickName, available: true}, 
+    Reply.findOneAndUpdate({nickName: replyModel.nickName, targetName: replyModel.targetName, available: true}, 
         replyModel, {upsert: true, setDefaultsOnInsert: true}, callback);
 };
 

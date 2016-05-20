@@ -71,13 +71,16 @@ exports.text = function(message, callback) {
 
         var msg = array[0].trim();
         var targetName = array[1].trim();
+        var nickName;
         async.waterfall([
             function (cb) {
                 api.getUser(message.FromUserName, function (err, result) {
                     if(err) {
                         return cb(new Error('无法获取当前用户，错误：', err));
                     }
-
+                    logger.info('当前用户');
+                    logger.info(result);
+                    nickName = result.nickname;
                     return cb(null, result);
                 });
             }, function (baseInfo, cb) {
@@ -91,8 +94,7 @@ exports.text = function(message, callback) {
             }, function(user, cb) {
                 Reply.updateReply(
                 {
-                    userID: user._id, 
-                    nickName: user.nickName,
+                    nickName: nickName,
                     targetName: targetName,
                     msg: msg
                 }, function(err, result) {
@@ -160,14 +162,14 @@ exports.subscribe = function(message, callback) {
                     }
                 });
             }, function (userName, cb) {
-                that.createUser(userName, function(err, user) {
+                that.createUser(userName, function(err, user, nickName) {
                     if (err) {
                         return cb(new Error("订阅时更新用户失败", err));
                     }
 
-                    return cb(null, user);
+                    return cb(null, user, nickName);
                 });
-            }, function (user, cb) {
+            }, function (user, nickName, cb) {
                 if (!user) {
                     Article.increaseArticleRecords(qrCodeID, 
                         function(err, result) {
@@ -178,8 +180,10 @@ exports.subscribe = function(message, callback) {
                         }
                     );
                 }
-                logger.info("开始查找需要回复的消息" + user.nickName);
-                Reply.getReplyByNickName(user.nickName, function(err, result) {
+
+                nickName = !user ? nickName : user.nickName;
+                logger.info("开始查找需要回复的消息" + nickName);
+                Reply.getReplyByNickName(nickName, function(err, result) {
                     if(err) {
                         return cb(new Error('查找用户需要做的回复失败，错误：', err));
                     }
@@ -204,14 +208,14 @@ exports.subscribe = function(message, callback) {
     } else {
         async.waterfall([
             function (cb) {
-                that.createUser(message.FromUserName, function(err, user) {
+                that.createUser(message.FromUserName, function(err, user, nickName) {
                     if (err) {
                         return cb(new Error("订阅时创建用户失败", err));
                     }
 
-                    return cb(null, user);
+                    return cb(null, user, nickName);
                 });
-            }, function (user, cb) {
+            }, function (user, nickName, cb) {
                 Reply.getReyplyByNickName(user.nickName, function(err, result) {
                     if(err) {
                         return cb(new Error('查找用户需要做的回复失败，错误：', err));
@@ -240,7 +244,53 @@ exports.CLICK = function(message, callback) {
         return callback(null, '系统表示一脸懵逼，主子请稍等啊！');
     }
 
-    return callback(null, '咦，咋点进来了，再宽限几天么♡o(╥﹏╥)o♡');
+    if(message.EventKey == "REPLY") {
+        if(!message.FromUserName) {
+            return callback(null, '系统表示一脸懵逼，主子请稍等啊！');
+        }
+
+        async.waterfall([
+            function (cb) {
+                api.getUser(message.FromUserName, function (err, result) {
+                    if(err) {
+                        return cb(new Error('无法获取当前用户，错误：', err));
+                    }
+
+                    return cb(null, result);
+                });
+            }, function (baseInfo, cb) {
+                logger.info(baseInfo);
+                User.getUserByUnionID(baseInfo.unionid, function(err, user) {
+                    if(err) {
+                        return cb(new Error('没有查找到当前用户，错误：', err));
+                    }
+
+                    return cb(null, user);
+                });
+            }, function(user, cb) {
+                logger.info(user);
+                Reply.getReplyByNickName(user.nickName, function(err, result) {
+                    if(err) {
+                        return cb(new Error('查找用户需要做的回复失败，错误：', err));
+                    }
+
+                    return cb(null, result);
+                });
+            }
+        ], function (err, result) {
+                var reply = '您收到了悄悄话哦，小北念给你听，咳咳：';
+                result.forEach(function(item) {
+                    logger.info('遍历悄悄话');
+                    logger.info(item);
+                    reply = reply.concat('\n' + util.format('%s想对你说：%s', 
+                        item.nickName || '', item.msg));
+                });
+                return callback(null, reply);  
+            }
+        );
+    } else {
+        return callback(null, '咦，咋点进来了，再宽限几天么♡o(╥﹏╥)o♡');
+    }
 };
 
 /**
@@ -248,9 +298,11 @@ exports.CLICK = function(message, callback) {
  * @param {Number} openID 关注用户的openID
  */
 exports.createUser = function(openID, callback) {
+    var nickName;
     async.waterfall([
             function (callback) {
                 api.getUser(openID, function (err, result) {
+                    nickName = result.nickname;
                     return callback(err, result);
                 });
             }, function (baseInfo, callback) {
@@ -260,7 +312,7 @@ exports.createUser = function(openID, callback) {
                 });
             }
         ], function (err, user) {
-            callback(err, user);
+            callback(err, user, nickName);
         }
     );
 };
