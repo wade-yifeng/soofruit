@@ -14,7 +14,7 @@ module.exports.post = wechat(config.WeChat, function (req, res, next) {
             handler[type](message, function(err, msg) {
                 if(err) {
                     logger.err("处理公众号请求失败，错误：" + err);
-                    return;
+                    msg = '小北暂时还不知道你在说啥，并向你扔了个自动回复';
                 }
                 
                 res.reply(msg);

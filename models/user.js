@@ -53,7 +53,7 @@ var UserSchema = new mongoose.Schema({
     points: {type: Number, default: 0},
 
     //帐号是否锁定
-    isBlocked: Boolean
+    isBlocked: {type: Boolean, default: false},
 });
 
 UserSchema.plugin(BaseModel);

@@ -33,12 +33,7 @@ exports.updateUserByUnionID = function(baseInfo, callback) {
         headImg: baseInfo.headimgurl,
         remark: baseInfo.remark,
         subcribeTime: new Date(baseInfo.subscribe_time * 1000),
-        lastLoginTime: Date.now(),
-        username: '',
-        tag: '',
-        mobile: '',
-        points: 0,
-        isBlocked: false
+        lastLoginTime: Date.now()
     };
     User.findOneAndUpdate({unionID: entity.unionID}, entity, {upsert: true, setDefaultsOnInsert: true}, callback);
 };

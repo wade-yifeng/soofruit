@@ -4,7 +4,8 @@ var async   = require('async');
 var logger  = require('../common/logger');
 var api     = require('./api');
 var Article = require('../proxy').Article;
-var User = require('../proxy').User;
+var User    = require('../proxy').User;
+var Reply   = require('../proxy').Reply;
 
 exports.text = function(message, callback) {
     if(!message.Content) {
@@ -60,9 +61,54 @@ exports.text = function(message, callback) {
                     url: qrCodeURL
                 }]);
         });
+    } else if(message.Content.indexOf('+') != -1) {
+        var array = message.Content.split('+');
+
+        if(array.length !== 2 || 
+            (array.length === 2 && (array[0].trim() === '' || array[1].trim() === ''))) {
+            return callback(null, '小北暂时还不知道你在说啥，并向你扔了个自动回复');
+        }
+
+        var msg = array[0].trim();
+        var targetName = array[1].trim();
+        async.waterfall([
+            function (cb) {
+                api.getUser(message.FromUserName, function (err, result) {
+                    if(err) {
+                        return cb(new Error('无法获取当前用户，错误：', err));
+                    }
+
+                    return cb(null, result);
+                });
+            }, function (baseInfo, cb) {
+                User.getUserByUnionID(baseInfo.unionid, function(err, user) {
+                    if(err) {
+                        return cb(new Error('没有查找到当前用户，错误：', err));
+                    }
+
+                    return cb(null, user);
+                });
+            }, function(user, cb) {
+                Reply.updateReply(
+                {
+                    userID: user._id, 
+                    nickName: user.nickName,
+                    targetName: targetName,
+                    msg: msg
+                }, function(err, result) {
+                    if(err) {
+                        return cb(new Error('更新回复消息失败，错误：', err));
+                    }
+
+                    return cb(null, '小北帮你记住悄悄话了，友情提示：对同个人的悄悄话只能记得一句哦~');
+                });
+            }
+        ], function (err, msg) {
+            return callback(err, msg);   
+        });
     } else {
         // 自动回复的处理
-        callback(null, '自动回复');
+        return callback(null, '小北暂时还不知道你在说啥，并向你扔了个自动回复');
     }
 };
 
@@ -100,16 +146,90 @@ exports.subscribe = function(message, callback) {
     // 扫描推广二维码后的关注
     if(/^qrscene_[0-9]+/.test(message.EventKey)) {
         var qrCodeID = message.EventKey.match(/\d+/)[0];
-        Article.getArticleByQRCodeID(qrCodeID, function(err, article){
-            if(!!article) {
-                if(!!message.FromUserName) {
-                    that.checkAndIncreaseRecords(qrCodeID, message.FromUserName, qrCodeID);
+
+        async.waterfall([
+            function(cb){
+                Article.getArticleByQRCodeID(qrCodeID, function(err, article){
+                    if(!!article && !!message.FromUserName) {
+                        reply = reply.concat('\n\n' + 
+                            util.format('首先感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧，您也可以通过我们的菜单进入征文活动哦~', 
+                                article.author, article.title, article.url));
+                        cb(null, message.FromUserName);
+                    } else {
+                        return cb(new Error("获取推广文章失败，QRCodeID:" + qrCodeID, err));
+                    }
+                });
+            }, function (userName, cb) {
+                that.createUser(userName, function(err, user) {
+                    if (err) {
+                        return cb(new Error("订阅时更新用户失败", err));
+                    }
+
+                    return cb(null, user);
+                });
+            }, function (user, cb) {
+                if (!user) {
+                    Article.increaseArticleRecords(qrCodeID, 
+                        function(err, result) {
+                            if(err) {
+                                logger.error("增加推广关注失败，错误：" + err);
+                            }
+                            logger.info('%j', result);
+                        }
+                    );
                 }
-                return callback(null, reply.concat('\n\n' + 
-                    util.format('首先感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧，您也可以通过我们的菜单进入征文活动哦~', 
-                        article.author, article.title, article.url)));
+                logger.info("开始查找需要回复的消息" + user.nickName);
+                Reply.getReplyByNickName(user.nickName, function(err, result) {
+                    if(err) {
+                        return cb(new Error('查找用户需要做的回复失败，错误：', err));
+                    }
+
+                    return cb(null, result);
+                });
+            }
+        ], function (err, result) {
+            if(err) {
+                return callback(err);
+            }
+            
+            reply = reply.concat('\n\n您收到了悄悄话哦，小北念给你听，咳咳：');
+            result.forEach(function(item) {
+                logger.info('便利悄悄话');
+                logger.info('item');
+                reply = reply.concat('\n' + util.format('%s想对你说：%s', 
+                    item.nickName || '', item.msg));
+            });
+            return callback(null, reply);
+        });
+    } else {
+        async.waterfall([
+            function (cb) {
+                that.createUser(message.FromUserName, function(err, user) {
+                    if (err) {
+                        return cb(new Error("订阅时创建用户失败", err));
+                    }
+
+                    return cb(null, user);
+                });
+            }, function (user, cb) {
+                Reply.getReyplyByNickName(user.nickName, function(err, result) {
+                    if(err) {
+                        return cb(new Error('查找用户需要做的回复失败，错误：', err));
+                    }
+
+                    return cb(null, result);
+                });
+            }
+        ], function (err, result) {
+            if(err) {
+                return callback(err);
             }
 
+            reply.concat('\n\n 您收到了悄悄话哦，小北念给你听，咳咳：');
+            result.forEach(function(item) {
+                reply.concat('\n' + util.format('%s 想对你说：%s', 
+                    item.nickName, item.msg));
+            });
             return callback(null, reply);
         });
     }
@@ -124,11 +244,10 @@ exports.CLICK = function(message, callback) {
 };
 
 /**
- * 根据被推荐的关注用户信息来判断并增加推广记录
+ * 订阅时创建用户
  * @param {Number} openID 关注用户的openID
- * @param {Number} qrCodeID 推广二维码编号
  */
-exports.checkAndIncreaseRecords = function(qrCodeURL, openID, qrCodeID) {
+exports.createUser = function(openID, callback) {
     async.waterfall([
             function (callback) {
                 api.getUser(openID, function (err, result) {
@@ -137,25 +256,11 @@ exports.checkAndIncreaseRecords = function(qrCodeURL, openID, qrCodeID) {
             }, function (baseInfo, callback) {
                 User.updateUserByUnionID(baseInfo, function(err, result) {
                     logger.info('%j', result);
-                    return callback(err, !!result);
+                    return callback(err, result);
                 });
             }
-        ], function (err, existed) {
-                if (err) {
-                    var errorMsg = "增加推广关注失败" + err;
-                    logger.error(errorMsg);
-                }
-                
-                if (!existed) {
-                    Article.increaseArticleRecords(qrCodeURL, 
-                        function(err, result) {
-                            if(err) {
-                                logger.error("增加推广关注失败，错误：" + err);
-                            }
-                            logger.info('%j', result);
-                        }
-                    );
-                }
+        ], function (err, user) {
+            callback(err, user);
         }
     );
 };
