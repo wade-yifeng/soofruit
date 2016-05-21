@@ -6,6 +6,7 @@ var api     = require('./api');
 var Article = require('../proxy').Article;
 var User    = require('../proxy').User;
 var Reply   = require('../proxy').Reply;
+var tools   = require('../common/utility');
 
 exports.text = function(message, callback) {
     if(!message.Content) {
@@ -110,7 +111,7 @@ exports.text = function(message, callback) {
         });
     } else {
         // 自动回复的处理
-        return callback(null, '小北暂时还不知道你在说啥，并向你扔了个自动回复');
+        return callback(null, '小北想偷偷告诉你，发送：想说的话+微信昵称，可以给对方发送悄悄话哦\n只能帮到这里咯 ╮(╯▽╰)╭ ');
     }
 };
 
@@ -139,7 +140,7 @@ exports.subscribe = function(message, callback) {
     var that = this;
     var reply = 'Hi，亲爱的小主，小北在此等候多时了。这里是我们的新家，' + 
         '我们将为您提供新鲜的水果尝鲜抢购&每日热点资讯&有趣的文章&生活大发现，' + 
-        '请敬请期待平台正式发布哦~';
+        '请敬请期待平台正式发布哦~\n\n发送：想说的话+微信昵称，可以给对方发送悄悄话哦，只能帮到这里咯 ╮(╯▽╰)╭ ';
 
     if(!message.EventKey) {
         return callback(null, reply);
@@ -249,13 +250,14 @@ exports.CLICK = function(message, callback) {
             return callback(null, '系统表示一脸懵逼，主子请稍等啊！');
         }
 
+        var nickName;
         async.waterfall([
             function (cb) {
                 api.getUser(message.FromUserName, function (err, result) {
                     if(err) {
                         return cb(new Error('无法获取当前用户，错误：', err));
                     }
-
+                    nickName = result.nickname;
                     return cb(null, result);
                 });
             }, function (baseInfo, cb) {
@@ -269,7 +271,7 @@ exports.CLICK = function(message, callback) {
                 });
             }, function(user, cb) {
                 logger.info(user);
-                Reply.getReplyByNickName(user.nickName, function(err, result) {
+                Reply.getReplyByNickName(!!user ? user.nickName : nickName, function(err, result) {
                     if(err) {
                         return cb(new Error('查找用户需要做的回复失败，错误：', err));
                     }
@@ -279,15 +281,32 @@ exports.CLICK = function(message, callback) {
             }
         ], function (err, result) {
                 var reply = '您收到了悄悄话哦，小北念给你听，咳咳：';
-                result.forEach(function(item) {
-                    logger.info('遍历悄悄话');
-                    logger.info(item);
-                    reply = reply.concat('\n' + util.format('%s想对你说：%s', 
-                        item.nickName || '', item.msg));
-                });
+                if(result && result.length) {
+                    result.forEach(function(item) {
+                        logger.info('遍历悄悄话');
+                        logger.info(item);
+                        reply = reply.concat('\n' + util.format('%s想对你说：%s', 
+                            item.nickName || '', item.msg));
+                    });
+                }
                 return callback(null, reply);  
             }
         );
+    } else if(message.EventKey == "ARTICLE_RANK") {
+        Article.getArticleByRecordsRank(function(err, result) {
+            if(err) {
+                var errMsg = '读取征文排行失败，错误：';
+                logger.error(errMsg + err);
+                return callback(new Error(errMsg, err));
+            }
+
+            var reply = '截止' + tools.formatDate(Date.now()) + '\n';
+            result.forEach(function(item) {
+                reply = reply.concat(util.format('《%s》  %s  %d\n', item.title, item.author, item.records));
+            });
+
+            return callback(null, reply);
+        });
     } else {
         return callback(null, '咦，咋点进来了，再宽限几天么♡o(╥﹏╥)o♡');
     }

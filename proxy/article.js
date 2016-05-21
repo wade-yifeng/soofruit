@@ -21,6 +21,10 @@ exports.getArticleByQRCodeID = function (qrCodeID, callback) {
     );
 };
 
+exports.getArticleByRecordsRank = function (callback) {
+    Article.find({active: true}).limit(10).sort('-records').select('title author records').exec(callback);
+};
+
 /**
  * 根据推广二维码ID来记录关注人数增长
  * Callback:

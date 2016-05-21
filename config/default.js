@@ -91,7 +91,7 @@ var config = {
                         {
                             "type":"click",
                             "name":"征文排行榜",
-                            "key":"COMMING_SOON"
+                            "key":"ARTICLE_RANK"
                         },
                         {
                             "type":"click",
