@@ -7,72 +7,42 @@ var Article = require('../proxy').Article;
 var User    = require('../proxy').User;
 var Reply   = require('../proxy').Reply;
 var tools   = require('../common/utility');
+var handler = require('./handler');
+
+// 消息分割的正则表达式
+var msgReg  = /(?=\S)[^\+]+?(?=\s*(\+|$))/g;
+// 消息关键字
+// GZ: 获取文章关注列表
+var msgTags = {'GZ': 'getArticleRecordsRank'};
+// 微信消息回复
+var msg = {
+    'NoReply': '小北暂时还不知道你在说啥，并向你扔了个自动回复',
+
+};
 
 exports.text = function(message, callback) {
     if(!message.Content) {
         return callback(new Error('无法处理文本消息'));
     }
 
-    var content = message.Content;
     // 征文活动的二维码生成
     if(/^ZW[0-9]+/.test(message.Content)) {
         var target = message.Content.substring(2);
-        async.waterfall([
-            function (cb) {
-                Article.getArticleByQRCodeID(target, function(err, article){
-                    cb(err, article);
-                });
-            }, function (article, cb) {
-                if(!article) {
-                    api.createTmpQRCode(target, config.WeChat.qrCodeExpire, 
-                        function(err, result) {
-                            if(err) {
-                                cb(err);
-                            }
+        return handler.generateQRCode(target, callback);
+    }
 
-                            var qrCodeURL = api.showQRCodeURL(result.ticket);
-                            cb(null, false, qrCodeURL);
-                        }
-                    );
-                } else {
-                    cb(null, true, article.qrCodeURL);
-                }
-            }
-        ], function (err, existed, qrCodeURL) {
-                if (err) {
-                    var errorMsg = "生成二维码失败，错误：" + err;
-                    logger.error(errorMsg);
-                    return callback(null, '生成二维码失败');
-                }
-                
-                if (!existed) {
-                    Article.createArticleWithQRCode(target, qrCodeURL, 
-                        function(err) {
-                            if(err) {
-                                logger.error("创建推广文章失败，错误：" + err);
-                            }
-                        }
-                    );
-                }
+    var array = msgReg.match(message.Content);
+    if(array.length !== 2) {
+        return callback(null, msg.NoReply);
+    }
 
-                return callback(null, [{
-                    title: '快来关注' + target + '吧',
-                    description: '请打开页面获取二维码，开始扫码推广吧！',
-                    picurl: qrCodeURL,
-                    url: qrCodeURL
-                }]);
-        });
-    } else if(message.Content.indexOf('+') != -1) {
-        var array = message.Content.split('+');
+    var content = array[0];
+    var targetName = array[1];
+    if(msgTags[targetName]) {
+        return handler[msgTags[targetName]](content);
+    }
 
-        if(array.length !== 2 || 
-            (array.length === 2 && (array[0].trim() === '' || array[1].trim() === ''))) {
-            return callback(null, '小北暂时还不知道你在说啥，并向你扔了个自动回复');
-        }
-
-        var msg = array[0].trim();
-        var targetName = array[1].trim();
-        var nickName;
+    return handler.saveUserWisper
         async.waterfall([
             function (cb) {
                 api.getUser(message.FromUserName, function (err, result) {
@@ -293,7 +263,7 @@ exports.CLICK = function(message, callback) {
             }
         );
     } else if(message.EventKey == "ARTICLE_RANK") {
-        Article.getArticleByRecordsRank(function(err, result) {
+        Article.getArticleRecordsRank(function(err, result) {
             if(err) {
                 var errMsg = '读取征文排行失败，错误：';
                 logger.error(errMsg + err);

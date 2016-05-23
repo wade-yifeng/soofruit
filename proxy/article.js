@@ -1,6 +1,6 @@
-var config = require('config');
+var config  = require('config');
 
-var models = require('../models');
+var models  = require('../models');
 var Article = models.Article;
 
 /**
@@ -21,7 +21,7 @@ exports.getArticleByQRCodeID = function (qrCodeID, callback) {
     );
 };
 
-exports.getArticleByRecordsRank = function (callback) {
+exports.getArticleRecordsRank = function (callback) {
     Article.find({active: true}).limit(10).sort('-records').select('title author records').exec(callback);
 };
 
