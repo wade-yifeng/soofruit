@@ -3,7 +3,7 @@ var config  = require('config');
 var logger  = require('../common/logger');
 var handler = require('./message');
 
-module.exports.post = wechat(config.WeChat, function (req, res, next) {
+exports.post = wechat(config.WeChat, function (req, res, next) {
     // 微信输入信息都在req.weixin上
     var message = req.weixin;
     logger.info(message);
@@ -23,7 +23,7 @@ module.exports.post = wechat(config.WeChat, function (req, res, next) {
     }
 });
 
-module.exports.get = function (req, res) {
+exports.get = function (req, res) {
     // 签名成功
     if (wechat.checkSignature(req.query, config.WeChat.token)) {
         res.status(200).send(req.query.echostr);

@@ -1,7 +1,7 @@
 var ValidateResult = require('./validate_result');
 var validator = require('validator');
 
-module.exports.ValidateGood = function (good) {
+exports.ValidateGood = function (good) {
     var result = new ValidateResult();
 
     //good.name

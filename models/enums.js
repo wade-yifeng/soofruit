@@ -1,7 +1,7 @@
 /**
  * 返回的结果代码
  */
-module.exports.ResultCode = {
+exports.ResultCode = {
 
     // 成功
     Success: 200,
@@ -17,9 +17,21 @@ module.exports.ResultCode = {
 };
 
 /**
+ * 逻辑层错误消信息（格式）
+ */
+exports.ErrorMessage = {
+
+    // 数据库错误
+    DBErrorFormat: '1000，%s发生数据库错误，参数：%s，',
+
+    // 微信API调用错误
+    WeChatErrorFormat: '2000，%s发生微信调用错误，参数：%s，'
+};
+
+/**
  * 订单状态
  */
-module.exports.OrderStatus = {
+exports.OrderStatus = {
 
     //已取消
     Cancelled: 'Cancelled',

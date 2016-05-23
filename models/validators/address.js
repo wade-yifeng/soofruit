@@ -1,7 +1,7 @@
 var ValidateResult = require('./validate_result');
 var validator = require('validator');
 
-module.exports.ValidateAddress = function (address) {
+exports.ValidateAddress = function (address) {
     var result = new ValidateResult();
 
     //address.receiver

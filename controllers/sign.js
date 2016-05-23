@@ -8,7 +8,7 @@ var logger = require('../common/logger');
 var User = require('../proxy').User;
 var authMiddleWare = require('../middlewares/auth');
 
-module.exports.login = function (req, res) {
+exports.login = function (req, res) {
     if(config.debug) {
         res.redirect(req.session.targetUrl);
     }
