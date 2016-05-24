@@ -51,9 +51,9 @@ var config = {
     // 微信(soostep作为测试)
     WeChat: {
         // 公众号ID
-        appID: "wx36418b8bcd9f8c8a",
+        appID: "wxd4c7bf8f83f20312",
         // 公众号密钥
-        appSecret: "f5e38fb6f3f29d7ae73004b106f8de45",
+        appSecret: "62fc65ad455580e36f58684b3cdabe2a",
         // 公众号预设Token    
         token: "Soostep123",
         //推广临时二维码失效时间
