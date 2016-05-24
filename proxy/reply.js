@@ -30,9 +30,7 @@ exports.getReplyByNickName = function (targetName, callback) {
 
 exports.updateReply = function(reply, callback) {
     var replyModel = new ReplyModel(reply);
-    logger.info("更新回复消息");
-    logger.info(reply);
-    logger.info(replyModel);
+
     Reply.findOneAndUpdate({nickName: replyModel.nickName, targetName: replyModel.targetName, available: true}, 
         replyModel, {upsert: true, setDefaultsOnInsert: true}, callback);
 };

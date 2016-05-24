@@ -9,6 +9,18 @@ var User     = require('../proxy').User;
 var Reply    = require('../proxy').Reply;
 var tools    = require('../common/utility');
 
+// 微信消息回复
+var msg = {
+    'WisperReply': '小北帮你记住悄悄话了，友情提示：对同个人的悄悄话只能记得一句哦~'
+};
+
+/**
+ * 生成推广关注二维码
+ * Callback:
+ * - err, 生成（读取）二维码异常
+ * - msg, 自动回复消息
+ * @param {String} qrCodeID 推广二维码场景ID
+ */
 exports.generateQRCode = function(qrCodeID, callback) {
     async.waterfall([
         function (cb) {
@@ -55,4 +67,33 @@ exports.generateQRCode = function(qrCodeID, callback) {
     });
 };
 
-exports.
+/**
+ * 保存用户悄悄话
+ * Callback:
+ * - err, 更新悄悄话推送异常
+ * - msg, 自动回复消息
+ * @param {String} openID 目标用户的OPNEID
+ * @param {String} openID 推送目标的微信昵称
+ * @param {String} content 推送消息的内容
+ */
+exports.saveUserWisper = function(openID, targetName, content, callback) {
+    async.waterfall([
+        function (cb) {
+            api.getUser(openID, cb);
+        }, function(baseInfo, cb) {
+            Reply.updateReply(
+            {
+                nickName: baseInfo.nickname,
+                targetName: targetName,
+                msg: content
+            }, cb);
+        }
+    ], function (err) {
+        if (err) {
+            logger.error(util.format(ErrorMsg.GeneralErrorFormat, "更新悄悄话推送", err));
+            return callback(err);
+        }
+
+        return callback(null, msg.WisperReply);   
+    });
+};

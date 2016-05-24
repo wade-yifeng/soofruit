@@ -48,7 +48,7 @@ var config = {
     // 默认数据缓存时间，秒为单位
     default_cache_time: 600,
 
-    // 微信(目前只是配置正式环境)
+    // 微信(soostep作为测试)
     WeChat: {
         // 公众号ID
         appID: "wx36418b8bcd9f8c8a",
