@@ -15,8 +15,8 @@ exports.post = wechat(config.WeChat, function (req, res, next) {
     if(message !== undefined) {
         var type = message.MsgType === "event" ? message.Event : message.MsgType;
         
-        if(this[type]) {
-            this[type](message, function(err, reply) {
+        if(handler[type]) {
+            handler[type](message, function(err, reply) {
                 if(err) {
                     logger.error(util.format(ErrorMsg.GeneralErrorFormat, "处理公众号消息", err));
                     reply = msg.ErrorRely;
