@@ -80,7 +80,8 @@ exports.saveUserWisper = function(openID, targetName, content, callback) {
     async.waterfall([
         function (cb) {
             api.getUser(openID, cb);
-        }, function(baseInfo, cb) {
+        }, function(baseInfo) {
+            var cb = arguments[arguments.length - 1];
             Reply.updateReply(
             {
                 nickName: baseInfo.nickname,
@@ -88,7 +89,7 @@ exports.saveUserWisper = function(openID, targetName, content, callback) {
                 msg: content
             }, cb);
         }
-    ], function (err) {
+    ], function (err, result) {
         if (err) {
             logger.error(util.format(ErrorMsg.GeneralErrorFormat, "更新悄悄话推送", err));
             return callback(err);

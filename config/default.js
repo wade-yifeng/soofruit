@@ -9,10 +9,10 @@ var config = {
     debug: true,
 
     // 网站的域名
-    host: 'www.0575s.com',
+    host: 'localhost',
 
     // 站点端口
-    port: 80,
+    port: 3000,
 
     // 监控网站性能
     oneapm_key: 'XApSBgxfAQEe3e1DTV9HCVUfDR9f57BfCR0LVgQBG7a12lEFH1QOH1FUe93cAlMcCVUYBQM=',
@@ -51,9 +51,9 @@ var config = {
     // 微信(soostep作为测试)
     WeChat: {
         // 公众号ID
-        appID: "wxd4c7bf8f83f20312",
+        appID: "wx94911ed9aa3ef58c",
         // 公众号密钥
-        appSecret: "62fc65ad455580e36f58684b3cdabe2a",
+        appSecret: "c2f8def6c499b979bc46f7beee43091d",
         // 公众号预设Token    
         token: "Soostep123",
         //推广临时二维码失效时间

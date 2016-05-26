@@ -1,12 +1,11 @@
-var async = require('async');
-var config = require('config');
-
-var oauthApi = require('../wechat/api_oauth');
-var api = require('../wechat/api');
-var logger = require('../common/logger');
-
-var User = require('../proxy').User;
-var authMiddleWare = require('../middlewares/auth');
+var async          = require('async');
+var config         = require('config');
+var oauthApi       = require('../wechat/api_oauth');
+var api            = require('../wechat/api');
+var logger         = require('../common/logger');
+var User           = require('../proxy').User;
+var auth = require('../middlewares/auth');
+var ErrorMsg       = require('../models').Enums.ErrorMessage;
 
 exports.login = function (req, res) {
     if(config.debug) {
@@ -49,7 +48,7 @@ exports.login = function (req, res) {
                         }
                     });
 
-                    authMiddleWare.gen_session(baseInfo, res);
+                    auth.gen_session(baseInfo, res);
                 }
 
                 res.redirect(req.session.targetUrl);

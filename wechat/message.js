@@ -21,7 +21,7 @@ exports.text = function(message, callback) {
         return handler.generateQRCode(target, callback);
     }
 
-    var array = msgReg.match(message.Content);
+    var array = message.Content.match(msgReg);
     if(array.length !== 2) {
         return callback(null, msg.NoReply);
     }

@@ -10,13 +10,13 @@ var msg = {
 
 exports.post = wechat(config.WeChat, function (req, res, next) {
     // 微信输入信息都在req.weixin上
-    var message = req.weixin;
-    logger.info(message);
-    if(message !== undefined) {
-        var type = message.MsgType === "event" ? message.Event : message.MsgType;
+    var weixin = req.weixin;
+    logger.info(weixin);
+    if(weixin !== undefined) {
+        var type = weixin.MsgType === "event" ? weixin.Event : weixin.MsgType;
         
         if(handler[type]) {
-            handler[type](message, function(err, reply) {
+            handler[type](weixin, function(err, reply) {
                 if(err) {
                     logger.error(util.format(ErrorMsg.GeneralErrorFormat, "处理公众号消息", err));
                     reply = msg.ErrorRely;
@@ -24,8 +24,13 @@ exports.post = wechat(config.WeChat, function (req, res, next) {
                 
                 res.reply(reply);
             });
+            return next();
         }
+
+        res.reply(msg.ErrorRely);
     }
+
+    next();
 });
 
 exports.get = function (req, res) {
