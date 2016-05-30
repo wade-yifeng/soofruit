@@ -2,38 +2,67 @@ var wechat   = require('wechat');
 var config   = require('config');
 var util     = require('util');
 var logger   = require('../common/logger');
-var handler  = require('./message');
 var ErrorMsg = require('../models').Enums.ErrorMessage;
+var handler  = require('./handler');
 
-var msg = {
+// 消息分割的正则表达式
+var msgReg  = /(?=\S)[^\+]+?(?=\s*(\+|$))/g;
+// 消息关键字
+// GZ: 获取文章关注列表
+var msgTags = {'GZ': 'getArticleRecordsRank'};
+// 微信消息回复
+var msgReply = {
+    'NoReply': '小北想偷偷告诉你，发送：想说的话+微信昵称，可以给对方发送悄悄话哦\n只能帮到这里咯 ╮(╯▽╰)╭ ',
     'ErrorRely': '小北暂时还不知道你在说啥，并向你扔了个自动回复'
 };
 
-exports.post = wechat(config.WeChat, function (req, res, next) {
-    // 微信输入信息都在req.weixin上
-    var weixin = req.weixin;
-    logger.info(weixin);
-    if(!weixin) {
-        return next();
+exports.post = wechat(config.WeChat).text(function (message, req, res, next) {
+    if(!message.Content) {
+        return res.reply(msgReply.ErrorRely);
     }
-    var type = weixin.MsgType === "event" ? weixin.Event : weixin.MsgType;
 
-    if(handler[type]) {
+    // 征文活动的二维码生成
+    if(/^ZW[0-9]+/.test(message.Content)) {
+        var target = message.Content.substring(2);
+        return handler.generateQRCode(target, callback);
+    }
+
+    // 处理关键字消息
+    var array = message.Content.match(msgReg);
+    if(array.length === 2) {
+        var content = array[0];
+        var targetName = array[1];
+        if(msgTags[targetName]) {
+            return handler[msgTags[targetName]](content, callback);
+        }
+
+        return handler.saveUserWisper(message.FromUserName, targetName, content, callback);
+    }
+
+    // 自动回复，TODO: 增加智能回复
+    return callback(null, msgReply.NoReply);
+}).event(function (message, req, res, next) {
+    if(!message.Event) {
+        return res.reply(msgReply.ErrorRely);
+    }
+
+    if(handler[message.Event]) {
         handler[type](weixin, function(err, reply) {
             if(err) {
-                logger.error(util.format(ErrorMsg.GeneralErrorFormat, "处理公众号消息", err));
-                reply = msg.ErrorRely;
+                logger.error(util.format(ErrorMsg.GeneralErrorFormat, "处理公众号事件消息", err));
+                reply = msgReply.ErrorRely;
             }
-
+            
             res.reply(reply);
         });
-    } else if(type === "LOCATION") {
-        // TODO: 目前没有处理地理位置
-        res.reply('');
-    } else {
-        res.reply(msg.ErrorRely);
+        return next();
     }
-});
+
+    return res.reply(msgReply.ErrorRely);
+}).location(function (message, req, res, next) {
+    // TODO 处理定位消息
+    res.reply('');
+}).middlewarify(); 
 
 exports.get = function (req, res) {
     // 签名成功

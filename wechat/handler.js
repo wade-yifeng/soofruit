@@ -10,7 +10,9 @@ var Reply    = require('../proxy').Reply;
 var tools    = require('../common/utility');
 
 // 微信消息回复
-var msg = {
+var msgReply = {
+    'QRCodeTitle': '快来关注%d吧',
+    'QRCodeDescription': '打开页面获取完整二维码，开始扫码推广！',
     'WisperReply': '小北帮你记住悄悄话了，友情提示：对同个人的悄悄话只能记得一句哦~'
 };
 
@@ -59,8 +61,8 @@ exports.generateQRCode = function(qrCodeID, callback) {
         }
 
         return callback(null, [{
-            title: '快来关注' + qrCodeID + '吧',
-            description: '请打开页面获取完整二维码，开始扫码推广！',
+            title: util.format(msgReply.QRCodeTitle, qrCodeID),
+            description: msgReply.QRCodeDescription,
             picurl: qrCodeURL,
             url: qrCodeURL
         }]);
@@ -96,7 +98,7 @@ exports.saveUserWisper = function(openID, targetName, content, callback) {
             return callback(err);
         }
 
-        return callback(null, msg.WisperReply);   
+        return callback(null, msgReply.WisperReply);   
     });
 };
 
