@@ -27,7 +27,7 @@ exports.generateQRCode = function(qrCodeID, callback) {
             Article.getArticleByQRCodeID(qrCodeID, cb);
         }, function (article, cb) {
             if(!article) {
-                api.createTmpQRCode(target, config.WeChat.qrCodeExpire, 
+                api.createTmpQRCode(qrCodeID, config.WeChat.qrCodeExpire,
                     function(err, result) {
                         if(err) {
                             return cb(err);
@@ -42,28 +42,28 @@ exports.generateQRCode = function(qrCodeID, callback) {
             }
         }
     ], function (err, existed, qrCodeURL) {
-            if (err) {
-                logger.error(util.format(ErrorMsg.GeneralErrorFormat, "生成二维码", err));
-                return callback(err);
-            }
-            
-            if (!existed) {
-                Article.createArticleWithQRCode(target, qrCodeURL, 
-                    function(err) {
-                        if(err) {
-                            logger.error(util.format(ErrorMsg.DBErrorFormat, 
-                                "创建推广二维码对应的文章", {target: target, qrCodeURL: qrCodeURL}, err));
-                        }
-                    }
-                );
-            }
+        if (err) {
+            logger.error(util.format(ErrorMsg.GeneralErrorFormat, "生成二维码", err));
+            return callback(err);
+        }
 
-            return callback(null, [{
-                title: '快来关注' + qrCodeID + '吧',
-                description: '请打开页面获取完整二维码，开始扫码推广！',
-                picurl: qrCodeURL,
-                url: qrCodeURL
-            }]);
+        if (!existed) {
+            Article.createArticleWithQRCode(qrCodeID, qrCodeURL,
+                function(err) {
+                    if(err) {
+                        logger.error(util.format(ErrorMsg.DBErrorFormat,
+                            "创建推广二维码对应的文章", {qrCodeID: qrCodeID, qrCodeURL: qrCodeURL}, err));
+                    }
+                }
+            );
+        }
+
+        return callback(null, [{
+            title: '快来关注' + qrCodeID + '吧',
+            description: '请打开页面获取完整二维码，开始扫码推广！',
+            picurl: qrCodeURL,
+            url: qrCodeURL
+        }]);
     });
 };
 
@@ -73,7 +73,7 @@ exports.generateQRCode = function(qrCodeID, callback) {
  * - err, 更新悄悄话推送异常
  * - msg, 自动回复消息
  * @param {String} openID 目标用户的OPNEID
- * @param {String} openID 推送目标的微信昵称
+ * @param {String} targetName 推送目标的微信昵称
  * @param {String} content 推送消息的内容
  */
 exports.saveUserWisper = function(openID, targetName, content, callback) {
@@ -81,6 +81,7 @@ exports.saveUserWisper = function(openID, targetName, content, callback) {
         function (cb) {
             api.getUser(openID, cb);
         }, function(baseInfo) {
+            // getUser返回不止一个参数,获取最后一个callback参数
             var cb = arguments[arguments.length - 1];
             Reply.updateReply(
             {
@@ -98,3 +99,32 @@ exports.saveUserWisper = function(openID, targetName, content, callback) {
         return callback(null, msg.WisperReply);   
     });
 };
+
+/**
+ * 推广的二维码被扫描
+ * Callback:
+ * - err, 获取二维码对应信息异常
+ * - msg, 自动回复消息
+ * @param {String} message 目标用户的OPNEID
+ * @param {String} targetName 推送目标的微信昵称
+ * @param {String} content 推送消息的内容
+ */
+exports.SCAN = function(message, callback) {
+    if(!message.EventKey) {
+        return callback(null, '系统表示一脸懵逼，主子请稍等啊！');
+    }
+
+    // 已关注用户
+    if(!!message.FromUserName){
+        Article.getArticleByQRCodeID(message.EventKey, function(err, article){
+            if(!!article) {
+                return callback(null, 
+                    util.format('感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧', 
+                        article.author, article.title, article.url));
+            }
+
+            return callback(null, '没有找到二维码对应的文章哦，请联系我们的小编吧');
+        });
+    }
+};
+

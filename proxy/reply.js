@@ -29,10 +29,8 @@ exports.getReplyByNickName = function (targetName, callback) {
 };
 
 exports.updateReply = function(reply, callback) {
-    var replyModel = new ReplyModel(reply);
-
-    Reply.findOneAndUpdate({nickName: replyModel.nickName, targetName: replyModel.targetName, available: true}, 
-        replyModel, {upsert: true, setDefaultsOnInsert: true}, callback);
+    Reply.findOneAndUpdate({nickName: reply.nickName, targetName: reply.targetName, available: true},
+        reply, {upsert: true, setDefaultsOnInsert: true}, callback);
 };
 
 exports.updateReplyResult = function (replyID, targetID, result, callback) {
