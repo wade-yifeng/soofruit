@@ -10,15 +10,7 @@ var Article = models.Article;
  * - article, 文章
  */
 exports.getArticleByQRCodeID = function (qrCodeID, callback) {
-    Article.findOne({qrCodeID: qrCodeID}, 
-        function(err, article) {
-            if (err) {
-                return callback(err);
-            }
-
-            return callback(null, article);
-        }
-    );
+    Article.findOne({qrCodeID: qrCodeID}, callback);
 };
 
 exports.getArticleRecordsRank = function (callback) {
@@ -46,7 +38,5 @@ exports.createArticleWithQRCode = function (qrCodeID, qrCodeURL, callback) {
 exports.save = function(data, callback) {
     var article = new Article(data);
 
-    article.save(function (err, result) {
-        callback(err, result);
-    });
+    article.save(callback);
 };

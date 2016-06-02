@@ -6,10 +6,7 @@ exports.getFavoritesByUserID = function(userID, callback) {
             if (err) {
                 return callback(err);
             }
-            // if (favorites.length === 0) {
-            //     return callback(null, []);
-            // }
-
+            
             favorites = _.map(favorites, function(item) {
                 return item.itemID;
             });
@@ -22,13 +19,9 @@ exports.getFavoritesByUserID = function(userID, callback) {
 exports.add = function(data, callback) {
     var favorite = new Favorite(data);
 
-    favorite.save(function (err, result) {
-        callback(err, result);
-    });
+    favorite.save(callback);
 };
 
 exports.remove = function(userID, itemID, callback) {
-    Favorite.remove({userID: userID, itemID: itemID}, function (err, result) {
-        callback(err, result);
-    });
+    Favorite.remove({userID: userID, itemID: itemID}, callback);
 };

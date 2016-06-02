@@ -13,7 +13,10 @@ var tools    = require('../common/utility');
 var msgReply = {
     'QRCodeTitle': '快来关注%d吧',
     'QRCodeDescription': '打开页面获取完整二维码，开始扫码推广！',
-    'WisperReply': '小北帮你记住悄悄话了，友情提示：对同个人的悄悄话只能记得一句哦~'
+    'WisperReply': '小北帮你记住悄悄话了，友情提示：对同个人的悄悄话只能记得一句哦~',
+    'ScanWithException': '系统表示一脸懵逼，主子请稍等啊！',
+    'ScanWithoutArticle': '没有找到二维码对应的文章哦，请联系我们的小编吧~',
+    'ScanArticleSuccess': '感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧'
 };
 
 /**
@@ -112,21 +115,24 @@ exports.saveUserWisper = function(openID, targetName, content, callback) {
  * @param {String} content 推送消息的内容
  */
 exports.SCAN = function(message, callback) {
-    if(!message.EventKey) {
-        return callback(null, '系统表示一脸懵逼，主子请稍等啊！');
+    // TODO: 目前只支持有事件Key和已关注用户的扫描
+    if(!message.EventKey || !message.FromUserName) {
+        return callback(null, msgReply.ScanWithException);
     }
 
-    // 已关注用户
-    if(!!message.FromUserName){
-        Article.getArticleByQRCodeID(message.EventKey, function(err, article){
-            if(!!article) {
-                return callback(null, 
-                    util.format('感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧', 
-                        article.author, article.title, article.url));
-            }
+    Article.getArticleByQRCodeID(message.EventKey, function(err, article){
+        if (err) {
+            logger.error(util.format(ErrorMsg.GeneralErrorFormat, "根据推广二维码ID查找文章", err));
+            return callback(err);
+        }
 
-            return callback(null, '没有找到二维码对应的文章哦，请联系我们的小编吧');
-        });
-    }
+        if(!article) {  
+            return callback(null, msgReply.ScanWithoutArticle);
+        }
+
+        return callback(null, 
+            util.format(msgReply.ScanArticleSuccess, 
+                article.author, article.title, article.url));
+    });
 };
 

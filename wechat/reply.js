@@ -27,6 +27,7 @@ exports.post = wechat(config.WeChat).text(function (message, req, res, next) {
         return handler.generateQRCode(target, callback);
     }
 
+    else {
     // 处理关键字消息
     var array = message.Content.match(msgReg);
     if(array.length === 2) {
@@ -37,10 +38,9 @@ exports.post = wechat(config.WeChat).text(function (message, req, res, next) {
         }
 
         return handler.saveUserWisper(message.FromUserName, targetName, content, callback);
-    }
-
+    } else {
     // 自动回复，TODO: 增加智能回复
-    return callback(null, msgReply.NoReply);
+    return res.reply(msgReply.NoReply);
 }).event(function (message, req, res, next) {
     if(!message.Event) {
         return res.reply(msgReply.ErrorRely);
@@ -61,6 +61,18 @@ exports.post = wechat(config.WeChat).text(function (message, req, res, next) {
     return res.reply(msgReply.ErrorRely);
 }).location(function (message, req, res, next) {
     // TODO 处理定位消息
+    res.reply('');
+}).link(function (message, req, res, next) {
+    // TODO message为链接内容
+    res.reply('');
+}).image(function (message, req, res, next) {
+    // TODO
+    res.reply('');
+}).voice(function (message, req, res, next) {
+    // TODO
+    res.reply('');
+}).video(function (message, req, res, next) {
+    // TODO
     res.reply('');
 }).middlewarify(); 
 

@@ -11,10 +11,6 @@ var logger = require('../common/logger');
  * @param {Function} callback 回调函数
  */
 exports.getUserByUnionID = function (unionID, callback) {
-    if (!unionID) {
-        return callback();
-    }
-    
     User.findOne({unionID: unionID}, callback);
 };
 
