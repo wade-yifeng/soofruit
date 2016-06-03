@@ -1,15 +1,17 @@
-var async          = require('async');
-var config         = require('config');
-var oauthApi       = require('../wechat/api_oauth');
-var api            = require('../wechat/api');
-var logger         = require('../common/logger');
-var User           = require('../proxy').User;
-var auth = require('../middlewares/auth');
-var ErrorMsg       = require('../models').Enums.ErrorMessage;
+var async    = require('async');
+var config   = require('config');
+var oauthApi = require('../wechat/api_oauth');
+var api      = require('../wechat/api');
+var logger   = require('../common/logger');
+var User     = require('../proxy').User;
+var auth     = require('../middlewares/auth');
+var ErrorMsg = require('../models').Enums.ErrorMessage;
 
 exports.login = function (req, res) {
+    req.session._loginReferer = req.headers.referer;
+  
     if(config.debug) {
-        res.redirect(req.session.targetUrl);
+        res.redirect(req.session._loginReferer);
     }
 
     // 第一次跳转

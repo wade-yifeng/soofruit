@@ -1,9 +1,10 @@
-var wechat   = require('wechat');
-var config   = require('config');
-var util     = require('util');
-var logger   = require('../common/logger');
-var ErrorMsg = require('../models').Enums.ErrorMessage;
-var handler  = require('./handler');
+var wechat     = require('wechat');
+var config     = require('config');
+var util       = require('util');
+var logger     = require('../common/logger');
+var ErrorMsg   = require('../models').Enums.ErrorMessage;
+var EventProxy = require('../common/event_proxy');
+var handler    = require('./handler');
 
 // 消息分割的正则表达式
 var msgReg  = /(?=\S)[^\+]+?(?=\s*(\+|$))/g;
@@ -21,26 +22,34 @@ exports.post = wechat(config.WeChat).text(function (message, req, res, next) {
         return res.reply(msgReply.ErrorRely);
     }
 
+    var ep = EventProxy.create();
+    ep.fail(next);
+
+    // 调用reply表示处理结束
+    ep.on('reply', function (msg) {
+        res.reply(reply);
+    });
+
     // 征文活动的二维码生成
     if(/^ZW[0-9]+/.test(message.Content)) {
         var target = message.Content.substring(2);
-        return handler.generateQRCode(target, callback);
+        return handler.generateQRCode(target, ep.done('reply'));
     }
 
-    else {
     // 处理关键字消息
     var array = message.Content.match(msgReg);
     if(array.length === 2) {
         var content = array[0];
         var targetName = array[1];
         if(msgTags[targetName]) {
-            return handler[msgTags[targetName]](content, callback);
+            return handler[msgTags[targetName]](content, ep.done('reply'));
         }
 
-        return handler.saveUserWisper(message.FromUserName, targetName, content, callback);
-    } else {
+        return handler.saveUserWisper(message.FromUserName, targetName, content, ep.done('reply'));
+    }
+    
     // 自动回复，TODO: 增加智能回复
-    return res.reply(msgReply.NoReply);
+    ep.emit('reply', msgReply.NoReply);
 }).event(function (message, req, res, next) {
     if(!message.Event) {
         return res.reply(msgReply.ErrorRely);

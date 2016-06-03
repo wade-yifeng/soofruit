@@ -123,21 +123,6 @@ EventProxy.prototype.emit = EventProxy.prototype.trigger;
 EventProxy.prototype.fire = EventProxy.prototype.trigger;
 
 /**
- * Bind an event like the bind method, but will remove the listener after it was fired.
- * @param {String} ev Event name
- * @param {Function} callback Callback
- */
-EventProxy.prototype.once = function (ev, callback) {
-    var self = this;
-    var wrapper = function () {
-        callback.apply(self, arguments);
-        self.unbind(ev, wrapper);
-    };
-    this.bind(ev, wrapper);
-    return this;
-};
-
-/**
  * Assign the only one 'error' event handler.
  * @param {Function(err)} callback
  */
@@ -159,31 +144,6 @@ EventProxy.prototype.fail = function (callback) {
 EventProxy.prototype.throw = function () {
     var that = this;
     that.emit.apply(that, ['error'].concat(SLICE.call(arguments)));
-};
-
-/**
- * The callback will be executed after any registered event was fired. It only executed once.
- * @param {String} eventname1 Event name.
- * @param {String} eventname2 Event name.
- * @param {Function} callback The callback will get a map that has data and eventname attributes.
- */
-EventProxy.prototype.any = function () {
-    var proxy = this,
-        callback = arguments[arguments.length - 1],
-        events = SLICE.call(arguments, 0, -1),
-        _eventname = events.join("_");
-
-    proxy.once(_eventname, callback);
-
-    var _bind = function (key) {
-        proxy.bind(key, function (data) {
-            proxy.trigger(_eventname, {"data": data, eventName: key});
-        });
-    };
-
-    for (var index = 0; index < events.length; index++) {
-        _bind(events[index]);
-    }
 };
 
 /**

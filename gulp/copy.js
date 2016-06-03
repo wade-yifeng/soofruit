@@ -7,12 +7,12 @@ gulp.task('copy:fonts', function () {
         .pipe(gulp.dest('assets/'));
 });
 
-gulp.task('copy:imgs', function () {
-    return gulp.src('static/imgs/**/*.*', {base: 'static'})
+gulp.task('copy:images', function () {
+    return gulp.src('static/images/**/*.*', {base: 'static'})
         .pipe(gulp.dest('assets/'));
 });
 
-gulp.task('copy:templates', ['copy:fonts', 'copy:imgs'], function () {
+gulp.task('copy:templates', ['copy:fonts', 'copy:images'], function () {
     return gulp.src([
             'app/templates/**/*.html'
         ])

@@ -1,14 +1,18 @@
-var mongoose  = require('mongoose');
-var UserModel = mongoose.model('User');
-var config    = require('config');
-var UserProxy = require('../proxy').User;
-var logger    = require('../common/logger');
+var mongoose   = require('mongoose');
+var UserModel  = mongoose.model('User');
+var config     = require('config');
+var UserProxy  = require('../proxy').User;
+var EventProxy = require('../common/event_proxy');
+var logger     = require('../common/logger');
 
 // 验证用户是否登录
 exports.authUser = function (req, res, next) {
-    if (/^\/assets/.test(req.url) || /^\/views\/section/.test(req.url) || /^\/wechat/.test(req.url)) {
-        return next();
-    }
+    var ep = EventProxy.create();
+    ep.fail(next);
+
+    ep.on('auth', function (msg) {
+        res.reply(reply);
+    });
     
     // Ensure current_user always has defined.
     res.locals.current_user = null;
@@ -19,7 +23,7 @@ exports.authUser = function (req, res, next) {
         logger.info('在session中找到了用户:' + userModel);
         res.locals.current_user = req.session.user = userModel;
         res.locals.userID = req.session.userID = userModel._id;
-        return next();
+        return ep.emit('auth');
     }
 
     // 查找浏览器Cookie
@@ -27,29 +31,17 @@ exports.authUser = function (req, res, next) {
     if (auth_token) {
         var auth = auth_token.split('||');
         var unionID = auth[0];
-        UserProxy.getUserByUnionID(unionID, function(err, user){
-            if(err) {
-                logger.err('根据unionID查找用户失败，错误：' + err);
-            }
+
+        return UserProxy.getUserByUnionID(unionID, ep.done(function(user){
             if(user) {
                 logger.info('在cookie中找到了用户:' + user);
                 res.locals.current_user = req.session.user = user;
                 res.locals.userID = req.session.userID = user._id;
             }
-        });
-        return next();
+            ep.emit('auth');
+        }));
     }
 
-    var isLogin = !!req.session.targetUrl;
-    
-    req.session.targetUrl = !/^\/login/.test(req.url) ? 
-        req.protocol + '://' + req.get('host') + req.originalUrl : 
-        req.protocol + '://' + req.get('host');
-
-    if(isLogin) {
-        return next();
-    }
-    
     res.redirect('/login');
 };
 

@@ -43,7 +43,7 @@ var config = {
     file_limit: '1MB',
 
     // 图片上传路径
-    upload_directory: "./assets/imgs/upload",
+    upload_directory: "./public/images/upload",
 
     // 默认数据缓存时间，秒为单位
     default_cache_time: 600,

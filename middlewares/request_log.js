@@ -2,7 +2,7 @@ var logger = require('../common/logger');
 
 module.exports = function (req, res, next) {
     // Assets do not out log.
-    if (/^\/assets/.test(req.url)) {
+    if (/^\/public/.test(req.url)) {
         next();
         return;
     }

@@ -51,11 +51,12 @@ config.hostname = urlinfo.hostname || config.host;
 
 var app = express();
 
-app.set('views', path.join(__dirname, 'views'));
+// public路径指向assets打包目录
+app.use('/public', express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/views', express.static(path.join(__dirname, 'views')));
+
 // 浏览器中计算和显示相应时间
 app.use(require('response-time')());
 // Only let me be framed by people of the same origin:
@@ -121,15 +122,12 @@ app.use(busboy({
     }
 }));
 
-// custom middleware
-app.use(auth.authUser);
-
 /* TODO: 封装数据库访问
 var apiRouter = require('./api_router');
 */
 
 // app.use('/api', cors(), apiRouter);
-app.use('/', appRouter);
+app.use('/', auth.authUser, appRouter);
 app.use('/wechat', wechatRouter);
 
 // error handler

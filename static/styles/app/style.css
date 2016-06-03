@@ -242,27 +242,27 @@ a {
 }
 
 #share-content ul li .share-icon-wechat {
-    background: url(http://cdn.yangkeduo.com/assets/img/share-sprite-c6f89ab3ae.png) 0 0 no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/share-sprite-c6f89ab3ae.png) 0 0 no-repeat;
     background-size: 220px 44px
 }
 
 #share-content ul li .share-icon-moments {
-    background: url(http://cdn.yangkeduo.com/assets/img/share-sprite-c6f89ab3ae.png) -44px 0 no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/share-sprite-c6f89ab3ae.png) -44px 0 no-repeat;
     background-size: 220px 44px
 }
 
 #share-content ul li .share-icon-qq {
-    background: url(http://cdn.yangkeduo.com/assets/img/share-sprite-c6f89ab3ae.png) -88px 0 no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/share-sprite-c6f89ab3ae.png) -88px 0 no-repeat;
     background-size: 220px 44px
 }
 
 #share-content ul li .share-icon-qqzone {
-    background: url(http://cdn.yangkeduo.com/assets/img/share-sprite-c6f89ab3ae.png) -132px 0 no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/share-sprite-c6f89ab3ae.png) -132px 0 no-repeat;
     background-size: 220px 44px
 }
 
 #share-content ul li .share-icon-sina {
-    background: url(http://cdn.yangkeduo.com/assets/img/share-sprite-c6f89ab3ae.png) -176px 0 no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/share-sprite-c6f89ab3ae.png) -176px 0 no-repeat;
     background-size: 220px 44px
 }
 
@@ -921,7 +921,7 @@ body {
 .search-icon-class {
     width: 16px;
     height: 16px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sprite_search-d13f06ef49.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sprite_search-d13f06ef49.png);
     background-repeat: no-repeat;
     background-size: 70px 35px;
     background-position: 0 -17px
@@ -1046,7 +1046,7 @@ body {
     width: 60px;
     height: 60px;
     margin: 0 auto;
-    background: url(http://cdn.yangkeduo.com/assets/img/logo_white-b8f98f250e.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/logo_white-b8f98f250e.png) no-repeat;
     background-size: contain
 }
 
@@ -1127,7 +1127,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
-    background: url(http://cdn.yangkeduo.com/assets/img/coupon_bg2-dcb6f59398.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/coupon_bg2-dcb6f59398.png) no-repeat;
     background-size: cover
 }
 
@@ -1342,7 +1342,7 @@ body {
     width: 60px;
     height: 60px;
     margin: 0 auto 10px;
-    background: url(http://cdn.yangkeduo.com/assets/img/logo_white-b8f98f250e.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/logo_white-b8f98f250e.png) no-repeat;
     background-size: contain
 }
 
@@ -1365,7 +1365,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    background: url(http://cdn.yangkeduo.com/assets/img/coupon_bg2-dcb6f59398.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/coupon_bg2-dcb6f59398.png) no-repeat;
     background-size: cover
 }
 
@@ -1402,7 +1402,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    background: url(http://cdn.yangkeduo.com/assets/img/coupon_none-196a893e58.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/coupon_none-196a893e58.png) no-repeat;
     background-size: contain
 }
 
@@ -1675,7 +1675,7 @@ body {
 #hongbao-mask .circle {
     width: 100%;
     height: 100%;
-    background: url(http://cdn.yangkeduo.com/assets/img/hongbao-e1a5d10394.png) 50% no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/hongbao-e1a5d10394.png) 50% no-repeat;
     background-size: contain
 }
 
@@ -2359,7 +2359,7 @@ body {
     bottom: 124px;
     padding: 7px 0 0 8px;
     z-index: 999;
-    background: url(/assets/imgs/mobile/go_cart.png) no-repeat;
+    background: url(/public/images/mobile/go_cart.png) no-repeat;
     background-size: contain;
     opacity: 1;
     font-size: 25px;
@@ -2412,7 +2412,7 @@ body {
     bottom: 73px;
     width: 47px;
     height: 45px;
-    background: url(/assets/imgs/mobile/icons_bg.png) -235px -115px no-repeat;
+    background: url(/public/images/mobile/icons_bg.png) -235px -115px no-repeat;
     background-size: 340px auto;
     opacity: 1;
 }
@@ -2425,7 +2425,7 @@ body {
     right: 0;
     bottom: 150px;
     z-index: 9999;
-    background: url(http://cdn.yangkeduo.com/assets/img/go_home_goods-9a61f61ff1.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/go_home_goods-9a61f61ff1.png) no-repeat;
     background-size: contain;
     opacity: 0;
     -webkit-transition: bottom .8s ease, opacity .6s ease;
@@ -2681,7 +2681,7 @@ body {
 }
 
 .td2 .out-pic {
-    background: url(http://cdn.yangkeduo.com/assets/img/out-0810f259cb.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/out-0810f259cb.png) no-repeat;
     background-size: contain
 }
 
@@ -2695,7 +2695,7 @@ body {
 }
 
 .td2 .coming-pic {
-    background: url(http://cdn.yangkeduo.com/assets/img/coming-c0eceb4166.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/coming-c0eceb4166.png) no-repeat;
     background-size: contain
 }
 
@@ -3038,7 +3038,7 @@ body {
     left: -1px;
     height: 21px;
     width: 22px;
-    background-image: url(/assets/imgs/mobile/icons_bg.png);
+    background-image: url(/public/images/mobile/icons_bg.png);
     background-repeat: no-repeat;
     background-size: 159px 75.6px;
     background-position: -135px -21px
@@ -3072,12 +3072,12 @@ body {
     width: 22px;
     border: 0;
     margin: 5px auto 0;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/chat_disable-80def53840.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/chat_disable-80def53840.png);
     background-repeat: no-repeat
 }
 
 .can_contact {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/message-fb3e83c325.png)
+    background-image: url(http://cdn.yangkeduo.com/public/img/message-fb3e83c325.png)
 }
 
 .kt_message_text {
@@ -3103,11 +3103,11 @@ body {
 }
 
 .kt_item2 {
-    background: url(http://cdn.yangkeduo.com/assets/img/btn2-9c8470e223.png) no-repeat !important
+    background: url(http://cdn.yangkeduo.com/public/img/btn2-9c8470e223.png) no-repeat !important
 }
 
 .kt_item1 {
-    background: url(http://cdn.yangkeduo.com/assets/img/btn-b631bb1dd2.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/btn-b631bb1dd2.png) no-repeat;
     background-size: cover;
     float: right;
     margin-right: 0;
@@ -3484,7 +3484,7 @@ html {
     top: 0;
     right: 5px;
     display: none;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/soldout-52105f0281.png)
+    background-image: url(http://cdn.yangkeduo.com/public/img/soldout-52105f0281.png)
 }
 
 .fl {
@@ -5092,7 +5092,7 @@ html {
 }
 
 .nav_item_hd_coupons_sale:before {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/phone-dadda5e73f.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/phone-dadda5e73f.png);
     background-repeat: no-repeat;
     background-size: 24px auto;
     content: "";
@@ -5406,7 +5406,7 @@ html {
 }
 
 .tips .tips_ico {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 265px 126px
 }
@@ -5418,7 +5418,7 @@ html {
     left: 10px;
     height: 50px;
     width: 50px;
-    background: url(http://cdn.yangkeduo.com/assets/img/logo-e166ec751b.jpg) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/logo-e166ec751b.jpg) no-repeat;
     background-size: 50px 50px;
     border-radius: 25px
 }
@@ -5714,13 +5714,13 @@ a.fixopt_share {
 }
 
 .fixopt_share:after {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 265px 126px
 }
 
 .fixopt_home:before {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 176.66667px 84px;
     background-position: -60px -60px;
@@ -6080,7 +6080,7 @@ a.fixopt_share {
 }
 
 .pp_list_item:nth-child(1) .pp_list_item:nth-child(2):after {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 265px 126px
 }
@@ -6159,7 +6159,7 @@ a.fixopt_share {
 }
 
 .pp_list_blank:before, .step_more:after, .tips_opt a:after, .tm:before {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 265px 126px
 }
@@ -6435,7 +6435,7 @@ a.fixopt_share {
 
 .hide-alipay-arrow {
     display: inline-block;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 265px 126px;
     background-position: -140px -90px;
@@ -7043,7 +7043,7 @@ a.fixopt_share {
 }
 
 .rank_g_btn:after, .rank_g_core:before, .tuan_g_btn:after, .tuan_g_img_round, .tuan_mark {
-    background-image: url(/assets/imgs/mobile/icons_bg.png);
+    background-image: url(/public/images/mobile/icons_bg.png);
     background-repeat: no-repeat;
     background-size: 265px 126px
 }
@@ -7224,7 +7224,7 @@ a.fixopt_share {
     display: block;
     margin: 0;
     padding: 0;
-    background: url(http://cdn.yangkeduo.com/assets/img/loading-eb0d435039.gif) 50% no-repeat
+    background: url(http://cdn.yangkeduo.com/public/img/loading-eb0d435039.gif) 50% no-repeat
 }
 
 #go-top, .go-top {
@@ -7266,7 +7266,7 @@ a.fixopt_share {
     top: 145px;
     width: 90px;
     height: 90px;
-    background: url(http://cdn.yangkeduo.com/assets/img/out-0810f259cb.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/out-0810f259cb.png) no-repeat;
     background-size: cover;
     z-index: 999
 }
@@ -7740,7 +7740,7 @@ a.fixopt_share {
 }
 
 .list-center .img-rotate {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/program_tags-bdfbd92e74.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/program_tags-bdfbd92e74.png);
     background-repeat: no-repeat;
     background-size: 315px 255px;
     background-position: -168px -213px;
@@ -8036,7 +8036,7 @@ a.fixopt_share {
 }
 
 .mall_icon {
-    background: url(http://cdn.yangkeduo.com/assets/img/mall_icon-369524b1fe.jpg) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/mall_icon-369524b1fe.jpg) no-repeat;
     background-size: 20px auto;
     content: "";
     height: 20px;
@@ -8087,7 +8087,7 @@ a.fixopt_share {
 .mall_page .mall_page_head .mall_detail_info .mall_detail_icons .mall_detail_icon_1 {
     position: relative;
     display: inline-block;
-    background: url(http://cdn.yangkeduo.com/assets/img/mall_detail_1-b98f221ed2.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/mall_detail_1-b98f221ed2.png) no-repeat;
     background-size: contain;
     width: 22px;
     height: 22px
@@ -8096,7 +8096,7 @@ a.fixopt_share {
 .mall_page .mall_page_head .mall_detail_info .mall_detail_icons .mall_detail_icon_2 {
     position: relative;
     display: inline-block;
-    background: url(http://cdn.yangkeduo.com/assets/img/mall_detail_2-55bc1def87.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/mall_detail_2-55bc1def87.png) no-repeat;
     background-size: contain;
     width: 22px;
     height: 22px;
@@ -9392,7 +9392,7 @@ a.fixopt_share {
 }
 
 .pay2_item_ico {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/pay_icon-d503fdccb8.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/pay_icon-d503fdccb8.png);
     background-position: 0 0
 }
 
@@ -9407,12 +9407,12 @@ a.fixopt_share {
 }
 
 .pay2_item_ico_ali {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/pay_icon-d503fdccb8.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/pay_icon-d503fdccb8.png);
     background-position: -24px 0
 }
 
 .pay3_item_ico {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sale-770ede5279.png);
     background-size: 24px 24px;
     height: 24px;
     margin-top: 11px;
@@ -9422,7 +9422,7 @@ a.fixopt_share {
 }
 
 .pay3_item_ico_small {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sale-770ede5279.png);
     background-size: 21px 21px;
     position: relative;
     top: 7px;
@@ -9884,7 +9884,7 @@ a.fixopt_share {
 }
 
 .coupon_icon {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sale-770ede5279.png);
     background-size: 14px 14px;
     height: 14px;
     width: 14px;
@@ -10022,7 +10022,7 @@ a.fixopt_share {
 }
 
 .order_coupon_selected {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/choose-47ae32adee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/choose-47ae32adee.png);
     background-repeat: no-repeat;
     background-size: 20px 20px;
     background-position: 0 0;
@@ -10471,7 +10471,7 @@ input[type=text], textarea {
 }
 
 .post_sale_first:before {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/1-0b9389ec30.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/1-0b9389ec30.png);
     background-repeat: no-repeat;
     background-size: 24px auto;
     content: "";
@@ -10488,7 +10488,7 @@ input[type=text], textarea {
 }
 
 .post_sale_second:before {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/2-ad1e1ac733.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/2-ad1e1ac733.png);
     background-repeat: no-repeat;
     background-size: 24px auto;
     content: "";
@@ -10569,7 +10569,7 @@ input[type=text], textarea {
 }
 
 .icon_address {
-    background: url(http://cdn.yangkeduo.com/assets/img/choose-47ae32adee.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/choose-47ae32adee.png) no-repeat;
     background-size: 18px 18px;
     z-index: 999;
     left: 12px
@@ -10622,7 +10622,7 @@ input[type=text], textarea {
 }
 
 .address_list .edit:after, .address_list ul:before {
-    background-image: url(/assets/imgs/mobile/sprites.png);
+    background-image: url(/public/images/mobile/sprites.png);
     background-repeat: no-repeat;
     background-size: 100px 100px
 }
@@ -10632,7 +10632,7 @@ input[type=text], textarea {
 }
 
 .address_list_link .item.item_wx:after, .address_list_link .item:after {
-    background-image: url(/assets/imgs/mobile/sprites.png);
+    background-image: url(/public/images/mobile/sprites.png);
     background-repeat: no-repeat;
     background-size: 100px 100px
 }
@@ -11751,7 +11751,7 @@ input[type=text], textarea {
 }
 
 .explain_tuan {
-    background: url(http://cdn.yangkeduo.com/assets/img/tuan_tip-cb9b32ff7d.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/tuan_tip-cb9b32ff7d.png) no-repeat;
     background-size: contain
 }
 
@@ -11907,7 +11907,7 @@ input[type=text], textarea {
 #recommend .bd li .recommend_like {
     width: 22px;
     height: 18px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 132.5px 63px;
     background-position: -112.5px -17.5px
@@ -12132,7 +12132,7 @@ input[type=text], textarea {
     height: 30px;
     position: relative;
     margin-right: 1px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/comment_bg_star-bee23e23e8.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/comment_bg_star-bee23e23e8.png);
     background-repeat: no-repeat;
     background-size: 60px;
     background-position: 0
@@ -12397,7 +12397,7 @@ input[type=text], textarea {
     position: absolute;
     top: 21px;
     left: 12px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sprite_search-d13f06ef49.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sprite_search-d13f06ef49.png);
     background-repeat: no-repeat;
     background-size: 70px 35px;
     background-position: 0 -17px
@@ -12439,7 +12439,7 @@ input[type=text], textarea {
 }
 
 .search-content-clear {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sprite_search-d13f06ef49.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sprite_search-d13f06ef49.png);
     background-repeat: no-repeat;
     background-size: 60px 30px;
     background-position: -15px 0;
@@ -12471,7 +12471,7 @@ input[type=text], textarea {
     height: 18px;
     margin-right: 20px;
     height: 16px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sprite_search-d13f06ef49.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sprite_search-d13f06ef49.png);
     background-repeat: no-repeat;
     background-size: 70px 35px;
     background-position: 0 0
@@ -12704,7 +12704,7 @@ input[type=text], textarea {
     right: 0;
     width: 23px;
     height: 20px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-e5e65ca3ee.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-e5e65ca3ee.png);
     background-repeat: no-repeat;
     background-size: 159px 75.6px;
     background-position: -135px -21px
@@ -12847,7 +12847,7 @@ input[type=text], textarea {
     display: inline-block;
     position: relative;
     margin-right: 1px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/comment_bg_star-bee23e23e8.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/comment_bg_star-bee23e23e8.png);
     background-repeat: no-repeat;
     background-size: 30px;
     background-position: -15px
@@ -13306,7 +13306,7 @@ input[type=text], textarea {
 }
 
 .pay2_item_ico {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/pay_icon-d503fdccb8.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/pay_icon-d503fdccb8.png);
     background-position: 0 0
 }
 
@@ -13321,12 +13321,12 @@ input[type=text], textarea {
 }
 
 .pay2_item_ico_ali {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/pay_icon-d503fdccb8.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/pay_icon-d503fdccb8.png);
     background-position: -24px 0
 }
 
 .pay3_item_ico {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sale-770ede5279.png);
     background-size: 24px 24px;
     height: 24px;
     margin-top: 11px;
@@ -13336,7 +13336,7 @@ input[type=text], textarea {
 }
 
 .pay3_item_ico_small {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sale-770ede5279.png);
     background-size: 21px 21px;
     position: relative;
     top: 7px;
@@ -13672,7 +13672,7 @@ input[type=text], textarea {
 }
 
 .recommend_grid_tile_favor, .recommend_grid_tile_favored {
-    background-image: url("http://cdn.yangkeduo.com/assets/img/program_tags-bdfbd92e74.png");
+    background-image: url("http://cdn.yangkeduo.com/public/img/program_tags-bdfbd92e74.png");
     background-repeat: no-repeat;
     background-size: 210px 170px;
     width: 23px;
@@ -13975,7 +13975,7 @@ input[type=text], textarea {
 }
 
 .active .fb-class, .active .fb-home, .active .fb-oversea, .active .fb-rank, .active .fb-user, .fb-class, .fb-home, .fb-oversea, .fb-rank, .fb-user {
-    background: url(http://cdn.yangkeduo.com/assets/img/tabbar-d3deef50ef.png) no-repeat;
+    background: url(http://cdn.yangkeduo.com/public/img/tabbar-d3deef50ef.png) no-repeat;
     background-size: auto 20px;
     content: "";
     height: 20px;
@@ -14025,7 +14025,7 @@ input[type=text], textarea {
 }
 
 .black-friday, .black-friday-active {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/black_friday-5d6e7b0633.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/black_friday-5d6e7b0633.png);
     background-repeat: no-repeat;
     background-size: auto 40px;
     content: "";
@@ -14037,7 +14037,7 @@ input[type=text], textarea {
 }
 
 .black-friday-active {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/black_friday_active-dd50f099d1.png)
+    background-image: url(http://cdn.yangkeduo.com/public/img/black_friday_active-dd50f099d1.png)
 }
 
 .fb {
@@ -14158,7 +14158,7 @@ input[type=text], textarea {
 }
 
 .my {
-    background: url(/assets/imgs/mobile/account_bg.jpg) no-repeat scroll top/100% auto transparent;
+    background: url(/public/images/mobile/account_bg.jpg) no-repeat scroll top/100% auto transparent;
     height: 120px;
     position: relative;
     width: 100%;
@@ -14269,7 +14269,7 @@ input[type=text], textarea {
 }
 
 .nav_item_hd:before {
-    background-image: url("http://cdn.yangkeduo.com/assets/img/sprite_icon-9adbcd7042.png");
+    background-image: url("http://cdn.yangkeduo.com/public/img/sprite_icon-9adbcd7042.png");
     background-repeat: no-repeat;
     background-size: 24px auto;
     content: "";
@@ -14291,7 +14291,7 @@ input[type=text], textarea {
 }
 
 .nav_item_hd_coupons:before {
-    background-image: url("http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png");
+    background-image: url("http://cdn.yangkeduo.com/public/img/sale-770ede5279.png");
     background-repeat: no-repeat;
     background-size: 24 auto;
     content: "";
@@ -14372,7 +14372,7 @@ input[type=text], textarea {
 }
 
 .nav_item_bd .nav_item_order_img {
-    background-image: url(/assets/imgs/mobile/icons.png);
+    background-image: url(/public/images/mobile/icons.png);
     background-repeat: no-repeat;
     background-size: 133.33333px 133.33333px;
     content: "";
@@ -14450,7 +14450,7 @@ input[type=text], textarea {
 }
 
 .nav_list_img {
-    background-image: url(/assets/imgs/mobile/icons.png);
+    background-image: url(/public/images/mobile/icons.png);
     background-repeat: no-repeat;
     background-size: 133.33333px 133.33333px;
     content: "";
@@ -14559,7 +14559,7 @@ input[type=text], textarea {
 }
 
 .nav_item_hd_coupons_sale:before {
-    background-image: url("http://cdn.yangkeduo.com/assets/img/phone-dadda5e73f.png");
+    background-image: url("http://cdn.yangkeduo.com/public/img/phone-dadda5e73f.png");
     background-repeat: no-repeat;
     background-size: 24px auto;
     content: "";
@@ -14596,7 +14596,7 @@ input[type=text], textarea {
 .nav_download_icon {
     right: 10px;
     top: 11px;
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sprite_search-d13f06ef49.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sprite_search-d13f06ef49.png);
     background-size: 150px 67.5px;
     background-position: -45px -37.5px
 }
@@ -14611,7 +14611,7 @@ input[type=text], textarea {
 .nav_download_image {
     left: 15px;
     top: 15px;
-    background-image: url(/assets/imgs/mobile/icons.png);
+    background-image: url(/public/images/mobile/icons.png);
     background-size: 133.33333px 133.33333px;
     background-position: -100px 0
 }
@@ -14623,7 +14623,7 @@ input[type=text], textarea {
     top: 3px;
     width: 20px;
     height: 20px;
-    background: url(/assets/imgs/mobile/icons.png) -130px 6px no-repeat;
+    background: url(/public/images/mobile/icons.png) -130px 6px no-repeat;
     background-size: 150px 110px;
 }
 
@@ -14684,7 +14684,7 @@ input[type=text], textarea {
 }
 
 .order-lottery-not, .orders-lottery-wait {
-    background-image: url("http://cdn.yangkeduo.com/assets/img/sprites_stamps-df846800d1.png");
+    background-image: url("http://cdn.yangkeduo.com/public/img/sprites_stamps-df846800d1.png");
     background-repeat: no-repeat;
     background-size: 299.83425px 299.83425px
 }
@@ -14694,7 +14694,7 @@ input[type=text], textarea {
 }
 
 .order-lottery-lucky {
-    background-image: url("http://cdn.yangkeduo.com/assets/img/sprites_stamps-df846800d1.png");
+    background-image: url("http://cdn.yangkeduo.com/public/img/sprites_stamps-df846800d1.png");
     background-repeat: no-repeat;
     background-size: 299.83425px 299.83425px;
     background-position: -99.94475px 0
@@ -14794,7 +14794,7 @@ input[type=text], textarea {
 }
 
 .orders-order-goods-payed .orders-coupon-icon {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/program_tags-bdfbd92e74.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/program_tags-bdfbd92e74.png);
     background-repeat: no-repeat;
     background-size: 183.75px 148.75px;
     background-position: -35px -131.25px;
@@ -14866,7 +14866,7 @@ input[type=text], textarea {
 }
 
 .orders-order_total ._right ._coupon_icon {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sale-770ede5279.png);
     background-size: 14px 14px;
     height: 14px;
     width: 14px;
@@ -15022,7 +15022,7 @@ input[type=text], textarea {
 }
 
 .img-rotate, .img_rotate {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/program_tags-bdfbd92e74.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/program_tags-bdfbd92e74.png);
     background-repeat: no-repeat;
     background-size: 157.5px 127.5px;
     background-position: -84px -106.5px;
@@ -15222,23 +15222,23 @@ input[type=text], textarea {
 }
 
 .order-banner .order_cancel {
-    background-image: url(/assets/imgs/mobile/order_cancel.png)
+    background-image: url(/public/images/mobile/order_cancel.png)
 }
 
 .order-banner .order_unpay {
-    background-image: url(/assets/imgs/mobile/order_unpay.png)
+    background-image: url(/public/images/mobile/order_unpay.png)
 }
 
 .order-banner .order_payed {
-    background-image: url(/assets/imgs/mobile/order_payed.png)
+    background-image: url(/public/images/mobile/order_payed.png)
 }
 
 .order-banner .order_receive {
-    background-image: url(/assets/imgs/mobile/order_receive.png)
+    background-image: url(/public/images/mobile/order_receive.png)
 }
 
 .order-banner .order_received {
-    background-image: url(/assets/imgs/mobile/order_received.png)
+    background-image: url(/public/images/mobile/order_received.png)
 }
 
 .order-banner ._banner_txt {
@@ -15593,7 +15593,7 @@ input[type=text], textarea {
 }
 
 .order-order-total ._right ._coupon_icon {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/sale-770ede5279.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/sale-770ede5279.png);
     background-size: 14px 14px;
     height: 14px;
     width: 14px;
@@ -15947,7 +15947,7 @@ input[type=text], textarea {
 }
 
 .group-button:after {
-    background-image: url(http://cdn.yangkeduo.com/assets/img/bg_v7-01ff7574e6.png);
+    background-image: url(http://cdn.yangkeduo.com/public/img/bg_v7-01ff7574e6.png);
     background-repeat: no-repeat;
     background-size: 310px 180px;
     background-position: -140px -105px;

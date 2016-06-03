@@ -52,6 +52,7 @@ exports.generateQRCode = function(qrCodeID, callback) {
             return callback(err);
         }
 
+        // run as async
         if (!existed) {
             Article.createArticleWithQRCode(qrCodeID, qrCodeURL,
                 function(err) {
@@ -126,11 +127,7 @@ exports.SCAN = function(message, callback) {
             return callback(err);
         }
 
-        if(!article) {  
-            return callback(null, msgReply.ScanWithoutArticle);
-        }
-
-        return callback(null, 
+        return callback(null, !article ? msgReply.ScanWithoutArticle : 
             util.format(msgReply.ScanArticleSuccess, 
                 article.author, article.title, article.url));
     });

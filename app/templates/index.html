@@ -9,7 +9,7 @@
             <div ng-repeat="good in goods">
                 <div class="tuan_g">
                     <div class="tuan_g_img" ui-sref="detail({goodID:'{{good._id}}'})">
-                        <img src="/assets/imgs/upload/{{good.pics[0]}}">
+                        <img src="/public/images/upload/{{good.pics[0]}}">
                         <div class="tuan_g_img_text">
                             <div class="tuan_g_img_item" ng-repeat="tag in good.tags">
                                 <div class="tuan_g_img_round"></div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="tuan_g_core">
                         <div class="tuan_g_core_img">
-                            <img src="/assets/imgs/app/tuan.png">
+                            <img src="/public/images/app/tuan.png">
                         </div>
                         <div class="tuan_g_price price-big">
                             <span>活动价</span><b>{{good.sellPrice|currency:'￥'}}</b>
@@ -32,8 +32,8 @@
                         <div class="tuan_g_btn" ui-sref="detail({goodID:'{{good._id}}'})">查看详情</div>
                     </div>
                     <div class="like goods_list_like">
-                        <img src="/assets/imgs/app/unlike.png" ng-hide="isLike(good._id)">
-                        <img src="/assets/imgs/app/like.png" ng-show="isLike(good._id)">
+                        <img src="/public/images/app/unlike.png" ng-hide="isLike(good._id)">
+                        <img src="/public/images/app/like.png" ng-show="isLike(good._id)">
                         <div class="like_click_button" ng-click="setLike(good._id)"></div>
                     </div>
                 </div>
