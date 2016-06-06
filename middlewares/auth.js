@@ -7,6 +7,10 @@ var logger     = require('../common/logger');
 
 // 验证用户是否登录
 exports.authUser = function (req, res, next) {
+    if(req.originalUrl === "/login") {
+        return next();
+    }
+
     var ep = EventProxy.create();
     ep.fail(next);
 

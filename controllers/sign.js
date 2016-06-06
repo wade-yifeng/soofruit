@@ -16,7 +16,8 @@ exports.login = function (req, res) {
 
     if(req.query.code === undefined) { 
         // 从微信验证跳转，但没有获取到Code
-        if(require('url').parse(req.headers.referer).hostname === "open.weixin.qq.com") {
+        if(req.headers.referer &&
+            require('url').parse(req.headers.referer).hostname === "open.weixin.qq.com") {
             res.status(403);
             return res.render('layout.html', { error: '微信登陆失败' });
         }

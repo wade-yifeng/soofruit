@@ -123,6 +123,21 @@ EventProxy.prototype.emit = EventProxy.prototype.trigger;
 EventProxy.prototype.fire = EventProxy.prototype.trigger;
 
 /**
+ * Bind an event like the bind method, but will remove the listener after it was fired.
+ * @param {String} ev Event name
+ * @param {Function} callback Callback
+ */
+EventProxy.prototype.once = function (ev, callback) {
+    var self = this;
+    var wrapper = function () {
+        callback.apply(self, arguments);
+        self.unbind(ev, wrapper);
+    };
+    this.bind(ev, wrapper);
+    return this;
+};
+
+/**
  * Assign the only one 'error' event handler.
  * @param {Function(err)} callback
  */
