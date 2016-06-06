@@ -14,8 +14,13 @@ exports.authUser = function (req, res, next) {
     var ep = EventProxy.create();
     ep.fail(next);
 
-    ep.on('auth', function (msg) {
-        res.reply(reply);
+    ep.on('auth', function (user) {
+        if (!user) {
+            return next();
+        }
+
+        user = res.locals.current_user = req.session.user = new UserModel(user);
+        res.locals.userID = req.session.userID = user._id;
     });
     
     // Ensure current_user always has defined.
@@ -23,11 +28,7 @@ exports.authUser = function (req, res, next) {
 
     // 先查找Session，找到直接放入locals
     if(req.session.user) {
-        var userModel = new UserModel(req.session.user);
-        logger.info('在session中找到了用户:' + userModel);
-        res.locals.current_user = req.session.user = userModel;
-        res.locals.userID = req.session.userID = userModel._id;
-        return ep.emit('auth');
+        return ep.emit('auth', req.session.user);
     }
 
     // 查找浏览器Cookie
@@ -36,14 +37,7 @@ exports.authUser = function (req, res, next) {
         var auth = auth_token.split('||');
         var unionID = auth[0];
 
-        return UserProxy.getUserByUnionID(unionID, ep.done(function(user){
-            if(user) {
-                logger.info('在cookie中找到了用户:' + user);
-                res.locals.current_user = req.session.user = user;
-                res.locals.userID = req.session.userID = user._id;
-            }
-            ep.emit('auth');
-        }));
+        return UserProxy.getUserByUnionID(unionID, ep.done('auth'));
     }
 
     res.redirect('/login');
