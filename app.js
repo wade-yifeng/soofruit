@@ -53,7 +53,7 @@ var app = express();
 
 // public路径指向assets打包目录
 app.use('/public', express.static(path.join(__dirname, 'assets')));
-app.use(express.static(path.join(__dirname, 'views')));
+app.use('/views', express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
 
