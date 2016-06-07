@@ -34,5 +34,5 @@ exports.updateReply = function(reply, callback) {
 };
 
 exports.updateReplyResult = function (replyID, targetID, result, callback) {
-    Reply.update({_id: relpyID}, {$set:{targetID: targetID, result: result, available: false}}, callback);
+    Reply.update({_id: replyID}, {$set:{targetID: targetID, result: result, available: false}}, callback);
 };

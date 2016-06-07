@@ -7,7 +7,10 @@ var logger     = require('../common/logger');
 
 // 验证用户是否登录
 exports.authUser = function (req, res, next) {
-    if(req.originalUrl === "/login") {
+    // if(req.originalUrl === "/login" || req.originalUrl === "/wechat") {
+    //     return next();
+    // }
+    if (exports.ignore.test(req.url)) {
         return next();
     }
 
@@ -42,6 +45,8 @@ exports.authUser = function (req, res, next) {
 
     res.redirect('/login');
 };
+
+exports.ignore = /^\/(login|wechat)/;
 
 // 目前只是以微信端unionid作为Session
 exports.gen_session = function(user, res) {
