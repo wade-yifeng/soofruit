@@ -7,10 +7,7 @@ var logger     = require('../common/logger');
 
 // 验证用户是否登录
 exports.authUser = function (req, res, next) {
-    // if(req.originalUrl === "/login" || req.originalUrl === "/wechat") {
-    //     return next();
-    // }
-    if (exports.ignore.test(req.url)) {
+    if (config.debug || exports.ignore.test(req.url)) {
         return next();
     }
 
@@ -43,6 +40,7 @@ exports.authUser = function (req, res, next) {
         return UserProxy.getUserByUnionID(unionID, ep.done('auth'));
     }
 
+    req.session.targetUrl = req.url;
     res.redirect('/login');
 };
 

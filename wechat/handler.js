@@ -1,14 +1,14 @@
-var config   = require('config');
-var util     = require('util');
-var async    = require('async');
+var config     = require('config');
+var util       = require('util');
+var async      = require('async');
+var api        = require('./api');
 var EventProxy = require('../common/event_proxy');
-var logger   = require('../common/logger');
-var api      = require('./api');
-var ErrorMsg = require('../models').Enums.ErrorMessage;
-var Article  = require('../proxy').Article;
-var User     = require('../proxy').User;
-var Reply    = require('../proxy').Reply;
-var tools    = require('../common/utility');
+var tools      = require('../common/utility');
+var logger     = require('../common/logger');
+var ErrorMsg   = require('../models').Enums.ErrorMessage;
+var Article    = require('../proxy').Article;
+var User       = require('../proxy').User;
+var Reply      = require('../proxy').Reply;
 
 // 微信消息回复
 var msgReply = {
@@ -20,7 +20,8 @@ var msgReply = {
     'SubscribeReply': 'Hi，亲爱的小主，小北在此等候多时了。这里是我们的新家，' + 
         '我们将为您提供新鲜的水果尝鲜抢购&每日热点资讯&有趣的文章&生活大发现，' + 
         '请敬请期待平台正式发布哦~\n\n发送：想说的话+微信昵称（已关注），可以给对方发送悄悄话哦，只能帮到这里咯 ╮(╯▽╰)╭ ',
-    'ThanksFollowArticle': '\n\n首先感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧，您也可以通过我们的菜单进入征文活动哦~'
+    'ThanksFollowArticle': '\n\n首先感谢您支持%s的文章《%s》，猛戳<a href="%s">这里</a>去看看详情吧，您也可以通过我们的菜单进入征文活动哦~',
+    'NoWisperReply': '您并没有收到悄悄话，发送：想说的话+微信昵称（已关注），可以给对方发送悄悄话哦'
 };
 
 /**
@@ -115,9 +116,6 @@ exports.saveUserWisper = function(openID, targetName, content, callback) {
  * Callback:
  * - err, 获取二维码对应信息异常
  * - msg, 自动回复消息
- * @param {String} message 目标用户的OPNEID
- * @param {String} targetName 推送目标的微信昵称
- * @param {String} content 推送消息的内容
  */
 exports.SCAN = function(message, callback) {
     // TODO: 目前只支持有事件Key和已关注用户的扫描
@@ -142,9 +140,6 @@ exports.SCAN = function(message, callback) {
  * Callback:
  * - err, 获取二维码对应信息异常
  * - msg, 自动回复消息
- * @param {String} message 目标用户的OPNEID
- * @param {String} targetName 推送目标的微信昵称
- * @param {String} content 推送消息的内容
  */
 exports.subscribe = function(message, callback) {
     var that = this;
@@ -232,7 +227,7 @@ exports.CLICK = function(message, callback) {
                 return callback(err);
             }
 
-            var reply = '您并没有收到悄悄话，发送：想说的话+微信昵称（已关注），可以给对方发送悄悄话哦';
+            var reply = msgReply.NoWisperReply;
             if(result && result.length) {
                 reply = '您收到了悄悄话哦，小北念给你听，咳咳：';
                 result.forEach(function(item) {
@@ -253,12 +248,16 @@ exports.CLICK = function(message, callback) {
                 return callback(err);
             }
 
-            var reply = '截止' + tools.formatDate(Date.now()) + '\n';
-            result.forEach(function(item) {
-                reply = reply.concat(util.format('《%s》  %s  %d\n', item.title, item.author, item.records));
-            });
+            if(result) {
+                var reply = '截止' + tools.formatDate(Date.now()) + '\n';
+                result.forEach(function(item) {
+                    reply = reply.concat(util.format('《%s》  %s  %d\n', item.title, item.author, item.records));
+                });
 
-            return callback(null, reply);
+                return callback(null, reply);
+            }
+
+            return callback(new Error('没有读取到征文数据'));
         });
     } 
 

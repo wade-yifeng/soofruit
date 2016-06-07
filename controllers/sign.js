@@ -8,11 +8,9 @@ var auth     = require('../middlewares/auth');
 var ErrorMsg = require('../models').Enums.ErrorMessage;
 
 exports.login = function (req, res) {
-    req.session._loginReferer = req.headers.referer;
-  
-    // if(config.debug) {
-    //     return res.redirect(req.session._loginReferer);
-    // }
+     if(config.debug) {
+         return res.redirect(req.session.targetUrl);
+     }
 
     if(req.query.code === undefined) { 
         // 从微信验证跳转，但没有获取到Code

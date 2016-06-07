@@ -1,10 +1,10 @@
 var wechat     = require('wechat');
 var config     = require('config');
 var util       = require('util');
+var handler    = require('./handler');
+var EventProxy = require('../common/event_proxy');
 var logger     = require('../common/logger');
 var ErrorMsg   = require('../models').Enums.ErrorMessage;
-var EventProxy = require('../common/event_proxy');
-var handler    = require('./handler');
 
 // 消息分割的正则表达式
 var msgReg  = /(?=\S)[^\+]+?(?=\s*(\+|$))/g;

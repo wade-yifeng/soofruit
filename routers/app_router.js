@@ -5,7 +5,7 @@ var sign = require('../controllers/sign');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('/views/layout');
+    res.render('layout');
 });
 
 // home page

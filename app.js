@@ -122,12 +122,14 @@ app.use(busboy({
     }
 }));
 
+app.use(auth.authUser);
+
 /* TODO: 封装数据库访问
 var apiRouter = require('./api_router');
 */
 
 // app.use('/api', cors(), apiRouter);
-app.use('/', auth.authUser, appRouter);
+app.use('/', appRouter);
 app.use('/wechat', wechatRouter);
 // error handler
 app.use(errorPageMiddleware.errorPage);
