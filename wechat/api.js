@@ -25,6 +25,6 @@ module.exports = new API(config.WeChat.appID, config.WeChat.appSecret,
             callback(null, JSON.parse(txt));
         });
     }, function (token, callback) {
-        cache.set('access_token', token, callback);
+        cache.set('access_token', JSON.stringify(token), callback);
     }
 );

@@ -1,5 +1,6 @@
 var async    = require('async');
 var config   = require('config');
+var util      = require('util');
 var oauthApi = require('../wechat/api_oauth');
 var api      = require('../wechat/api');
 var logger   = require('../common/logger');
@@ -13,7 +14,7 @@ exports.login = function (req, res) {
         if(req.headers.referer &&
             require('url').parse(req.headers.referer).hostname === "open.weixin.qq.com") {
             res.status(403);
-            return res.render('layout.html', { error: '微信登陆失败' });
+            return res.render('layout', { error: '微信登陆失败' });
         }
 
         var absoluteURL = req.protocol + '://' + req.get('host') + req.originalUrl;
@@ -24,11 +25,11 @@ exports.login = function (req, res) {
     async.waterfall([
         function (callback) {
             oauthApi.getAccessToken(req.query.code, function (err, result) {
-                if (!err && (result.data === undefined || result.data.openid === undefined)) {
-                    callback(new Error('调用微信API获取openid失败'));
+                if (err || (result.data === undefined || result.data.openid === undefined)) {
+                    callback(new Error('调用微信API获取openid失败', err));
                 }
 
-                callback(err, result.data.openid);
+                callback(null, result.data.openid);
             });
         }, function (openID, callback) {
             api.getUser(openID, function (err, result) {
@@ -37,18 +38,18 @@ exports.login = function (req, res) {
         }
     ], function (err, baseInfo) {
             if (err) {
-                logger.error("获取微信身份信息失败，错误：" + err);
+                logger.error(util.format(ErrorMsg.WeChatErrorFormat, "获取微信身份信息失败", err));
             }
             else {
                 User.updateUserByUnionID(baseInfo, function(err, result) {
                     if(err) {
-                        logger.error('更新用户失败' + err);
+                        logger.error(util.format(ErrorMsg.DBErrorFormat, "更新用户失败", err));
                     }
                 });
 
                 auth.gen_session(baseInfo, res);
             }
 
-            res.redirect(req.session.targetUrl);
+            return res.redirect(req.session.targetUrl);
     });
 };

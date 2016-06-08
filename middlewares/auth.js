@@ -16,11 +16,13 @@ exports.authUser = function (req, res, next) {
 
     ep.on('auth', function (user) {
         if (!user) {
-            return next();
+            req.session.targetUrl = req.url;
+            return res.redirect('/login');
         }
 
         user = res.locals.current_user = req.session.user = new UserModel(user);
         res.locals.userID = req.session.userID = user._id;
+        return next();
     });
     
     // Ensure current_user always has defined.
@@ -42,6 +44,7 @@ exports.authUser = function (req, res, next) {
 
     req.session.targetUrl = req.url;
     res.redirect('/login');
+    return next();
 };
 
 exports.ignore = /^\/(login|wechat|public|sections)/;

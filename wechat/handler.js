@@ -62,8 +62,7 @@ exports.generateQRCode = function(qrCodeID, callback) {
             Article.createArticleWithQRCode(qrCodeID, qrCodeURL,
                 function(err) {
                     if(err) {
-                        logger.error(util.format(ErrorMsg.DBErrorFormat,
-                            "创建推广二维码对应的文章", {qrCodeID: qrCodeID, qrCodeURL: qrCodeURL}, err));
+                        logger.error(util.format(ErrorMsg.DBErrorFormat, "创建推广二维码对应的文章", err));
                     }
                 }
             );
@@ -165,7 +164,7 @@ exports.subscribe = function(message, callback) {
                 if (qrscene && !flag) {
                     Article.increaseArticleRecords(qrCodeID, function(err) {
                         if(err) {
-                            logger.error("增加推广关注失败，错误：" + err);
+                            logger.error(util.format(ErrorMsg.DBErrorFormat, "增加推广关注失败", err));
                         }
                     });
                 }
@@ -244,7 +243,7 @@ exports.CLICK = function(message, callback) {
     if(message.EventKey == "ARTICLE_RANK") {
         return Article.getArticleRecordsRank(function(err, result) {
             if(err) {
-                logger.error('读取征文排行失败，错误：', err);
+                logger.error(util.format(ErrorMsg.DBErrorFormat, "读取征文排行", err));
                 return callback(err);
             }
 

@@ -4,7 +4,6 @@ var util       = require('util');
 var handler    = require('./handler');
 var EventProxy = require('../common/event_proxy');
 var logger     = require('../common/logger');
-var ErrorMsg   = require('../models').Enums.ErrorMessage;
 
 // 消息分割的正则表达式
 var msgReg  = /(?=\S)[^\+]+?(?=\s*(\+|$))/g;
