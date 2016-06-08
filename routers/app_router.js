@@ -11,10 +11,4 @@ router.get('/', function(req, res, next) {
 // home page
 router.get('/index', site.index);
 
-// favorite
-// router.post('/favorite', site.addFavorite);
-// router.delete('/favorite/:itemID', site.removeFavorite);
-
-router.get('/login', sign.login);
-
 module.exports = router;

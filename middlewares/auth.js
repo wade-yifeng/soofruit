@@ -44,7 +44,7 @@ exports.authUser = function (req, res, next) {
     res.redirect('/login');
 };
 
-exports.ignore = /^\/(login|wechat)/;
+exports.ignore = /^\/(login|wechat|public|sections)/;
 
 // 目前只是以微信端unionid作为Session
 exports.gen_session = function(user, res) {
