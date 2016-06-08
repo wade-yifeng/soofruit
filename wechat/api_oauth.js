@@ -4,21 +4,19 @@
  */
 
 var config = require('config');
-var OAuth = require('./lib/oauth');
-var fs = require('fs');
+var fs     = require('fs');
+var OAuth  = require('./lib/oauth');
+var cache  = require('../common/cache');
 
 module.exports = new OAuth(config.WeChat.appID, config.WeChat.appSecret, 
     function (openid, callback) {
-        // 根据openid获取对应的全局token
-        fs.readFile(openid +':access_token.txt', 'utf8', function (err, txt) {
+        cache.get('access_token:' + openid, function (err, txt) {
             if (err || !txt) {
                 return callback(err);
             }
             callback(null, JSON.parse(txt));
         });
     }, function (openid, token, callback) {
-        // TODO: 使用redis的发布订阅模式存储token，需要在cluster模式及多机情况下使用
-        // 每个openid都对应一个唯一的token!
-        fs.writeFile(openid + ':access_token.txt', JSON.stringify(token), callback);
+        cache.set('access_token:' + openid, token, callback);
     }
 );
