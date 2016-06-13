@@ -1,7 +1,6 @@
 var config  = require('config');
 
-var models  = require('../models');
-var Article = models.Article;
+var Article = require('../models/article');
 
 /**
  * 根据推广二维码ID查找文章

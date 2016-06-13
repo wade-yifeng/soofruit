@@ -6,7 +6,7 @@ var api      = require('../wechat/api');
 var logger   = require('../common/logger');
 var User     = require('../proxy').User;
 var auth     = require('../middlewares/auth');
-var ErrorMsg = require('../models').Enums.ErrorMessage;
+var ErrorMsg = require('../models/enums').ErrorMessage;
 
 exports.login = function (req, res) {
     if(req.query.code === undefined) { 

@@ -1,7 +1,5 @@
-var config = require('config');
-
-var models = require('../models');
-var Subject = models.Subject;
+var config  = require('config');
+var Subject = require('../models/subject');
 
 /**
  * 获取激活的主题

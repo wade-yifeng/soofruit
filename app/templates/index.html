@@ -1,4 +1,16 @@
 <div class="container" ng-controller="IndexController">
+    <div class="swiper-container swiper-container-horizontal">
+        <div class="swiper-wrapper" id="divImgList">
+            <div class="swiper-slide" ng-repeat="slide in slides">
+                <a ui-sref="noticeDetail({noticeId:{{slide.id}}})">
+                <img id="{{slide.id}}" class="swiper-lazy" data-src="{{slide.avatar}}">
+                </a>
+                <div class="swiper-lazy-preloader"></div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-clickable"></div>
+    </div>
     <div id="banner">
         <div class="flexslider">
             <div ui-view="subjects" class="flexslider"></div>
@@ -38,15 +50,15 @@
                     </div>
                 </div>
             </div>
-
             <!--<div class="load-more pullUp_show">-->
-                <!--<div class="list-center">-->
-                    <!--<div class="img-rotate"></div>-->
-                    <!--<span class="orders_text">正在玩命的加载...</span>-->
-                <!--</div>-->
+            <!--<div class="list-center">-->
+            <!--<div class="img-rotate"></div>-->
+            <!--<span class="orders_text">正在玩命的加载...</span>-->
+            <!--</div>-->
             <!--</div>-->
         </div>
     </section>
-
-    <div id="go_cart" ui-sref="cart"><span class="glyphicon glyphicon-shopping-cart"></span></div>
+    <div id="go_cart" ui-sref="cart">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </div>
 </div>

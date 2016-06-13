@@ -1,5 +1,4 @@
-var models = require('../models');
-var User = models.User;
+var User = require('../models/user');
 var logger = require('../common/logger');
 
 /**

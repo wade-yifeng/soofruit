@@ -1,5 +1,4 @@
-var models = require('../models');
-var Favorite = models.Favorite;
+var Favorite = require('../models/favorite');
 
 exports.getFavoritesByUserID = function(userID, callback) {
     Favorite.find({userID: userID}, function(err, favorites) {

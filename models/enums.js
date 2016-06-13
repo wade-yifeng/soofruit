@@ -24,11 +24,14 @@ exports.ErrorMessage = {
     // 数据库错误
     DBErrorFormat: '1000，%s发生数据库错误，异常：%j',
 
+    // Redis错误
+    RedisErrorFormat: '2000，%s发生Redis存儲错误，异常：%j',
+
     // 通用错误
-    GeneralErrorFormat: '2000, %s发生错误，异常：%j',
+    GeneralErrorFormat: '3000, %s发生错误，异常：%j',
 
     // 微信API调用错误
-    WeChatErrorFormat: '3000，%s发生微信调用错误，异常：%j'
+    WeChatErrorFormat: '4000，%s发生微信调用错误，异常：%j'
 };
 
 /**

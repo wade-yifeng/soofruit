@@ -3,18 +3,18 @@ var Schema    = mongoose.Schema;
 var ObjectId  = Schema.ObjectId;
 var BaseModel = require("./base_model");
 
-// var subject1 = {
+// var subject3 = {
 //     name: '测试2',
 //     desc: '这是一个测试主题',
 //     type: 'test',
 //     tags: ['item', 'top5'],
-//     url: 'www.baidu.com',
-//     pic: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/bg_2.jpg'],
+//     url: 'http://test.soofruit.com',
+//     pic: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/watermelon.jpg'],
 //     top: true,
 //     priority: 2,
 //     spotlight: true,
 //     active: true,
-//     createTime: '2016-05-15'
+//     createTime: '2016-06-13'
 // };
 
 var SubjectSchema = new Schema({
