@@ -3,7 +3,7 @@ var concat = require('gulp-concat');
 var cleanCSS = require('gulp-clean-css');
 
 gulp.task('css:app', function () {
-    return gulp.src('static/styles/app/**/*.css')
+    return gulp.src('static/styles/app/*.css')
         .pipe(concat('app.css'))
         .pipe(cleanCSS())
         .pipe(gulp.dest('assets'));

@@ -24,15 +24,7 @@ gulp.task('js:common', ['js:app'], function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
             'static/scripts/angular.js',
-            'static/scripts/angular-cookies.js',
-            'static/scripts/angular-ui-router.js',
-            'static/scripts/ng-file-upload-shim.js',
-            'static/scripts/ng-file-upload.js',
-            'static/scripts/jquery.js',
-            'static/scripts/bootstrap.js',
-            'static/scripts/socket.io.js',
-            'static/scripts/underscore.js',
-            'static/scripts/site.js'
+            'static/scripts/angular-ui-router.js'
         ])
         .pipe(concat('common.js'))
         .pipe(uglify())
