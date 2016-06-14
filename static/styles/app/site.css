@@ -112,7 +112,7 @@ body {
 }
 
 .icon_logo {
-    background-image: url("http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/logo1.jpg")
+    background-image: url("http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/logo.png")
 }
 
 @media only screen and (max-width:360px) {
@@ -190,7 +190,7 @@ body {
 
 /*=====swiper轮播======*/
 
-.swiper-container {
+.swiper-container#subjects {
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -648,7 +648,7 @@ body {
     }
 }
 
-.swiper-slide {
+.swiper-slide#subjects {
     text-align: center;
     font-size: 18px;
     background: #fff;
@@ -674,6 +674,42 @@ body {
     height: 100%;
 }
 
-.swiper-slide a img {
+#subjects a img {
     height: 270px
+}
+
+.swiper-container#spotlights {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    padding: 7px 0 4px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 320px;
+    max-width: 540px;
+}
+
+.swiper-slide#spotlights {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    height: 75px;
+    width: 75px;
+    margin: 0 5px;
+    display: inline-block;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
 }

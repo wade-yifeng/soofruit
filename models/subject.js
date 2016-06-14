@@ -4,17 +4,17 @@ var ObjectId  = Schema.ObjectId;
 var BaseModel = require("./base_model");
 
 // var subject3 = {
-//     name: '测试2',
+//     name: '测试3',
 //     desc: '这是一个测试主题',
 //     type: 'test',
 //     tags: ['item', 'top5'],
 //     url: 'http://test.soofruit.com',
-//     pics: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/watermelon.jpg'],
+//     pics: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/durian.jpg'],
 //     top: true,
 //     priority: 2,
 //     spotlight: true,
 //     active: true,
-//     createTime: '2016-06-13'
+//     createTime: '2016-06-14'
 // };
 
 var SubjectSchema = new Schema({

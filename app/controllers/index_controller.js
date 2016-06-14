@@ -11,11 +11,20 @@ var IndexController = function($scope, $http, $timeout, Index) {
 
         $timeout(function() {
             //初始化轮播插件
-            var swiper = new Swiper('.swiper-container', {
+            var swiperSubjects = new Swiper('#subjects', {
                 autoplay: 6000,//可选选项，自动滑动
-                pagination: '.swiper-pagination',
+                pagination: '#subjects .swiper-pagination',
                 lazyLoading: true,
                 autoplayDisableOnInteraction: false
+            });
+            //初始化滚动栏
+            var swiperSpotlights = new Swiper('#spotlights', {
+                scrollbar: '#spotlights .swiper-scrollbar',
+                scrollbarHide: true,
+                slidesPerView: 'auto',
+                centeredSlides: true,
+                spaceBetween: 0,
+                grabCursor: true
             });
         }, 0);
     });

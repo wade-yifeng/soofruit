@@ -1,20 +1,26 @@
 <div class="container" ng-controller="IndexController">
-    <div class="swiper-container swiper-container-horizontal">
-        <div class="swiper-wrapper" id="divImgList">
+    <div id="subjects" class="swiper-container swiper-container-horizontal">
+        <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="subject in subjects">
-                <a ui-sref="subjectDetail({id:'{{subject.id}}'})">
+                <a ui-sref="ItemDetail({id:'{{subject.id}}'})">
                     <img id="{{subject.id}}" class="swiper-lazy" data-src="{{subject.img}}">
                 </a>
                 <div class="swiper-lazy-preloader"></div>
             </div>
         </div>
         <!-- Add Pagination -->
-        <div class="swiper-pagination swiper-pagination-clickable"></div>
+        <div class="swiper-pagination"></div>
     </div>
-    <div id="banner">
-        <div class="flexslider">
-            <div ui-view="subjects" class="flexslider"></div>
+    <div id="spotlights" class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="spotlight in spotlights">
+                <a ui-sref="ItemDetail({id:'{{spotlight.id}}'})">
+                    <img id="{{spotlight.id}}" src="{{spotlight.img}}">
+                </a>
+            </div>
         </div>
+        <!-- Add Scrollbar -->
+        <div class="swiper-scrollbar"></div>
     </div>
     <section class="main-view tuan" id="goods_list">
         <div class="base-list-wrapper">
