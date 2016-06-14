@@ -9,7 +9,7 @@ var BaseModel = require("./base_model");
 //     type: 'test',
 //     tags: ['item', 'top5'],
 //     url: 'http://test.soofruit.com',
-//     pic: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/watermelon.jpg'],
+//     pics: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/watermelon.jpg'],
 //     top: true,
 //     priority: 2,
 //     spotlight: true,

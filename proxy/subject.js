@@ -1,5 +1,5 @@
 var config  = require('config');
-var Subject = require('../models/subject');
+var Subject = require('../models').Subject;
 
 /**
  * 获取激活的主题
@@ -20,8 +20,9 @@ exports.getActiveSubject = function (query, opt, callback) {
                 return callback(null, []);
             }
 
-            subjects = _.map(subjects, function(item) {
+            var items = _.map(subjects, function(item) {
                 return {
+                    id: item._id,
                     name: item.name,
                     title: item.desc,
                     img: item.pics[0],
@@ -30,7 +31,7 @@ exports.getActiveSubject = function (query, opt, callback) {
                 };
             });
 
-            return callback(null, subjects);
+            return callback(null, items);
         }
     );
 };

@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User = require('../models').User;
 var logger = require('../common/logger');
 
 /**

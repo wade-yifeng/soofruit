@@ -1,7 +1,5 @@
 var config = require('config');
-var mongoose  = require('mongoose');
-var Reply = require('../models/reply');
-var ReplyModel = mongoose.model('Reply');
+var Reply  = require('../models').Reply;
 var logger = require('../common/logger');
 
 /**

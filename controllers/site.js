@@ -54,15 +54,15 @@ exports.index = function (req, res, next) {
                 );
             }, callback);
         }, function(callback){
-            exports.getOrSetCache('subjects', function(callback) {
+            exports.getOrSetCache('express', function(callback) {
                 Subject.getActiveSubject({top: true}, 
                     {limit: config.min_subject_size, sort: 'priority'},
-                    function (err, subjects) {
+                    function (err, express) {
                         if(!err) {
-                            cache.set('subjects', subjects, expired);
+                            cache.set('express', express, expired);
                         }
 
-                        callback(err, subjects);
+                        callback(err, express);
                     }
                 );
             }, callback);

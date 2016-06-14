@@ -1,9 +1,9 @@
 <div class="container" ng-controller="IndexController">
     <div class="swiper-container swiper-container-horizontal">
         <div class="swiper-wrapper" id="divImgList">
-            <div class="swiper-slide" ng-repeat="slide in slides">
-                <a ui-sref="noticeDetail({noticeId:{{slide.id}}})">
-                <img id="{{slide.id}}" class="swiper-lazy" data-src="{{slide.avatar}}">
+            <div class="swiper-slide" ng-repeat="subject in subjects">
+                <a ui-sref="subjectDetail({id:'{{subject.id}}'})">
+                    <img id="{{subject.id}}" class="swiper-lazy" data-src="{{subject.img}}">
                 </a>
                 <div class="swiper-lazy-preloader"></div>
             </div>
