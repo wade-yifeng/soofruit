@@ -1,7 +1,12 @@
 var app = angular.module('soofruit', ['ui.router']);
 
 app.controller('IndexController', IndexController);
+// Service通用Promise封装
 app.factory('Promise', PromiseService);
+// Service通用$http.get封装
+app.factory('HttpGet', HttpGetService);
+// 首页的业务逻辑
+app.factory('Index', IndexService);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -33,3 +38,16 @@ app.run(function ($rootScope, $urlRouter) {
         $rootScope.stateIsLoading = false;
     });
 });
+
+/**
+ * ng的http方法调用成功时的处理逻辑
+ * @param result    Controller方法返回的JSON结果
+ * @param defer     $q.defer()实例
+ */
+var httpSuccess = function(result, defer) {
+    if (result.code === 0) {
+        defer.resolve(result);
+    } else {
+        defer.reject(result);
+    }
+};

@@ -1,6 +1,6 @@
 // 个人中心控制器
-var IndexController = function($scope, $http, $timeout) {
-    $http.get('/index').success(function (result) {
+var IndexController = function($scope, $http, $timeout, Index) {
+    Index.LoadSubjectsAndExpress().then(function (result) {
         if(!result.success || !result.data) {
             //showInfo(result.msg);
         }
@@ -8,12 +8,8 @@ var IndexController = function($scope, $http, $timeout) {
         $scope.subjects = result.data.subjects;
         $scope.spotlights = result.data.spotlights;
         $scope.express = result.data.express;
-    }).error(function () {
-        // showInfo('加载首页数据失败，可以尝试联系我们的客服MM');
-    });
 
-    $scope.$on('$viewContentLoaded', function(event){
-        if($scope.subjects) {
+        $timeout(function() {
             //初始化轮播插件
             var swiper = new Swiper('.swiper-container', {
                 autoplay: 6000,//可选选项，自动滑动
@@ -21,8 +17,8 @@ var IndexController = function($scope, $http, $timeout) {
                 lazyLoading: true,
                 autoplayDisableOnInteraction: false
             });
-        }
+        }, 0);
     });
 };
 
-IndexController.$inject = ['$scope', '$http', '$timeout'];
+IndexController.$inject = ['$scope', '$http', '$timeout', 'Index'];
