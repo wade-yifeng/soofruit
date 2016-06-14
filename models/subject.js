@@ -3,19 +3,19 @@ var Schema    = mongoose.Schema;
 var ObjectId  = Schema.ObjectId;
 var BaseModel = require("./base_model");
 
-// var subject3 = {
-//     name: '测试3',
-//     desc: '这是一个测试主题',
-//     type: 'test',
-//     tags: ['item', 'top5'],
-//     url: 'http://test.soofruit.com',
-//     pics: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/durian.jpg'],
-//     top: true,
-//     priority: 2,
-//     spotlight: true,
-//     active: true,
-//     createTime: '2016-06-14'
-// };
+ //var subject10 = {
+ //    name: '测试10',
+ //    desc: '这是一个测试热点',
+ //    type: 'test',
+ //    tags: ['item', 'spotlight'],
+ //    url: 'http://test.soofruit.com',
+ //    pics: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/waxberry.jpg'],
+ //    top: false,
+ //    priority: 7,
+ //    spotlight: true,
+ //    active: true,
+ //    createTime: '2016-06-14'
+ //};
 
 var SubjectSchema = new Schema({
 

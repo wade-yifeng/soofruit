@@ -38,16 +38,3 @@ app.run(function ($rootScope, $urlRouter) {
         $rootScope.stateIsLoading = false;
     });
 });
-
-/**
- * ng的http方法调用成功时的处理逻辑
- * @param result    Controller方法返回的JSON结果
- * @param defer     $q.defer()实例
- */
-var httpSuccess = function(result, defer) {
-    if (result.code === 0) {
-        defer.resolve(result);
-    } else {
-        defer.reject(result);
-    }
-};

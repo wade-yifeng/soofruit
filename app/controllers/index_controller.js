@@ -22,12 +22,9 @@ var IndexController = function($scope, $http, $timeout, Index) {
                 scrollbar: '#spotlights .swiper-scrollbar',
                 scrollbarHide: true,
                 slidesPerView: 'auto',
-                centeredSlides: true,
                 spaceBetween: 0,
                 grabCursor: true
             });
         }, 0);
     });
 };
-
-IndexController.$inject = ['$scope', '$http', '$timeout', 'Index'];

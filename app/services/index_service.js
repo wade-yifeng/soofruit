@@ -7,5 +7,3 @@ var IndexService = function ($http, Promise, HttpGet) {
         }
     };
 };
-
-IndexService.$inject = ['$http', 'Promise', 'HttpGet'];

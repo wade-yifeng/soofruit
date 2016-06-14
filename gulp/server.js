@@ -6,5 +6,5 @@ gulp.task('dev:server', function () {
         script: 'app.js',
         ext: 'js',
         ignore: ['assets*', 'gulp*', 'node_modules*']
-    })
+    });
 });
