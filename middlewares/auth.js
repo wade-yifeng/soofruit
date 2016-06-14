@@ -44,7 +44,6 @@ exports.authUser = function (req, res, next) {
 
     req.session.targetUrl = req.url;
     res.redirect('/login');
-    return next();
 };
 
 exports.ignore = /^\/(login|wechat|public|sections)/;
