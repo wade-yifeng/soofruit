@@ -15,7 +15,7 @@ gulp.task('js:app', function () {
         .pipe(sourcemaps.init())    //Debug需要
         .pipe(ngAnnotate())         //uglify需要
         .pipe(concat('app.js'))
-        //.pipe(uglify())           //生产环境需要
+        .pipe(uglify())           //生产环境需要
         .pipe(sourcemaps.write())   //Debug需要
         .pipe(gulp.dest('assets'));
 });
@@ -29,7 +29,7 @@ gulp.task('js:common', ['js:app'], function () {
             'static/scripts/swiper.js'
         ])
         .pipe(concat('common.js'))
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('assets'));
 });
 

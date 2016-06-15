@@ -15,3 +15,6 @@ var HttpGetService = function ($http) {
         });
     };
 };
+
+PromiseService.$inject = ['$q'];
+HttpGetService.$inject = ['$http'];

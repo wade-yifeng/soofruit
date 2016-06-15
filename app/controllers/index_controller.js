@@ -40,3 +40,5 @@ var IndexController = function($scope, $http, $timeout, Index) {
         }, 0);
     });
 };
+
+IndexController.$inject = ['$scope', '$http', '$timeout', 'Index'];
