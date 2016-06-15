@@ -56,6 +56,9 @@ var ProductSchema = new mongoose.Schema({
     //库存
     balance: Number,
 
+    //是否有效
+    active: { type: Boolean, default: false },
+
     //创建时间
     createTime: { type: Date, default: Date.now},
 

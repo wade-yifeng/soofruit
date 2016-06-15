@@ -23,6 +23,7 @@ exports.getActiveSubject = function (query, opt, callback) {
             var items = _.map(subjects, function(item) {
                 return {
                     id: item._id,
+                    type: item.type,
                     name: item.name,
                     title: item.desc,
                     img: item.pics[0],

@@ -30,7 +30,7 @@ exports.index = function (req, res, next) {
         function(callback) {
             exports.getOrSetCache('subjects', function(callback) {
                 Subject.getActiveSubject({top: true}, 
-                    {limit: config.min_subject_size, sort: 'priority'},
+                    {limit: config.max_subject_size, sort: 'priority'},
                     function (err, subjects) {
                         if(!err) {
                             cache.set('subjects', subjects, expired);
@@ -43,7 +43,7 @@ exports.index = function (req, res, next) {
         }, function(callback){
             exports.getOrSetCache('spotlights', function(callback) {
                 Subject.getActiveSubject({spotlight: true}, 
-                    {limit: config.min_spotlight_size, sort: 'priority'},
+                    {limit: config.max_spotlight_size, sort: 'priority'},
                     function (err, spotlights) {
                         if(!err) {
                             cache.set('spotlights', spotlights, expired);
@@ -55,14 +55,14 @@ exports.index = function (req, res, next) {
             }, callback);
         }, function(callback){
             exports.getOrSetCache('express', function(callback) {
-                Product.getActiveSubject({top: true}, 
-                    {limit: config.min_subject_size, sort: 'priority'},
-                    function (err, express) {
+                Product.getActiveProducts({ tags: "express" }, 
+                    {limit: config.max_express_size, sort: '-lastUpdateTime'},
+                    function (err, products) {
                         if(!err) {
-                            cache.set('express', express, expired);
+                            cache.set('express', products, expired);
                         }
 
-                        callback(err, express);
+                        callback(err, products);
                     }
                 );
             }, callback);

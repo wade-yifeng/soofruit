@@ -2,7 +2,7 @@
     <div id="subjects" class="swiper-container swiper-container-horizontal">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="subject in subjects">
-                <a ui-sref="ItemDetail({id:'{{subject.id}}'})">
+                <a ui-sref="ItemDetail({id:'{{subject.id}}', type: '{{subject.type}}'})">
                     <img id="{{subject.id}}" class="swiper-lazy" data-src="{{subject.img}}">
                 </a>
                 <div class="swiper-lazy-preloader"></div>
@@ -14,7 +14,7 @@
     <div id="spotlights" class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="spotlight in spotlights">
-                <a ui-sref="ItemDetail({id:'{{spotlight.id}}'})">
+                <a ui-sref="ItemDetail({id:'{{spotlight.id}}', type: '{{subject.type}}'})">
                     <img id="{{spotlight.id}}" src="{{spotlight.img}}">
                 </a>
             </div>
@@ -25,7 +25,7 @@
     <div class="express-container">
         <ul class="express-column clearfix" id="express">
             <li class="rotate" ng-repeat="item in express">
-                <a ui-sref="ItemDetail({id:'{{item.id}}'})">
+                <a ui-sref="ItemDetail({id:'{{item.id}}', type: 'item'})">
                     <img id="{{item.id}}" src="{{item.img}}">
                 </a>
             </li>

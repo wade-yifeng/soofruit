@@ -17,14 +17,17 @@ var config = {
     // 监控网站性能
     oneapm_key: 'XApSBgxfAQEe3e1DTV9HCVUfDR9f57BfCR0LVgQBG7a12lEFH1QOH1FUe93cAlMcCVUYBQM=',
 
-    // 单页最小记录数
-    min_page_size: 10,
+    // 单页最大记录数
+    max_page_size: 10,
 
-    // 首页最小活动数量
-    min_subject_size: 5,
+    // 首页最大活动数量
+    max_subject_size: 5,
 
-    // 首页最小热点显示数量
-    min_spotlight_size: 10,
+    // 首页最大热点数量
+    max_spotlight_size: 10,
+
+    // 首页最大新品速递数量
+    max_express_size: 3,
 
     // 数据库连接字符串
     db: "mongodb://127.0.0.1/soofruit",
@@ -58,7 +61,7 @@ var config = {
         token: "Soostep123",
         //推广临时二维码失效时间
         qrCodeExpire: 604800,
-
+        //初始化菜单
         menu: {
             "button":[
                 {
