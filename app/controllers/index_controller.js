@@ -22,7 +22,7 @@ var IndexController = function($scope, $http, $timeout, Index) {
             var window_w = $(window).width();
             if (window_w < 540) {
                 height_slider = window_w * 1 / 2;
-                $('#subjects a img').style('height', height_slider);
+                $('#subjects a img').css('height', height_slider);
             }
 
             //初始化滚动栏

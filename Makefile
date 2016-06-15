@@ -20,10 +20,10 @@ run:
 # -i 0: 
 # Will start maximum processes with LB depending on available CPUs
 start: install
-	@NODE_ENV=production nohup pm2 start app.js -i 0 --name "soofruit" --max-memory-restart 400M >> /var/web/www/soofruit.log 2>&1 &
+	@NODE_ENV=production nohup node_modules/.bin/pm2 start app.js -i 0 --name "soofruit" --max-memory-restart 400M >> soofruit.log 2>&1 &
 
 restart: install
-	@NODE_ENV=production nohup pm2 restart "soofruit" >> /var/web/www/soofruit.log 2>&1 &
+	@NODE_ENV=production nohup node_modules/.bin/pm2 restart "soofruit" >> /var/web/www/soofruit.log 2>&1 &
 
 # 强制别名（伪文件）
 .PHONY: install run start restart

@@ -11,7 +11,7 @@
   "author": "someone",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.0.0-rc.3",
+    "async": "^1.5.2",
     "body-parser": "^1.15.0",
     "browserify": "^13.0.0",
     "bytes": "^2.3.0",
