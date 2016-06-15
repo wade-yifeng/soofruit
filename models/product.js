@@ -1,6 +1,17 @@
 var mongoose = require('mongoose');
 var BaseModel = require("./base_model");
 
+ // var product3 = {
+ //    name: '测试3',
+ //    desc: '这是一个测试商品',
+ //    tags: ['spotlight'],
+ //    pics: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/shrimps_express.jpg'],
+ //    originPrice: 50,
+ //    sellPrice: 30,
+ //    sales: 100,
+ //    balance: 100
+ // };
+
 /**
  * 产品
  */

@@ -55,7 +55,7 @@ exports.index = function (req, res, next) {
             }, callback);
         }, function(callback){
             exports.getOrSetCache('express', function(callback) {
-                Subject.getActiveSubject({top: true}, 
+                Product.getActiveSubject({top: true}, 
                     {limit: config.min_subject_size, sort: 'priority'},
                     function (err, express) {
                         if(!err) {

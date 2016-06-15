@@ -24,19 +24,9 @@
     </div>
     <div class="express-container">
         <ul class="express-column clearfix" id="express">
-            <li class="rotate">
-                <a href="/product/61499.html">
-                    <img alt="" title="" src="http://img14.yiguoimg.com/e/albums/2016/160614/153403882915733710_260x320.jpg" data-original="http://img14.yiguoimg.com/e/albums/2016/160614/153403882915733710_260x320.jpg" style="display: inline;">
-                </a>
-            </li>
-            <li class="rotate">
-                <a href="/product/156202.html">
-                    <img alt="" title="" src="http://img14.yiguoimg.com/e/albums/2016/160609/153403882845741257_260x320.jpg" data-original="http://img14.yiguoimg.com/e/albums/2016/160609/153403882845741257_260x320.jpg" style="display: inline;">
-                </a>
-            </li>
-            <li class="rotate">
-                <a href="/product/10273.html">
-                    <img alt="" title="" src="http://img12.yiguoimg.com/e/albums/2016/160613/153403882904035533_260x320.jpg" data-original="http://img12.yiguoimg.com/e/albums/2016/160613/153403882904035533_260x320.jpg" style="display: inline;">
+            <li class="rotate" ng-repeat="item in express">
+                <a ui-sref="ItemDetail({id:'{{item.id}}'})">
+                    <img id="{{item.id}}" src="{{item.img}}">
                 </a>
             </li>
         </ul>
