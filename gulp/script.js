@@ -23,6 +23,7 @@ gulp.task('js:app', function () {
 gulp.task('js:common', ['js:app'], function () {
     return gulp.src([
             //必须按顺序将内容压缩进去,否则不能正常执行
+            'static/scripts/jquery-3.0.0.js',
             'static/scripts/angular.js',
             'static/scripts/angular-ui-router.js',
             'static/scripts/swiper.js'

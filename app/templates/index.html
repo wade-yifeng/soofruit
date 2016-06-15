@@ -22,48 +22,25 @@
         <!-- Add Scrollbar -->
         <div class="swiper-scrollbar"></div>
     </div>
-    <section class="main-view tuan" id="goods_list">
-        <div class="base-list-wrapper">
-            <div ng-repeat="good in goods">
-                <div class="tuan_g">
-                    <div class="tuan_g_img" ui-sref="detail({goodID:'{{good._id}}'})">
-                        <img src="/public/images/upload/{{good.pics[0]}}">
-                        <div class="tuan_g_img_text">
-                            <div class="tuan_g_img_item" ng-repeat="tag in good.tags">
-                                <div class="tuan_g_img_round"></div>
-                                <div class="tuan_img_text_border">
-                                    <span>{{tag}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tuan_g_info">
-                        <p class="tuan_g_name">{{good.name}}</p>
-                    </div>
-                    <div class="tuan_g_core">
-                        <div class="tuan_g_core_img">
-                            <img src="/public/images/app/tuan.png">
-                        </div>
-                        <div class="tuan_g_price price-big">
-                            <span>活动价</span><b>{{good.sellPrice|currency:'￥'}}</b>
-                        </div>
-                        <div class="tuan_g_btn" ui-sref="detail({goodID:'{{good._id}}'})">查看详情</div>
-                    </div>
-                    <div class="like goods_list_like">
-                        <img src="/public/images/app/unlike.png" ng-hide="isLike(good._id)">
-                        <img src="/public/images/app/like.png" ng-show="isLike(good._id)">
-                        <div class="like_click_button" ng-click="setLike(good._id)"></div>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="load-more pullUp_show">-->
-            <!--<div class="list-center">-->
-            <!--<div class="img-rotate"></div>-->
-            <!--<span class="orders_text">正在玩命的加载...</span>-->
-            <!--</div>-->
-            <!--</div>-->
-        </div>
-    </section>
+    <div class="express-container">
+        <ul class="express-column clearfix" id="express">
+            <li class="rotate">
+                <a href="/product/61499.html">
+                    <img alt="" title="" src="http://img14.yiguoimg.com/e/albums/2016/160614/153403882915733710_260x320.jpg" data-original="http://img14.yiguoimg.com/e/albums/2016/160614/153403882915733710_260x320.jpg" style="display: inline;">
+                </a>
+            </li>
+            <li class="rotate">
+                <a href="/product/156202.html">
+                    <img alt="" title="" src="http://img14.yiguoimg.com/e/albums/2016/160609/153403882845741257_260x320.jpg" data-original="http://img14.yiguoimg.com/e/albums/2016/160609/153403882845741257_260x320.jpg" style="display: inline;">
+                </a>
+            </li>
+            <li class="rotate">
+                <a href="/product/10273.html">
+                    <img alt="" title="" src="http://img12.yiguoimg.com/e/albums/2016/160613/153403882904035533_260x320.jpg" data-original="http://img12.yiguoimg.com/e/albums/2016/160613/153403882904035533_260x320.jpg" style="display: inline;">
+                </a>
+            </li>
+        </ul>
+    </div>
     <div id="go_cart" ui-sref="cart">
         <span class="glyphicon glyphicon-shopping-cart"></span>
     </div>

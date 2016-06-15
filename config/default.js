@@ -6,13 +6,13 @@ var config = {
     name: 'Soofruit1',
 
     //默认调试状态开启
-    debug: false,
+    debug: true,
 
     // 网站的域名
     host: 'localhost',
 
     // 站点端口
-    port: 80,
+    port: 3000,
 
     // 监控网站性能
     oneapm_key: 'XApSBgxfAQEe3e1DTV9HCVUfDR9f57BfCR0LVgQBG7a12lEFH1QOH1FUe93cAlMcCVUYBQM=',

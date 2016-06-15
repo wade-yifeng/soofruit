@@ -25,6 +25,8 @@ var IndexController = function($scope, $http, $timeout, Index) {
                 spaceBetween: 0,
                 grabCursor: true
             });
+            //新品推荐闪现
+            angular.element("#express li").addClass("rotateY");
         }, 0);
     });
 };
