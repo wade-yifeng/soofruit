@@ -17,6 +17,7 @@ body {
     -webkit-user-select: none;
     -webkit-text-size-adjust: none;
     background-color: #f8f8f8;
+    margin: 0px;
 }
 
 input,

@@ -35,6 +35,7 @@ gulp.task('js:common', ['js:app'], function () {
 
 gulp.task('watch:js', ['js:common'], function () {
     gulp.watch([
+        'static/scripts/jquery-3.0.0.js',
         'static/scripts/angular.js',
         'static/scripts/angular-ui-router.js',
         'static/scripts/swiper.js',
