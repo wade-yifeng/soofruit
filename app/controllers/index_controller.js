@@ -17,6 +17,14 @@ var IndexController = function($scope, $http, $timeout, Index) {
                 lazyLoading: true,
                 autoplayDisableOnInteraction: false
             });
+
+            //设置首页轮播图片高度
+            var window_w = $(window).width();
+            if (window_w < 540) {
+                height_slider = window_w * 1 / 2;
+                $('#subjects a img').style('height', height_slider);
+            }
+
             //初始化滚动栏
             var swiperSpotlights = new Swiper('#spotlights', {
                 scrollbar: '#spotlights .swiper-scrollbar',
@@ -25,8 +33,10 @@ var IndexController = function($scope, $http, $timeout, Index) {
                 spaceBetween: 0,
                 grabCursor: true
             });
+            
+
             //新品推荐闪现
-            angular.element("#express li").addClass("rotateY");
+            $("#express li").addClass("rotateY");
         }, 0);
     });
 };
