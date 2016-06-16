@@ -819,14 +819,76 @@ li {
 }
 
 .rotate {
-    -webkit-transform:rotateY(90deg);   
-    transform:rotateY(90deg);
-    -webkit-transition: -webkit-transform .3s ease-out 0s; 
-    transition:transform .3s ease-out 0s
+    -webkit-transform: rotateY(90deg);
+    transform: rotateY(90deg);
+    -webkit-transition: -webkit-transform .3s ease-out 0s;
+    transition: transform .3s ease-out 0s
 }
 
 .rotateY {
-    -webkit-transform:rotateY(0deg); 
-    transform:rotateY(0deg)
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg)
 }
 
+
+/*=====底部菜单栏======*/
+
+.footer {
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #d5d5d5;
+    background: #fff;
+}
+
+.footer a {
+    position: relative;
+    display: block;
+    float: left;
+    width: 25%;
+    height: 50px;
+    color: #FFF;
+    font-size: 12px;
+    color: #8d8a8a;
+    text-align: center;
+    vertical-align: middle
+}
+
+.footer .icon {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+    margin: 6px auto 2px auto;
+}
+
+.footer .icon ~ .tab-label {
+    display: block;
+    position: relative;
+    top: 2px;
+}
+
+.footer .badge {
+    position: absolute;
+    display: inline-block;
+    top: 2px;
+    left: 50%;
+    z-index: 100;
+    height: 16px;
+    min-width: 16px;
+    line-height: 16px;
+    color: #fff;
+    vertical-align: top;
+    background: red;
+    border-radius: 16px;
+    margin-left: 4px;
+}
+
+.footer a.current,
+.footer a:hover {
+    color: #0894ec;
+}

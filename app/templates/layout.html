@@ -10,8 +10,10 @@
         <meta name="format-detection" content="telephone=yes" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="renderer" content="webkit">
-        <!-- <link rel='stylesheet' type="text/css" href='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/css/common.css'> -->
-        <link rel='stylesheet' type="text/css" href='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/css/app.css'>
+        <link rel='stylesheet' type="text/css" href='/public/common.css'>
+        <link rel='stylesheet' type="text/css" href='/public/app.css'>
+        <!-- <link rel='stylesheet' type="text/css" href='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/css/common.css'>
+        <link rel='stylesheet' type="text/css" href='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/css/app.css'> -->
     </head>
     <body ng-app="soofruit">
         <header class="header">
@@ -34,14 +36,35 @@
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <a id="index" href="http://weixin.m.yiguo.com/" class="current">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a id="category" href="/categorylist">
+                <span class="icon icon-app"></span>
+                <span class="tab-label">嗖一下</span>
+            </a>
+            <a id="cart" href="/mycart">
+                <span class="icon icon-menu"></span>
+                <span class="tab-label">订单中心</span>
+            </a>
+            <a id="my" href="/my">
+                <span class="icon icon-friends"></span>
+                <span class="tab-label">我的</span>
+                <span class="badge">2</span>
+            </a>
+        </footer>
         <!-- TODO: 顶部弹窗 -->
         <!-- TODO: 返回顶部 -->
         <!-- TODO: 进入购物车 -->
-        <script type="text/javascript" src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+        <script type="text/javascript" src='/public/common.js'></script>
+        <script type="text/javascript" src='/public/app.js'></script>
+        <!-- <script type="text/javascript" src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
         <script type="text/javascript" src='http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js'></script>
         <script type="text/javascript" src='http://apps.bdimg.com/libs/angular-ui-router/0.2.15/angular-ui-router.js'></script>
         <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/swiper.min.js'></script>
         <!-- <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/common.js'></script> -->
-        <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/app.js'></script>
+        <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/app.js'></script> -->
     </body>
 </html>
