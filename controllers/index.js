@@ -24,7 +24,7 @@ exports.getOrSetCache = function (key, getMethod, callback) {
     });
 };
 
-exports.index = function (req, res, next) {
+exports.home = function (req, res, next) {
     var expired = config.default_cache_time;
     async.parallel([
         function(callback) {

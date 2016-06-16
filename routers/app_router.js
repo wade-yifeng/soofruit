@@ -1,5 +1,5 @@
 var express = require('express');
-var site = require('../controllers/site');
+var index = require('../controllers/index');
 var sign = require('../controllers/sign');
 
 var router = express.Router();
@@ -9,6 +9,6 @@ router.get('/', function(req, res) {
 });
 router.get('/login', sign.login);
 // 请求主页数据
-router.get('/index', site.index);
+router.get('/index', index.home);
 
 module.exports = router;

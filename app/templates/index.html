@@ -14,8 +14,8 @@
     <div id="spotlights" class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="spotlight in spotlights">
-                <a ui-sref="ItemDetail({id:'{{spotlight.id}}', type: '{{subject.type}}'})">
-                    <img id="{{spotlight.id}}" src="{{spotlight.img}}">
+                <a ui-sref="ItemDetail({id:'{{spotlight.id}}', type: '{{spotlight.type}}'})">
+                    <img id="{{spotlight.id}}" ng-src="{{spotlight.img}}">
                 </a>
             </div>
         </div>
@@ -26,10 +26,17 @@
         <ul class="express-column clearfix" id="express">
             <li class="rotate" ng-repeat="item in express">
                 <a ui-sref="ItemDetail({id:'{{item.id}}', type: 'item'})">
-                    <img id="{{item.id}}" src="{{item.img}}">
+                    <img id="{{item.id}}" ng-src="{{item.img}}">
                 </a>
             </li>
         </ul>
+    </div>
+    <div class="products-container">
+        <div class="content">
+            <a href="/goods/buy1/id/456" title="东魁杨梅" alt="东魁杨梅">
+                <img src="http://goead.ysxdgy.com/Uploads/Picture/uploads/20160607/5756bbbf3f7d9.jpg" width="100%" title="东魁杨梅" alt="东魁杨梅" class="scrollLoading">
+            </a>
+        </div>
     </div>
     <div id="go_cart" ui-sref="cart">
         <span class="glyphicon glyphicon-shopping-cart"></span>

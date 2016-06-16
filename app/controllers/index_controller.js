@@ -15,6 +15,7 @@ var IndexController = function($scope, $http, $timeout, Index) {
                 autoplay: 6000,//可选选项，自动滑动
                 pagination: '#subjects .swiper-pagination',
                 lazyLoading: true,
+                loop: true,
                 autoplayDisableOnInteraction: false
             });
 

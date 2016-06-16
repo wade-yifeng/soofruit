@@ -12,7 +12,7 @@
         }
     };
 
-
+    
 }($, window, undefined));
 
 // 扩展jQuery
