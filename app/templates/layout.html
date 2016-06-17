@@ -26,16 +26,6 @@
             </div>
         </header>
         <div ui-view style="height:100%;"></div>
-        <div class="layer-container" ng-show="stateIsLoading">
-            <div class="layer-shade"></div>
-            <div class="layer-main">
-                <div class="section">
-                    <div class="bounce1"></div>
-                    <div class="bounce2"></div>
-                    <div class="bounce3"></div>
-                </div>
-            </div>
-        </div>
         <footer class="footer">
             <a id="index" ui-sref="index">
                 <span class="icon icon-home"></span>
@@ -55,6 +45,16 @@
                 <span class="badge">2</span>
             </a>
         </footer>
+        <div class="layer-container" ng-show="stateIsLoading">
+            <div class="layer-shade"></div>
+            <div class="layer-main">
+                <div class="section">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+            </div>
+        </div>
         <!-- TODO: 顶部弹窗 -->
         <!-- TODO: 返回顶部 -->
         <!-- TODO: 进入购物车 -->
