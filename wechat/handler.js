@@ -230,8 +230,6 @@ exports.CLICK = function(message, callback) {
             if(result && result.length) {
                 reply = '您收到了悄悄话哦，小北念给你听，咳咳：';
                 result.forEach(function(item) {
-                    logger.info('遍历悄悄话');
-                    logger.info(item);
                     reply = reply.concat('\n' + util.format('%s想对你说：%s', 
                         item.nickName || '', item.msg));
                 });

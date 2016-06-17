@@ -57,6 +57,6 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.plugin(BaseModel);
-UserSchema.index({createTime: -1});
+UserSchema.index({unionID : 1});
 
 mongoose.model('User', UserSchema);

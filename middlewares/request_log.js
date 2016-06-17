@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
     }
 
     var t = new Date();
-    logger.info('\n\nStarted', tools.formatDate(t), req.method, req.url, req.ip);
+    logger.info('Started', tools.formatDate(t), req.method, req.url, req.ip);
 
     res.on('finish', function () {
         var duration = ((new Date()) - t);
