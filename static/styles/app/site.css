@@ -880,6 +880,7 @@ li {
     display: block;
     position: relative;
     top: 2px;
+    text-align: center;
 }
 
 .footer .badge {
@@ -927,6 +928,8 @@ li {
     text-align: center;
     font-size: 18px;
     background: #fff;
+    min-height: 146px;
+    max-height: 246px;
 
     display: -webkit-box;
     display: -ms-flexbox;
@@ -943,7 +946,6 @@ li {
 }
 
 #products a img {
-    margin-bottom: 5px;
     -webkit-box-shadow: #ccc 0px 0px 8px;
     -moz-box-shadow: #ccc 0px 0px 8px;
     box-shadow: #ccc 0px 0px 8px;
@@ -953,3 +955,5 @@ li {
 #products .swiper-slide a img {
     display: block;
 }
+
+
