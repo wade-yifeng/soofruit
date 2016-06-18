@@ -38,15 +38,7 @@ var IndexController = function($scope, $http, $timeout, Index) {
             //新品推荐闪现
             $("#express li").addClass("rotateY");
 
-            //初始化商品列表
-            var swiperProducts = new Swiper('#products', {
-                direction: 'vertical',
-                spaceBetween: 5,
-                freeMode: true,
-                onReachEnd: function(swiper){
-                  alert('到了最后一个slide');
-                }
-            });
+            //TODO: 初始化商品列表
         }, 0);
     });
 };
