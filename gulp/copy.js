@@ -12,16 +12,16 @@ gulp.task('copy:images', function () {
         .pipe(gulp.dest('assets/'));
 });
 
-gulp.task('copy:templates', ['copy:fonts', 'copy:images'], function () {
+gulp.task('copy:views', ['copy:fonts', 'copy:images'], function () {
     return gulp.src([
-            'app/templates/**/*.html'
+            'app/views/**/*.html'
         ])
         //.pipe(minifyhtml())
         .pipe(gulp.dest('views/'));
 });
 
-gulp.task('watch:html', ['copy:templates'], function () {
+gulp.task('watch:html', ['copy:views'], function () {
     gulp.watch([
-        'app/templates/**/*.html'
-    ], ['copy:templates']);
+        'app/views/**/*.html'
+    ], ['copy:views']);
 });

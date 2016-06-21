@@ -1,8 +1,17 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var ngAnnotate = require('gulp-ng-annotate');
-var sourcemaps = require('gulp-sourcemaps');
+var gulp          = require('gulp');
+var concat        = require('gulp-concat');
+var uglify        = require('gulp-uglify');
+var ngAnnotate    = require('gulp-ng-annotate');
+var sourcemaps    = require('gulp-sourcemaps');
+// var minifyhtml = require('gulp-minify-html');
+var templateCache = require('gulp-angular-templatecache');
+var addStream     = require('add-stream');
+
+var prepareTemplates = function() {
+  return gulp.src('app/templates/**/*.html')
+        //.pipe(minifyhtml())
+        .pipe(templateCache());
+};
 
 gulp.task('js:app', function () {
     return gulp.src([
@@ -14,6 +23,7 @@ gulp.task('js:app', function () {
         ])
         .pipe(sourcemaps.init())    //Debug需要
         .pipe(ngAnnotate())         //uglify需要
+        .pipe(addStream.obj(prepareTemplates()))
         .pipe(concat('app.js'))
         //.pipe(uglify())           //生产环境需要
         .pipe(sourcemaps.write())   //Debug需要

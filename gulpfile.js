@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var fs = require('fs');
 
 fs.readdirSync(__dirname + '/gulp').forEach(function (task) {
-    require('./gulp/' + task)
+    require('./gulp/' + task);
 });
 
 gulp.task('watch', ['watch:js', 'watch:css', 'watch:html', 'watch:browserify']);

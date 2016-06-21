@@ -38,7 +38,12 @@ var IndexController = function($scope, $http, $timeout, Index) {
             //新品推荐闪现
             $("#express li").addClass("rotateY");
 
-            //TODO: 初始化商品列表
+            //初始化商品列表
+
+            //预先加载20条
+            addItems(itemsPerLoad, 0);
+
+            $.init();
         }, 0);
     });
 };

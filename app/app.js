@@ -1,4 +1,7 @@
-var app = angular.module('soofruit', ['ui.router']);
+// gulp压缩并放入$templateCache
+angular.module('templates', []);
+
+var app = angular.module('soofruit', ['ui.router', 'templates']);
 
 app.controller('IndexController', IndexController);
 // Service通用Promise封装

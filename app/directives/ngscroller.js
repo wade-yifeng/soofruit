@@ -1,10 +1,14 @@
 /**
  * 封装Scroller组件
  */
-var ngScrollerDirective = function() {
+var ngScrollerDirective = function($templateCache) {
     return {
-        restrict: 'AE',
-        templateUrl: '/views/template/ngScroller',
-        replace: true
+        transclude: true,
+        templateUrl: $templateCache.get("ng_scroller.html"),
+        link: function(scope, element, attr) {
+
+        }
     };
 };
+
+ngScrollerDirective.$inject = ['$templateCache'];
