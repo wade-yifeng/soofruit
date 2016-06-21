@@ -34,7 +34,7 @@ node_modules
 
 # Gulp asset folder
 assets
-views
+/views
 
 # IDE config directory
 .idea
