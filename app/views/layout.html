@@ -16,7 +16,35 @@
         <link rel='stylesheet' type="text/css" href='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/css/app.css'> -->
     </head>
     <body ng-app="soofruit">
+        <header class="header">
+            <div class="clearfix">
+                <em class="icon icon_logo"> </em>
+                <a class="positionwrap">
+                    <em class="icon icon_position"> </em>
+                    <em id="emName">绍兴</em>
+                </a>
+            </div>
+        </header>
         <div ui-view style="height:100%;"></div>
+        <footer class="footer">
+            <a id="index" ui-sref="index">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a id="activity" ui-sref="activity">
+                <span class="icon icon-app"></span>
+                <span class="tab-label">嗖一下</span>
+            </a>
+            <a id="order" ui-sref="order">
+                <span class="icon icon-cart"></span>
+                <span class="tab-label">订单中心</span>
+            </a>
+            <a id="user" ui-sref="user">
+                <span class="icon icon-friends"></span>
+                <span class="tab-label">我的</span>
+                <span class="badge">2</span>
+            </a>
+        </footer>
         <div class="layer-container" ng-show="stateIsLoading">
             <div class="layer-shade"></div>
             <div class="layer-main">
@@ -37,7 +65,7 @@
         <script type="text/javascript" src='http://apps.bdimg.com/libs/angular-ui-router/0.2.15/angular-ui-router.js'></script>
         <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/swiper.min.js'></script>
         <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/iscroll.min.js'></script>
-        <!-- <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/scroller.js'></script> -->
+        <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/scroller.min.js'></script>
         <!-- <script type="text/javascript" src='http://soofruit.oss-cn-hangzhou.aliyuncs.com/app/js/app.js'></script> -->
         <script type="text/javascript" src='/public/app.js'></script>
         <script type="text/javascript">
