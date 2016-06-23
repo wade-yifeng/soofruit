@@ -1,5 +1,5 @@
-<div class="container" ng-controller="IndexController">
-    <div id="subjects" class="swiper-container swiper-container-horizontal">
+<div class="content" ng-controller="IndexController">
+    <div id="subjects" class="container swiper-container swiper-container-horizontal">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="subject in subjects">
                 <a ui-sref="ItemDetail({id:'{{subject.id}}', type: '{{subject.type}}'})">
@@ -11,7 +11,7 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </div>
-    <div id="spotlights" class="swiper-container">
+    <div id="spotlights" class="container swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="spotlight in spotlights">
                 <a ui-sref="ItemDetail({id:'{{spotlight.id}}', type: '{{spotlight.type}}'})">
@@ -22,7 +22,7 @@
         <!-- Add Scrollbar -->
         <div class="swiper-scrollbar"></div>
     </div>
-    <div class="express-container">
+    <div class="container express-container">
         <ul class="express-column clearfix" id="express">
             <li class="rotate" ng-repeat="item in express">
                 <a ui-sref="ItemDetail({id:'{{item.id}}', type: 'item'})">
@@ -31,17 +31,13 @@
             </li>
         </ul>
     </div>
-    <div class="products-container page">
-        <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
-            <div class="list-block">
-                <ul id="products" class="list-container">
-                </ul>
-            </div>
-            <!-- 加载提示符 -->
-            <div class="infinite-scroll-preloader">
-                <div class="preloader"></div>
-            </div>
-        </div>
+    <div class="container products-container list-block">
+        <ul id="products" class="list-container">
+        </ul>
+    </div>
+    <!-- 加载提示符 -->
+    <div class="infinite-scroll-preloader">
+        <div class="preloader"></div>
     </div>
     <!-- <div class="products-container">
         <div id="products" class="content">
