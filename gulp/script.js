@@ -19,6 +19,7 @@ gulp.task('js:app', function () {
             'static/scripts/app/*.js',
             'app/services/*.js',
             'app/controllers/*.js',
+            'app/directives/*.js',
             'app/app.js'
         ])
         .pipe(sourcemaps.init())    //Debug需要

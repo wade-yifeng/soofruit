@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var paginate = require('mongoose-paginate');
 var config   = require('config');
 var logger   = require('../common/logger');
 

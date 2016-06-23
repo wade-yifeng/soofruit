@@ -1,4 +1,4 @@
-<div class="content" ng-controller="IndexController">
+<div class="content infinite-scroll infinite-scroll-bottom" data-distance="80" ng-controller="IndexController">
     <div id="subjects" class="container swiper-container swiper-container-horizontal">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="subject in subjects">
@@ -31,14 +31,13 @@
             </li>
         </ul>
     </div>
-    <div class="container products-container list-block">
-        <ul id="products" class="list-container">
-        </ul>
-    </div>
-    <!-- 加载提示符 -->
-    <div class="infinite-scroll-preloader">
-        <div class="preloader"></div>
-    </div>
+    <scroller>
+        <li ng-repeat="product in products" class="content-item">
+            <a title="{{product.name}}" alt="{{product.name}}" ui-sref="ItemDetail({id:'{{product.id}}', type: 'item'})">
+                <img id="{{product.id}}" ng-src="{{product.img}}">
+            </a>
+        </li>
+    </scroller>
     <!-- <div class="products-container">
         <div id="products" class="content">
             <a class=href="/goods/buy1/id/456" title="东魁杨梅" alt="东魁杨梅">

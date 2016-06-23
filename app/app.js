@@ -8,8 +8,12 @@ app.controller('IndexController', IndexController);
 app.factory('Promise', PromiseService);
 // Service通用$http.get封装
 app.factory('HttpGet', HttpGetService);
+app.factory('HttpPost', HttpPostService);
 // 首页的业务逻辑
 app.factory('Index', IndexService);
+
+// 通用組件
+app.directive('scroller', ngScrollerDirective);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 

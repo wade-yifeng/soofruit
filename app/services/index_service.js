@@ -1,8 +1,13 @@
 var IndexService = function ($http, Promise, HttpGet) {
     return {
-        LoadSubjectsAndExpress: function (pageIndex) {
+        LoadSubjectsAndExpress: function () {
             return Promise(function (defer) {
-                HttpGet('index', defer);
+                HttpGet('getActivities', null, defer);
+            });
+        },
+        LoadPagedProducts: function(pageIndex) {
+            return Promise(function (defer) {
+                HttpGet('getProductList', {page_index: pageIndex}, defer);
             });
         }
     };

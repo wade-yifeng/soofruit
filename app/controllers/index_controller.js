@@ -37,15 +37,24 @@ var IndexController = function($scope, $http, $timeout, Index) {
             
             //新品推荐闪现
             $("#express li").addClass("rotateY");
-
-            //初始化商品列表
-
-            //预先加载20条
-            addItems(itemsPerLoad, 0);
-
-            $.init();
         }, 0);
     });
+
+    // 商品列表尚未加载
+    $scope.loading = false;
+
+    $scope.LoadPagedData = function(pageIndex, callback) {
+        Index.LoadPagedProducts(pageIndex).then(function(result) {
+            if(!result.success || !result.data) {
+                //showInfo(result.msg);
+            }
+            $scope.totalPage = result.data.totalPage;
+            $scope.products = result.data.products;
+            $timeout(function() {
+                callback();
+            });
+        });
+    };
 };
 
 IndexController.$inject = ['$scope', '$http', '$timeout', 'Index'];

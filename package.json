@@ -45,6 +45,7 @@
     "method-override": "^2.3.5",
     "moment": "^2.13.0",
     "mongoose": "^4.4.6",
+    "mongoose-paginate": "^5.0.0",
     "oneapm": "^1.2.20",
     "path": "^0.12.7",
     "pm2": "^1.1.3",

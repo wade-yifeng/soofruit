@@ -1,5 +1,5 @@
 var logger = require('../common/logger');
-var tools = require('../common/utility');
+var utils = require('../common/utility');
 
 module.exports = function (req, res, next) {
     // Assets do not out log.
@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
     }
 
     var t = new Date();
-    logger.info('Started', tools.formatDate(t), req.method, req.url, req.ip);
+    logger.info('Started', utils.formatDate(t), req.method, req.url, req.ip);
 
     res.on('finish', function () {
         var duration = ((new Date()) - t);

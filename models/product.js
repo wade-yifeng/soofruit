@@ -1,15 +1,17 @@
-var mongoose = require('mongoose');
+var mongoose  = require('mongoose');
+var paginate  = require('mongoose-paginate');
 var BaseModel = require("./base_model");
 
- // var product3 = {
- //    name: '测试3',
- //    desc: '这是一个测试商品',
- //    tags: ['spotlight'],
- //    pics: ['http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/shrimps_express.jpg'],
- //    originPrice: 50,
- //    sellPrice: 30,
- //    sales: 100,
- //    balance: 100
+ // var product15 = {
+ //    "name":"测试15",
+ //    "desc":"这是一个测试商品",
+ //    "tags":["item"],
+ //    "pics":["http://soofruit.oss-cn-hangzhou.aliyuncs.com/item/item-waxberry.jpg"],
+ //    "originPrice":50.0,
+ //    "sellPrice":30.0,
+ //    "sales":100.0,
+ //    "balance":100.0,
+ //    "active":true
  // };
 
 /**
@@ -67,6 +69,7 @@ var ProductSchema = new mongoose.Schema({
 });
 
 ProductSchema.plugin(BaseModel);
+ProductSchema.plugin(paginate);
 ProductSchema.index({createTime: -1});
-
+mongoose.Promise = global.Promise;
 mongoose.model('Product', ProductSchema);

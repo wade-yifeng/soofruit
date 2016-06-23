@@ -10,28 +10,31 @@ var Product = require('../models').Product;
  * 后期考虑根据用户推荐不同的新品
  */
 exports.getActiveProducts = function (query, opt, callback) {
-    query = _.extend(query, {active: true});
-    Product.find(query, {}, opt || {limit: config.max_page_size, sort: '-lastUpdateTime'},
-        function(err, products) {
+    query = query === null ? {active: true} : _.extend(query, {active: true});
+    Product.paginate(query, opt || {limit: config.max_page_size, sort: '-lastUpdateTime'},
+        function(err, result) {
             if (err) {
                 return callback(err);
             }
-            if (products.length === 0) {
+            if (result.total === 0) {
                 return callback(null, []);
             }
 
-            var items = _.map(products, function(item) {
-                return {
-                    id: item._id,
-                    name: item.name,
-                    tags: item.tags,
-                    img: item.pics[0],
-                    originPrice: item.originPrice,
-                    sellPrice: item.sellPrice,
-                    sales: item.sales,
-                    balance: item.balance
-                };
-            });
+            var items = {
+                total: result.total,
+                docs: _.map(result.docs, function(item) {
+                    return {
+                        id: item._id,
+                        name: item.name,
+                        tags: item.tags,
+                        img: item.pics[0],
+                        originPrice: item.originPrice,
+                        sellPrice: item.sellPrice,
+                        sales: item.sales,
+                        balance: item.balance
+                    };
+                })
+            };
 
             return callback(null, items);
         }

@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
 });
 router.get('/login', sign.login);
 // 请求主页数据
-router.get('/index', index.home);
+router.get('/getActivities', index.getActivities);
+router.get('/getProductList', index.getProductList);
 
 module.exports = router;

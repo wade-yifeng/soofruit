@@ -7,8 +7,26 @@ var PromiseService = function ($q) {
 };
 
 var HttpGetService = function ($http) {
-    return function (url, defer) {
-        $http.get(url).success(function(result) {
+    return function (url, data, defer) {
+        $http({
+            url: url,
+            method: 'GET',
+            params: data
+        }).success(function(result) {
+            defer.resolve(result);
+        }).error(function(result, status) {
+            defer.reject(status);
+        });
+    };
+};
+
+var HttpPostService = function ($http) {
+    return function (url, data, defer) {
+        $http({
+            url: url,
+            method: 'POST',
+            data: data
+        }).success(function(result) {
             defer.resolve(result);
         }).error(function(result, status) {
             defer.reject(status);
@@ -18,3 +36,4 @@ var HttpGetService = function ($http) {
 
 PromiseService.$inject = ['$q'];
 HttpGetService.$inject = ['$http'];
+HttpPostService.$inject = ['$http'];
